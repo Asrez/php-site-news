@@ -50,7 +50,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" metod="post" action="#">
+              <form role="form" method="post" action="action_article_edit.php">
                 <!-- text input -->
                 <div class="form-group">
                   <label>عنوان</label>
@@ -112,7 +112,7 @@
             <!-- /.box-header -->
             <div class="box-body pad">
              
-                    <textarea id="editor1" name="summery" rows="5" cols="80" name="summery"></textarea>
+                    <textarea id="editor1"  rows="5" cols="60" name="summery"></textarea>
                </div>
           </div>
           <div class="box box-info">
@@ -131,7 +131,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <textarea id="editor1" name="content" rows="20" cols="80" name="content"></textarea>
+              <textarea id="editor1" rows="20" cols="60" name="content"></textarea>
               
             </div>
             <div class="form-group">
@@ -139,26 +139,14 @@
                   <input type="text" class="form-control" placeholder="منبع" name="source">
                 </div>
           </div>
+          <div class="form-group">
+                  <label>عکس</label>
+                  <input type="file" class="form-control" name="image" value="footer_logo.png" >
+                </div>
+          </div>
           <button type="submit" name="btn">ثبت</button>
               </form>
-              <?php 
-              if(isset($_post['btn'])){
-                $title=$_post['title'];
-                $summery=$_post['summery'];
-                $content=$_post['content'];
-                $content=$_post['source'];
-                $category=$_post['category'];
-              }
-              $insert_article="INSERT INTO `articles`(`id`, `publicationdate`, `title`, `summery`, `content`, `image`, `source`, `viewcount`, `category_id`, `admin_id`, `slug`) VALUES ('NULL','date('Y-m-d h:i:sa')','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]')";
-              if(mysqli_query($link,$insert_article)){
-                ?>
-                <script>
-                    window.alert("خبر با موفقیت ثبت شد");
-                </script>
-                <?php
-              }
               
-              ?>
             </div>
             <!-- /.box-body -->
           </div>
