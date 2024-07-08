@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>خبر اینلاین</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/fontawesome.css" type="text/css">
+    <link rel="stylesheet" href="css/yBox.css" type="text/css">
+</head>
+<body>
+<header id="header">
+    <div id="top_header">
+        <div class="container">
+            <div class="row">
+                <div class="col-5 col-md-2">
+                    <ul class="lang_menu">
+                        <li><a href="#">فارسی</a> </li>
+                        <li><a href="#">العربية</a> </li>
+                        <li class="d-none d-lg-inline-block"><a href="#" >English</a> </li>
+                    </ul>
+                </div>
+                <div class="col-7 col-md-3">
+                    <ul class="top_menu">
+                        <li><a href="contact_us.html">تماس با ما</a> </li>
+                        <li><a href="about_us.html">درباره با ما</a> </li>
+                        <li><a href="archive.html">آرشیو</a> </li>
+                        <li class="d-none d-lg-inline-block"><a href="#">تبلیغات</a> </li>
+                    </ul>
+                </div>
+                <div class="d-none col-md-3 d-md-block">
+                    <div class="search">
+                        <form action="#" method="post" role="form">
+                            <div class="input-group">
+                                <input type="text" name="search" placeholder="جستجو ...">
+                                <button type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="d-none col-lg-2 d-lg-block">
+                    <div class="date_time">
+                        دوشنبه 14 تیر 1400
+                    </div>
+                </div>
+                <div class="d-none col-md-4 col-lg-2 d-md-block">
+                    <ul class="header_social text-left">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a> </li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a> </li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a> </li>
+                        <li><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
+                        <li><a href="#"><i class="fas fa-rss"></i></a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <h1>
+                    <a href="index.html" class="logo"></a>
+                </h1>
+            </div>
+            <div class="col-12 col-lg-6 text-center">
+                <div class="ads">
+                    <figure>
+                        <a href="#">
+                            <img src="image/5577072.gif" class="img-fluid" alt="ads" title="ads">
+                        </a>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav id="menu">
+        <div class="container">
+            <ul class="d-none d-lg-block">
+                <li><a href="index.html">صفحه نخست</a> </li>
+                <li>
+                    <a href="archive.html">ورزشی</a>
+                    <ul class="submenu">
+                        <li><a href="category.html">فوتبال</a> </li>
+                        <li><a href="category.html">والیبال</a> </li>
+                        <li><a href="category.html">بسکتبال</a> </li>
+                        <li><a href="category.html">هندبال</a> </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="archive.html">سیاسی</a>
+                    <ul class="submenu">
+                        <li><a href="category.html">رهبری</a> </li>
+                        <li><a href="category.html">بین الملل</a> </li>
+                        <li><a href="category.html">نظامی</a> </li>
+                        <li><a href="category.html">دولت</a> </li>
+                        <li><a href="category.html">مجلس</a> </li>
+                        <li><a href="category.html">انتخابات</a> </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="archive.html">فرهنگ</a>
+                    <ul class="submenu">
+                        <li><a href="category.html">سینما</a> </li>
+                        <li><a href="category.html">موسیقی</a> </li>
+                        <li><a href="category.html">رسانه</a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 d-inline-block d-md-none">
+                <button class="btn openbtn" onclick="opennav()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="col-8 d-md-none">
+                <div class="search">
+                    <form action="#" method="post" role="form">
+                        <div class="input-group">
+                            <input type="text" name="search" placeholder="جستجو ...">
+                            <button type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<nav id="sidemenu" class="d-none">
+    <div id="s_menu">
+        <a href="#" class="closenav" onclick="closenav()">
+            <i class="fas fa-times"></i>
+        </a>
+    </div>
+    <ul class="s_menu1 mt-5">
+        <li class="main_list"><a href="index.html">صفحه نخست</a> </li>
+        <li class="main_list">
+            <a href="#" class="submenu-toggler" onclick="o_submenu(1)">
+                <i class="fas fa-plus"></i>
+                ورزشی
+            </a>
+            <ul id="submenu_1" class="sub-menu d-none">
+                <li><a href="category.html">فوتبال</a></li>
+                <li><a href="category.html">والیبال</a></li>
+                <li><a href="category.html">بسکتبال</a></li>
+                <li><a href="category.html">هندبال</a></li>
+            </ul>
+        </li>
+        <li class="main_list">
+            <a href="#" class="submenu-toggler" onclick="o_submenu(2)">
+                <i class="fas fa-plus"></i>
+                سیاسی
+            </a>
+            <ul id="submenu_2" class="sub-menu d-none">
+                <li><a href="category.html">رهبری</a></li>
+                <li><a href="category.html">بین الملل</a></li>
+                <li><a href="category.html">نظامی</a></li>
+                <li><a href="category.html">دولت</a></li>
+                <li><a href="category.html">مجلس</a></li>
+                <li><a href="category.html">انتخابات</a></li>
+            </ul>
+        </li>
+        <li class="main_list">
+            <a href="#" class="submenu-toggler" onclick="o_submenu(3)">
+                <i class="fas fa-plus"></i>
+                فرهنگ
+            </a>
+            <ul id="submenu_3" class="sub-menu d-none">
+                <li><a href="category.html">سینما</a></li>
+                <li><a href="category.html">موسیقی</a></li>
+                <li><a href="category.html">رسانه</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-6 box">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">صفحه اصلی</a> </li>
+                        <li class="breadcrumb-item"><a href="#">سر دسته</a> </li>
+                        <li class="breadcrumb-item active">دسته </li>
+                    </ul>
+                </div>
+                <div class="col-12 main_content">
+                    <div class="row mb-2">
+                        <div class="col-4 pl-0">
+                            <a href="#" target="_blank">
+                                <img src="image/1.jpg" class="img-fluid" alt="" title="">
+                            </a>
+                        </div>
+                        <div class="col-8">
+                            <div class="news_title">
+                                <h2 class="h6">
+                                    <a href="#" target="_blank">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="desc_news d-none d-md-block">
+                               <p>
+                                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+                               </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-4 pl-0">
+                            <a href="#" target="_blank">
+                                <img src="image/2.jpg" class="img-fluid" alt="" title="">
+                            </a>
+                        </div>
+                        <div class="col-8">
+                            <div class="news_title">
+                                <h2 class="h6">
+                                    <a href="#" target="_blank">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="desc_news d-none d-md-block">
+                                <p>
+                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-4 pl-0">
+                            <a href="#" target="_blank">
+                                <img src="image/3.jpg" class="img-fluid" alt="" title="">
+                            </a>
+                        </div>
+                        <div class="col-8">
+                            <div class="news_title">
+                                <h2 class="h6">
+                                    <a href="#" target="_blank">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="desc_news d-none d-md-block">
+                                <p>
+                                    مشرق نوشت: مقام‌معظم رهبری در دوسه هفته اخیر چندین بار پیگیر سلامتی علیرضا مرندی از اعضای تیم پزشکی خود شدند.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-4 pl-0">
+                            <a href="#" target="_blank">
+                                <img src="image/box2-f.jpg" class="img-fluid" alt="" title="">
+                            </a>
+                        </div>
+                        <div class="col-8">
+                            <div class="news_title">
+                                <h2 class="h6">
+                                    <a href="#" target="_blank">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="desc_news d-none d-md-block">
+                                <p>
+                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-3 text-center">
+                            <a href="archive.html" class="btn btn-secondary">بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 col-lg-3 box d-none d-md-block">
+            <section class="box_1 last_news">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="box_header">
+                            <h2>
+                                <a href="#">آخرین اخبار سیاسی ایران</a>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="most_viewed_news">
+                            <ul>
+                                <li><a href="#">دلیل حمایت رهبر انقلاب از دولت احمدی نژاد به روایت کیهان</a> </li>
+                                <li><a href="#"> دلیل حمایت رهبر انقلاب از دولت احمدی نژاد به روایت کیهان
+                                    ۳ صندلی مهم دولت رئیسی به چه کسانی می‌رسد؟ /پایداری ها منتظرند
+                                </a> </li>
+                                <li><a href="#">گزارشگران، سوهان روح عاشقان فوتبال</a> </li>
+                                <li><a href="#">اعتراض به نجوای عجیب جمعه یکی از روحانیون در فضای مجازی/ دیگر دولت امام زمان درست نکنید!</a> </li>
+                                <li><a href="#">ببینید | لحظه جنایت بی‌رحمانه در آمریکا؛ شلیک مرگبار به دختر و پسر 18 ساله</a> </li>
+                                <li><a href="#">دلیل حمایت رهبر انقلاب از دولت احمدی نژاد به روایت کیهان</a> </li>
+                                <li><a href="#"> دلیل حمایت رهبر انقلاب از دولت احمدی نژاد به روایت کیهان
+                                    ۳ صندلی مهم دولت رئیسی به چه کسانی می‌رسد؟ /پایداری ها منتظرند
+                                </a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<footer class="mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 fooret_text text-center">
+                <p>
+                    تمامی حقوق این سایت برای خبر اینلاین محفوظ است. نقل مطالب با ذکر منبع بلامانع است.
+                    <br>
+                    Copyright © 2018 khabarinline News Agancy, All rights reserved
+                </p>
+            </div>
+            <div class="col-12 text-center">
+                <div class="poweredby">
+                    <a href="https://hircana.com/" target="_blank">
+                        طراحی و تولید: هیرکانا
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/popper.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.js" type="text/javascript"></script>
+<script src="js/owl.carousel.js" type="text/javascript"></script>
+<script src="js/js.js" type="text/javascript"></script>
+<script src="js/fontawesome.js" type="text/javascript"></script>
+<script src="js/yBox.js" type="text/javascript"></script>
+</body>
+</html>
