@@ -290,20 +290,19 @@
       <?php $article2="SELECT * FROM `articles` ORDER BY publicationdate LIMIT 4 ";
         $article_result=mysqli_query($link,$article2);
         while($article_row=mysqli_fetch_array($article_result)){
-          $idd=$article_row['admin_id'];
-          $name_admin1="SELECT * FROM `admins` WHERE id=$idd";
-          $name_admin1_result=mysqli_query($link,$name_admin1);
-          $name_admin_row1=mysqli_fetch_array($name_admin1_result);
-
         ?>
         <div class="col-md-6">
           <!-- Box Comment -->
           <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="../dist/img/<?php  echo $admin_id['image']; ?>" alt="User Image">
+                <img class="img-circle" src="../dist/img/<?php  echo $article_row['image']; ?>" alt="User Image">
                 <span class="username"><a href="#"><?php
-               
+                $idd=$article_row['admin_id'];
+                $name_admin1="SELECT * FROM `admins` WHERE id=$idd";
+                $name_admin1_result=mysqli_query($link,$name_admin1);
+                $name_admin_row1=mysqli_fetch_array($name_admin1_result);
+
                 echo $name_admin_row1['name']; ?></a></span>
                 <span class="description"> <?php  echo $article_row['publicationdate']; ?></span>
               </div>
@@ -319,28 +318,31 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <img class="img-responsive pad" src="../dist/img/<?php echo $article_row['image']; ?>" alt="Photo">
+              <img class="img-responsive pad" src="../../image/<?php  echo $article_row['image']; ?>" alt="Photo">
 
               <p><?php  echo $article_row['title']; ?></p>
               <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> اشتراک گذاری</button>
               <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> لایک</button>
               <span class="pull-left text-muted">
               <?php 
-                $count_article1="SELECT COUNT(id) as count FROM comments WHERE article_id=$idd";
-                $result_count_article1=mysqli_query($link,$count_article1);
-                $row_count_article1=mysqli_fetch_array($result_count_article1);
-                echo $row_count_article1['count'];
-                ?>
+              $iddd=$article_row['id'];
+              $count_commentt="SELECT COUNT(id) AS count FROM `comments` WHERE article_id=$iddd";
+              $count_commentt_result=mysqli_query($link,$count_commentt);
+              $count_commentt_row=mysqli_fetch_array($count_commentt_result);
+              echo $count_commentt_row['count'];
+              
+              ?>
+
+
+
               </span>
-
             </div>
-            <?php 
-                $comment_article="SELECT * FROM comments WHERE article_id=$idd";
-                $comment_article_result=mysqli_query($link,$comment_article);
-                while ($comment_article_row=mysqli_fetch_array($comment_article_result)){
-                  ?>
-
             <!-- /.box-body -->
+            <?php 
+              $t_commentt="SELECT * FROM `comments` WHERE article_id=$iddd";
+              $t_commentt_result=mysqli_query($link,$t_commentt);
+              while($t_commentt_row=mysqli_fetch_array($t_commentt_result)){
+              ?>
             <div class="box-footer box-comments">
               <div class="box-comment">
                 <!-- User image -->
@@ -348,34 +350,24 @@
 
                 <div class="comment-text">
                       <span class="username">
-                        <?php echo $comment_article_row['name']; ?>
-                        <span class="text-muted pull-left"><?php echo $comment_article_row['date']; ?></span>
+                      <?php echo $t_commentt_row['name']; ?>
+                        <span class="text-muted pull-left"><?php echo $t_commentt_row['date']; ?></span>
                       </span><!-- /.username -->
-                      <?php echo $comment_article_row['comment']; ?>  
-                                  </div>
+                      <?php echo $t_commentt_row['comment']; ?>
+                </div>
                 <!-- /.comment-text -->
               </div>
-              <?php } ?>
               
-            <div class="box-footer">
-              <form action="widgets.php" method="post">
-                <img class="img-responsive img-circle img-sm" src="../dist/img/<?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true){
-  echo $_SESSION["admin_image"];
-} ?>" alt="Alt Text">
-                <!-- .img-push is used to add margin to elements next to floating images -->
-                <div class="img-push">
-                  <input type="text" class="form-control input-sm" placeholder="نظر">
-                </div>
-                <button type="submit" >ارسال پیام</button>
-              </form>
             </div>
+            <?php } ?>
             <!-- /.box-footer -->
-          </div>
+      
           <!-- /.box -->
+        </div>
         </div>
         <?php } ?>
         <!-- /.col -->
-        
+       
       </div>
       <!-- /.row -->
 
