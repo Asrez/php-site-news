@@ -1,4 +1,7 @@
-
+<?php
+session_start();
+$link=mysqli_connect("localhost","root","","news");
+?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -50,15 +53,38 @@
     <!-- /.lockscreen-image -->
 
     <!-- lockscreen credentials (contains the form) -->
-    <form class="lockscreen-credentials" method="post" action="profile.html">
+    <form class="lockscreen-credentials" method="post" action="lockscreen.php">
       <div class="input-group">
-        <input type="password" class="form-control" placeholder="رمز عبور">
+        <input type="password" class="form-control" placeholder="رمز عبور" name="password">
 
         <div class="input-group-btn">
-          <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+          <button type="submit" class="btn" name="btn"><i class="fa fa-arrow-right text-muted"></i></button>
         </div>
       </div>
     </form>
+    <?php
+    if(isset($_POST['btn'])){
+      $pass=$_POST['password'];
+      $user=$_SESSION['username'];
+      $passtrue="SELECT * FROM admins WHERE username='$user' AND password='$pass'";
+      $result=mysqli_query($link,$passtrue);
+      $row=mysqli_fetch_array($result);
+      if($row){
+        ?>
+        <script type='text/javascript'> window.alert('خوش آمدید ');
+    location.replace('profile.php');
+</script>
+        <?php
+      }
+      else{
+        ?>
+        <script type='text/javascript'> window.alert('اشتباه است');
+</script>
+        <?php
+      }
+    }
+    ?>
+
     <!-- /.lockscreen credentials -->
 
   </div>
