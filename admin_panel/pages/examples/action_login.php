@@ -29,6 +29,7 @@ if(
     $_SESSION["name"]=$row['name'];
     $_SESSION["username"]=$row['username'];
     $_SESSION["admin_image"]=$row['image'];
+    $_SESSION["admin_id"]=$row['id'];
     echo ("<script > window.alert('{$row['name']}به پنل ادمین خوش آمدید');
     location.replace('../../index2.php');
 </script>");

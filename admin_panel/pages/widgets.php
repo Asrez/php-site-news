@@ -57,7 +57,15 @@
 
             <div class="info-box-content">
               <span class="info-box-text">پیام ها</span>
-              <span class="info-box-number">1,410</span>
+              <span class="info-box-number"> <?php 
+                $query_count_comment="SELECT COUNT(id) as count FROM `comments` ";
+                $result_count_comment=mysqli_query($link,$query_count_comment);
+                while($row_count_comment=mysqli_fetch_array($result_count_comment)){
+                  echo $row_count_comment['count'];
+                }
+             
+              
+              ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -69,8 +77,16 @@
             <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">علاقه مندی ها</span>
-              <span class="info-box-number">410</span>
+              <span class="info-box-text">دسته بندی ها</span>
+              <span class="info-box-number"><?php 
+                $query_count_category="SELECT COUNT(id) as count FROM `categorys` WHERE parent_id=0 ";
+                $result_count_category=mysqli_query($link,$query_count_category);
+                while($row_count_category=mysqli_fetch_array($result_count_category)){
+                  echo $row_count_category['count'];
+                }
+             
+              
+              ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -82,8 +98,16 @@
             <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">آپلود ها</span>
-              <span class="info-box-number">13,648</span>
+              <span class="info-box-text"> اخبار</span>
+              <span class="info-box-number"><?php 
+                $query_count_article="SELECT COUNT(id) as count FROM `articles` ";
+                $result_count_article=mysqli_query($link,$query_count_article);
+                while($row_count_article=mysqli_fetch_array($result_count_article)){
+                  echo $row_count_article['count'];
+                }
+             
+              
+              ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -95,8 +119,16 @@
             <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">لایک ها</span>
-              <span class="info-box-number">93,139</span>
+              <span class="info-box-text">ادمین ها</span>
+              <span class="info-box-number"><?php 
+                $query_count_admins="SELECT COUNT(id) as count FROM `admins` ";
+                $result_count_admin=mysqli_query($link,$query_count_admins);
+                while($row_count_admin=mysqli_fetch_array($result_count_admin)){
+                  echo $row_count_admin['count'];
+                }
+             
+              
+              ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -108,90 +140,7 @@
 
       <!-- =========================================================== -->
 
-      <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box bg-aqua">
-            <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">علاقه مندی ها</span>
-              <span class="info-box-number">41,410</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-                  <span class="progress-description">
-                    ۷۰ درصد افزایش
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box bg-green">
-            <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">لایک ها</span>
-              <span class="info-box-number">41,410</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-                  <span class="progress-description">
-                      ۷۰ درصد افزایش
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box bg-yellow">
-            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">رویدادها</span>
-              <span class="info-box-number">41,410</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-                  <span class="progress-description">
-                     ۷۰ درصد افزایش
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box bg-red">
-            <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">نظرات</span>
-              <span class="info-box-number">41,410</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-                  <span class="progress-description">
-                     ۷۰ درصد افزایش
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-
+      
       <!-- =========================================================== -->
 
       <!-- Small boxes (Stat box) -->
@@ -200,15 +149,23 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+              <h3><?php 
+                $query_count_article="SELECT COUNT(id) as count FROM `articles` ";
+                $result_count_article=mysqli_query($link,$query_count_article);
+                while($row_count_article=mysqli_fetch_array($result_count_article)){
+                  echo $row_count_article['count'];
+                }
+             
+              
+              ?></h3>
 
-              <p>سفارش جدید</p>
+              <p>افزودن خبر جدید</p>
             </div>
             <div class="icon">
               <i class="fa fa-shopping-cart"></i>
             </div>
-            <a href="#" class="small-box-footer">
-              اطلاعات بیشتر <i class="fa fa-arrow-circle-right"></i>
+            <a href="forms/article_edit.php" class="small-box-footer">
+               افزودن <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
         </div>
@@ -217,15 +174,23 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3><?php 
+                $query_count_category="SELECT COUNT(id) as count FROM `categorys` WHERE parent_id=0 ";
+                $result_count_category=mysqli_query($link,$query_count_category);
+                while($row_count_category=mysqli_fetch_array($result_count_category)){
+                  echo $row_count_category['count'];
+                }
+             
+              
+              ?></h3>
 
-              <p>نرخ بازگشت</p>
+              <p>افزودن دسته بندی </p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
             <a href="#" class="small-box-footer">
-              اطلاعات بیشتر <i class="fa fa-arrow-circle-right"></i>
+               افزودن <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
         </div>
@@ -234,7 +199,15 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?php 
+                $query_count_admins="SELECT COUNT(id) as count FROM `admins` ";
+                $result_count_admin=mysqli_query($link,$query_count_admins);
+                while($row_count_admin=mysqli_fetch_array($result_count_admin)){
+                  echo $row_count_admin['count'];
+                }
+             
+              
+              ?></h3>
 
               <p>ثبت نام</p>
             </div>
@@ -242,7 +215,7 @@
               <i class="ion ion-person-add"></i>
             </div>
             <a href="#" class="small-box-footer">
-              اطلاعات بیشتر <i class="fa fa-arrow-circle-right"></i>
+               افزودن کاربر <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
         </div>
@@ -251,15 +224,23 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3><?php 
+                $query_count_tag="SELECT COUNT(id) as count FROM `tags` ";
+                $result_count_tag=mysqli_query($link,$query_count_tag);
+                while($row_count_tag=mysqli_fetch_array($result_count_tag)){
+                  echo $row_count_tag['count'];
+                }
+             
+              
+              ?></h3>
 
-              <p>بازدید جدید</p>
+              <p>افزودن تگ</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
             <a href="#" class="small-box-footer">
-              اطلاعات بیشتر <i class="fa fa-arrow-circle-right"></i>
+               افزودن <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
         </div>
@@ -267,669 +248,64 @@
       </div>
       <!-- /.row -->
 
-      <!-- =========================================================== -->
+      <h2 class="page-header">ادمین ها</h2>
 
       <div class="row">
-        <div class="col-md-3">
-          <div class="box box-default collapsed-box">
-            <div class="box-header with-border">
-              <h3 class="box-title">بسته</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              محتوای باکس
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3">
-          <div class="box box-success">
-            <div class="box-header with-border">
-              <h3 class="box-title">دکمه حذف</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              محتوای باکس
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3">
-          <div class="box box-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title">باز</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              محتوای باکس
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3">
-          <div class="box box-danger">
-            <div class="box-header">
-              <h3 class="box-title">لودینگ</h3>
-            </div>
-            <div class="box-body">
-              محتوای باکس
-            </div>
-            <!-- /.box-body -->
-            <!-- Loading (remove the following to stop the loading)-->
-            <div class="overlay">
-              <i class="fa fa-refresh fa-spin"></i>
-            </div>
-            <!-- end loading -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-
-      <!-- =========================================================== -->
-
-      <div class="row">
-        <div class="col-md-3">
-          <div class="box box-default collapsed-box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">بسته</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              محتوای باکس
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3">
-          <div class="box box-success box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">دکمه حذف</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              محتوای باکس
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3">
-          <div class="box box-warning box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">باز</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              محتوای باکس
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3">
-          <div class="box box-danger box-solid">
-            <div class="box-header">
-              <h3 class="box-title">لودینگ</h3>
-            </div>
-            <div class="box-body">
-              محتوای باکس
-            </div>
-            <!-- /.box-body -->
-            <!-- Loading (remove the following to stop the loading)-->
-            <div class="overlay">
-              <i class="fa fa-refresh fa-spin"></i>
-            </div>
-            <!-- end loading -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-
-      <!-- =========================================================== -->
-
-      <!-- Direct Chat -->
-      <div class="row">
-        <div class="col-md-3">
-          <!-- DIRECT CHAT PRIMARY -->
-          <div class="box box-primary direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">گفتگو</h3>
-
-              <div class="box-tools pull-right">
-                <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                  <i class="fa fa-comments"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <!-- Message. Default to the left -->
-                <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-left">علیرضا</span>
-                    <span class="direct-chat-timestamp pull-right">۱۳ مرداد ساعت ۱۲:۲۳</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    قالب را رایگان دانلود کنید
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-                <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">سارا</span>
-                    <span class="direct-chat-timestamp pull-left">۱۴ مرداد ساعت ۱۲:۲۳</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    عالیه با تشکر از شما
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-              </div>
-              <!--/.direct-chat-messages-->
-
-              <!-- Contacts are loaded here -->
-              <div class="direct-chat-contacts">
-                <ul class="contacts-list">
-                  <li>
-                    <a href="#">
-                      <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="User Image">
-
-                      <div class="contacts-list-info">
-                            <span class="contacts-list-name">
-                              محمد
-                              <small class="contacts-list-date pull-right">2/28/2015</small>
-                            </span>
-                        <span class="contacts-list-msg">پشتیبانی</span>
-                      </div>
-                      <!-- /.contacts-list-info -->
-                    </a>
-                  </li>
-                  <!-- End Contact Item -->
-                </ul>
-                <!-- /.contatcts-list -->
-              </div>
-              <!-- /.direct-chat-pane -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-              <form action="#" method="post">
-                <div class="input-group">
-                  <input type="text" name="message" placeholder="پیام" class="form-control">
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-primary btn-flat">ارسال</button>
-                      </span>
-                </div>
-              </form>
-            </div>
-            <!-- /.box-footer-->
-          </div>
-          <!--/.direct-chat -->
-        </div>
-        <!-- /.col -->
-
-        <div class="col-md-3">
-          <!-- DIRECT CHAT SUCCESS -->
-          <div class="box box-success direct-chat direct-chat-success">
-            <div class="box-header with-border">
-              <h3 class="box-title">گفتگو</h3>
-
-              <div class="box-tools pull-right">
-                <span data-toggle="tooltip" title="3 New Messages" class="badge bg-green">3</span>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                  <i class="fa fa-comments"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <!-- Message. Default to the left -->
-                <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-left">علیرضا</span>
-                    <span class="direct-chat-timestamp pull-right">۱۳ مرداد ساعت ۱۲:۲۳</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    قالب را رایگان دانلود کنید
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-                <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">سارا</span>
-                    <span class="direct-chat-timestamp pull-left">۱۴ مرداد ساعت ۱۲:۲۳</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    عالیه با تشکر از شما
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-              </div>
-              <!--/.direct-chat-messages-->
-
-              <!-- Contacts are loaded here -->
-              <div class="direct-chat-contacts">
-                <ul class="contacts-list">
-                  <li>
-                    <a href="#">
-                      <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="User Image">
-
-                      <div class="contacts-list-info">
-                            <span class="contacts-list-name">
-                              محمد
-                              <small class="contacts-list-date pull-right">2/28/2015</small>
-                            </span>
-                        <span class="contacts-list-msg">پشتیبانی</span>
-                      </div>
-                      <!-- /.contacts-list-info -->
-                    </a>
-                  </li>
-                  <!-- End Contact Item -->
-                </ul>
-                <!-- /.contatcts-list -->
-              </div>
-              <!-- /.direct-chat-pane -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-              <form action="#" method="post">
-                <div class="input-group">
-                  <input type="text" name="message" placeholder="پیام" class="form-control">
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-success btn-flat">ارسال</button>
-                      </span>
-                </div>
-              </form>
-            </div>
-            <!-- /.box-footer-->
-          </div>
-          <!--/.direct-chat -->
-        </div>
-        <!-- /.col -->
-
-        <div class="col-md-3">
-          <!-- DIRECT CHAT WARNING -->
-          <div class="box box-warning direct-chat direct-chat-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title">گفتگو</h3>
-
-              <div class="box-tools pull-right">
-                <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                  <i class="fa fa-comments"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <!-- Message. Default to the left -->
-                <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-left">علیرضا</span>
-                    <span class="direct-chat-timestamp pull-right">۱۳ مرداد ساعت ۱۲:۲۳</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    قالب را رایگان دانلود کنید
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-                <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">سارا</span>
-                    <span class="direct-chat-timestamp pull-left">۱۴ مرداد ساعت ۱۲:۲۳</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    عالیه با تشکر از شما
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-              </div>
-              <!--/.direct-chat-messages-->
-
-              <!-- Contacts are loaded here -->
-              <div class="direct-chat-contacts">
-                <ul class="contacts-list">
-                  <li>
-                    <a href="#">
-                      <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="User Image">
-
-                      <div class="contacts-list-info">
-                            <span class="contacts-list-name">
-                              محمد
-                              <small class="contacts-list-date pull-right">2/28/2015</small>
-                            </span>
-                        <span class="contacts-list-msg">پشتیبانی</span>
-                      </div>
-                      <!-- /.contacts-list-info -->
-                    </a>
-                  </li>
-                  <!-- End Contact Item -->
-                </ul>
-                <!-- /.contatcts-list -->
-              </div>
-              <!-- /.direct-chat-pane -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-              <form action="#" method="post">
-                <div class="input-group">
-                  <input type="text" name="message" placeholder="پیام" class="form-control">
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-warning btn-flat">ارسال</button>
-                      </span>
-                </div>
-              </form>
-            </div>
-            <!-- /.box-footer-->
-          </div>
-          <!--/.direct-chat -->
-        </div>
-        <!-- /.col -->
-
-        <div class="col-md-3">
-          <!-- DIRECT CHAT DANGER -->
-          <div class="box box-danger direct-chat direct-chat-danger">
-            <div class="box-header with-border">
-              <h3 class="box-title">گفتگو</h3>
-
-              <div class="box-tools pull-right">
-                <span data-toggle="tooltip" title="3 New Messages" class="badge bg-red">3</span>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                  <i class="fa fa-comments"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <!-- Message. Default to the left -->
-                <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-left">علیرضا</span>
-                    <span class="direct-chat-timestamp pull-right">۱۳ مرداد ساعت ۱۲:۲۳</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    قالب را رایگان دانلود کنید
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-                <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">سارا</span>
-                    <span class="direct-chat-timestamp pull-left">۱۴ مرداد ساعت ۱۲:۲۳</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    عالیه با تشکر از شما
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-              </div>
-              <!--/.direct-chat-messages-->
-
-              <!-- Contacts are loaded here -->
-              <div class="direct-chat-contacts">
-                <ul class="contacts-list">
-                  <li>
-                    <a href="#">
-                      <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="User Image">
-
-                      <div class="contacts-list-info">
-                            <span class="contacts-list-name">
-                              محمد
-                              <small class="contacts-list-date pull-right">2/28/2015</small>
-                            </span>
-                        <span class="contacts-list-msg">پشتیبانی</span>
-                      </div>
-                      <!-- /.contacts-list-info -->
-                    </a>
-                  </li>
-                  <!-- End Contact Item -->
-                </ul>
-                <!-- /.contatcts-list -->
-              </div>
-              <!-- /.direct-chat-pane -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-              <form action="#" method="post">
-                <div class="input-group">
-                  <input type="text" name="message" placeholder="پیام" class="form-control">
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-danger btn-flat">ارسال</button>
-                      </span>
-                </div>
-              </form>
-            </div>
-            <!-- /.box-footer-->
-          </div>
-          <!--/.direct-chat -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-
-      <h2 class="page-header">شبکه های اجتماعی</h2>
-
-      <div class="row">
+        <?php $admins="SELECT * FROM `admins` ";
+        $admin_result=mysqli_query($link,$admins);
+        while($admin_row=mysqli_fetch_array($admin_result)){
+        ?>
         <div class="col-md-4">
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-yellow">
+            <div class="widget-user-header bg-red">
               <div class="widget-user-image">
-                <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+                <img class="img-circle" src="../dist/img/<?php echo $admin_row['image']; ?>" alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
-              <h3 class="widget-user-username">نادیا</h3>
-              <h5 class="widget-user-desc">توسعه دهنده</h5>
+              <h3 class="widget-user-username"><?php echo $admin_row['name']; ?></h3>
+              <h5 class="widget-user-desc"> admin</h5>
             </div>
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
-                <li><a href="#">پروژه <span class="pull-left badge bg-blue">31</span></a></li>
-                <li><a href="#">کار <span class="pull-left badge bg-aqua">5</span></a></li>
-                <li><a href="#">هدف <span class="pull-left badge bg-green">12</span></a></li>
-                <li><a href="#">فالوور <span class="pull-left badge bg-red">842</span></a></li>
+                <li><a href="#">پروژه <span class="pull-left badge bg-blue">
+                  <?php
+                  $admin_id=$admin_row['name'];
+                  $count_project="SELECT COUNT(id) as count FROM `articles` WHERE admin_id=$admin_id  "
+                  ?>
+
+                </span></a></li>
               </ul>
             </div>
           </div>
           <!-- /.widget-user -->
         </div>
-        <!-- /.col -->
-        <div class="col-md-4">
-          <!-- Widget: user widget style 1 -->
-          <div class="box box-widget widget-user">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-aqua-active">
-              <h3 class="widget-user-username">علیرضا</h3>
-              <h5 class="widget-user-desc">مدیر کل</h5>
-            </div>
-            <div class="widget-user-image">
-              <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
-            </div>
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">3,200</h5>
-                    <span class="description-text">فروش</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">فالوور</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4">
-                  <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">محصول</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-          </div>
-          <!-- /.widget-user -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-4">
-          <!-- Widget: user widget style 1 -->
-          <div class="box box-widget widget-user">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-black" style="background: url('../dist/img/photo1.png') center center;">
-              <h3 class="widget-user-username">الیزابت</h3>
-              <h5 class="widget-user-desc">طراح وب</h5>
-            </div>
-            <div class="widget-user-image">
-              <img class="img-circle" src="../dist/img/user3-128x128.jpg" alt="User Avatar">
-            </div>
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">3,200</h5>
-                    <span class="description-text">فروش</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">فالوور</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4">
-                  <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">محصول</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-          </div>
-          <!-- /.widget-user -->
-        </div>
-        <!-- /.col -->
+        <?php } ?>
+       
       </div>
       <!-- /.row -->
 
       <div class="row">
+      <?php $article2="SELECT * FROM `articles` ORDER BY publicationdate LIMIT 4 ";
+        $article_result=mysqli_query($link,$article2);
+        while($article_row=mysqli_fetch_array($article_result)){
+          $idd=$article_row['admin_id'];
+          $name_admin1="SELECT * FROM `admins` WHERE id=$idd";
+          $name_admin1_result=mysqli_query($link,$name_admin1);
+          $name_admin_row1=mysqli_fetch_array($name_admin1_result);
+
+        ?>
         <div class="col-md-6">
           <!-- Box Comment -->
           <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
-                <span class="username"><a href="#">حسین</a></span>
-                <span class="description">منتشر شده در ۱۳ آبان ۱۳۹۶</span>
+                <img class="img-circle" src="../dist/img/<?php  echo $admin_id['image']; ?>" alt="User Image">
+                <span class="username"><a href="#"><?php
+               
+                echo $name_admin_row1['name']; ?></a></span>
+                <span class="description"> <?php  echo $article_row['publicationdate']; ?></span>
               </div>
               <!-- /.user-block -->
               <div class="box-tools">
@@ -943,150 +319,63 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <img class="img-responsive pad" src="../dist/img/photo2.png" alt="Photo">
+              <img class="img-responsive pad" src="../dist/img/<?php echo $article_row['image']; ?>" alt="Photo">
 
-              <p>این تصویریه که اول صبح میبینم</p>
+              <p><?php  echo $article_row['title']; ?></p>
               <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> اشتراک گذاری</button>
               <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> لایک</button>
-              <span class="pull-left text-muted">127 لایک - 3 نظر</span>
+              <span class="pull-left text-muted">
+              <?php 
+                $count_article1="SELECT COUNT(id) as count FROM comments WHERE article_id=$idd";
+                $result_count_article1=mysqli_query($link,$count_article1);
+                $row_count_article1=mysqli_fetch_array($result_count_article1);
+                echo $row_count_article1['count'];
+                ?>
+              </span>
+
             </div>
+            <?php 
+                $comment_article="SELECT * FROM comments WHERE article_id=$idd";
+                $comment_article_result=mysqli_query($link,$comment_article);
+                while ($comment_article_row=mysqli_fetch_array($comment_article_result)){
+                  ?>
+
             <!-- /.box-body -->
             <div class="box-footer box-comments">
               <div class="box-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+                <img class="img-circle img-sm" src="../dist/img/user.png" alt="User Image">
 
                 <div class="comment-text">
                       <span class="username">
-                        مریم
-                        <span class="text-muted pull-left">۸:۳۰ امروز</span>
+                        <?php echo $comment_article_row['name']; ?>
+                        <span class="text-muted pull-left"><?php echo $comment_article_row['date']; ?></span>
                       </span><!-- /.username -->
-                  خوش به حالت
-                </div>
+                      <?php echo $comment_article_row['comment']; ?>  
+                                  </div>
                 <!-- /.comment-text -->
               </div>
-              <!-- /.box-comment -->
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="User Image">
-
-                <div class="comment-text">
-                      <span class="username">
-                        لادن
-                        <span class="text-muted pull-left">۸:۳۲ امروز</span>
-                      </span><!-- /.username -->
-                  آفرین به تو
-                </div>
-                <!-- /.comment-text -->
-              </div>
-              <!-- /.box-comment -->
-            </div>
-            <!-- /.box-footer -->
+              <?php } ?>
+              
             <div class="box-footer">
-              <form action="#" method="post">
-                <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+              <form action="widgets.php" method="post">
+                <img class="img-responsive img-circle img-sm" src="../dist/img/<?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true){
+  echo $_SESSION["admin_image"];
+} ?>" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
                   <input type="text" class="form-control input-sm" placeholder="نظر">
                 </div>
+                <button type="submit" >ارسال پیام</button>
               </form>
             </div>
             <!-- /.box-footer -->
           </div>
           <!-- /.box -->
         </div>
+        <?php } ?>
         <!-- /.col -->
-        <div class="col-md-6">
-          <!-- Box Comment -->
-          <div class="box box-widget">
-            <div class="box-header with-border">
-              <div class="user-block">
-                <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
-                <span class="username"><a href="#">جاناتان آیو</a></span>
-                <span class="description">منتشر شده در ۱۳ آبان ۱۳۹۶</span>
-              </div>
-              <!-- /.user-block -->
-              <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="خوانده شده">
-                  <i class="fa fa-circle-o"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- post text -->
-              <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
-
-              <!-- Attachment -->
-              <div class="attachment-block clearfix">
-                <img class="attachment-img" src="../dist/img/photo1.png" alt="Attachment Image">
-
-                <div class="attachment-pushed">
-                  <h4 class="attachment-heading"><a href="http://www.lipsum.com/">ساخت لورم</a></h4>
-
-                  <div class="attachment-text">
-                    متن مورد نظر متن مورد نظر متن مورد نظر... <a href="#">ادامه</a>
-                  </div>
-                  <!-- /.attachment-text -->
-                </div>
-                <!-- /.attachment-pushed -->
-              </div>
-              <!-- /.attachment-block -->
-
-              <!-- Social sharing buttons -->
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> اشتراک گذاری</button>
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> لایک</button>
-              <span class="pull-left text-muted">45 لایک - 2 نظر</span>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer box-comments">
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
-
-                <div class="comment-text">
-                      <span class="username">
-                       مریم
-                        <span class="text-muted pull-left">۸:۳۲ امروز</span>
-                      </span><!-- /.username -->
-                  عالیه
-                </div>
-                <!-- /.comment-text -->
-              </div>
-              <!-- /.box-comment -->
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="../dist/img/user5-128x128.jpg" alt="User Image">
-
-                <div class="comment-text">
-                      <span class="username">
-                        نورا
-                         <span class="text-muted pull-left">۸:۳۲ امروز</span>
-                      </span><!-- /.username -->
-                 ممنون از تو
-                </div>
-                <!-- /.comment-text -->
-              </div>
-              <!-- /.box-comment -->
-            </div>
-            <!-- /.box-footer -->
-            <div class="box-footer">
-              <form action="#" method="post">
-                <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
-                <!-- .img-push is used to add margin to elements next to floating images -->
-                <div class="img-push">
-                  <input type="text" class="form-control input-sm" placeholder="متن">
-                </div>
-              </form>
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
+        
       </div>
       <!-- /.row -->
 

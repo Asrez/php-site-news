@@ -85,7 +85,8 @@
 
             <div class="info-box-content">
               <span class="info-box-text">کامنت ها</span>
-              <span class="info-box-number"><?php 
+              <span class="info-box-number">
+                <?php 
                 $query_count_comment="SELECT COUNT(id) as count FROM `comments` ";
                 $result_count_comment=mysqli_query($link,$query_count_comment);
                 while($row_count_comment=mysqli_fetch_array($result_count_comment)){

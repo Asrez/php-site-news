@@ -1,32 +1,55 @@
 <?php 
 session_start();
 $link=mysqli_connect("localhost","root","","news");
-           
-                $title=$_post['title'];
-                $summery=$_post['summery'];
-                $content=$_post['content'];
-                $source=$_post['source'];
-                $category=$_post['category'];
+if(!isset($_SESSION["state_login"]) && $_SESSION["state_login"]===false)
+{
+	?>
+    <script type="text/javascript">
+	location.replace("../../../index.php");
+	</script>
+    <?php
+}
+if(isset($_POST["title"]) 
+&& !empty($_POST["title"])&&
+isset($_POST["summery"]) && !empty($_POST["summery"])&&
+isset($_POST["content"]) && !empty($_POST["content"])&&
+isset($_POST["source"]) && !empty($_POST["source"])&&
+isset($_POST["category"]) && !empty($_POST["category"]))
+
+{
+      
+                $title=$_POST['title'];
+                $summery=$_POST['summery'];
+                $content=$_POST['content'];
+                $source=$_POST['source'];
+                $category=$_POST['category'];
                 $admin=$_SESSION["admin_id"];
-                $pro_image=basename($_FILES["image"]["name"]);
-                $target_dir="image/products/";
+                $image=basename($_FILES["image"]["name"]);
+                $target_dir="../../../image/";
                 $target_file=$target_dir.basename($_FILES["image"]["name"]);
                 $uploadok=1;
                 $imagefiletype=pathinfo($target_file,PATHINFO_EXTENSION);
-                $check=getimagesize($_FILES["pro_image"]["tmp_name"]);
-                if($check===true)
-                 {
-                    	$uploadok=1;	
-                 }
-                else
-                  {	
-                  echo('
+                // $check=getimagesize($_FILES["image"]["tmp_name"]);
+              
+}
+else{
+  ?>
+  <script type="text/javascript">
+    window.alert("برخی فیلد ها مقدار دهی نشده است")
+location.replace("article_edit.php");
+</script>
+  <?php
+
+}
+if($imagefiletype!="jpg" &&$imagefiletype!="png"&& $imagefiletype!="jpeg" && $imagefiletype!="gif")
+{
+	echo('
 
 <script type="text/javascript">
-window.alert("پرونده انتخابی از نوع تصویر نیست");
-	location.replace("article_edit.php");
+window.alert("شما فقط پسوند های png , jpg , jpeg ,gif مجاز هستید");
+	location.replace("admin_product.php");
 </script>');
-   $uploadok=0;
+	$uploadok=0;
 }
                   if(file_exists($target_file)){
 	                 echo('
@@ -36,46 +59,27 @@ window.alert("فایل انتخابی در سرویس دهنده موجود اس
 	location.replace("article_edit.php");
 </script>');
 }
-                  if(move_uploaded_file($_FILES["image"]["tmp_name"],$target_file)){
+ if(move_uploaded_file($_FILES["image"]["tmp_name"],$target_file)){
                       echo('
 
 <script type="text/javascript">
-window.alert("پرونده به سرویس دهنده میزبان ارسال شد");
+window.alert("فایل به سرویس دهنده میزبان ارسال شد");
 </script>');
 }
              
 
-             function slugify($text, string $divider = '-')
-{
-  // replace non letter or digits by divider
-  $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
+$myChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%%^&^&**()_+';
+$text=substr( str_shuffle($myChars), 5, 16 );
+$date=date('Y-m-d h:i:s');
 
-  // transliterate
-  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-
-  // remove unwanted characters
-  $text = preg_replace('~[^-\w]+~', '', $text);
-
-  // trim
-  $text = trim($text, $divider);
-
-  // remove duplicate divider
-  $text = preg_replace('~-+~', $divider, $text);
-
-  // lowercase
-  $text = strtolower($text);
-
-  if (empty($text)) {
-    return 'n-a';
-  }
-
-  return $text;
-}
-              $insert_article="INSERT INTO `articles`(`id`, `publicationdate`, `title`, `summery`, `content`, `image`, `source`, `viewcount`, `category_id`, `admin_id`, `slug`) VALUES ('NULL','date('Y-m-d h:i:sa')','$title','$summery','$content','$pro_image','$source','0','$category','$admin','$text')";
-              if(mysqli_query($link,$insert_article)){
+             $insert_article="INSERT INTO `articles`(`id`, `publicationdate`, `title`, `summery`, `content`, `image`, `source`, `viewcount`, `category_id`, `admin_id`, `slug`)
+                                             VALUES ('NULL','$date','$title','$summery','$content','$image','$source','0','$category','$admin','$text')";
+                                                                                                                                                                                                        
+             if(mysqli_query($link,$insert_article)===true){
                 ?>
                 <script>
                     window.alert("خبر با موفقیت ثبت شد");
+                    location.replace("../index1.php");
                 </script>
                 <?php
               }

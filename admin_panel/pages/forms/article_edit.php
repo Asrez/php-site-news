@@ -50,15 +50,15 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" method="post" action="action_article_edit.php">
+              <form role="form" method="post" action="action_article_edit.php" enctype="multipart/form-data">
                 <!-- text input -->
                 <div class="form-group">
                   <label>عنوان</label>
-                  <input type="text" class="form-control" placeholder="متن" name="title">
+                  <input type="text" class="form-control" placeholder="متن" name="title" id="title">
                 </div>
                 <div class="form-group">
                   <label>نویسنده</label>
-                  <input type="text" class="form-control" name="admin" value="<?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true){
+                  <input type="text" class="form-control" name="admin"  id="admin" value="<?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true){
   echo $_SESSION["name"];
 } ?>" disabled>
                 </div>
@@ -71,7 +71,7 @@
                 <div class="form-group">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="tag">
+                      <input type="checkbox" name="tag"  id="tag">
                     <?php echo $tags_row['title']; ?>
                     </label>
                   </div>
@@ -81,13 +81,13 @@
     
                 <div class="form-group">
                   <label>دسته بندی</label>
-                  <select class="form-control" name="myselect">
+                  <select class="form-control" name="category">
                     <?php
                     $categorys_query="SELECT * FROM categorys WHERE parent_id!=0";
                     $categorys_result=mysqli_query($link,$categorys_query);
                     while($categorys_row=mysqli_fetch_array($categorys_result)){
                     ?>
-                    <option value="<?php echo $categorys_row['id'] ?>" name="categorys"><?php echo $categorys_row['title'] ?></option>
+                    <option value="<?php echo $categorys_row['id'] ?>"><?php echo $categorys_row['title'] ?></option>
                    <?php } ?>
                   </select>
                       </div>

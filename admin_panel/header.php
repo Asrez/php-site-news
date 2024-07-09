@@ -381,7 +381,7 @@ $link=mysqli_connect("localhost" , "root" ,"" ,"news") ;
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> اجزای عمومی</a></li>
+            <li><a href="pages/forms/article_edit.php"><i class="fa fa-circle-o"></i>افزودن خبر</a></li>
             <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> پیشرفته</a></li>
             <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> ویرایشگر</a></li>
           </ul>
