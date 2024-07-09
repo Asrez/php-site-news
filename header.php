@@ -46,10 +46,10 @@ $link=mysqli_connect("localhost","root","","news");
                 </div>
                 <div class="d-none col-md-4 col-lg-2 d-md-block">
                     <ul class="header_social text-left">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a> </li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a> </li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a> </li>
-                        <li><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
+                        <li><a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a> </li>
+                        <li><a href="https://twitter.com"><i class="fab fa-twitter"></i></a> </li>
+                        <li><a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a> </li>
+                        <li><a href="https://www.telegram.com"><i class="fab fa-telegram-plane"></i></a></li>
                         <li><a href="admin_panel/pages/examples/login.php"><i class="fas fa-rss"></i></a> </li>
                     </ul>
                 </div>

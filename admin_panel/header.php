@@ -244,7 +244,7 @@ $link=mysqli_connect("localhost" , "root" ,"" ,"news") ;
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="pages/examples/lockscreen.html">صفحه من</a>
+                    <a href="pages/examples/lockscreen.php">صفحه من</a>
                   </div>
                   <div class="col-xs-4 text-center">
                     <a href="#">فروش</a>
@@ -258,7 +258,7 @@ $link=mysqli_connect("localhost" , "root" ,"" ,"news") ;
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="pages/examples/lockscreen.html" class="btn btn-default btn-flat">پروفایل</a>
+                  <a href="pages/examples/lockscreen.php" class="btn btn-default btn-flat">پروفایل</a>
                 </div>
                 <div class="pull-left">
                   <a href="#" class="btn btn-default btn-flat">خروج</a>
