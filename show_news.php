@@ -237,7 +237,7 @@ echo "";
                             <div class="most_viewed_news suggested">
                                 <ul>
                                 <?php
-                                $article__query="SELECT * FROM articles ";
+                                $article__query="SELECT * FROM articles  LIMIT 5";
                                 $article__result=mysqli_query($link,$article__query);
                                 while($article__row=mysqli_fetch_array($article__result)){
                                     ?>
@@ -260,19 +260,20 @@ echo "";
                     </div>
                     <div class="row">
                         <div class="col-12 p-0">
-                            <form action="" method="">
+                        
+                            <form action="action_insert_comment.php?article_slug=<?php echo $article_slug; ?>" method="post" name="comment_form">
                                 <fieldset class="row">
                                     <div class="col-12 col-md-6 form-group name-group">
                                         <label for="userName">نام</label>
-                                        <input type="text" id="userName" name="userName" placeholder="نام" maxlength="50" class="form-control" data-minlength="3" data-required-msg="لطفا نام خود را وارد کنید.">
+                                        <input type="text" id="userName" name="name" placeholder="نام" maxlength="50" class="form-control" data-minlength="3" data-required-msg="لطفا نام خود را وارد کنید.">
                                     </div>
                                     <div class="col-12 col-md-6 form-group email-group">
                                         <label for="userEmail">ایمیل</label>
-                                        <input type="email" placeholder="ایمیل" class="form-control ltr" id="userEmail" name="userEmail" maxlength="80">
+                                        <input type="email" placeholder="ایمیل" class="form-control ltr" id="userEmail" name="Email" maxlength="80">
                                     </div>
                                     <div class="col-12 form-group text-group">
                                         <label for="body">نظر شما *</label>
-                                        <textarea maxlength="1000" placeholder="نظر شما" data-required-msg="لطفاً نظر خود را وارد کنید." class="form-control" required="true" id="body" name="body" rows="5"></textarea>
+                                        <textarea maxlength="1000" placeholder="نظر شما" data-required-msg="لطفاً نظر خود را وارد کنید." class="form-control" required="true" id="body" name="comment" rows="5"></textarea>
                                     </div><div class="col-12 col-md-6 form-group captcha-group">
                                     <div class="captcha">
                                         <input id="captchaKey" name="captchaKey" value="-4573118011947117407" type="hidden">
@@ -281,19 +282,26 @@ echo "";
                                     </div></div>
                                     <div class="col-12 col-md-6">
                                         <div style="direction: ltr">
-                                            <div class="captcha-image d-inline-block">1 + 4 =
+                                        <?php
+                                        $num1=rand(1,10);
+                                        $num2=rand(1,10);
+                                        $sum= $num1 + $num2;
+                                        ?>
+                                        <input type="number" name="real_sum" value="<?php echo $sum; ?>" style="opacity: 0;position: absolute;">
+                                            <div class="captcha-image d-inline-block"><?php echo $num1; ?> +<?php echo $num2; ?>=
                                             </div>
                                             <div class="captcha-input d-inline-block">
-                                                <input type="number" name="captchaText" id="number" required="required" data-required-msg="حاصل عبارت را وارد کنید.">
+                                                <input type="number" name="sum" id="number" required="required" data-required-msg="حاصل عبارت را وارد کنید.">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 form-group submit-group">
-                                        <button class="btn btn-default" id="btnSave">ارسال</button>
+                                        <button class="btn btn-default" id="btnSave" type="submit" name="btnsubmit">ارسال</button>
                                         <div class="msg"></div>
                                     </div>
                                 </fieldset>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -337,11 +345,17 @@ echo "";
                     <div class="row">
                         <div class="most_viewed_news">
                             <ul>
-                                <?php $ostan_query="SELECT * FROM `articles` WHERE category_id=10  ORDER BY publicationdate ";
-                                 $result_ostan_query=mysqli_query($link,$ostan_query);
-                              while($row_ostan_query=mysqli_fetch_array($result_ostan_query)){ ?>
-                                <li><a href="#"><?php echo  $row_ostan_query['title'];?></a> </li>
-                                <?php } ?>
+                                <?php 
+                                $category_ostan4="SELECT * FROM categorys WHERE parent_id=10";
+                                $category_ostan_result4=mysqli_query($link,$category_ostan4);
+                                while($category_ostan_row4=mysqli_fetch_array($category_ostan_result4)){
+                                    $category_id4=$category_ostan_row4['id'];
+                                $ostan_query4="SELECT * FROM `articles` WHERE category_id=$category_id4  ORDER BY publicationdate ";
+                                 $result_ostan_query4=mysqli_query($link,$ostan_query4);
+                              while($row_ostan_query4=mysqli_fetch_array($result_ostan_query4)){ ?>
+                                <li><a href="#"><?php echo  $row_ostan_query4['title'];?></a> </li>
+                                <?php } 
+                                }?>
                             </ul>
                         </div>
                     </div>
@@ -380,7 +394,7 @@ echo "";
                         </div>
                     </div>
                     <div class="row container_box">
-                        <?php $coment_count="SELECT DISTINCT articles.id,articles.image,articles.title  FROM comments , articles  WHERE comments.article_id=articles.id  LIMIT 10";
+                        <?php $coment_count="SELECT DISTINCT articles.id,articles.image,articles.title  FROM comments , articles WHERE comments.article_id=articles.id  LIMIT 10";
                         $coment_result=mysqli_query($link,$coment_count);
                         while($coment_row=mysqli_fetch_array($coment_result)){ ?>
                         <div class="col-5 p-0">
@@ -403,31 +417,32 @@ echo "";
                     <div class="row">
                         <div class="box_header">
                             <h2>
-                                مطالب پیشنهادی
+                                اخبار سیاسی
                             </h2>
                         </div>
                     </div>
                     <div class="row container_box">
+                    <?php
+                    $siyasi_query1="SELECT * FROM categorys WHERE parent_id=3 ";
+                    $result_siyasi_query1=mysqli_query($link,$siyasi_query1);
+                    while($row_siyasi_query1=mysqli_fetch_array($result_siyasi_query1)){
+                        $idd=$row_siyasi_query1['id'];
+                    $siyasi_query="SELECT * FROM `articles` WHERE category_id=$idd  ORDER BY publicationdate LIMIT 4";
+                                 $result_siyasi_query=mysqli_query($link,$siyasi_query);
+                              while($row_siyasi_query=mysqli_fetch_array($result_siyasi_query)){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
-                                <img src="image/1.jpg" class="img-fluid" alt="" title="">
+                                <img src="image/<?php echo $row_siyasi_query['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-7 p-0">
                             <a href="#" target="_blank" class="">
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            <?php echo $row_siyasi_query['title']; ?>
                             </a>
                         </div>
-                        <div class="col-5 p-0">
-                            <a href="#" target="_blank">
-                                <img src="image/2.jpg" class="img-fluid" alt="" title="">
-                            </a>
-                        </div>
-                        <div class="col-7 p-0">
-                            <a href="#" target="_blank" class="">
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوممتن خبر
-                            </a>
-                        </div>
+                        <?php }
+                          } ?>
+                        
                     </div>
                 </div>
             </section>
@@ -438,31 +453,31 @@ echo "";
                     <div class="row">
                         <div class="box_header">
                             <h2>
-                                بخوانید
+                                اخبار فرهنگی
                             </h2>
                         </div>
                     </div>
                     <div class="row container_box">
+                    <?php
+                    $farhangi_query1="SELECT * FROM categorys WHERE parent_id=2 ";
+                    $result_farhangi_query1=mysqli_query($link,$farhangi_query1);
+                    while($row_farhangi_query1=mysqli_fetch_array($result_farhangi_query1)){
+                        $idid=$row_farhangi_query1['id'];
+                    $farhangi_query="SELECT * FROM `articles` WHERE category_id=$idid  ORDER BY publicationdate LIMIT 4";
+                                 $result_farhangi_query=mysqli_query($link,$farhangi_query);
+                              while($row_farhangi_query=mysqli_fetch_array($result_farhangi_query)){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
-                                <img src="image/10.jpg" class="img-fluid" alt="" title="">
+                                <img src="image/<?php echo $row_farhangi_query['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-7 p-0">
                             <a href="#" target="_blank" class="">
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            <?php echo $row_farhangi_query['title']; ?>
                             </a>
                         </div>
-                        <div class="col-5 p-0">
-                            <a href="#" target="_blank">
-                                <img src="image/b1.jpg" class="img-fluid" alt="" title="">
-                            </a>
-                        </div>
-                        <div class="col-7 p-0">
-                            <a href="#" target="_blank" class="">
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                            </a>
-                        </div>
+                        <?php }
+                    } ?>
                     </div>
                 </div>
             </section>
@@ -525,52 +540,7 @@ echo "";
                     </div>
                 </div>
             </section>
-            <section class="box box_1 web">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="box_header">
-                            <h2>
-                                وب گردی
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="row container_box">
-                        <div class="col-6 p-0 boxing">
-                            <a href="#" target="_blank">
-                                <img src="image/1.jpg" class="img-fluid" alt="" title="">
-                                <div class="">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 p-0 boxing">
-                            <a href="#" target="_blank">
-                                <img src="image/2.jpg" class="img-fluid" alt="" title="">
-                                <div class="">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 p-0 boxing">
-                            <a href="#" target="_blank">
-                                <img src="image/3.jpg" class="img-fluid" alt="" title="">
-                                <div class="">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 p-0 boxing">
-                            <a href="#" target="_blank">
-                                <img src="image/4.jpg" class="img-fluid" alt="" title="">
-                                <div class="">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
+            
             <section class="box box_1 participation">
                 <div class="col-12">
                     <div class="row">
@@ -580,27 +550,29 @@ echo "";
                             </h2>
                         </div>
                     </div>
+                        
                     <div class="row container_box">
+                    <?php 
+                                $category_ostan1="SELECT * FROM categorys WHERE parent_id=10";
+                                $category_ostan_result1=mysqli_query($link,$category_ostan1);
+                                while($category_ostan_row1=mysqli_fetch_array($category_ostan_result1)){
+                                    $category_id=$category_ostan_row1['id'];
+                                $ostan_query1="SELECT * FROM `articles` WHERE category_id=$category_id  ORDER BY publicationdate ";
+                                 $result_ostan_query1=mysqli_query($link,$ostan_query1);
+                              while($row_ostan_query1=mysqli_fetch_array($result_ostan_query1)){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
-                                <img src="image/b1.jpg" class="img-fluid" alt="" title="">
+                                <img src="image/<?php echo $row_ostan_query1['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-7 p-0">
                             <a href="#" target="_blank" class="">
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            <?php echo $row_ostan_query1['title']; ?>
                             </a>
                         </div>
-                        <div class="col-5 p-0">
-                            <a href="#" target="_blank">
-                                <img src="image/b2.jpg" class="img-fluid" alt="" title="">
-                            </a>
-                        </div>
-                        <div class="col-7 p-0">
-                            <a href="#" target="_blank" class="">
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                            </a>
-                        </div>
+                        <?php } 
+                                }
+                        ?>
                     </div>
                 </div>
             </section>
@@ -609,31 +581,30 @@ echo "";
                     <div class="row">
                         <div class="box_header">
                             <h2>
-                                بازار
+                                اقتصادی
                             </h2>
                         </div>
                     </div>
                     <div class="row container_box">
-                        <div class="col-5 p-0">
+                    <?php
+                    $eghtesad_query1="SELECT * FROM categorys WHERE parent_id=4 ";
+                    $result_eghtesad_query1=mysqli_query($link,$eghtesad_query1);
+                    while($row_eghtesad_query1=mysqli_fetch_array($result_eghtesad_query1)){
+                        $dd=$row_eghtesad_query1['id'];
+                    $eghtesad_query="SELECT * FROM `articles` WHERE category_id=$dd  ORDER BY publicationdate LIMIT 4";
+                                 $result_eghtesad_query=mysqli_query($link,$eghtesad_query);
+                              while($row_eghtesad_query=mysqli_fetch_array($result_eghtesad_query)){ ?>
+                        <div class="col-6 p-0 boxing">
                             <a href="#" target="_blank">
-                                <img src="image/d.jpg" class="img-fluid" alt="" title="">
+                                <img src="image/<?php echo $row_eghtesad_query['image']; ?>" class="img-fluid" alt="" title="">
+                                <div class="">
+                                    <p>ببینید | <?php echo $row_eghtesad_query['title']; ?> </p>
+                                </div>
                             </a>
                         </div>
-                        <div class="col-7 p-0">
-                            <a href="#" target="_blank" class="">
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                            </a>
-                        </div>
-                        <div class="col-5 p-0">
-                            <a href="#" target="_blank">
-                                <img src="image/o.jpg" class="img-fluid" alt="" title="">
-                            </a>
-                        </div>
-                        <div class="col-7 p-0">
-                            <a href="#" target="_blank" class="">
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                            </a>
-                        </div>
+                        <?php } 
+                        }
+                        ?>
                     </div>
                 </div>
             </section>
@@ -647,12 +618,19 @@ echo "";
                     <div class="row">
                         <div class="web_box_content">
                             <ul>
-                                <li><a href="#" target="_blank">بلیط هواپیما</a> </li>
-                                <li><a href="#" target="_blank">بلیط اتوبوس</a> </li>
-                                <li><a href="#" target="_blank">نرم افزار حسابداری</a> </li>
-                                <li><a href="#" target="_blank">دوره جامع داوری با تدریس دکتر توکلی</a> </li>
-                                <li><a href="#" target="_blank">سفارش بک لینک</a> </li>
-                                <li><a href="#" target="_blank">تور آنتالیا</a> </li>
+                                <?php
+                                 $sport_query3="SELECT * FROM categorys WHERE parent_id=5 ";
+                                 $result_sport_query3=mysqli_query($link,$sport_query3);
+                                 while($row_sport_query3=mysqli_fetch_array($result_sport_query3)){
+                                     $category_idd=$row_sport_query3['id'];
+                                             $sport_query3="SELECT * FROM `articles` WHERE category_id=$category_idd  AND viewcount>0 ORDER BY publicationdate LIMIT 6";
+                                              $result_sport_query3=mysqli_query($link,$sport_query3);
+                                           while($row_sport_query3=mysqli_fetch_array($result_sport_query3)){
+                                
+                                ?>
+                                <li><a href="#" target="_blank"><?php echo $row_sport_query3['title'] ?> </a> </li>
+                                <?php }
+                                 } ?>
                             </ul>
                         </div>
                     </div>

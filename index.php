@@ -685,12 +685,19 @@
                     <div class="row">
                         <div class="web_box_content">
                             <ul>
-                                <li><a href="#" target="_blank">بلیط هواپیما</a> </li>
-                                <li><a href="#" target="_blank">بلیط اتوبوس</a> </li>
-                                <li><a href="#" target="_blank">نرم افزار حسابداری</a> </li>
-                                <li><a href="#" target="_blank">دوره جامع داوری با تدریس دکتر توکلی</a> </li>
-                                <li><a href="#" target="_blank">سفارش بک لینک</a> </li>
-                                <li><a href="#" target="_blank">تور آنتالیا</a> </li>
+                                <?php
+                                 $sport_query3="SELECT * FROM categorys WHERE parent_id=5 ";
+                                 $result_sport_query3=mysqli_query($link,$sport_query3);
+                                 while($row_sport_query3=mysqli_fetch_array($result_sport_query3)){
+                                     $category_idd=$row_sport_query3['id'];
+                                             $sport_query3="SELECT * FROM `articles` WHERE category_id=$category_idd  AND viewcount>0 ORDER BY publicationdate LIMIT 6";
+                                              $result_sport_query3=mysqli_query($link,$sport_query3);
+                                           while($row_sport_query3=mysqli_fetch_array($result_sport_query3)){
+                                
+                                ?>
+                                <li><a href="#" target="_blank"><?php echo $row_sport_query3['title'] ?> </a> </li>
+                                <?php }
+                                 } ?>
                             </ul>
                         </div>
                     </div>

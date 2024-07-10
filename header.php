@@ -1,6 +1,6 @@
 <?php
 $link=mysqli_connect("localhost","root","","news");
-
+// $setting_Query="SELECT * FROM              "
 
 ?>
 
@@ -67,7 +67,8 @@ $link=mysqli_connect("localhost","root","","news");
                 <div class="ads">
                     <figure>
                         <a href="#">
-                            <img src="image/5577072.gif" class="img-fluid" alt="ads" title="ads">
+                            
+                            <img src="image/<?php ?>" class="img-fluid" alt="ads" title="ads">
                         </a>
                     </figure>
                 </div>
