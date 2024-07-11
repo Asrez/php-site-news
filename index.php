@@ -319,14 +319,22 @@
                 </div>
             </section>
             <section class="box ads">
+            <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_middel1_index' ";
+           include("setting_query_result.php");
+?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/5.jpg" class="img-fluid w-100"  alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100"  alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_middel2_index' ";
+           include("setting_query_result.php");
+?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/6.jpeg" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
             </section>
@@ -538,24 +546,40 @@
                 </div>
             </section>
             <section class="box ads">
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left1_index' ";
+           include("setting_query_result.php");
+?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/1.gif" class="img-fluid w-100"  alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100"  alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left2_index' ";
+           include("setting_query_result.php");
+?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/2.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left3_index' ";
+           include("setting_query_result.php");
+?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/3.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left4_index' ";
+           include("setting_query_result.php");
+?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/4.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
             </section>
@@ -704,24 +728,41 @@
                 </div>
             </section>
             <section class="box ads">
+            <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left5_index' ";
+           include("setting_query_result.php");
+?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/1.gif" class="img-fluid w-100"  alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100"  alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left6_index' ";
+           include("setting_query_result.php");
+?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/2.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left7_index' ";
+           include("setting_query_result.php");
+?>
+
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/3.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left8_index' ";
+           include("setting_query_result.php");
+?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/4.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
             </section>
@@ -752,6 +793,7 @@
                                     <h3 class="h6">آخرین ویدیو ها</h3>
                                 </div>
                                 <div class="owl-carousel2 owl-carousel owl-theme pt-md-2 pb-md-3">
+                                    
                                     <div class="item">
                                         <a href="show_video.html" target="_blank">
                                             <img src="image/1.jpg" class="img-fluid" alt="" title="">

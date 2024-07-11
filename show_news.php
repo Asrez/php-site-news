@@ -27,19 +27,31 @@ echo "";
     <div class="row">
         <div class="col-12 col-md-6">
             <section class="box ads">
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right1_show_news' ";
+            include("setting_query_result.php");
+            ?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/5.gif" class="img-fluid w-100"  alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100"  alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right2_show_news' ";
+            include("setting_query_result.php");
+            ?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/6.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_show_news' ";
+            include("setting_query_result.php");
+            ?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/7.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
                 <div class="row">
@@ -153,9 +165,13 @@ echo "";
                 </div>
             </article>
             <section class="box ads">
+            <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right4_show_news' ";
+            include("setting_query_result.php");
+            ?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/7.gif" class="img-fluid"  alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid"  alt="" title="">
                     </a>
                 </div>
             </section>
@@ -482,19 +498,31 @@ echo "";
                 </div>
             </section>
             <section class="box ads">
+            <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left1_show_news' ";
+            include("setting_query_result.php");
+            ?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/5.gif" class="img-fluid w-100"  alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100"  alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left2_show_news' ";
+            include("setting_query_result.php");
+            ?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/6.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left3_show_news' ";
+            include("setting_query_result.php");
+            ?>
                 <div class="col-12 text-center p-0">
                     <a href="#" target="_blank">
-                        <img src="image/7.gif" class="img-fluid w-100" alt="" title="">
+                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
             </section>

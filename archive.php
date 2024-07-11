@@ -213,11 +213,11 @@
                 <div class="col-12 main_content box">
                 <?php 
                 
-                $counter=0;
+              
                 $articles="SELECT * FROM articles ";
                  $result_article=mysqli_query($link,$articles);
                 while($row_articles=mysqli_fetch_array($result_article)) {
-                    $counter++;?>
+                  ?>
                     <div class="row mb-3">
                         <div class="after-content col-4 pl-0">
                             <a href="show_news.php?article_slug=<?php echo  $row_articles['slug']; ?>" target="_blank">
@@ -257,10 +257,7 @@
                             </time>
                         </div>
                     </div><?php 
-                    if($counter==5){
-                    $next=true;
-                    break;
-                    }
+                    
                 
                 } ?>
                     <div class="row">
@@ -289,5 +286,6 @@
 <script src="js/js.js" type="text/javascript"></script>
 <script src="js/fontawesome.js" type="text/javascript"></script>
 <script src="js/yBox.js" type="text/javascript"></script>
+
 </body>
 </html>

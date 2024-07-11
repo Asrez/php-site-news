@@ -78,7 +78,6 @@
                 <?php 
                     $news_query="SELECT * FROM articles ";
                     $news_result=mysqli_query($link,$news_query);
-                    $counter=0;
                     while($news_row=mysqli_fetch_array($news_result)){
                      ?>
                 <tr>
@@ -90,9 +89,7 @@
                   <td> <?php echo $news_row['publicationdate']; ?> </td>
                 </tr>
                 <?php
-                $counter+=1;
-                
-                    }
+                      }
              ?>
                 </tfoot>
               </table>

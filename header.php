@@ -1,6 +1,8 @@
 <?php
 $link=mysqli_connect("localhost","root","","news");
-// $setting_Query="SELECT * FROM              "
+$setting_Query_Advertise_header="SELECT * FROM   setting where key_setting='Advertise_header' ";
+$setting_result_Advertise_header=mysqli_query($link,$setting_Query_Advertise_header);
+$setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_header);
 
 ?>
 
@@ -60,7 +62,12 @@ $link=mysqli_connect("localhost","root","","news");
         <div class="row">
             <div class="col-12 col-lg-6">
                 <h1>
-                    <a href="index.php" class="logo"></a>
+                <?php
+            $setting_Query="SELECT * FROM   setting where key_setting='logo_header' ";
+            include("setting_query_result.php");
+            $logo_image=$setting_row['value_setting'];
+            ?>
+                    <a href="index.php" class="logo" style="background-image: url('image/<?php echo $logo_image ;?>');"></a>
                 </h1>
             </div>
             <div class="col-12 col-lg-6 text-center">
@@ -68,7 +75,7 @@ $link=mysqli_connect("localhost","root","","news");
                     <figure>
                         <a href="#">
                             
-                            <img src="image/<?php ?>" class="img-fluid" alt="ads" title="ads">
+                            <img src="image/<?php echo $setting_row_Advertise_header['value_setting'];?>" class="img-fluid" alt="ads" title="ads">
                         </a>
                     </figure>
                 </div>
@@ -96,7 +103,7 @@ $link=mysqli_connect("localhost","root","","news");
 
                                <?php  while($row_category_down=mysqli_fetch_array($result_category_down)) { ?>
                        <li>
-                           <a href="category.html">
+                           <a href="category.php?category_slug=<?php echo $row_category_down['slug'];?>">
                            <?php echo $row_category_down ['title']; ?>
                             </a> 
                        </li>
