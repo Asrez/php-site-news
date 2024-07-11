@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2024 at 01:16 PM
+-- Generation Time: Jul 11, 2024 at 12:50 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `news`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `about_us`
+--
+
+CREATE TABLE `about_us` (
+  `id` bigint(255) NOT NULL,
+  `title` varchar(1000) NOT NULL,
+  `address` text NOT NULL,
+  `email` varchar(10000) NOT NULL,
+  `tel` bigint(255) NOT NULL,
+  `post_code` bigint(255) NOT NULL,
+  `about_us_text` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+--
+-- Dumping data for table `about_us`
+--
+
+INSERT INTO `about_us` (`id`, `title`, `address`, `email`, `tel`, `post_code`, `about_us_text`) VALUES
+(1, 'اینلاین', 'تهران - خیابان میرزای شیرازی - کوچه شهید عزیزاللهی - پلاک ۱۵', 'advertise@khabarinline.ir', 555143637, 15982354852, ' خبر اینلاین که کار خود را از سال ۱۳۸۷ شروع کرده است تلاش دارد آخرین تحلیل‌ها و گزارش‌ها از مهم‌ترین اتفاقات روز ایران و جهان را به صورت آنلاین در اختیار مخاطبان خود قرار دهد.\r\n\r\nمشی رسانه‌ای این سایت، تحلیلی - خبری است و اعضای تحریریه این مجموعه می‌کوشند از قالب ظاهری خبرها فراتر رفته و به زوایای پنهان و آشکار حوادث سرک بکشند و با کندوکاو بیشتر، ناگفته‌ها و وجوه نامکشوف وقایع و حوادث را بیابند.\r\n\r\nاین مجموعه رسانه‌ای خود را در امر اطلاع‌رسانی مستقل می‌داند و در چارچوب قوانین نظام جمهوری اسلامی و تعهد به آرمان‌های انقلاب اسلامی و امام راحل و شهیدان انقلاب، از درغلتیدن به تمایلات حزبی و جناحی پرهیز دارد.\r\n\r\nاین مجموعه اما نقد و تحلیل کارشناسانه دستگاه‌ها، عملکرد مسئولان و احزاب را وظیفه ذاتی خود می‌پندارد و آن را با هدف ارتقای دانایی جامعه، حق پرسشگری شهروندان و وظیفه پاسخگویی مسئولان با جدیت دنبال می‌کند.\r\n\r\nتحریریه خبر اینلاین همچنین با بهره‌مندی از همکاران حرفه‌ای و با سابقه می‌کوشد عرصه‌های جدیدی در اطلاع‌رسانی بهنگام و شفاف بجوید و بگشاید');
 
 -- --------------------------------------------------------
 
@@ -71,7 +94,7 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `publicationdate`, `title`, `summery`, `content`, `image`, `source`, `viewcount`, `category_id`, `admin_id`, `slug`) VALUES
-(1, '2024-07-06 08:44:34', 'hgggg', 'hgggggggggggggggggg', 'jgggggggggggggggggggggggg', 'd.jpg', 'gd', 88, 11, 13, 't6ugj'),
+(1, '2024-07-06 08:44:34', 'hgggg', 'hgggggggggggggggggg', 'jgggggggggggggggggggggggg', 'd.jpg', 'gd', 93, 11, 13, 't6ugj'),
 (2, '2024-07-06 08:42:13', 'jjjjjjjjjjj', 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', 'ba.jpg', 'kk', 20, 16, 13, 'l'),
 (3, '2024-07-06 08:37:58', 'r6yth', 'hgggggggggggggggggggggggggggggggggg', 'hmkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk', '2.jpg', '35', 3, 12, 2, 'ggfvg'),
 (4, '2024-07-06 08:36:43', 'ttttttttttttt', 'tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt', 'tttttsryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy', '1.jpg', 'uuuu', 7, 17, 2, '6tdhg'),
@@ -81,7 +104,9 @@ INSERT INTO `articles` (`id`, `publicationdate`, `title`, `summery`, `content`, 
 (8, '2024-07-02 12:13:27', 'صادرات ۳۰۰ هزار دلاری محصولات دانش بنیان در خراسان شمالی', 'رییس پارک علم و فناوری خراسان شمالی از صادرات ۳۰۰ هزاردلاری تولیدات شرکت دانش بنیان استان در سه ماه نخست امسال خبرداد.', 'محمد رضا قربانی روند صادرات شرکت‌های دانش‌بنیان درخراسان شمالی را افزایشی دانست و گفت: کالا‌های صادراتی شرکت‌های دانش بنیان شامل انواع مصالح ساختمانی، پودر آلفا آلومینا، فوم و پکیج‌های سرمایشی و گرمایشی بوده که به کشور‌های روسیه، عراق، گرجستان و قزاقستان صادر شد.\r\nوی گفت: پارسال شرکت‌های دانش بنیان استان در مجموع یک میلیون و ۴۱۷ هزارو ۷۶۸ دلار تولیدات خود را صادرکردند.\r\nرییس پارک علم و فناوری استان در خصوص صادرات محصولات شرکت‎های دانش‌بنیان در دولت سیزدهم هم گفت: این شرکت‌ها در دو سال اخیر حدود ۳.۶ میلیون دلار صادرات داشتند که در مقایسه با میزان صادرات در سال ۱۴۰۰ که ۱۸۰ هزار دلار بود از رشد چشمگیری برخوردار بوده است.\r\n۱۳۵ واحد فناور ۱۳۶ شرکت دانش بنیان در خراسان شمالی وجود دارد که حدود ۱۲۵ شرکت فعال هستند.', '1.jpg', 'http://www.yjc.ir/00an4i', 13, 11, 1, 'njkcbvjhb jcvb jbcjbcbc'),
 (9, '2024-07-05 13:27:16', 'dfghfmnbj', 'vvvvvvvvvvvvvvvvv', 'vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', '2.jpg', 'retgrft', 11, 18, 13, 'fhhhhhhhhhhhhhhhhhhhh'),
 (10, '2024-07-05 13:31:20', 'jjjjgfghn', 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', 'gjvbjbgggggggggggggggggggggggggggggggggggggggggggggggggjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', '1.jpg', 'tgf', 7, 6, 13, 'r5tytrf'),
-(11, '2024-07-05 13:28:26', 'fhhfhhhfffffffffffffffffffffff', 'fffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhh', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', '3.jpg', 'r.ir', 8, 13, 14, 'fhhhhhhhhhhhh');
+(11, '2024-07-05 13:28:26', 'fhhfhhhfffffffffffffffffffffff', 'fffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhh', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', '3.jpg', 'r.ir', 8, 13, 14, 'fhhhhhhhhhhhh'),
+(17, '2024-07-09 08:52:46', 'vghftgh', 'hhhhhhhhhhhhhhhhhhf', 'fgfgfgfgfgfgfgfgfgfgfgfgh', '1.jpg', 'gfdrtg', 3, 16, 2, 'gfn'),
+(18, '2024-07-09 09:04:35', 'grfe', 'errrrrrrrrrrrrrrrrrrr', 'gggggggggggr', 'welcome bookland.jpg', 're', 0, 18, 13, 'f2nmp%6%Rx^9^rw4');
 
 -- --------------------------------------------------------
 
@@ -159,9 +184,10 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `name`, `email`, `comment`, `date`, `article_id`, `venify`) VALUES
-(4, 'ali', 'ali@gmail.com', 'سایت عالی', '2024-07-10', 5, 1),
+(4, 'ali', 'ali@gmail.com', 'سایت عالی', '2024-07-10', 6, 1),
 (6, 'بهرام', 'b@gmail.com', 'این خبر درست نیست', '2024-07-18', 7, 1),
-(7, 'sara', 'sara@gmail.com', '#انتخابات', '2024-07-25', 5, 0);
+(7, 'sara', 'sara@gmail.com', '#انتخابات', '2024-07-25', 8, 0),
+(8, 'dara', 'dd@gmail.com', 'سلام', '2024-07-30', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -172,25 +198,41 @@ INSERT INTO `comments` (`id`, `name`, `email`, `comment`, `date`, `article_id`, 
 CREATE TABLE `setting` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `key_setting` varchar(500) NOT NULL,
-  `value_setting` varchar(500) NOT NULL
+  `value_setting` varchar(500) NOT NULL,
+  `link` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `setting`
 --
 
-INSERT INTO `setting` (`id`, `key_setting`, `value_setting`) VALUES
-(1, 'Advertise_header', '1.gif'),
-(2, 'Advertise_middel1_index', '2.gif'),
-(3, 'Advertise_middel2_index', '3.gif'),
-(4, 'Advertise_left1_index', '1.gif'),
-(5, 'Advertise_left2_index', '1.gif'),
-(6, 'Advertise_left3_index', '2.gif'),
-(7, 'Advertise_left4_index', '1.gif'),
-(8, 'Advertise_left5_index', '1.gif'),
-(9, 'Advertise_left6_index', '1.gif'),
-(10, 'Advertise_left7_index', '1.gif'),
-(11, 'Advertise_left8_index', '2.gif');
+INSERT INTO `setting` (`id`, `key_setting`, `value_setting`, `link`) VALUES
+(1, 'Advertise_header', '1.gif', NULL),
+(2, 'Advertise_middel1_index', '2.gif', NULL),
+(3, 'Advertise_middel2_index', '3.gif', NULL),
+(4, 'Advertise_left1_index', '1.gif', NULL),
+(5, 'Advertise_left2_index', '1.gif', NULL),
+(6, 'Advertise_left3_index', '2.gif', NULL),
+(7, 'Advertise_left4_index', '1.gif', NULL),
+(8, 'Advertise_left5_index', '1.gif', NULL),
+(9, 'Advertise_left6_index', '1.gif', NULL),
+(10, 'Advertise_left7_index', '1.gif', NULL),
+(11, 'Advertise_left8_index', '2.gif', NULL),
+(12, 'Advertise_right1_show_news', '4.gif', NULL),
+(13, 'Advertise_right2_show_news', '6.gif', NULL),
+(14, 'Advertise_right3_show_news', '5.gif', NULL),
+(15, 'Advertise_right4_show_news', '5.gif', NULL),
+(16, 'Advertise_left1_show_news', '1.gif', NULL),
+(17, 'Advertise_left2_show_news', '1.gif', NULL),
+(18, 'Advertise_left3_show_news', '2.gif', NULL),
+(19, 'logo_header', 'logo.png', NULL),
+(20, 'Advertise_lef1_about_us', '1.gif', NULL),
+(21, 'Advertise_lef2_about_us', '1.gif', NULL),
+(22, 'Advertise_lef3_about_us', '1.gif', NULL),
+(23, 'Advertise_right1_about_us', '1.gif', NULL),
+(24, 'Advertise_right2_about_us', '1.gif', NULL),
+(25, 'Advertise_right3_about_us', '1.gif', NULL),
+(26, 'Advertise_right4_about_us', '7.gif', NULL);
 
 -- --------------------------------------------------------
 
@@ -215,6 +257,12 @@ INSERT INTO `tags` (`id`, `title`, `slug`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `about_us`
+--
+ALTER TABLE `about_us`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `admins`
@@ -285,6 +333,12 @@ ALTER TABLE `tags`
 --
 
 --
+-- AUTO_INCREMENT for table `about_us`
+--
+ALTER TABLE `about_us`
+  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
@@ -294,7 +348,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `article_tag`
@@ -312,13 +366,13 @@ ALTER TABLE `categorys`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `setting`
 --
 ALTER TABLE `setting`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables

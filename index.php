@@ -37,7 +37,7 @@
                         <div class="carousel-item <?php if ($counter1==0) 
                         echo ' active';?>">
                            
-                            <a href="show_news.html" target="_blank">
+                            <a href="show_news.php?article_slug=<?php echo $row_article_view3['slug'] ; ?>" target="_blank">
                                 <img src="image/<?php echo $row_article_view3['image'];  ?>" alt="" class="img-fluid">
                                 <div class="carousel-caption">
                                     <p>
@@ -74,14 +74,14 @@
                             <div class="col-6 mt-4">
                                 <div class="row">
                                     <div class="col-12 text-center text-md-right col-lg-5 p-md-1 p-lg-0">
-                                        <a href="#" target="_blank">
+                                        <a href="show_news.php?article_slug=<?php echo $row_article_view1['slug'] ; ?>" target="_blank">
                                             <img src="image/<?php echo $row_article_view1['image']; ?>" class="img-fluid" alt="" title="">
                                         </a>
                                     </div>
                                     <div class="col-12 text-center text-md-right col-lg-7 p-md-1 p-lg-0">
                                         <div class="desc_news ">
                                             <h3>
-                                                <a href="#" target="_blank">ببینید | <?php echo $row_article_view1['title']; ?></a>
+                                                <a href="show_news.php?article_slug=<?php echo $row_article_view1['slug'] ; ?>" target="_blank">ببینید | <?php echo $row_article_view1['title']; ?></a>
                                             </h3>
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@
                             <div class="col12 col-lg-6">
                                 <div class="desc_news">
                                     <h3>
-                                        <a href="#" target="_blank"> <?php echo $row_article_view11['title']; ?> </a>
+                                        <a href="show_news.php?article_slug=<?php echo $row_article_view11['slug'] ; ?>" target="_blank"> <?php echo $row_article_view11['title']; ?> </a>
                                     </h3>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                                           $rr=mysqli_fetch_array($r)
                                                 ?>
                                         <h3>
-                                            <a href="#" target="_blank"> <?php  echo $rr['title']; ?></a>
+                                            <a href="show_news.php?article_slug=<?php echo $rr['slug'] ; ?>" target="_blank"> <?php  echo $rr['title']; ?></a>
                                         </h3>
                                     </div>
                                     <div class="comment">
@@ -253,18 +253,18 @@
                     <div class="row">
                         <div class="box_header">
                             <h2>
-                                <a href="#"><?php echo $row_parent_category['title']; ?></a>
+                                <a href="archive.php"><?php echo $row_parent_category['title']; ?></a>
                             </h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-lg-6">
                             <div>
-                                <a href="#" target="_blank">
+                                <a href="show_news.php?article_slug=<?php echo $row_article_category['slug'] ; ?>" target="_blank">
                                     <img src="image/<?php echo $row_article_category['image']; ?>" alt="" title="" class="img-fluid">
                                 </a>
                                 <div class="desc">
-                                    <h2><a href="#"> <?php echo $row_article_category['title']; ?></a> </h2>
+                                    <h2><a href="show_news.php?article_slug=<?php echo $row_article_category['slug'] ; ?>"> <?php echo $row_article_category['title']; ?></a> </h2>
                                 </div>
                             </div>
                         </div>
@@ -280,7 +280,7 @@
                                      $tr=mysqli_query($link,$tt);
                                   while($ttr=mysqli_fetch_array($tr)){
  ?>
-                                    <li><a href="#" > </a> <?php echo $ttr['title']; ?> </li>
+                                    <li><a href="show_news.php?article_slug=<?php echo $ttr['slug'] ; ?>" > </a> <?php echo $ttr['title']; ?> </li>
                                     <?php 
                                     } 
                                     } ?>
@@ -312,7 +312,7 @@
                             $article_resultt=mysqli_query($link,$query_article_vieww);
                             while($row_article_vieww=mysqli_fetch_array($article_resultt))
                             {  ?>
-                                <li><a href="#"><?php echo $row_article_vieww['title']; ?> </a> </li><?php } ?>
+                                <li><a href="show_news.php?article_slug=<?php echo $row_article_vieww['slug'] ; ?>"><?php echo $row_article_vieww['title']; ?> </a> </li><?php } ?>
                             </ul>
                         </div>
                     </div>
@@ -358,7 +358,7 @@
                                  $result_sport_query=mysqli_query($link,$sport_query);
                               while($row_sport_query=mysqli_fetch_array($result_sport_query)){ ?>
                         <div class="col-6 p-0 boxing">
-                            <a href="#" target="_blank">
+                            <a href="show_news.php?article_slug=<?php echo $row_sport_query['slug'] ; ?>" target="_blank">
                                 <img src="image/<?php echo $row_sport_query['image']; ?> " class="img-fluid" alt="" title="">
                                 <div class="">
                                     <p> <?php echo $row_sport_query['title']; ?></p>
@@ -391,7 +391,7 @@
                                  $result_siyasi_query=mysqli_query($link,$siyasi_query);
                               while($row_siyasi_query=mysqli_fetch_array($result_siyasi_query)){ ?>
                         <div class="col-6 p-0 boxing">
-                            <a href="#" target="_blank">
+                            <a href="show_news.php?article_slug=<?php echo $row_siyasi_query['slug'] ; ?>" target="_blank">
                                 <img src="image/<?php echo $row_siyasi_query['image']; ?>" class="img-fluid" alt="" title="">
                                 <div class="">
                                     <p>ببینید | <?php echo $row_siyasi_query['title']; ?> </p>
@@ -420,7 +420,7 @@
                             <?php $end_news_query="SELECT * FROM `articles` ORDER BY `publicationdate` ";
                                  $result_end_news_query=mysqli_query($link,$end_news_query);
                               while($row_end_news_query=mysqli_fetch_array($result_end_news_query)){ ?>
-                                <li><a href="#"> <?php echo $row_end_news_query['title']; ?></a> </li>
+                                <li><a href="show_news.php?article_slug=<?php echo $row_end_news_query['slug'] ; ?>"> <?php echo $row_end_news_query['title']; ?></a> </li>
                                 <?php } ?>
                                
                             </ul>
@@ -447,7 +447,7 @@
                             </a>
                         </div>
                         <div class="col-7 p-0">
-                            <a href="#" target="_blank" class="">
+                            <a href="show_news.php?article_slug=<?php echo $coment_row['slug'] ; ?>" target="_blank" class="">
                                 <?php echo $coment_row['title']; ?>
                             </a>
                         </div>
@@ -471,7 +471,7 @@
                                  $result_end_news_query2=mysqli_query($link,$end_news_query2);
                               while($row_end_news_query2=mysqli_fetch_array($result_end_news_query2)){ ?>
                                     <div class="item">
-                                        <a href="photo.html" target="_blank">
+                                        <a href="show_news.php?article_slug=<?php echo $row_end_news_query2['slug'] ; ?>" target="_blank">
                                             <img src="image/<?php echo $row_end_news_query2['image']; ?>" class="img-fluid" alt="" title="">
                                             <p><?php echo $row_end_news_query2['title']; ?> </p>
                                         </a>
@@ -498,7 +498,7 @@
                                  $result_end_news_query2=mysqli_query($link,$end_news_query2);
                               while($row_end_news_query2=mysqli_fetch_array($result_end_news_query2)){ ?>
                                     <div class="item">
-                                        <a href="photo.html" target="_blank">
+                                        <a href="show_news.php?article_slug=<?php echo $row_end_news_query2['slug'] ; ?>" target="_blank">
                                             <img src="image/<?php echo $row_end_news_query2['image']; ?>" class="img-fluid" alt="" title="">
                                             <p><?php echo $row_end_news_query2['title']; ?> </p>
                                         </a>
@@ -531,7 +531,7 @@
                                  $result_farhangi_query=mysqli_query($link,$farhangi_query);
                               while($row_farhangi_query=mysqli_fetch_array($result_farhangi_query)){ ?>
                         <div class="col-6 p-0 boxing">
-                            <a href="#" target="_blank">
+                            <a href="show_news.php?article_slug=<?php echo $row_farhangi_query['slug'] ; ?>" target="_blank">
                                 <img src="image/<?php echo $row_farhangi_query['image']; ?>" class="img-fluid" alt="" title="">
                                 <div class="">
                                     <p><?php echo $row_farhangi_query['title']; ?></p>
@@ -624,7 +624,7 @@
                                 $ostan_query="SELECT * FROM `articles` WHERE category_id=$category_id  ORDER BY publicationdate ";
                                  $result_ostan_query=mysqli_query($link,$ostan_query);
                               while($row_ostan_query=mysqli_fetch_array($result_ostan_query)){ ?>
-                                <li><a href="#"><?php echo  $row_ostan_query['title'];?></a> </li>
+                                <li><a href="show_news.php?article_slug=<?php echo $row_ostan_query['slug'] ; ?>"><?php echo  $row_ostan_query['title'];?></a> </li>
                                 <?php } 
                                 }?>
                             </ul>
@@ -652,12 +652,12 @@
                                  $result_ostan_query1=mysqli_query($link,$ostan_query1);
                               while($row_ostan_query1=mysqli_fetch_array($result_ostan_query1)){ ?>
                         <div class="col-5 p-0">
-                            <a href="#" target="_blank">
+                            <a href="show_news.php?article_slug=<?php echo $row_ostan_query1['slug'] ; ?>" target="_blank">
                                 <img src="image/<?php echo $row_ostan_query1['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-7 p-0">
-                            <a href="#" target="_blank" class="">
+                            <a href="show_news.php?article_slug=<?php echo $row_ostan_query1['slug'] ; ?>" target="_blank" class="">
                             <?php echo $row_ostan_query1['title']; ?>
                             </a>
                         </div>
@@ -686,7 +686,7 @@
                                  $result_eghtesad_query=mysqli_query($link,$eghtesad_query);
                               while($row_eghtesad_query=mysqli_fetch_array($result_eghtesad_query)){ ?>
                         <div class="col-6 p-0 boxing">
-                            <a href="#" target="_blank">
+                            <a href="show_news.php?article_slug=<?php echo $row_eghtesad_query['slug'] ; ?>" target="_blank">
                                 <img src="image/<?php echo $row_eghtesad_query['image']; ?>" class="img-fluid" alt="" title="">
                                 <div class="">
                                     <p>ببینید | <?php echo $row_eghtesad_query['title']; ?> </p>
@@ -719,7 +719,7 @@
                                            while($row_sport_query3=mysqli_fetch_array($result_sport_query3)){
                                 
                                 ?>
-                                <li><a href="#" target="_blank"><?php echo $row_sport_query3['title'] ?> </a> </li>
+                                <li><a href="show_news.php?article_slug=<?php echo $row_sport_query3['slug'] ; ?>" target="_blank"><?php echo $row_sport_query3['title'] ?> </a> </li>
                                 <?php }
                                  } ?>
                             </ul>
