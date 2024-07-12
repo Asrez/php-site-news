@@ -48,14 +48,14 @@ $article_result=mysqli_query($link,$article_query);
                         ?>
                     <div class="row mb-2">
                         <div class="col-4 pl-0">
-                            <a href="#" target="_blank">
+                            <a href="show_news.php?article_slug=<?php echo $article_row['slug']; ?>" target="_blank">
                                 <img src="image/<?php echo $article_row['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-8">
                             <div class="news_title">
                                 <h2 class="h6">
-                                    <a href="#" target="_blank">
+                                    <a href="show_news.php?article_slug=<?php echo $article_row['slug']; ?>" target="_blank">
                                     <?php echo $article_row['title']; ?>
                                     </a>
                                 </h2>
@@ -83,7 +83,7 @@ $article_result=mysqli_query($link,$article_query);
                     <div class="row">
                         <div class="box_header">
                             <h2>
-                                <a href="#">آخرین اخبار  </a>
+                                <a href="archive.php">آخرین اخبار  </a>
                             </h2>
                         </div>
                     </div>

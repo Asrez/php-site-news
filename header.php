@@ -19,8 +19,8 @@ $setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_heade
                 </div>
                 <div class="col-7 col-md-3">
                     <ul class="top_menu">
-                        <li><a href="contact_us.html">تماس با ما</a> </li>
-                        <li><a href="about_us.html">درباره با ما</a> </li>
+                        <li><a href="contact_us.php">تماس با ما</a> </li>
+                        <li><a href="about_us.php">درباره با ما</a> </li>
                         <li><a href="archive.php">آرشیو</a> </li>
                         <li class="d-none d-lg-inline-block"><a href="#">تبلیغات</a> </li>
                     </ul>
@@ -73,7 +73,7 @@ $setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_heade
             <div class="col-12 col-lg-6 text-center">
                 <div class="ads">
                     <figure>
-                        <a href="#">
+                        <a href="<?php echo $setting_row_Advertise_header['link'];?>">
                             
                             <img src="image/<?php echo $setting_row_Advertise_header['value_setting'];?>" class="img-fluid" alt="ads" title="ads">
                         </a>
@@ -85,7 +85,11 @@ $setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_heade
     <nav id="menu">
         <div class="container">
             <ul class="d-none d-lg-block">
-
+            <li>
+                   <a href="index.php">
+                      صفحه نخست
+                    </a> 
+</li>
             <?php
                $categoryn_parent="SELECT * FROM `categorys` WHERE parent_id=0 ";
                $result_category_parent=mysqli_query($link,$categoryn_parent);

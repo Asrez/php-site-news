@@ -324,7 +324,7 @@
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100"  alt="" title="">
                     </a>
                 </div>
@@ -333,7 +333,7 @@
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
@@ -438,7 +438,7 @@
                         </div>
                     </div>
                     <div class="row container_box">
-                        <?php $coment_count="SELECT DISTINCT articles.id,articles.image,articles.title  FROM comments , articles WHERE comments.article_id=articles.id  LIMIT 10";
+                        <?php $coment_count="SELECT DISTINCT articles.id,articles.image,articles.title,articles.slug  FROM comments , articles WHERE comments.article_id=articles.id  LIMIT 10";
                         $coment_result=mysqli_query($link,$coment_count);
                         while($coment_row=mysqli_fetch_array($coment_result)){ ?>
                         <div class="col-5 p-0">
@@ -551,7 +551,7 @@
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100"  alt="" title="">
                     </a>
                 </div>
@@ -560,7 +560,7 @@
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
@@ -569,7 +569,7 @@
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
@@ -578,7 +578,7 @@
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
@@ -733,7 +733,7 @@
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100"  alt="" title="">
                     </a>
                 </div>
@@ -742,7 +742,7 @@
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
@@ -752,7 +752,7 @@
 ?>
 
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
@@ -761,7 +761,7 @@
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>

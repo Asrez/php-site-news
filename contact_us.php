@@ -1,8 +1,7 @@
 <?php
 session_start();
-
 ?>
-<html lang="en">
+<html >
 <head>
     <meta charset="UTF-8">
     <title>خبر اینلاین</title>
@@ -15,7 +14,7 @@ session_start();
     <link rel="stylesheet" href="css/yBox.css" type="text/css">
 </head>
 <body>
-<?php include("header.php") ;?>
+    <?php include("header.php"); ?>
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-6">
@@ -25,7 +24,7 @@ session_start();
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
+                    <a href="#" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100"  alt="" title="">
                     </a>
                 </div>
@@ -34,7 +33,7 @@ session_start();
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
+                    <a href="#" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
@@ -43,7 +42,7 @@ session_start();
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
-                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
+                    <a href="#" target="_blank">
                         <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid w-100" alt="" title="">
                     </a>
                 </div>
@@ -69,7 +68,6 @@ session_start();
                 <div class="row">
                     <div class="col-12">
                         <ul class="breadcrumb">
-                           
                         </ul>
                         <?php
                         $about_query="SELECT * FROM about_us ";
@@ -77,18 +75,31 @@ session_start();
                         $about_row=mysqli_fetch_array($about_result);
                         ?>
                         <div class="title">
-                            <h2>درباره خبر <?php echo $about_row['title'] ;?></h2>
+                            <h2>تماس با ما</h2>
+                        </div>
+                        <div class="title-desc">
+                            <p>صفحه تماس با ما خبر <?php echo $about_row['title'] ;?></p>
                         </div>
                         <div class="body">
                             <p>
-                            <?php echo $about_row['about_us_text'] ;?>
-                        </p>
+                                نشانی: <?php echo $about_row['address'] ;?> کد پستی: <?php echo $about_row['post_code'] ;?>
+                            </p>
+                            <p>
+                                در صورت تمایل جهت ارسال هر گونه خبر، پیشنهاد و یا انتقاد به
+                                <a href="<?php echo $about_row['link'] ;?>" class="font-weight-bold text-danger">خبر اینلاین</a>
+                                از طریق پست الکترونیکی زیر اقدام فرمایید.
+                            </p>
+                            <a href="#" class="d-block">
+                                <strong><?php echo $about_row['email'] ;?></strong>
+                            </a>
+                            
+                            
                         </div>
                     </div>
                 </div>
                 <hr style="width: 100%;height: 1px;background-color: #adb5bd">
                 <div class="row">
-                    <div class="col-6 social">
+                    <div class="col-12 col-md-6 social">
                         <ul>
                             <li class="fb"><a href="#"><i class="fab fa-facebook-f"></i></a> </li>
                             <li class="tw"><a href="#"><i class="fab fa-twitter"></i></a> </li>
@@ -96,7 +107,7 @@ session_start();
                             <li class="tg"><a href="#"><i class="fab fa-telegram-plane"></i></a> </li>
                         </ul>
                     </div>
-                    <div class="col-6 short-link">
+                    <div class="col-12 col-md-6 short-link">
                         <i class="fas fa-link"></i>
                         <span><?php echo $about_row['link'] ;?></span>
                     </div>
@@ -541,6 +552,10 @@ session_start();
 
 
 <?php include("footer.php") ;?>
+
+
+
+
 
 
 <script src="js/jquery.min.js" type="text/javascript"></script>
