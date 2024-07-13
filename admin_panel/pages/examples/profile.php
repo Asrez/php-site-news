@@ -155,49 +155,49 @@
                   </ul>
 
                   <input class="form-control input-sm" type="text" placeholder="نظر">
-                </div>
+                
                 <!-- /.post -->
+
                 <?php } ?>
               </div>
              
               <!-- /.tab-pane -->
               
 
+<?php
+ $id=$_SESSION['admin_id'];
+ $query_select_admin="SELECT * FROM admins WHERE id= $id";
+ $result=mysqli_query($link,$query_select_admin);
+ $row=mysqli_fetch_array($result);
+  ?>
               <div class="tab-pane" id="settings">
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="update_admin.php" metod="post" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">نام</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="نام">
+                      <input type="text" class="form-control" id="inputName" name="name" placeholder="نام" value="<?php echo $row['name'] ;?>">
+                    </div>
+                  </div>
+                    <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">پسورد</label>
+
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" id="password" name="password" placeholder="پسورد" value="<?php echo $row['password'] ;?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">ایمیل</label>
+                    <label for="username" class="col-sm-2 control-label">نام کاربری</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="ایمیل">
+                      <input type="text" class="form-control" id="username" name="username" placeholder="نام کاربری" value="<?php echo $row['username'] ;?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">نام خانوادگی</label>
+                    <label for="image" class="col-sm-2 control-label">تصویر </label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="نام خانوادگی">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">ویژگی ها</label>
-
-                    <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="ویژگی ها"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">توانایی ها</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="توانایی ها">
+                      <input type="file" class="form-control" id="image" name="image" placeholder="تصویر " value="<?php echo $row['image'] ;?>">
                     </div>
                   </div>
                   <div class="form-group">
@@ -211,7 +211,7 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">ارسال</button>
+                      <button type="submit" class="btn btn-danger" name="subbtn">ارسال</button>
                     </div>
                   </div>
                 </form>

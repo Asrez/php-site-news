@@ -1,14 +1,6 @@
 <?php 
 session_start();
 $link=mysqli_connect("localhost","root","","news");
-if(!isset($_SESSION["state_login"]) && $_SESSION["state_login"]===false)
-{
-	?>
-    <script type="text/javascript">
-	location.replace("../../../index.php");
-	</script>
-    <?php
-}
 if(isset($_POST["title"]) 
 && !empty($_POST["title"])&&
 isset($_POST["summery"]) && !empty($_POST["summery"])&&

@@ -27,10 +27,10 @@ $setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_heade
                 </div>
                 <div class="d-none col-md-3 d-md-block">
                     <div class="search">
-                        <form action="#" method="post" role="form">
+                        <form action="archive.php" method="post" role="form">
                             <div class="input-group">
-                                <input type="text" name="search" placeholder="جستجو ...">
-                                <button type="submit">
+                                <input type="text" name="search"  placeholder="جستجو ...">
+                                <button type="submit" name="btnsearch">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -132,7 +132,7 @@ $setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_heade
                 <div class="search">
                     <form action="#" method="post" role="form">
                         <div class="input-group">
-                            <input type="text" name="search" id="search" placeholder="جستجو ..." >
+                            <input type="text" id="searchbox" placeholder="جستجو ..." />
                             <button type="submit" name="button" id="button">
                                 <i class="fas fa-search"></i>
                             </button>
