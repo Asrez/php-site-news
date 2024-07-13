@@ -410,7 +410,7 @@ echo "";
                         </div>
                     </div>
                     <div class="row container_box">
-                        <?php $coment_count="SELECT DISTINCT articles.id,articles.image,articles.title  FROM comments , articles WHERE comments.article_id=articles.id  LIMIT 10";
+                        <?php $coment_count="SELECT DISTINCT articles.id,articles.image,articles.title,articles.slug  FROM comments , articles WHERE comments.article_id=articles.id  LIMIT 10";
                         $coment_result=mysqli_query($link,$coment_count);
                         while($coment_row=mysqli_fetch_array($coment_result)){ ?>
                         <div class="col-5 p-0">

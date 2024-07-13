@@ -120,7 +120,7 @@ session_start();
                     </div>
                     
                     <?php
-                    $comment_query="SELECT * FROM comments WHERE venify=1 ORDER BY comments.date LIMIT 2 ";
+                    $comment_query="SELECT * FROM comments WHERE venify=1 ORDER BY comments.date LIMIT 4 ";
                     $comment_result=mysqli_query($link,$comment_query);
 
                      ?>
@@ -166,7 +166,7 @@ session_start();
                     <div class="row">
                         <div class="box_header">
                             <h2>
-                                <a href="#">یادداشت</a>
+                                <a href="show_news.php">پربازدید ترین ها</a>
                             </h2>
                         </div>
                     </div>
@@ -174,56 +174,24 @@ session_start();
                         <div class="col-12">
                             <div class="row">
                                 <div class="owl-carousel1 owl-carousel owl-theme">
+                                    
+                                    <?php
+                                $article11__query="SELECT * FROM articles ORDER BY viewcount DESC LIMIT 10";
+                                $article11__result=mysqli_query($link,$article11__query);
+                                while($article11__row=mysqli_fetch_array($article11__result)){
+                                    ?>
                                     <div class="item">
-                                        <a href="show_news.html" target="_blank" class="text-dark">
+                                        <a href="show_news.php?article_slug=<?php echo $article11__row['slug']; ?>" target="_blank" class="text-dark">
                                             <div>
-                                                <img src="image/1.jpg" class="img-fluid" alt="" title="">
+                                                <img src="image/<?php echo $article11__row['image']; ?>" class="img-fluid" alt="" title="">
                                             </div>
                                             <div class="text-center">
-                                                <p class="p-2">عنوان یاداشت</p>
+                                                <p class="p-2"><?php echo $article11__row['title']; ?></p>
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="item">
-                                        <a href="show_news.html" target="_blank" class="text-dark">
-                                            <div>
-                                                <img src="image/2.jpg" class="img-fluid" alt="" title="">
-                                            </div>
-                                            <div class="text-center">
-                                                <p class="p-2">عنوان یاداشت</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="show_news.html" target="_blank" class="text-dark">
-                                            <div>
-                                                <img src="image/3.jpg" class="img-fluid" alt="" title="">
-                                            </div>
-                                            <div class="text-center">
-                                                <p class="p-2">عنوان یاداشت</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="show_news.html" target="_blank" class="text-dark">
-                                            <div>
-                                                <img src="image/index-carusel-image1.jpg" class="img-fluid" alt="" title="">
-                                            </div>
-                                            <div class="text-center">
-                                                <p class="p-2">عنوان یاداشت</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="show_news.html" target="_blank" class="text-dark">
-                                            <div>
-                                                <img src="image/index-carusel-image3.jpg" class="img-fluid" alt="" title="">
-                                            </div>
-                                            <div class="text-center">
-                                                <p class="p-2">عنوان یاداشت</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    <?php } ?>
+                                    
                                 </div>
                             </div>
                         </div>

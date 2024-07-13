@@ -1,4 +1,4 @@
-
+<?php $page1=true; ?>
 <html>
 <head>
   <meta charset="utf-8">

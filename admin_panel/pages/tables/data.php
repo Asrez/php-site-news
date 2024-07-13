@@ -1,4 +1,4 @@
-
+<?php $page2=true; ?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -66,7 +66,7 @@
                 <thead>
                   
                 <tr>
-                <th  width="100px"><a href="../tables/article_edit.php? action=insert"><button type="button"  class="btn btn-block btn-success btn-sm" >افزودن</button></a> </th>
+                <th><a href="../tables/article_edit.php? action=insert"><button type="button"  class="btn btn-block btn-success btn-sm" >افزودن</button></a> </th>
                   <th>کد خبر</th>
                   <th>نام خبر</th>
                   <th>خلاصه</th>

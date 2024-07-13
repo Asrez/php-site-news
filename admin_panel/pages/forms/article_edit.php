@@ -1,4 +1,6 @@
-
+<?php $page2=true; 
+if ($page2===true){echo "fBG"; }
+exit();?>
 <html>
 <head>
   <meta charset="utf-8">

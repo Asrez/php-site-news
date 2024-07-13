@@ -218,7 +218,8 @@ $link=mysqli_connect("localhost" , "root" ,"" ,"news") ;
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src='dist/img/<?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true){
+
+              <img src='<?php if(isset($_page2) && $page2==1) {?>../../<?php} if(isset($_page1) && $page1==1){?>../<?php }; ?>dist/img/<?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true){
   echo $_SESSION["admin_image"];
 } ?>' class="user-image" alt="User Image">
               <span class="hidden-xs"><?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true){
