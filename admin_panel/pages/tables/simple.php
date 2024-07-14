@@ -59,6 +59,11 @@
             <div class="box-body">
               <table class="table table-bordered">
                 <tr>
+                  <td><a href="admin_edit.php?action=insert"><button type="button" class="btn btn-block btn-success btn-sm" 
+                     <?php 
+                       if($_SESSION["admin_id"]!=13 ){
+                      echo "disabled";
+}  ?>>افزودن</button></a></td>
                   <th style="width: 10px">کد کاربر</th>
                   <th>نام</th>
                   <th>نام کاربری</th>
@@ -70,25 +75,32 @@
                 while($admin_row=mysqli_fetch_array($admin_result)){
                 ?>
                 <tr>
+                  <td>  <a href="admin_edit.php?id=<?php echo $admin_row['id'];?> & action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  
+                  <?php 
+                       if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true && $_SESSION["admin_id"]!=13 && $admin_row['id']==13){
+                      echo "disabled";
+}  ?>
+                  >ویرایش</button></a>
+                     <?php if ($admin_row['id']!=13) { ?>   <a href="admin_edit_action.php?id=<?php echo $admin_row['id'];?> & action=delete"><button type="button" class="btn btn-block btn-danger btn-sm"
+                  <?php if($_SESSION["admin_id"]!=13 and $_SESSION["admin_id"]!=$admin_row['id']){
+                    echo "disabled";
+                  } 
+                  ?>
+                        >خذف</button></a> <?php } ?>
+                </td>
                   <td><?php echo $admin_row['id'] ;?></td>
                   <td><?php echo $admin_row['name'] ;?></td>
                   <td><?php echo $admin_row['username'] ;?></td>
-                  <td><?php echo $admin_row['date'] ;?></td>
+                  <td><?php echo $admin_row['date'] ;?>
+               </td>
                 </tr>
+                
                 <?php } ?>
                 
               </table>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </div>
+            
           </div>
           <!-- /.box -->
 

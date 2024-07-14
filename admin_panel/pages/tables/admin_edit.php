@@ -53,28 +53,33 @@
                 <?php
                  $id=$_GET['id'];
                    
-                      $link=mysqli_connect("localhost","root","","news");
-                      $query_select="SELECT * FROM setting WHERE id=$id ";
+$link=mysqli_connect("localhost","root","","news");
+                      $query_select="SELECT * FROM admins WHERE id=$id ";
                       $result_select=mysqli_query($link,$query_select);
                       $row_select=mysqli_fetch_array($result_select);
                 
                  ?>
-              <form role="form" method="post" action="setting_edit_action.php?id=<?php echo  $id; ?>" >
+              <form role="form" method="post" action="admin_edit_action.php?id=<?php echo  $id; ?>" >
                 <!-- text input -->
                 <div class="form-group">
-                  <label>کلید</label>
-                  <input type="text" class="form-control" placeholder="کلید" name="key_setting" id="key_setting" value="<?php  echo $row_select['key_setting']; ?>" disabled>
+                  <label>نام کاربری </label>
+                  <input type="text" class="form-control" placeholder="نام کاربری" name="username" id="username" value="<?php  echo $row_select['username']; ?>" disabled>
                 </div>
                 <div class="form-group">
-                  <label>مقدار</label>
-                   <input type="text" class="form-control" placeholder="مقدار" name="value_setting" id="value_setting" value="<?php echo $row_select['value_setting']; ?>">
+                  <label>نام</label>
+                   <input type="text" class="form-control" placeholder="نام" name="name" id="name" value="<?php echo $row_select['name']; ?>">
                  
                 </div>
                 <div class="form-group">
-                  <label>لینک</label>
-                   <input type="text" class="form-control" placeholder="لینک" name="qlink" id="qlink" value="<?php echo $row_select['link']; ?>">
+                  <label>پسورد</label>
+                   <input type="password" class="form-control" placeholder="پسورد" name="password" id="password" value="<?php echo $row_select['password']; ?>">
                  
                 </div>
+                <div class="form-group">
+                  <label>عکس</label>
+                  <input type="file" class="form-control" name="image" value="<?php if($action=='update'){echo $row_up['image'];} ?>">
+                </div>
+          </div>
                 <button type="submit" name="btn">تایید</button>
               </form>
               

@@ -318,7 +318,7 @@ session_start();
                     <div class="row container_box">
                     
                     <?php
-                    $sport_query1="SELECT * FROM categorys WHERE parent_id=5 ";
+                    $sport_query1="SELECT * FROM categorys WHERE parent_id=5 LIMIT 4";
                     $result_sport_query1=mysqli_query($link,$sport_query1);
                     while($row_sport_query1=mysqli_fetch_array($result_sport_query1)){
                         $ididd=$row_sport_query1['id'];
