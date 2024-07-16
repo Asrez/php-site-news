@@ -642,8 +642,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">سفارش جدید</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">نمایش همه</a>
+              <a href="pages/tables/simple.php" class="btn btn-sm btn-default btn-flat pull-right">نمایش همه</a>
             </div>
             <!-- /.box-footer -->
           </div>
@@ -757,16 +756,6 @@
               <!-- /.row -->
             </div>
             <!-- /.box-body -->
-            <div class="box-footer no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">ایران
-                  <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                <li><a href="#">آمریکا <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a>
-                </li>
-                <li><a href="#">انگلستان
-                  <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-              </ul>
-            </div>
             <!-- /.footer -->
           </div>
           <!-- /.box -->
@@ -814,7 +803,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-center">
-              <a href="javascript:void(0)" class="uppercase">نمایش همه</a>
+              <a href="pages/tables/data.php" class="uppercase">نمایش همه</a>
             </div>
             <!-- /.box-footer -->
           </div>

@@ -5,7 +5,7 @@ $action=$_GET['action'];
 if($action!="insert"){$slug=$_GET['slug'];}
 if(isset($_POST["title"]) && !empty($_POST["title"])&&
 isset($_POST["summery"]) && !empty($_POST["summery"])&&
-isset($_POST["content"]) && !empty($_POST["content"])&&)
+isset($_POST["content"]) && !empty($_POST["content"]))
 
 {
    
@@ -64,15 +64,25 @@ if($action!="delete"){
 }
 switch ($action){
     case "delete":
+        $found_article="SELECT * FROM articles WHERE slug='$slug'";
+        $found_article_result=mysqli_query($link,$found_article);
+        $found_article_row=mysqli_fetch_array($found_article_result);
+        $id=$found_article_row['id'];
+        $delete_comment="DELETE FROM `comments` WHERE article_id='$id'";
+        $delete_article_tag="DELETE FROM `article_tag` WHERE article_id='$id'";
         $delete="DELETE FROM `articles` WHERE slug ='$slug'";
-        if(mysqli_query($link,$delete)===true){
+        if(mysqli_query($link,$delete_comment)===true){
+            if(mysqli_query($link,$delete_article_tag)===true){
+                if(mysqli_query($link,$delete)===true){
+            
             ?>
             <script>
                 window.alert("با موفقیت حذف شد");
                 location.replace("data.php");
             </script>
             <?php
-
+            }
+          }
         }
         else{
             ?>

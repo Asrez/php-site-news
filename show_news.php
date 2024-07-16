@@ -265,6 +265,47 @@ echo "";
                     </div>
                 </div>
             </section>
+            <section class="box_news">
+                <ul class="nav nav-tabs my-2" >
+                    <li class="nav-item">
+                        <a href="#box4" class="nav-link" data-toggle="tab"> نمایش نظرات کاربران </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    
+                    <?php
+                    $id_for_comments=$article_roww['id'];
+                    $comment_query="SELECT * FROM comments WHERE venify=1 AND article_id='$id_for_comments'  ORDER BY comments.date  ";
+                    $comment_result=mysqli_query($link,$comment_query);
+
+                     ?>
+                    <div id="box4" class="tab-pane fade">
+                        <div class="col-12 show_comment">
+                            <?php while($row_comment=mysqli_fetch_array($comment_result)){ ?>
+                            <div class="row mt-2">
+                                <div class="col-12 comment_header">
+                                    <div class="row">
+                                        <div class="col-6 username">
+                                            <i class="fas fa-user"></i>
+                                            <?php echo $row_comment['name']; ?>
+                                        </div>
+                                        <div class="col-6 time">
+                                            <i class="far fa-calendar-alt"></i>
+                                            <?php echo $row_comment['date'];?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 comment_body">
+                                    <div class="comment">
+                                        <p>  <?php echo $row_comment['comment'];?> </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section class="box box_1">
                 <div class="col-12">
                     <div class="row">
@@ -321,8 +362,11 @@ echo "";
                         </div>
                     </div>
                 </div>
+                
             </section>
+            
         </div>
+        
         <div class="col-12 col-md-3">
             <section class="box box_news box_caricature">
                 <ul class="nav nav-tabs my-2" role="tablist">
