@@ -32,7 +32,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-    <?php include("../../header.php") ;?>
+    <?php include("../../header2.php") ;?>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -125,26 +125,43 @@
                 ?>
                 <tr>
                   <td ><?php echo $category_row['id']; ?></td>
-                  <td><?php echo $category_row['title']; ?></td>
-                  <td><ul>
-                  
+                  <td><?php echo $category_row['title']; ?> <a href="category_edit.php?id=<?php echo $id; ?>&action=delete& parent_id=0"> <i class="fa fa-fw fa-trash"></i></a>
+                  <a href="action_category_edit.php?id=<?php echo $id; ?>&action=update& parent_id=0"> <i class="fa fa-fw  fa-pencil"></i></a></td>
+                  <td> <table>
+                <tbody>
+                   <tr>
                     <?php
                   $idd=$category_row['id'];
                 $category_query1="SELECT * FROM categorys WHERE parent_id=$idd";
                 $category_result1=mysqli_query($link,$category_query1);
                 while($category_row1=mysqli_fetch_array($category_result1)){
+                  $parent_id=$category_row['id'];
                 ?>
                        
-                        <li><?php echo $category_row1['title']; ?> (<?php echo $category_row1['id']; ?> )</li>
+                       <td><?php echo $category_row1['title']; ?> (<?php echo $category_row1['id']; ?> )</td> 
+                    <td><a href="category_edit.php?id=<?php echo $id; ?>&action=delete& parent_id=<?php echo $parent_id;  ?>"> <i class="fa fa-fw fa-trash"></i></a>
+                        <a href="action_category_edit.php?id=<?php echo $id; ?>&action=update& parent_id=<?php echo $parent_id;  ?>"> <i class="fa fa-fw  fa-pencil"></i></a>
+                    </td>
+                  </tr>
                 <?php } ?>
-                </ul>
+                </tbody>
+                </tbody>
+              </table>
+              <a href="category_edit.php?action=insert& parent_id=<?php echo $parent_id;  ?>"><i class="fa fa-fw  fa-plus"></i></a>
                 </td>
                 </tr>
                     <?php } ?>
                  
                                     
-                
+                <tr>
+                  <td><a href="category_edit.php?action=insert& parent_id=0"><i class="fa fa-fw  fa-plus"></i></a></td>
+                </tr>
               </table>
+              
+              
+                 
+                    
+                
             </div>
             <!-- /.box-body -->
           </div>
@@ -154,21 +171,24 @@
         <div class="col-md-6">
           <div class="box"  style="margin-top: 100px;">
             <div class="box-header">
-              <h3 class="box-title">  تنظیمات </h3>
+              <h3 class="box-title"> تگ ها </h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <table class="table table-striped">
                 <tr>
+                  <th><a href="tag_edit.php?action=insert"><button type="button" class="btn btn-block btn-success btn-sm">افزودن</button></a></th>
                   <th >کد تگ</th>
                   <th>عنوان</th>
                 </tr>
                 <?php
-                $tag_query="SELECT * FROM tags";
+                $tag_query="SELECT * FROM tags ORDER BY id";
                 $tag_result=mysqli_query($link,$tag_query);
                 while($tag_row=mysqli_fetch_array($tag_result)){
                  ?>
                 <tr>
+                  <td><a href="tag_edit.php?action=update&slug=<?php echo $tag_row['slug'];?>"><button type="button" class="btn btn-block btn-warning btn-sm">ویرایش</button></a>
+                  <a href="tag_edit_action.php?action=delete&slug=<?php echo $tag_row['slug'];?>"><button type="button" class="btn btn-block btn-danger btn-sm">حذف</button></a></td>
                   <td><?php echo $tag_row['id'] ;?></td>
                   <td><?php echo $tag_row['title'] ;?></td>
                 </tr>
@@ -203,6 +223,7 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tr>
+                  <th></th>
                   <th>کد</th>
                   <th>نام کاربر</th>
                   <th>تاریخ</th>
@@ -216,6 +237,11 @@
 
                 ?>
                 <tr>
+                  <td><?php
+                  $venify=$comment_row['venify'];
+                  if($venify==0){ ?>  <a href="comment_action.php?action=update&id=<?php echo $comment_row['id'];?>"><button type="button" class="btn btn-block btn-success btn-sm">تایید</button></a>
+                    <?php } ?>
+                  <a href="comment_action.php?action=delete&id=<?php echo $comment_row['id'];?>"><button type="button" class="btn btn-block btn-danger btn-sm">حذف</button></a></td>
                   <td><?php echo $comment_row['id'];?></td>
                   <td><?php echo $comment_row['name'];?></td>
                   <td><?php echo $comment_row['date'];?></td>

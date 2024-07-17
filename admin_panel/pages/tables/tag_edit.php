@@ -1,4 +1,3 @@
-<?php $page2=true; ?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -46,44 +45,26 @@
         <div class="col-md-6">
           <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">  ادمین ها</h3>
+              <h3 class="box-title">تگ ها</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <?php 
-                $action=$_GET['action'];
-                if($action!='insert'){ $id=$_GET['id'];
-                 
-                   
-$link=mysqli_connect("localhost","root","","news");
-                      $query_select="SELECT * FROM admins WHERE id=$id ";
+                  $action=$_GET['action'];
+                  if($action=='update'){ $slug=$_GET['slug'];
+                     $link=mysqli_connect("localhost","root","","news");
+                      $query_select="SELECT title FROM tags WHERE slug='$slug'";
                       $result_select=mysqli_query($link,$query_select);
                       $row_select=mysqli_fetch_array($result_select);
-                      $name_admin=$row_select['name'];
-                      $username_admin=$row_select['username'];
                 }
                  ?>
-              <form role="form" method="post" action="admin_edit_action.php?action=<?php echo $action; if($action!="insert"){ echo "& id=".$id ."& username_admin=". $username_admin ."& name_admin=". $name_admin ;}?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="tag_edit_action.php?action=<?php echo $action; if($action!="insert"){ echo "& slug=". $slug; }?>" >
                 <!-- text input -->
                 <div class="form-group">
-                  <label>نام کاربری </label>
-                  <input type="text" class="form-control" placeholder="نام کاربری" name="username" id="username" value="<?php if($action!='insert'){echo $row_select['username'];} ?>" >
+                  <label>عنوان تگ :</label>
+                  <input type="text" class="form-control" placeholder="عنوان" name="title" id="title" value="<?php if($action=='update'){echo $row_select['title'];} ?>" >
                 </div>
-                <div class="form-group">
-                  <label>نام</label>
-                   <input type="text" class="form-control" placeholder="نام" name="name" id="name" value="<?php if($action!='insert'){ echo $row_select['name']; }?>">
-                 
-                </div>
-                <div class="form-group">
-                  <label>پسورد</label>
-                   <input type="password" class="form-control" placeholder="پسورد" name="password" id="password" value="<?php if($action!='insert'){ echo $row_select['password']; }?>">
-                 
-                </div>
-                <div class="form-group">
-                  <label>عکس</label>
-                  <input type="file" class="form-control" name="image"  >
-                </div>
-          </div>
+                
                 <button type="submit" name="btn">تایید</button>
               </form>
               

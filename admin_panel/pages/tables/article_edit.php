@@ -34,7 +34,7 @@ if($action!="insert"){$slug=$_GET['slug'];}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-  <?php include("../../header.php"); 
+  <?php include("../../header2.php"); 
   if($action!="insert"){
   $Query_up="SELECT * FROM articles WHERE slug='$slug'";
   $result_up=mysqli_query($link,$Query_up);
