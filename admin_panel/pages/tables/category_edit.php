@@ -45,14 +45,15 @@
         <div class="col-md-6">
           <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">  ادمین ها</h3>
+              <h3 class="box-title">دسته بندی ها</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <?php 
                 $action=$_GET['action'];
+                $parent_id=$_GET['parent_id'];
                 if($action!='insert'){ $id=$_GET['id'];
-                    $parent_id=$_GET['parent_id'];
+                    
                       $link=mysqli_connect("localhost","root","","news");
                       $query_select="SELECT * FROM categorys WHERE id=$id ";
                       $result_select=mysqli_query($link,$query_select);
@@ -60,11 +61,11 @@
                      
                 }
                  ?>
-              <form role="form" method="post" action="admin_edit_action.php?action=<?php echo $action; if($action!="insert"){ echo "& id=".$id ."& username_admin=". $username_admin ."& name_admin=". $name_admin ;}?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="action_category_edit.php?action=<?php echo $action; ?>&parent_id=<?php echo $parent_id; if($action=='update'){echo '&id='.$id ;}?>" >
                 <!-- text input -->
                 <div class="form-group">
                   <label> عنوان </label>
-                  <input type="text" class="form-control" placeholder="عنوان  " name="username" id="username" value="<?php if($action!='insert'){echo $row_select['username'];} ?>" >
+                  <input type="text" class="form-control" placeholder="عنوان  " name="title" id="title" value="<?php if($action!='insert'){echo $row_select['title'];} ?>" >
                 </div>
                 
                 <button type="submit" name="btn">تایید</button>

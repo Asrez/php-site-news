@@ -32,7 +32,11 @@ else{
 location.replace("article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?php  echo $slug ;  }?>");
 </script>
   <?php
+  exit();
  }
+}
+if(isset($_POST['tags'])){
+$tags=$_POST['tags'];
 }
 if($action!="delete"){
 
@@ -46,21 +50,9 @@ if($action!="delete"){
     </script>');
         $uploadok=0;
     }
-                      if(file_exists($target_file)){
-                         echo('
-    
-    <script type="text/javascript">
-    window.alert("فایل انتخابی در سرویس دهنده موجود است");
-        location.replace("article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?php  echo $slug ;  }?>");
-    </script>');
-    }
-     if(move_uploaded_file($_FILES["image"]["tmp_name"],$target_file)){
-                          echo('
-    
-    <script type="text/javascript">
-    window.alert("فایل به سرویس دهنده میزبان ارسال شد");
-    </script>');
-    }
+                      if(!file_exists($target_file)){
+                        
+     move_uploaded_file($_FILES["image"]["tmp_name"],$target_file);}
 }
 switch ($action){
     case "delete":
@@ -92,7 +84,7 @@ switch ($action){
             </script>
             <?php
         }
-        mysqli_close();
+
         break;
         case "update":
             $update="UPDATE `articles` SET title ='$title', summery='$summery', content ='$content', image ='$image', source ='$source', category_id ='$category'  WHERE slug='$slug'";
@@ -126,15 +118,28 @@ $date=date('Y-m-d h:i:s');
 
              $insert_article="INSERT INTO `articles`(`id`, `publicationdate`, `title`, `summery`, `content`, `image`, `source`, `viewcount`, `category_id`, `admin_id`, `slug`)
                                              VALUES ('NULL','$date','$title','$summery','$content','$image','$source','0','$category','$admin','$text')";
-                                                                                                                                                                                                        
-             if(mysqli_query($link,$insert_article)===true){
+                                                                                                                                                                                                     
+             if(mysqli_query($link,$insert_article)===true)
+             { 
+                $find_id_art="SELECT * FROM `articles` WHERE `slug`='$text';";
+                $find_id_art_result=mysqli_query($link,$find_id_art);
+                $find_id_art_row=mysqli_fetch_array($find_id_art_result);
+                $id_article=$find_id_art_row['id'];
+                if (count($tags) > 0)
+                { 
+                    foreach ($tags as $tag_id) {  
+                        $insert_tags="INSERT INTO `article_tag`(`id`, `article_id`, `tag_id`) VALUES ('NULL','$id_article','$tag_id');" ;
+                        mysqli_query($link,$insert_tags);
+                    }  
+                }
+            
                 ?>
                 <script>
                     window.alert("خبر با موفقیت ثبت شد");
                     location.replace("data.php");
                 </script>
                 <?php
-              }
+            }
               else{
                 ?>
                 <script>

@@ -266,11 +266,6 @@ echo "";
                 </div>
             </section>
             <section class="box_news">
-                <ul class="nav nav-tabs my-2" >
-                    <li class="nav-item">
-                        <a href="#box4" class="nav-link" data-toggle="tab"> نمایش نظرات کاربران </a>
-                    </li>
-                </ul>
                 <div class="tab-content">
                     
                     <?php
@@ -279,7 +274,7 @@ echo "";
                     $comment_result=mysqli_query($link,$comment_query);
 
                      ?>
-                    <div id="box4" class="tab-pane fade">
+                    <div class="tab-pane active">
                         <div class="col-12 show_comment">
                             <?php while($row_comment=mysqli_fetch_array($comment_result)){ ?>
                             <div class="row mt-2">
@@ -304,7 +299,7 @@ echo "";
                             <?php } ?>
                         </div>
                     </div>
-                </div>
+               
             </section>
             <section class="box box_1">
                 <div class="col-12">

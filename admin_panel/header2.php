@@ -159,42 +159,11 @@ $venify_result=mysqli_query($link,$venify_query);
         </li>
        
         <li>
-          <a href="pages/widgets.php">
+          <a href="../widgets.php">
             <i class="fa fa-th"></i> <span>ویجت ها</span>
           </a>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>نمودارها</span>
-            <span class="pull-left-container">
-              <i class="fa fa-angle-right pull-left"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i>نمودار ChartJS</a></li>
-            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i>نمودار Morris</a></li>
-            <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i>نمودار Flot</a></li>
-            <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i>نمودار Inline charts</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>اشیای گرافیکی</span>
-            <span class="pull-left-container">
-              <i class="fa fa-angle-right pull-left"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> عمومی</a></li>
-            <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> آیکون</a></li>
-            <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> دکمه</a></li>
-            <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> اسلایدر</a></li>
-            <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> تایم لاین</a></li>
-            <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> مدال</a></li>
-          </ul>
-        </li>
+       
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>مدیریت اطلاعات</span>
@@ -208,37 +177,9 @@ $venify_result=mysqli_query($link,$venify_query);
           </ul>
         </li>
         <li>
-          <a href="../calendar.html">
-            <i class="fa fa-calendar"></i> <span>تقویم</span>
-            <span class="pull-left-container">
-              <small class="label pull-left bg-red">۳</small>
-              <small class="label pull-left bg-blue">۱۷</small>
-            </span>
+          <a href="../../../index.php">
+            <i class="fa fa-eye"></i> <span>سایت اصلی</span>
           </a>
-        </li>
-        <li>
-          <a href="../mailbox/mailbox.html">
-            <i class="fa fa-user"></i> <span>ادمین ها</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>راهنما</span>
-            <span class="pull-left-container">
-              <i class="fa fa-angle-right pull-left"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../pages/examples/invoice.html"><i class="fa fa-circle-o"></i> سفارش</a></li>
-            <li><a href="../pages/examples/profile.html"><i class="fa fa-circle-o"></i> پروفایل</a></li>
-            <li><a href="../pages/examples/login.html"><i class="fa fa-circle-o"></i> صفحه ورود</a></li>
-            <li><a href="../pages/examples/register.html"><i class="fa fa-circle-o"></i> ثبت نام</a></li>
-            <li><a href="../pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> قفل صفحه</a></li>
-            <li><a href="../pages/examples/404.html"><i class="fa fa-circle-o"></i> ارور ۴۰۴</a></li>
-            <li><a href="../pages/examples/500.html"><i class="fa fa-circle-o"></i> ارور ۵۰۰</a></li>
-            <li><a href="../pages/examples/blank.html"><i class="fa fa-circle-o"></i> صفحه خالی</a></li>
-            <li><a href="../pages/examples/pace.html"><i class="fa fa-circle-o"></i> صفحه سریع</a></li>
-          </ul>
         </li>
         <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>مستندات</span></a></li>
         <li class="header">برچسب ها</li>

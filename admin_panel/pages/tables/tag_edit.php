@@ -50,19 +50,21 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <?php 
-                  $action=$_GET['action'];
-                  if($action=='update'){ $slug=$_GET['slug'];
-                     $link=mysqli_connect("localhost","root","","news");
-                      $query_select="SELECT title FROM tags WHERE slug='$slug'";
+                $action=$_GET['action'];
+                if($action!='insert'){$id=$_GET['id'];
+                    
+                      $link=mysqli_connect("localhost","root","","news");
+                      $query_select="SELECT * FROM tags WHERE id=$id ";
                       $result_select=mysqli_query($link,$query_select);
                       $row_select=mysqli_fetch_array($result_select);
+                     
                 }
                  ?>
-              <form role="form" method="post" action="tag_edit_action.php?action=<?php echo $action; if($action!="insert"){ echo "& slug=". $slug; }?>" >
+              <form role="form" method="post" action="tag_edit_action.php?action=<?php echo $action; if($action=='update'){echo '&id='.$id ;}?>" >
                 <!-- text input -->
                 <div class="form-group">
-                  <label>عنوان تگ :</label>
-                  <input type="text" class="form-control" placeholder="عنوان" name="title" id="title" value="<?php if($action=='update'){echo $row_select['title'];} ?>" >
+                  <label> عنوان </label>
+                  <input type="text" class="form-control" placeholder="عنوان  " name="title" id="title" value="<?php if($action!='insert'){echo $row_select['title'];} ?>" >
                 </div>
                 
                 <button type="submit" name="btn">تایید</button>

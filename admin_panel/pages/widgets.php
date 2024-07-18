@@ -164,7 +164,7 @@
             <div class="icon">
               <i class="fa fa-shopping-cart"></i>
             </div>
-            <a href="forms/article_edit.php" class="small-box-footer">
+            <a href="tables/article_edit.php?action=insert" class="small-box-footer">
                افزودن <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -189,7 +189,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="tables/category_edit.php?action=insert&parent_id=0" class="small-box-footer">
                افزودن <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -214,7 +214,7 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="tables/admin_edit.php?action=insert" class="small-box-footer">
                افزودن کاربر <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -239,7 +239,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="tables/tag_edit.php?action=insert" class="small-box-footer">
                افزودن <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>

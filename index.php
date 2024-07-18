@@ -96,14 +96,14 @@ session_start();
                 <ul class="nav nav-tabs my-2" role="tablist">
                     
                     <li class="nav-item pr-lg-1">
-                        <a href="#box2" class="nav-link " data-toggle="tab">پربحث ترین ها</a>
+                        <a href="#box2" class="nav-link active" data-toggle="tab">پربحث ترین ها</a>
                     </li>
                     <li class="nav-item">
                         <a href="#box4" class="nav-link" data-toggle="tab">آخرین نظرات</a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div id="box2" class="tab-pane active fade">
+                    <div id="box2" class="tab-pane active ">
                         <div class="row">
                         <?php $query_article_view11="SELECT * FROM `articles` WHERE viewcount>5 ";
                             $article_result11=mysqli_query($link,$query_article_view11);

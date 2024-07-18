@@ -118,41 +118,37 @@
                   <th>زیر منو ها</th>
                  
                 </tr>
+
                   <?php
-                $category_query="SELECT * FROM categorys WHERE parent_id=0";
-                $category_result=mysqli_query($link,$category_query);
-                while($category_row=mysqli_fetch_array($category_result)){
-                ?>
+                    $category_query="SELECT * FROM categorys WHERE parent_id=0;";
+                    $category_result=mysqli_query($link,$category_query);
+                    while($category_row=mysqli_fetch_array($category_result)){
+                    $id_category=$category_row['id'];
+                  ?>
                 <tr>
-                  <td ><?php echo $category_row['id']; ?></td>
-                  <td><?php echo $category_row['title']; ?> <a href="category_edit.php?id=<?php echo $id; ?>&action=delete& parent_id=0"> <i class="fa fa-fw fa-trash"></i></a>
-                  <a href="action_category_edit.php?id=<?php echo $id; ?>&action=update& parent_id=0"> <i class="fa fa-fw  fa-pencil"></i></a></td>
-                  <td> <table>
-                <tbody>
-                   <tr>
-                    <?php
-                  $idd=$category_row['id'];
-                $category_query1="SELECT * FROM categorys WHERE parent_id=$idd";
-                $category_result1=mysqli_query($link,$category_query1);
-                while($category_row1=mysqli_fetch_array($category_result1)){
-                  $parent_id=$category_row['id'];
-                ?>
+                     <td ><?php echo $id_category; ?></td>
+                     <td><?php echo $category_row['title']; ?> <a href="action_category_edit.php?id=<?php echo $id_category; ?>&action=delete& parent_id=0"> <i class="fa fa-fw fa-trash"></i></a>
+                          <a href="category_edit.php?id=<?php echo $id_category; ?>&action=update& parent_id=0"> <i class="fa fa-fw  fa-pencil"></i></a></td>
+                     <td>
+                                   <?php
+                                        $category_query1="SELECT * FROM categorys WHERE parent_id='$id_category';";
+                                        $category_result1=mysqli_query($link,$category_query1);
+                                        while($category_row1=mysqli_fetch_array($category_result1)){
+                                        $id_categoryy=$category_row1['id'];
+                                        $parent_id=$id_category;
+                                     ?>
                        
-                       <td><?php echo $category_row1['title']; ?> (<?php echo $category_row1['id']; ?> )</td> 
-                    <td><a href="category_edit.php?id=<?php echo $id; ?>&action=delete& parent_id=<?php echo $parent_id;  ?>"> <i class="fa fa-fw fa-trash"></i></a>
-                        <a href="action_category_edit.php?id=<?php echo $id; ?>&action=update& parent_id=<?php echo $parent_id;  ?>"> <i class="fa fa-fw  fa-pencil"></i></a>
-                    </td>
-                  </tr>
-                <?php } ?>
-                </tbody>
-                </tbody>
-              </table>
-              <a href="category_edit.php?action=insert& parent_id=<?php echo $parent_id;  ?>"><i class="fa fa-fw  fa-plus"></i></a>
-                </td>
-                </tr>
+                                   <p><?php echo $category_row1['title']; ?> (<?php echo $category_row1['id']; ?> )
+                                   <a href="action_category_edit.php?id=<?php echo $id_categoryy; ?>&action=delete& parent_id=<?php echo $parent_id;  ?>"> <i class="fa fa-fw fa-trash"></i></a>
+                                   <a href="category_edit.php?id=<?php echo $id_categoryy; ?>&action=update& parent_id=<?php echo $parent_id;  ?>"> <i class="fa fa-fw  fa-pencil"></i></a>
+                                        </p>
+                                   
+                                 <?php } ?>
+                                 <a href="category_edit.php?action=insert& parent_id=<?php echo $id_category;  ?>"><i class="fa fa-fw  fa-plus"></i></a>
+                       </td>
+                   </tr>
                     <?php } ?>
-                 
-                                    
+              
                 <tr>
                   <td><a href="category_edit.php?action=insert& parent_id=0"><i class="fa fa-fw  fa-plus"></i></a></td>
                 </tr>
@@ -187,8 +183,8 @@
                 while($tag_row=mysqli_fetch_array($tag_result)){
                  ?>
                 <tr>
-                  <td><a href="tag_edit.php?action=update&slug=<?php echo $tag_row['slug'];?>"><button type="button" class="btn btn-block btn-warning btn-sm">ویرایش</button></a>
-                  <a href="tag_edit_action.php?action=delete&slug=<?php echo $tag_row['slug'];?>"><button type="button" class="btn btn-block btn-danger btn-sm">حذف</button></a></td>
+                  <td><a href="tag_edit.php?action=update&id=<?php echo $tag_row['id'];?>"><button type="button" class="btn btn-block btn-warning btn-sm">ویرایش</button></a>
+                  <a href="tag_edit_action.php?action=delete&id=<?php echo $tag_row['id'];?>"><button type="button" class="btn btn-block btn-danger btn-sm">حذف</button></a></td>
                   <td><?php echo $tag_row['id'] ;?></td>
                   <td><?php echo $tag_row['title'] ;?></td>
                 </tr>

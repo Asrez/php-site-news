@@ -114,6 +114,7 @@
                 <thead>
                 <tr>
                   <th></th>
+                  <th></th>
                   <th>کد</th>
                   <th>کلید</th>
                   <th>مقدار</th>
@@ -126,10 +127,96 @@
                 $setting_result=mysqli_query($link,$setting_query);
                 while($setting_row=mysqli_fetch_array($setting_result)){
                 ?>
-                <tr><td>                     <a href="setting_edit.php?id=<?php echo $setting_row['id'];?>"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
+                <tr>
+                  <td><a class="fa fa-trash" href="setting_edit_action.php?id=<?php echo $setting_row['id'];?>&action=delete"></a></td>
+                  
+                <td>                     <a href="setting_edit.php?id=<?php echo $setting_row['id'];?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
+                
                     </td>
                   <td><?php echo $setting_row['id'];?></td>
-                  <td><?php echo $setting_row['key_setting'];?> </td>
+                  <td><?php
+                  $idd=$setting_row['id'];
+                  switch ($idd) {
+                    case '1':
+                      echo "عکس تبلیغ بخش هدر سایت ";
+                      break;
+                    case '2':
+                      echo " عکس تبلیغ میانی بالای صفحه اصلی";
+                      break;
+                    case '3':
+                      echo " عکس تبلیغ میانی پایین صفحه اصلی";
+                      break;
+                    case '4':
+                      echo " عکس تبلیغ اول سمت راست صفحه اصلی";
+                      break;
+                    case '5':
+                      echo " عکس تبلیغ دوم سمت راست صفحه اصلی";
+                      break;
+                    case '6':
+                      echo " عکس تبلیغ سوم سمت راست صفحه اصلی";
+                      break;
+                    case '7':
+                      echo " عکس تبلیغ چهارم سمت راست صفحه اصلی";
+                      break;
+                    case '8':
+                      echo " عکس تبلیغ پنجم سمت راست صفحه اصلی";
+                      break;
+                      case '9':
+                        echo " عکس تبلیغ ششم سمت راست صفحه اصلی";
+                        break;
+                      case '10':
+                        echo " عکس تبلیغ هفتم سمت راست صفحه اصلی";
+                        break;
+                      case '11':
+                        echo " عکس تبلیغ هشتم سمت راست صفحه اصلی";
+                        break;
+                      case '12':
+                        echo " عکس تبلیغ اول سمت راست صفحه نمایش خبر";
+                        break;
+                      case '13':
+                        echo " عکس تبلیغ دوم سمت راست صفحه نمایش خبر";
+                        break;
+                      case '14':
+                        echo " عکس تبلیغ سوم سمت راست صفحه نمایش خبر";
+                        break;
+                      case '15':
+                        echo " عکس تبلیغ چهارم سمت راست صفحه نمایش خبر";
+                        break;
+                      case '16':
+                        echo " عکس  تبلیغ اول سمت چپ صفحه نمایش خبر";
+                        break;
+                        case '17':
+                          echo " عکس  تبلیغ دوم سمت چپ صفحه نمایش خبر";
+                          break;
+                        case '18':
+                          echo "عکس تبلیغ سوم سمت چپ صفحه نمایش خبر";
+                          break;
+                        case '19':
+                          echo "عکس لوگو";
+                          break;
+                        case '20':
+                          echo "تبلیغ عکس اول سمت چپ صفحه درباره ما و ارتباط با ما";
+                          break;
+                        case '21':
+                          echo "تبلیغ عکس دوم سمت چپ صفحه درباره ما و ارتباط با ما";
+                          break;
+                        case '22':
+                          echo "تبلیغ عکس سوم سمت چپ صفحه درباره ما و ارتباط با ما";
+                          break;
+                        case '23':
+                          echo "تبلیغ عکس اول سمت راست صفحه درباره ما و ارتباط با ما";
+                          break;
+                        case '24':
+                          echo "تبلیغ عکس دوم سمت راست صفحه درباره ما و ارتباط با ما";
+                          break;
+                          case '25':
+                            echo "تبلیغ عکس سوم سمت راست صفحه درباره ما و ارتباط با ما";
+                            break;
+                          case '26':
+                            echo "تبلیغ عکس چهارم سمت راست صفحه درباره ما و ارتباط با ما";
+                            break;
+                  }
+                  ?></td>
                   <td><?php echo $setting_row['value_setting'];?> </td>
                 </tr>
                 <?php } ?>

@@ -66,7 +66,7 @@ if($action!="insert"){$slug=$_GET['slug'];}
             <!-- /.box-header -->
             <div class="box-body">
                 
-              <form role="form" method="post" action="article_edit_action.php?slug=<?php echo $slug?> & action=<?php echo $action ; ?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="article_edit_action.php?action=<?php echo $action ; if($action!='insert'){echo "&slug=".$slug ;}?>" enctype="multipart/form-data">
                 <!-- text input -->
                 <div class="form-group">
                   <label>عنوان</label>
@@ -74,17 +74,16 @@ if($action!="insert"){$slug=$_GET['slug'];}
                 </div>
                 <div class="form-group">
                   <label>نویسنده</label>
-                  <input type="text" class="form-control" name="admin"  id="admin" value="<?php if($action=='update'){
-                    if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true)
-                    {
-                     echo $_SESSION["name"];
-                    }
-                }
-                    if($action=='update')
+                  <input type="text" class="form-control" name="admin"  id="admin" value="<?php 
+                  if($action=='insert'){
+                       if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true)
                       {
-                      
-   
-                   echo $find_row['name'];
+                       echo $_SESSION["name"];
+                      }
+                    }
+                  if($action=='update')
+                      {
+                    echo $find_row['name'];
                    }?>" disabled>
                 </div>
 
@@ -96,7 +95,7 @@ if($action!="insert"){$slug=$_GET['slug'];}
                 <div class="form-group">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="tag"  id="tag">
+                      <input type="checkbox" name="tags[]"  value="<?php echo $tags_row['id']; ?>">
                     <?php echo $tags_row['title']; ?>
                     </label>
                   </div>
@@ -138,7 +137,7 @@ if($action!="insert"){$slug=$_GET['slug'];}
             <!-- /.box-header -->
             <div class="box-body pad">
              
-                    <textarea id="editor1"  rows="5" cols="60" name="summery"><?php if($action=='update'){echo $row_up['summery'];} ?></textarea>
+                    <textarea id="editor1"  rows="5" cols="45" name="summery"><?php if($action=='update'){echo $row_up['summery'];} ?></textarea>
                </div>
           </div>
           <div class="box box-info">
@@ -157,7 +156,7 @@ if($action!="insert"){$slug=$_GET['slug'];}
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <textarea id="editor1" rows="20" cols="60" name="content" ><?php if($action=='update'){echo $row_up['content'];} ?></textarea>
+              <textarea id="editor1" rows="20" cols="45" name="content" ><?php if($action=='update'){echo $row_up['content'];} ?></textarea>
               
             </div>
             <div class="form-group">
