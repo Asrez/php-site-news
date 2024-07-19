@@ -60,52 +60,61 @@ switch ($action){
         $found_article_result=mysqli_query($link,$found_article);
         $found_article_row=mysqli_fetch_array($found_article_result);
         $id=$found_article_row['id'];
-        $delete_comment="DELETE FROM `comments` WHERE article_id='$id'";
-        $delete_article_tag="DELETE FROM `article_tag` WHERE article_id='$id'";
-        $delete="DELETE FROM `articles` WHERE slug ='$slug'";
-        if(mysqli_query($link,$delete_comment)===true){
-            if(mysqli_query($link,$delete_article_tag)===true){
-                if(mysqli_query($link,$delete)===true){
-            
-            ?>
-            <script>
-                window.alert("با موفقیت حذف شد");
-                location.replace("data.php");
-            </script>
-            <?php
-            }
-          }
-        }
-        else{
-            ?>
-            <script>
-                window.alert("حذف نشد");
-                location.replace("article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?php  echo $slug ;  }?>");
-            </script>
-            <?php
-        }
-
+        $delete_comment=$link->prepare("DELETE FROM `comments` WHERE article_id=?");
+        $delete_article_tag=$link->prepare("DELETE FROM `article_tag` WHERE article_id=?");
+        $delete = $link->prepare("DELETE FROM `articles` WHERE slug =? ;");
+       if($delete_comment){
+        if($delete_article_tag){
+            if($delete){
+          $delete_comment->bind_param("i",$id);
+          $delete_article_tag->bind_param("i",$id);
+          $delete->bind_param("s",$slug);
+          if($delete_comment->execute()){
+            if($delete_article_tag->execute()){
+                if($delete->execute()){
+              ?>
+              <script>
+                  window.alert("حذف شد");
+                  location.replace("data.php");
+              </script>
+              <?php
+                 }} }
+                  else{
+                          ?>
+              <script>
+                  window.alert("حذف نشد");
+                  location.replace("article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?php  echo $slug ;  }?>");
+              </script>
+              <?php
+                  }
+         }} }    
         break;
         case "update":
-            $update="UPDATE `articles` SET title ='$title', summery='$summery', content ='$content', image ='$image', source ='$source', category_id ='$category'  WHERE slug='$slug'";
-            if(mysqli_query($link,$update)==true)
-            {
-                ?>
-                <script>
-                    window.alert("با موفقیت ویرایش شد");
-                    location.replace("data.php");
-                </script>
-                <?php
-    
-            }
-            else{
-                ?>
-                <script>
-                    window.alert("ویرایش نشد");
-                    location.replace("article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?php  echo $slug ;  }?>");
-                </script>
-                <?php
-            }mysqli_close();
+            if($image==""){
+            $select_img="SELECT * FROM `articles` WHERE `slug`='$slug';";
+            $select_img=mysqli_query($link,$select_img);
+            $select_img=mysqli_fetch_array($select_img);
+            $image=$select_img['image'];}
+            $update = $link->prepare("UPDATE `articles` SET title =?, summery=?, content =?, image =?, source =?, category_id =?  WHERE slug=? ;");
+            if($update){
+               $update->bind_param("sssssis",$title, $summery , $content ,$image , $source ,$category ,$slug);
+               if($update->execute()){
+                   ?>
+                   <script>
+                       window.alert("ویرایش  شد");
+                       location.replace("data.php");
+                   </script>
+                   <?php
+                       }
+                       else{
+                               ?>
+                   <script>
+                       window.alert("ویرایش نشد");
+                       location.replace("article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?php  echo $slug ;  }?>");
+                   </script>
+                   <?php
+                       }
+                     }    
             break;
         
 }
@@ -116,11 +125,15 @@ $myChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%%
 $text=substr( str_shuffle($myChars), 5, 16 );
 $date=date('Y-m-d h:i:s');
 
-             $insert_article="INSERT INTO `articles`(`id`, `publicationdate`, `title`, `summery`, `content`, `image`, `source`, `viewcount`, `category_id`, `admin_id`, `slug`)
-                                             VALUES ('NULL','$date','$title','$summery','$content','$image','$source','0','$category','$admin','$text')";
-                                                                                                                                                                                                     
-             if(mysqli_query($link,$insert_article)===true)
-             { 
+           $insert = $link->prepare("INSERT INTO `articles`(`id`, `publicationdate`, `title`, `summery`, `content`, `image`, `source`, `viewcount`, `category_id`, `admin_id`, `slug`)VALUES (?,?,?,?,?,?,?,?,?,?,?);");
+         if($insert){
+            if($image==""){
+                $image="default_art_img.png";
+            }
+            $code="NULL";
+            $view_count=0;
+            $insert->bind_param("issssssiiis",$code, $date, $title, $summery , $content , $image , $source , $ $view_count , $category ,$admin , $text);
+            if($insert->execute()){
                 $find_id_art="SELECT * FROM `articles` WHERE `slug`='$text';";
                 $find_id_art_result=mysqli_query($link,$find_id_art);
                 $find_id_art_row=mysqli_fetch_array($find_id_art_result);
@@ -128,26 +141,29 @@ $date=date('Y-m-d h:i:s');
                 if (count($tags) > 0)
                 { 
                     foreach ($tags as $tag_id) {  
-                        $insert_tags="INSERT INTO `article_tag`(`id`, `article_id`, `tag_id`) VALUES ('NULL','$id_article','$tag_id');" ;
-                        mysqli_query($link,$insert_tags);
+                        $insert_tags= $link->prepare("INSERT INTO `article_tag`(`id`, `article_id`, `tag_id`) VALUES (?,?,?);") ;
+                        $idd="NULL";
+                        $insert_tags->bind_param("iii",$idd,$id_article,$tag_id);
+                        $insert_tags->execute();
                     }  
                 }
             
                 ?>
                 <script>
-                    window.alert("خبر با موفقیت ثبت شد");
+                    window.alert("ثبت شد");
                     location.replace("data.php");
                 </script>
                 <?php
-            }
-              else{
-                ?>
+                    }
+                    else{
+                            ?>
                 <script>
-                window.alert("خطا در ثبت خبر");
-                location.replace("article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?php  echo $slug ;  }?>");
-            </script>
-            <?php
-              }
-            
-              mysqli_close();
+                    window.alert("ثبت نشد");
+                    location.replace("article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?php  echo $slug ;  }?>");
+                </script>
+                <?php
+                    }
+            }
+
+              mysqli_close($link);
               ?>

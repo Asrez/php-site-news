@@ -36,7 +36,7 @@ if($action!="insert"){$slug=$_GET['slug'];}
 <body class="hold-transition skin-blue sidebar-mini">
   <?php include("../../header2.php"); 
   if($action!="insert"){
-  $Query_up="SELECT * FROM articles WHERE slug='$slug'";
+  $Query_up="SELECT * FROM `articles` WHERE `slug`='$slug'";
   $result_up=mysqli_query($link,$Query_up);
   $row_up=mysqli_fetch_array($result_up);
   $admin_id=$row_up['admin_id'];

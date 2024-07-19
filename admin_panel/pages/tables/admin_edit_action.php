@@ -37,9 +37,6 @@ location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="inser
   <?php
  }
 }
-$query__="SELECT COUNT(id) AS count FROM admins WHERE username='$username' OR name='$name'";
-$result__=mysqli_query($link,$query__);
-$row__=mysqli_fetch_array($result__);
 
 
 if($action!="delete"){
@@ -72,68 +69,78 @@ if($action!="delete"){
 }
 switch ($action){
     case "delete":
-        $update_article="UPDATE `articles` SET `admin_id`='13' WHERE admin_id='$id';";
-        $delete="DELETE FROM `admins` WHERE id ='$id'";
-        if(mysqli_query($link,$update_article)===true){
-            if(mysqli_query($link,$delete)===true){
-            ?>
-            <script>
-                window.alert("با موفقیت حذف شد");
-                location.replace("simple.php");
-            </script>
-            <?php
-            }
-
-        }
-        else{
-            ?>
-            <script>
-                window.alert("حذف نشد");
-                location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
-            </script>
-            <?php
-        }
+        $update_article = $link->prepare("UPDATE `articles` SET `admin_id`=? WHERE admin_id=?;");
+        $delete = $link->prepare("DELETE FROM `admins` WHERE id =?;");
+      if($update_article){
+        if($delete){
+            $defult_id=13;
+            $update_article->bind_param("ii",$defult_id,$id);
+          $delete->bind_param("i",$id);
+          if($update_article->execute()){
+            if($delete->execute()){
+              ?>
+              <script>
+                  window.alert("حذف شد");
+                  location.replace("simple.php");
+              </script>
+              <?php
+             } }
+                  else{
+                          ?>
+              <script>
+                  window.alert("حذف نشد");
+                  location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+              </script>
+              <?php
+                  }
+                }   
+            } 
         mysqli_close();
         break;
         case "update":
-            if($row__['count']>1 &&
-                $username!=$username_admin
-             && $name!=$name_admin){
-                
+            try {
+                if($image ==""){
+                    $image="user.png";
+                }
+                $update = $link->prepare("UPDATE `admins` SET username =?, name=?, password =?, image =? WHERE id=?;");
+                if($update){
+                   $update->bind_param("ssssi",$username, $name ,$password , $image , $id);
+                   if($update->execute()){
+                       ?>
+                       <script>
+                           window.alert("ویرایش  شد");
+                           location.replace("simple.php");
+                       </script>
+                       <?php
+                           }
+                           else{
+                                   ?>
+                       <script>
+                           window.alert("ویرایش نشد");
+                           location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+                       </script>
+                       <?php
+                           }
+                         }  
+            } catch (mysqli_sql_exception $e) {
                 ?>
                 <script>
                     window.alert("نام کاربری یا نام را تغییر دهید");
                     location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
                 </script>
                 <?php
-}
-            if($image ==""){
-                $image="user.png";
             }
-            $update="UPDATE `admins` SET username ='$username', name='$name', password ='$password', image ='$image'  WHERE id='$id'";
-            if(mysqli_query($link,$update)==true)
-            {
-                ?>
-                <script>
-                    window.alert("با موفقیت ویرایش شد");
-                    location.replace("simple.php");
-                </script>
-                <?php
-    
-            }
-            else{
-                ?>
-                <script>
-                    window.alert("ویرایش نشد");
-                    location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
-                </script>
-                <?php
-                }
-            mysqli_close();
+               
+
+           
             break;
         
 }
 if($action=="insert"){
+    $query__="SELECT COUNT(id) AS count FROM admins WHERE username='$username' OR name='$name'";
+$result__=mysqli_query($link,$query__);
+$row__=mysqli_fetch_array($result__);
+
 if($row__['count']>0){
     ?>
  <script>   window.alert("نام کاربری یا نام را تغییر دهید");
@@ -143,25 +150,28 @@ if($row__['count']>0){
 }         
 
 
-$date=date('Y-m-d h:i:s');
-             $insert_admin="INSERT INTO `admins`(`id`, `name`, `username`, `password`, `image`, `date`) VALUES ('NULL','$name','$username','$password','$image','$date')";
-                                                                                                                                                                                                        
-             if(mysqli_query($link,$insert_admin)===true){
-                ?>
-                <script>
-                    window.alert("کاربر با موفقیت ثبت شد");
-                    location.replace("simple.php");
-                </script>
-                <?php
-              }
-              else{
-                ?>
-                <script>
-                window.alert("خطا در ثبت کاربر");
-                location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
-            </script>
-            <?php
-              }}
-            
+$date=date('Y-m-d');                                                                                                                                                                                                 
+             $insert = $link->prepare("INSERT INTO `admins`(`id`, `name`, `username`, `password`, `image`, `date`) VALUES (?,?,?,?,?,?);");
+             if($insert){
+                $code="NULL";
+                $insert->bind_param("issssi",$code, $name, $username, $password,$image ,$date);
+                if($insert->execute()){
+                    ?>
+                    <script>
+                        window.alert("ثبت شد");
+                        location.replace("simple.php");
+                    </script>
+                    <?php
+                        }
+                        else{
+                                ?>
+                    <script>
+                        window.alert("ثبت نشد");
+                        location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+                    </script>
+                    <?php
+                        }
+                }
+}
               mysqli_close($link);
               ?>

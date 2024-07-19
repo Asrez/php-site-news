@@ -83,8 +83,8 @@
                     while($news_row=mysqli_fetch_array($news_result)){
                      ?>
                 <tr>
-                <td>                     <a href="article_edit.php?slug=<?php echo $news_row['slug'];?> & action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
-                <a href="article_edit_action.php?slug=<?php echo $news_row['slug'];?>& action=delete" ><button type="button"  class="btn btn-block btn-danger btn-sm"  >حذف</button></a>
+                <td>                     <a href="article_edit.php?slug=<?php echo $news_row['slug'];?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
+                <a href="article_edit_action.php?slug=<?php echo $news_row['slug'];?>&action=delete" ><button type="button"  class="btn btn-block btn-danger btn-sm"  >حذف</button></a>
               </td>
                   <td> <?php echo $news_row['id']; ?> </td>
                   <td> <?php echo $news_row['title']; ?> </td>
