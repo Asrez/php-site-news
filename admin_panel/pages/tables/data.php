@@ -1,4 +1,3 @@
-<?php $page2=true; ?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -66,7 +65,7 @@
                 <thead>
                   
                 <tr>
-                <th><a href="article_edit.php? action=insert"><button type="button"  class="btn btn-block btn-success btn-sm" >افزودن</button></a> </th>
+                <th><a href="article_edit.php?action=insert"><button type="button"  class="btn btn-block btn-success btn-sm" >افزودن</button></a> </th>
                   <th>کد خبر</th>
                   <th>نام خبر</th>
                   <th>خلاصه</th>
@@ -78,12 +77,12 @@
                 <tbody>
                 
                 <?php 
-                    $news_query="SELECT * FROM articles ";
+                    $news_query="SELECT * FROM `articles`";
                     $news_result=mysqli_query($link,$news_query);
                     while($news_row=mysqli_fetch_array($news_result)){
                      ?>
                 <tr>
-                <td>                     <a href="article_edit.php?slug=<?php echo $news_row['slug'];?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
+                <td>                     <a href="article_edit.php?slug=<?= urlencode($news_row['slug']) ?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
                 <a href="article_edit_action.php?slug=<?php echo $news_row['slug'];?>&action=delete" ><button type="button"  class="btn btn-block btn-danger btn-sm"  >حذف</button></a>
               </td>
                   <td> <?php echo $news_row['id']; ?> </td>
@@ -113,11 +112,12 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th></th>
+                  
                   <th></th>
                   <th>کد</th>
                   <th>کلید</th>
                   <th>مقدار</th>
+                  <th>لینک</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -128,11 +128,10 @@
                 while($setting_row=mysqli_fetch_array($setting_result)){
                 ?>
                 <tr>
-                  <td><a class="fa fa-trash" href="setting_edit_action.php?id=<?php echo $setting_row['id'];?>&action=delete"></a></td>
+                  <td><a class="fa fa-trash" href="setting_edit_action.php?id=<?php echo $setting_row['id'];?>&action=delete" title="حذف"></a>
+                <a class="fa fa-fw fa-cloud-download" href="setting_edit.php?id=<?php echo $setting_row['id'];?>&action=update" title="ویرایش"></a>
+                </td>
                   
-                <td>                     <a href="setting_edit.php?id=<?php echo $setting_row['id'];?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
-                
-                    </td>
                   <td><?php echo $setting_row['id'];?></td>
                   <td><?php
                   $idd=$setting_row['id'];
@@ -218,6 +217,7 @@
                   }
                   ?></td>
                   <td><?php echo $setting_row['value_setting'];?> </td>
+                  <td><?php echo $setting_row['link'];?> </td>
                 </tr>
                 <?php } ?>
               

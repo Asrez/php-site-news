@@ -64,7 +64,7 @@ switch ($action) {
                 }    
                    break;
     case 'insert':
-         $myChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%%^&^&**()_+';
+         $myChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%%^^**()_+';
          $text=substr( str_shuffle($myChars), 5, 16 );
          $insert = $link->prepare("INSERT INTO `categorys`(`id`, `title`, `parent_id`, `slug`) VALUES (?, ?, ?, ?)");
          if($insert){

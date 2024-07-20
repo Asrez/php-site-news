@@ -95,7 +95,7 @@ switch ($action){
                   }
                 }   
             } 
-        mysqli_close();
+        mysqli_close($link);
         break;
         case "update":
             try {

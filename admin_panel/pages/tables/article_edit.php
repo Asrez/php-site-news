@@ -1,5 +1,4 @@
-<?php $page2=true; 
-$action=$_GET['action'];
+<?php $action=$_GET['action'];
 if($action!="insert"){$slug=$_GET['slug'];}
 ?>
 <html>
@@ -36,15 +35,19 @@ if($action!="insert"){$slug=$_GET['slug'];}
 <body class="hold-transition skin-blue sidebar-mini">
   <?php include("../../header2.php"); 
   if($action!="insert"){
-  $Query_up="SELECT * FROM `articles` WHERE `slug`='$slug'";
-  $result_up=mysqli_query($link,$Query_up);
-  $row_up=mysqli_fetch_array($result_up);
+    
+  $row_up=$link->prepare("SELECT * FROM `articles` WHERE `slug`=?;");
+  $row_up->bind_param("s",$slug);
+  $row_up->execute();
   $admin_id=$row_up['admin_id'];
   $ccategory_id=$row_up['category_id'];
-  $find_admin="SELECT * FROM admins WHERE id='$admin_id'";
-  $find_result=mysqli_query($link,$find_admin);
-  $find_row=mysqli_fetch_array($find_result);
-  
+  $id_art_for_tag=$row_up['id'];
+  $article_tag=$link->prepare("SELECT * FROM `article_tag` WHERE `article_id`=?; ");
+  $article_tag->bind_param("i",$id_art_for_tag);
+  $find_row=$link->prepare("SELECT * FROM admins WHERE id=?'");
+  $find_row->bind_param("i",$admin_id);
+  $find_row->execute();
+
   }
   ?>
 <div class="wrapper">
@@ -91,15 +94,18 @@ if($action!="insert"){$slug=$_GET['slug'];}
                 $tags_query="SELECT * FROM tags";
                 $tags_result=mysqli_query($link,$tags_query);
                 while($tags_row=mysqli_fetch_array($tags_result)){
+                
+                  
                 ?>
                 <div class="form-group">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="tags[]"  value="<?php echo $tags_row['id']; ?>">
+                      <input type="checkbox" name="tags[]"  value="<?php echo $tags_row['id']; ?>" >
                     <?php echo $tags_row['title']; ?>
                     </label>
                   </div>
-                <?php } ?>
+                <?php } 
+                ?>
 
 
     
@@ -107,7 +113,7 @@ if($action!="insert"){$slug=$_GET['slug'];}
                   <label>دسته بندی</label>
                   <select class="form-control" name="category">
                     <?php
-                   $categorys_query1="SELECT * FROM categorys WHERE parent_id!=0";
+                   $categorys_query1="SELECT * FROM `categorys` WHERE `parent_id`!=0";
                     $categorys_result1=mysqli_query($link,$categorys_query1);
                     while($categorys_row1=mysqli_fetch_array($categorys_result1)){
                    

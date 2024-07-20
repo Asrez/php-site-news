@@ -56,7 +56,7 @@ if($action!="delete"){
 }
 switch ($action){
     case "delete":
-        $found_article="SELECT * FROM articles WHERE slug='$slug'";
+        $found_article="SELECT * FROM `articles` WHERE slug='$slug'";
         $found_article_result=mysqli_query($link,$found_article);
         $found_article_row=mysqli_fetch_array($found_article_result);
         $id=$found_article_row['id'];
@@ -121,7 +121,7 @@ switch ($action){
 
              
 
-$myChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%%^&^&**()_+';
+$myChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%%^^**()_+';
 $text=substr( str_shuffle($myChars), 5, 16 );
 $date=date('Y-m-d h:i:s');
 

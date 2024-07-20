@@ -59,7 +59,7 @@
                       $row_select=mysqli_fetch_array($result_select);
                 
                  ?>
-              <form role="form" method="post" action="setting_edit_action.php?id=<?php echo  $id; ?>&action=update" >
+              <form role="form" method="post" action="setting_edit_action.php?id=<?php echo  $id; ?>&action=update" enctype="multipart/form-data">
                 <!-- text input -->
                 <div class="form-group">
                   <label>کلید</label>
@@ -67,8 +67,7 @@
                 </div>
                 <div class="form-group">
                   <label>مقدار</label>
-                   <input type="file" class="form-control" placeholder="مقدار" name="value_setting" id="value_setting" value="<?php echo $row_select['value_setting']; ?>">
-                 
+                   <input type="file" class="form-control" placeholder="مقدار" name="image" id="image" >
                 </div>
                 <div class="form-group">
                   <label>لینک</label>

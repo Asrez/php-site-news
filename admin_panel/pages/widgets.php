@@ -287,7 +287,7 @@
       <!-- /.row -->
 
       <div class="row">
-      <?php $article2="SELECT * FROM `articles` ORDER BY publicationdate LIMIT 4 ";
+      <?php $article2="SELECT * FROM `articles` ORDER BY publicationdate LIMIT 2 ";
         $article_result=mysqli_query($link,$article2);
         while($article_row=mysqli_fetch_array($article_result)){
         ?>
