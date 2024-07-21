@@ -1,10 +1,3 @@
-<?php
-
-
-
-
-?> 
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -49,15 +42,15 @@
                   ?>
                     <div class="row mb-3">
                         <div class="after-content col-4 pl-0">
-                            <a href="show_news.php?article_slug=<?php echo  $row_articles['slug']; ?>" target="_blank">
-                                <img src="image/<?php echo $row_articles['image'];?>" class="img-fluid" alt="" title="">
+                            <a href="show_news.php?article_slug=<?=  $row_articles['slug']; ?>" target="_blank">
+                                <img src="image/<?= $row_articles['image'];?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="after-content col-8">
                             <div class="news_title">
                                 <h2 class="h6">
-                                    <a href="show_news.php?article_slug=<?php echo  $row_articles['slug']; ?>" target="_blank">
-                                    <?php echo $row_articles['title'];?>
+                                    <a href="show_news.php?article_slug=<?=  $row_articles['slug']; ?>" target="_blank">
+                                    <?=  $row_articles['title'];?>
                                     </a>
                                 </h2>
                             </div>

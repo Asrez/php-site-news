@@ -1,6 +1,7 @@
 <?php
 require("config.php");
-$article___query=$link->prepare("SELECT * FROM articles ORDER BY viewcount ASC LIMIT 3");
+$article___query="SELECT * FROM `articles` ORDER BY `viewcount` ASC LIMIT 3 ;";
+$article___query=$link->prepare($article___query);
 $article___query->execute();
 $article___result=$article___query->get_result();
 
@@ -9,27 +10,17 @@ $about_query->execute();
 $about_result=$about_query->get_result();
 $about_row=$about_result->fetch_assoc();
 
-$article___query=$link->prepare("SELECT * FROM articles LIMIT 6");
+$article___query=$link->prepare("SELECT * FROM `articles` LIMIT 6");
 $article___query->execute();
 $article___result=$article___query->get_result();
 
-$article__query=$link->prepare("SELECT * FROM `articles`  LIMIT 5 ;");
+$article__query=$link->prepare("SELECT * FROM `articles` LIMIT 5");
 $article__query->execute();
 $article__result=$article__query->get_result();
 
 $end_news_query2=$link->prepare("SELECT * FROM `articles` ORDER BY RAND() LIMIT 4 ;");
 $end_news_query2->execute();
 $result_end_news_query2=$end_news_query2->get_result();
-
-$category_ostan4=$link->prepare("SELECT * FROM categorys WHERE parent_id=10");
-$category_ostan4->execute();
-$category_ostan_result4=$category_ostan4->get_result();
-
-$category_id4=0;
-$ostan_query4=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=? ORDER BY publicationdate LIMIT 20 ;");
-$ostan_query4->bind_param("i", $category_id4);
-$ostan_query4->execute();
-$result_ostan_query4=$ostan_query4->get_result();
 
 $end_news_query=$link->prepare("SELECT * FROM `articles` ORDER BY `publicationdate` LIMIT 20 ;");
 $end_news_query->execute();
@@ -38,49 +29,6 @@ $result_end_news_query=$end_news_query->get_result();
 $coment_count=$link->prepare("SELECT DISTINCT articles.id,articles.image,articles.title,articles.slug FROM comments , articles WHERE comments.article_id=articles.id  LIMIT 10 ;");
 $coment_count->execute();
 $coment_result=$coment_count->get_result();
-
-$siyasi_query1=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=3 ;");
-$siyasi_query1->execute();
-$result_siyasi_query1=$siyasi_query1->get_result();
-
-$idd=0;
-$siyasi_query=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=?  ORDER BY `publicationdate` LIMIT 4; ");
-$siyasi_query->bind_param("i",$idd);
-$siyasi_query->execute();
-$result_siyasi_query=$siyasi_query->get_result();
-
-$farhangi_query1=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=2 ");
-$farhangi_query1->execute();
-$result_farhangi_query1=$farhangi_query1->get_result();
-
-$farhangi_id=0;
-$farhangi_query=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=?  ORDER BY `publicationdate` LIMIT 4 ;");
-$farhangi_query->bind_param("i",$farhangi_id);
-$farhangi_query->execute();
-$result_farhangi_query=$farhangi_query->get_result();
-
-$category_ostan1=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=10");
-$category_ostan1->execute();
-$category_ostan_result1=$category_ostan1->get_result();
-
-// بخش ایرانگردی
-$category_id=0;
-$ostan_query1=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=?  ORDER BY `publicationdate`;");
-$ostan_query1->bind_param("i", $category_id);
-$ostan_query1->execute();
-$result_ostan_query1=$ostan_query1->get_result();
-
-// بخش اقتصادی
-$eghtesad_query1=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=4 ;");
-$eghtesad_query1->execute();
-$result_eghtesad_query1=$eghtesad_query1->get_result();
-
-$eghtesad_id=0;
-$eghtesad_query=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=?  ORDER BY `publicationdate` LIMIT 4 ;");
-$eghtesad_query->bind_param("i",$eghtesad_id);
-$eghtesad_query->execute();
-$result_eghtesad_query=$eghtesad_query->get_result();
-
 
 
 ?>
@@ -310,11 +258,11 @@ $result_eghtesad_query=$eghtesad_query->get_result();
                         <div class="most_viewed_news">
                             <ul>
                                 <?php 
-                               
-                                while($category_ostan_row4=$category_ostan_result4->fetch_assoc()){
-                                  $category_id4=$category_ostan_row4['id'];
-                              while($row_ostan_query4=$result_ostan_query4->fetch_assoc()){ ?>
-                                <li><a href="#"><?php echo  $row_ostan_query4['title'];?></a> </li>
+                                   $row=getCategories(10);
+                                   while($row_getCategories=$row->fetch_assoc()){
+                                       $rowcat=getArticlesInCategory($row_getCategories['id']);
+                                   while($row_getArticlesInCategory=$rowcat->fetch_assoc()){ ?>
+                                <li><a href="#"><?php echo  $row_getArticlesInCategory['title'];?></a> </li>
                                 <?php } 
                                 }?>
                             </ul>
@@ -381,18 +329,19 @@ $result_eghtesad_query=$eghtesad_query->get_result();
                     </div>
                     <div class="row container_box">
                     <?php
-                    
-                    while($row_siyasi_query1=$result_siyasi_query1->fetch_assoc()){
-                        $idd=$row_siyasi_query1['id'];
-                    while($row_siyasi_query=$result_siyasi_query->fetch_assoc()){ ?>
+                     
+                     $row=getCategories(3);
+                     while($row_getCategories=$row->fetch_assoc()){
+                         $rowcat=getArticlesInCategory($row_getCategories['id']);
+                     while($row_getArticlesInCategory=$rowcat->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
-                                <img src="image/<?php echo $row_siyasi_query['image']; ?>" class="img-fluid" alt="" title="">
+                                <img src="image/<?php echo $row_getArticlesInCategory['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-7 p-0">
                             <a href="#" target="_blank" class="">
-                            <?php echo $row_siyasi_query['title']; ?>
+                            <?php echo $row_getArticlesInCategory['title']; ?>
                             </a>
                         </div>
                         <?php }
@@ -415,17 +364,19 @@ $result_eghtesad_query=$eghtesad_query->get_result();
                     <div class="row container_box">
                     <?php
                     
-                    while($row_farhangi_query1=$result_farhangi_query1->fetch_assoc()){
-                        $farhangi_id=$row_farhangi_query1['id'];
-                    while($row_farhangi_query=$result_farhangi_query->fetch_assoc()){ ?>
+                   
+                    $row=getCategories(2);
+                                 while($row_getCategories=$row->fetch_assoc()){
+                                     $rowcat=getArticlesInCategory($row_getCategories['id']);
+                                 while($row_getArticlesInCategory=$rowcat->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
-                                <img src="image/<?php echo $row_farhangi_query['image']; ?>" class="img-fluid" alt="" title="">
+                                <img src="image/<?php echo $row_getArticlesInCategory['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-7 p-0">
                             <a href="#" target="_blank" class="">
-                            <?php echo $row_farhangi_query['title']; ?>
+                            <?php echo $row_getArticlesInCategory['title']; ?>
                             </a>
                         </div>
                         <?php }
@@ -516,18 +467,18 @@ $result_eghtesad_query=$eghtesad_query->get_result();
                         
                     <div class="row container_box">
                     <?php 
-                                $parent_id=5;
-                                while($category_ostan_row1=$category_ostan_result1->fetch_assoc()){
-                                    $category_id=$category_ostan_row1['id'];
-                              while($row_ostan_query1=$result_ostan_query1->fetch_assoc()){ ?>
+                          $row=getCategories(10);
+                          while($row_getCategories=$row->fetch_assoc()){
+                              $rowcat=getArticlesInCategory($row_getCategories['id']);
+                          while($row_getArticlesInCategory=$rowcat->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
-                                <img src="image/<?php echo $row_ostan_query1['image']; ?>" class="img-fluid" alt="" title="">
+                                <img src="image/<?php echo $row_getArticlesInCategory['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-7 p-0">
                             <a href="#" target="_blank" class="">
-                            <?php echo $row_ostan_query1['title']; ?>
+                            <?php echo $row_getArticlesInCategory['title']; ?>
                             </a>
                         </div>
                         <?php } 
@@ -548,14 +499,15 @@ $result_eghtesad_query=$eghtesad_query->get_result();
                     <div class="row container_box">
                     <?php
                     
-                    while($row_eghtesad_query1=$result_eghtesad_query1->fetch_assoc()){
-                        $eghtesad_id=$row_eghtesad_query1['id'];
-                    while($row_eghtesad_query=$result_eghtesad_query->fetch_assoc()){ ?>
+                    $row=getCategories(4);
+                                 while($row_getCategories=$row->fetch_assoc()){
+                                     $rowcat=getArticlesInCategory($row_getCategories['id']);
+                                 while($row_getArticlesInCategory=$rowcat->fetch_assoc()){?>
                         <div class="col-6 p-0 boxing">
                             <a href="#" target="_blank">
-                                <img src="image/<?php echo $row_eghtesad_query['image']; ?>" class="img-fluid" alt="" title="">
+                                <img src="image/<?php echo $row_getArticlesInCategory['image']; ?>" class="img-fluid" alt="" title="">
                                 <div class="">
-                                    <p>ببینید | <?php echo $row_eghtesad_query['title']; ?> </p>
+                                    <p>ببینید | <?php echo $row_getArticlesInCategory['title']; ?> </p>
                                 </div>
                             </a>
                         </div>
@@ -576,13 +528,13 @@ $result_eghtesad_query=$eghtesad_query->get_result();
                         <div class="web_box_content">
                             <ul>
                                 <?php
-                                getCategories(1);
-                                 while($row_sport_query3=$result_sport_query3->fetch_assoc()){
-                                     $category_idd=$row_sport_query3['id'];
-                                 while($row_sport_query3=$result_sport_query3->fetch_assoc()){
+                                $row=getCategories(5);
+                                 while($row_getCategories=$row->fetch_assoc()){
+                                     $rowcat=getArticlesInCategory($row_getCategories['id']);
+                                 while($row_getArticlesInCategory=$rowcat->fetch_assoc()){
                                 
                                 ?>
-                                <li><a href="#" target="_blank"><?php echo $row_sport_query3['title'] ?> </a> </li>
+                                <li><a href="#" target="_blank"><?php echo $row_getArticlesInCategory['title'] ?> </a> </li>
                                 <?php }
                                  } ?>
                             </ul>

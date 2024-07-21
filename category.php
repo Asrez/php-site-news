@@ -1,19 +1,36 @@
-<?php session_start();
+<?php 
+require "config.php";
 $link=mysqli_connect("localhost","root","","news");
 $category_slug=$_GET['category_slug'];
-$cat_queryy="SELECT * FROM categorys WHERE slug='$category_slug'";
-$cat_resultt=mysqli_query($link,$cat_queryy);
-$cat_roww=mysqli_fetch_array($cat_resultt);
+$cat_sql="SELECT * FROM categorys WHERE slug=?";
+$cat_queryy=$link->prepare($cat_sql);
+$cat_queryy->bind_param("s",$category_slug);
+$cat_queryy->execute(); 
+$cat_resultt=$cat_queryy->get_result();
+$cat_roww=$cat_resultt->fetch_assoc();
 $cat_id=$cat_roww['id'];
-$category_mini_query="SELECT * FROM categorys WHERE id=$cat_id";
-$category_mini_result=mysqli_query($link,$category_mini_query);
-$category_mini_row=mysqli_fetch_array($category_mini_result);
-$category_parent_id=$category_mini_row['parent_id'];
-$category_parent_query="SELECT * FROM categorys WHERE parent_id=0 and id=$category_parent_id";
-$category_parent_result=mysqli_query($link,$category_parent_query);
-$category_parent_row=mysqli_fetch_array($category_parent_result);
-$article_query="SELECT * FROM articles WHERE category_id=$cat_id LIMIT 7";
-$article_result=mysqli_query($link,$article_query);
+
+$cat_mini_sql="SELECT * FROM categorys WHERE id=?";
+$cat_query=$link->prepare($cat_mini_sql);
+$cat_query->bind_param("i",$cat_id);
+$cat_query->execute(); 
+$cat_result=$cat_query->get_result();
+$cat_row=$cat_result->fetch_assoc();
+
+$category_parent_id=$cat_row['parent_id'];
+$category_parent_sql="SELECT * FROM `categorys` WHERE `parent_id`=0 and `id`=?";
+
+$cat_parent_query=$link->prepare($category_parent_sql);
+$cat_parent_query->bind_param("i",$category_parent_id);
+$cat_parent_query->execute(); 
+$cat_parent_result=$cat_parent_query->get_result();
+$cat_parent_row=$cat_parent_result->fetch_assoc();
+
+$article_sql="SELECT * FROM `articles` WHERE `category_id`=? ;";
+$article_query=$link->prepare($article_sql);
+$article_query->bind_param("i",$cat_id);
+$article_query->execute(); 
+$article_result=$article_query->get_result();
 
 
 ?>
@@ -39,30 +56,30 @@ $article_result=mysqli_query($link,$article_query);
                 <div class="col-12">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">صفحه اصلی</a> </li>
-                        <li class="breadcrumb-item"><a href="#"><?php echo $category_parent_row['title'] ;?> </a> </li>
-                        <li class="breadcrumb-item active"><?php echo $category_mini_row['title'] ;?> </li>
+                        <li class="breadcrumb-item"><a href="#"><?=  $cat_parent_row['title'] ;?> </a> </li>
+                        <li class="breadcrumb-item active"><?=  $cat_row['title'] ;?> </li>
                     </ul>
                 </div>
                 <div class="col-12 main_content">
-                    <?php while($article_row=mysqli_fetch_array($article_result)){
+                    <?php while($article_row=$article_result->fetch_assoc()){
                         ?>
                     <div class="row mb-2">
                         <div class="col-4 pl-0">
-                            <a href="show_news.php?article_slug=<?php echo $article_row['slug']; ?>" target="_blank">
+                            <a href="show_news.php?article_slug=<?=  $article_row['slug']; ?>" target="_blank">
                                 <img src="image/<?php echo $article_row['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-8">
                             <div class="news_title">
                                 <h2 class="h6">
-                                    <a href="show_news.php?article_slug=<?php echo $article_row['slug']; ?>" target="_blank">
-                                    <?php echo $article_row['title']; ?>
+                                    <a href="show_news.php?article_slug=<?=  $article_row['slug']; ?>" target="_blank">
+                                    <?=  $article_row['title']; ?>
                                     </a>
                                 </h2>
                             </div>
                             <div class="desc_news d-none d-md-block">
                                <p>
-                               <?php echo $article_row['summery']; ?>
+                               <?=  $article_row['summery']; ?>
                             </p>
                             </div>
                         </div>
@@ -90,9 +107,9 @@ $article_result=mysqli_query($link,$article_query);
                     <div class="row">
                         <div class="most_viewed_news">
                             <ul>
-                            <?php $end_news_query="SELECT * FROM `articles` ORDER BY `publicationdate` LIMIT 20 ";
-                                 $result_end_news_query=mysqli_query($link,$end_news_query);
-                              while($row_end_news_query=mysqli_fetch_array($result_end_news_query)){ ?>
+                            <?php 
+                            $result_end_news_query=getArticles("publicationdate",20);
+                              while($row_end_news_query=result_end_news_query->fetch_assoc()){ ?>
                                 <li><a href="show_news.php?article_slug=<?php echo $row_end_news_query['slug'] ; ?>"><?php echo $row_end_news_query['title'] ;?></a> </li>
                                 <?php } ?>
                             </ul>
