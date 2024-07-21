@@ -1,5 +1,87 @@
 <?php
-session_start();
+require("config.php");
+$article___query=$link->prepare("SELECT * FROM articles ORDER BY viewcount ASC LIMIT 3");
+$article___query->execute();
+$article___result=$article___query->get_result();
+
+$about_query=$link->prepare("SELECT * FROM `about_us` ;");
+$about_query->execute();
+$about_result=$about_query->get_result();
+$about_row=$about_result->fetch_assoc();
+
+$article___query=$link->prepare("SELECT * FROM articles LIMIT 6");
+$article___query->execute();
+$article___result=$article___query->get_result();
+
+$article__query=$link->prepare("SELECT * FROM `articles`  LIMIT 5 ;");
+$article__query->execute();
+$article__result=$article__query->get_result();
+
+$end_news_query2=$link->prepare("SELECT * FROM `articles` ORDER BY RAND() LIMIT 4 ;");
+$end_news_query2->execute();
+$result_end_news_query2=$end_news_query2->get_result();
+
+$category_ostan4=$link->prepare("SELECT * FROM categorys WHERE parent_id=10");
+$category_ostan4->execute();
+$category_ostan_result4=$category_ostan4->get_result();
+
+$category_id4=0;
+$ostan_query4=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=? ORDER BY publicationdate LIMIT 20 ;");
+$ostan_query4->bind_param("i", $category_id4);
+$ostan_query4->execute();
+$result_ostan_query4=$ostan_query4->get_result();
+
+$end_news_query=$link->prepare("SELECT * FROM `articles` ORDER BY `publicationdate` LIMIT 20 ;");
+$end_news_query->execute();
+$result_end_news_query=$end_news_query->get_result();
+
+$coment_count=$link->prepare("SELECT DISTINCT articles.id,articles.image,articles.title,articles.slug FROM comments , articles WHERE comments.article_id=articles.id  LIMIT 10 ;");
+$coment_count->execute();
+$coment_result=$coment_count->get_result();
+
+$siyasi_query1=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=3 ;");
+$siyasi_query1->execute();
+$result_siyasi_query1=$siyasi_query1->get_result();
+
+$idd=0;
+$siyasi_query=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=?  ORDER BY `publicationdate` LIMIT 4; ");
+$siyasi_query->bind_param("i",$idd);
+$siyasi_query->execute();
+$result_siyasi_query=$siyasi_query->get_result();
+
+$farhangi_query1=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=2 ");
+$farhangi_query1->execute();
+$result_farhangi_query1=$farhangi_query1->get_result();
+
+$farhangi_id=0;
+$farhangi_query=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=?  ORDER BY `publicationdate` LIMIT 4 ;");
+$farhangi_query->bind_param("i",$farhangi_id);
+$farhangi_query->execute();
+$result_farhangi_query=$farhangi_query->get_result();
+
+$category_ostan1=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=10");
+$category_ostan1->execute();
+$category_ostan_result1=$category_ostan1->get_result();
+
+// بخش ایرانگردی
+$category_id=0;
+$ostan_query1=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=?  ORDER BY `publicationdate`;");
+$ostan_query1->bind_param("i", $category_id);
+$ostan_query1->execute();
+$result_ostan_query1=$ostan_query1->get_result();
+
+// بخش اقتصادی
+$eghtesad_query1=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=4 ;");
+$eghtesad_query1->execute();
+$result_eghtesad_query1=$eghtesad_query1->get_result();
+
+$eghtesad_id=0;
+$eghtesad_query=$link->prepare("SELECT * FROM `articles` WHERE `category_id`=?  ORDER BY `publicationdate` LIMIT 4 ;");
+$eghtesad_query->bind_param("i",$eghtesad_id);
+$eghtesad_query->execute();
+$result_eghtesad_query=$eghtesad_query->get_result();
+
+
 
 ?>
 <html lang="en">
@@ -21,7 +103,7 @@ session_start();
         <div class="col-12 col-md-6">
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right1_about_us' ";
+            $keyy="Advertise_right1_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -30,7 +112,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right2_about_us' ";
+            $keyy="Advertise_right2_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -39,7 +121,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+            $keyy="Advertise_right3_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -49,13 +131,12 @@ session_start();
                 </div>
                 <div class="row">
                 <?php
-                                $article___query="SELECT * FROM articles ORDER BY viewcount ASC LIMIT 3";
-                                $article___result=mysqli_query($link,$article___query);
-                                while($article___row=mysqli_fetch_array($article___result)){
+                                
+                                while($article___row=$article___result->fetch_assoc()){
 
                                 ?>
                             <div class="col-6 col-lg-4">
-                                <a href=show_news.php?article_slug=<?php echo $article___row['slug']; ?>">
+                                <a href="show_news.php?article_slug=<?php echo $article___row['slug']; ?>">
                                     <img src="image/<?php echo $article___row['image']; ?>" class="img-fluid" alt="" title="">
                                     <div class="ads_text">
                                         <p><?php echo $article___row['title']; ?></p>
@@ -72,9 +153,7 @@ session_start();
                            
                         </ul>
                         <?php
-                        $about_query="SELECT * FROM about_us ";
-                        $about_result=mysqli_query($link,$about_query);
-                        $about_row=mysqli_fetch_array($about_result);
+                        
                         ?>
                         <div class="title">
                             <h2>درباره خبر <?php echo $about_row['title'] ;?></h2>
@@ -104,7 +183,7 @@ session_start();
             </article>
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+            $keyy="Advertise_right3_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -125,9 +204,8 @@ session_start();
                     <div class="row container_box">
                         <div class="row">
                         <?php
-                                $article___query="SELECT * FROM articles LIMIT 6";
-                                $article___result=mysqli_query($link,$article___query);
-                                while($article___row=mysqli_fetch_array($article___result)){
+                                
+                                while($article___row=$article___result->fetch_assoc()){
 
                                 ?>
                             <div class="col-6 col-lg-4">
@@ -179,9 +257,8 @@ session_start();
                                 <ul>
                                     
                                 <?php
-                                $article__query="SELECT * FROM articles  LIMIT 5";
-                                $article__result=mysqli_query($link,$article__query);
-                                while($article__row=mysqli_fetch_array($article__result)){
+                                
+                                while($article__row=$article__result->fetch_assoc()){
                                     ?>
                                     <li><a href="#?article_slug=<?php echo $article__row['slug']; ?>"> <?php echo $article__row['title']; ?> </a> </li>
                                     <?php } ?>
@@ -204,9 +281,8 @@ session_start();
                         <div class="col-12">
                             <div class="row">
                                 <div class="owl-carousel3 owl-carousel owl-theme">
-                                <?php $end_news_query2="SELECT * FROM `articles` ORDER BY RAND() LIMIT 4";
-                                 $result_end_news_query2=mysqli_query($link,$end_news_query2);
-                              while($row_end_news_query2=mysqli_fetch_array($result_end_news_query2)){ ?>
+                                <?php 
+                              while($row_end_news_query2=$result_end_news_query2->fetch_assoc()){ ?>
                                     <div class="item">
                                         <a href="show_news.php?article_slug=<?php echo $row_end_news_query2['slug'] ; ?>" target="_blank">
                                             <img src="image/<?php echo $row_end_news_query2['image']; ?>" class="img-fluid" alt="" title="">
@@ -234,13 +310,10 @@ session_start();
                         <div class="most_viewed_news">
                             <ul>
                                 <?php 
-                                $category_ostan4="SELECT * FROM categorys WHERE parent_id=10";
-                                $category_ostan_result4=mysqli_query($link,$category_ostan4);
-                                while($category_ostan_row4=mysqli_fetch_array($category_ostan_result4)){
-                                    $category_id4=$category_ostan_row4['id'];
-                                $ostan_query4="SELECT * FROM `articles` WHERE category_id=$category_id4  ORDER BY publicationdate ";
-                                 $result_ostan_query4=mysqli_query($link,$ostan_query4);
-                              while($row_ostan_query4=mysqli_fetch_array($result_ostan_query4)){ ?>
+                               
+                                while($category_ostan_row4=$category_ostan_result4->fetch_assoc()){
+                                  $category_id4=$category_ostan_row4['id'];
+                              while($row_ostan_query4=$result_ostan_query4->fetch_assoc()){ ?>
                                 <li><a href="#"><?php echo  $row_ostan_query4['title'];?></a> </li>
                                 <?php } 
                                 }?>
@@ -261,9 +334,8 @@ session_start();
                     <div class="row">
                         <div class="most_viewed_news">
                             <ul>
-                            <?php $end_news_query="SELECT * FROM `articles` ORDER BY `publicationdate` LIMIT 20 ";
-                                 $result_end_news_query=mysqli_query($link,$end_news_query);
-                              while($row_end_news_query=mysqli_fetch_array($result_end_news_query)){ ?>
+                            <?php
+                              while($row_end_news_query=$result_end_news_query->fetch_assoc()){ ?>
                                <li><a href="show_news.php?article_slug=<?php echo $row_end_news_query['slug'] ; ?>"><?php echo $row_end_news_query['title'] ;?></a> </li>
                                <?php } ?>
                             </ul>
@@ -281,9 +353,8 @@ session_start();
                         </div>
                     </div>
                     <div class="row container_box">
-                        <?php $coment_count="SELECT DISTINCT articles.id,articles.image,articles.title,articles.slug  FROM comments , articles WHERE comments.article_id=articles.id  LIMIT 10";
-                        $coment_result=mysqli_query($link,$coment_count);
-                        while($coment_row=mysqli_fetch_array($coment_result)){ ?>
+                        <?php 
+                        while($coment_row=$coment_result->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
                                 <img src="image/<?php echo $coment_row['image'] ; ?>" class="img-fluid" alt="" title="">
@@ -310,13 +381,10 @@ session_start();
                     </div>
                     <div class="row container_box">
                     <?php
-                    $siyasi_query1="SELECT * FROM categorys WHERE parent_id=3 ";
-                    $result_siyasi_query1=mysqli_query($link,$siyasi_query1);
-                    while($row_siyasi_query1=mysqli_fetch_array($result_siyasi_query1)){
+                    
+                    while($row_siyasi_query1=$result_siyasi_query1->fetch_assoc()){
                         $idd=$row_siyasi_query1['id'];
-                    $siyasi_query="SELECT * FROM `articles` WHERE category_id=$idd  ORDER BY publicationdate LIMIT 4";
-                                 $result_siyasi_query=mysqli_query($link,$siyasi_query);
-                              while($row_siyasi_query=mysqli_fetch_array($result_siyasi_query)){ ?>
+                    while($row_siyasi_query=$result_siyasi_query->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
                                 <img src="image/<?php echo $row_siyasi_query['image']; ?>" class="img-fluid" alt="" title="">
@@ -346,13 +414,10 @@ session_start();
                     </div>
                     <div class="row container_box">
                     <?php
-                    $farhangi_query1="SELECT * FROM categorys WHERE parent_id=2 ";
-                    $result_farhangi_query1=mysqli_query($link,$farhangi_query1);
-                    while($row_farhangi_query1=mysqli_fetch_array($result_farhangi_query1)){
-                        $idid=$row_farhangi_query1['id'];
-                    $farhangi_query="SELECT * FROM `articles` WHERE category_id=$idid  ORDER BY publicationdate LIMIT 4";
-                                 $result_farhangi_query=mysqli_query($link,$farhangi_query);
-                              while($row_farhangi_query=mysqli_fetch_array($result_farhangi_query)){ ?>
+                    
+                    while($row_farhangi_query1=$result_farhangi_query1->fetch_assoc()){
+                        $farhangi_id=$row_farhangi_query1['id'];
+                    while($row_farhangi_query=$result_farhangi_query->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
                                 <img src="image/<?php echo $row_farhangi_query['image']; ?>" class="img-fluid" alt="" title="">
@@ -370,7 +435,7 @@ session_start();
             </section>
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+            $keyy="Advertise_right3_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -379,7 +444,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+             $keyy="Advertise_right3_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -388,7 +453,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+            $keyy="Advertise_right4_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -451,13 +516,10 @@ session_start();
                         
                     <div class="row container_box">
                     <?php 
-                                $category_ostan1="SELECT * FROM categorys WHERE parent_id=10";
-                                $category_ostan_result1=mysqli_query($link,$category_ostan1);
-                                while($category_ostan_row1=mysqli_fetch_array($category_ostan_result1)){
+                                $parent_id=5;
+                                while($category_ostan_row1=$category_ostan_result1->fetch_assoc()){
                                     $category_id=$category_ostan_row1['id'];
-                                $ostan_query1="SELECT * FROM `articles` WHERE category_id=$category_id  ORDER BY publicationdate ";
-                                 $result_ostan_query1=mysqli_query($link,$ostan_query1);
-                              while($row_ostan_query1=mysqli_fetch_array($result_ostan_query1)){ ?>
+                              while($row_ostan_query1=$result_ostan_query1->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
                                 <img src="image/<?php echo $row_ostan_query1['image']; ?>" class="img-fluid" alt="" title="">
@@ -485,13 +547,10 @@ session_start();
                     </div>
                     <div class="row container_box">
                     <?php
-                    $eghtesad_query1="SELECT * FROM categorys WHERE parent_id=4 ";
-                    $result_eghtesad_query1=mysqli_query($link,$eghtesad_query1);
-                    while($row_eghtesad_query1=mysqli_fetch_array($result_eghtesad_query1)){
-                        $dd=$row_eghtesad_query1['id'];
-                    $eghtesad_query="SELECT * FROM `articles` WHERE category_id=$dd  ORDER BY publicationdate LIMIT 4";
-                                 $result_eghtesad_query=mysqli_query($link,$eghtesad_query);
-                              while($row_eghtesad_query=mysqli_fetch_array($result_eghtesad_query)){ ?>
+                    
+                    while($row_eghtesad_query1=$result_eghtesad_query1->fetch_assoc()){
+                        $eghtesad_id=$row_eghtesad_query1['id'];
+                    while($row_eghtesad_query=$result_eghtesad_query->fetch_assoc()){ ?>
                         <div class="col-6 p-0 boxing">
                             <a href="#" target="_blank">
                                 <img src="image/<?php echo $row_eghtesad_query['image']; ?>" class="img-fluid" alt="" title="">
@@ -517,13 +576,10 @@ session_start();
                         <div class="web_box_content">
                             <ul>
                                 <?php
-                                 $sport_query3="SELECT * FROM categorys WHERE parent_id=5 ";
-                                 $result_sport_query3=mysqli_query($link,$sport_query3);
-                                 while($row_sport_query3=mysqli_fetch_array($result_sport_query3)){
+                                getCategories(1);
+                                 while($row_sport_query3=$result_sport_query3->fetch_assoc()){
                                      $category_idd=$row_sport_query3['id'];
-                                             $sport_query3="SELECT * FROM `articles` WHERE category_id=$category_idd  AND viewcount>0 ORDER BY publicationdate LIMIT 6";
-                                              $result_sport_query3=mysqli_query($link,$sport_query3);
-                                           while($row_sport_query3=mysqli_fetch_array($result_sport_query3)){
+                                 while($row_sport_query3=$result_sport_query3->fetch_assoc()){
                                 
                                 ?>
                                 <li><a href="#" target="_blank"><?php echo $row_sport_query3['title'] ?> </a> </li>

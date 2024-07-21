@@ -28,7 +28,7 @@ echo "";
         <div class="col-12 col-md-6">
             <section class="box ads">
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right1_show_news' ";
+            $keyy="Advertise_right1_show_news";
             include("setting_query_result.php");
             ?>
                 <div class="col-12 text-center p-0">
@@ -37,7 +37,7 @@ echo "";
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right2_show_news' ";
+            $keyy="Advertise_right2_show_news";
             include("setting_query_result.php");
             ?>
                 <div class="col-12 text-center p-0">
@@ -46,7 +46,7 @@ echo "";
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_show_news' ";
+            $keyy="Advertise_right3_show_news";
             include("setting_query_result.php");
             ?>
                 <div class="col-12 text-center p-0">
@@ -166,7 +166,7 @@ echo "";
             </article>
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right4_show_news' ";
+            $keyy="Advertise_right4_show_news";
             include("setting_query_result.php");
             ?>
                 <div class="col-12 text-center p-0">
@@ -538,7 +538,7 @@ echo "";
             </section>
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left1_show_news' ";
+            $keyy="Advertise_left1_show_news";
             include("setting_query_result.php");
             ?>
                 <div class="col-12 text-center p-0">
@@ -547,7 +547,7 @@ echo "";
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left2_show_news' ";
+            $keyy="Advertise_left2_show_news";
             include("setting_query_result.php");
             ?>
                 <div class="col-12 text-center p-0">
@@ -556,7 +556,7 @@ echo "";
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left3_show_news' ";
+            $keyy="Advertise_left3_show_news";
             include("setting_query_result.php");
             ?>
                 <div class="col-12 text-center p-0">

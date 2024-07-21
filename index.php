@@ -288,7 +288,7 @@ session_start();
             </section>
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_middel1_index' ";
+            $keyy="Advertise_middel1_index";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -297,7 +297,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_middel2_index' ";
+           $keyy="Advertise_middel2_index";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -515,7 +515,7 @@ session_start();
             </section>
             <section class="box ads">
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left1_index' ";
+           $keyy="Advertise_left1_index";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -524,7 +524,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left2_index' ";
+           $keyy="Advertise_left2_index";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -533,7 +533,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left3_index' ";
+           $keyy="Advertise_left3_index";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -542,7 +542,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left4_index' ";
+           $keyy="Advertise_left4_index";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -697,7 +697,7 @@ session_start();
             </section>
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left5_index' ";
+           $keyy="Advertise_left5_index";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -706,7 +706,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left6_index' ";
+           $keyy="Advertise_left6_index";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -715,7 +715,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left7_index' ";
+           $keyy="Advertise_left7_index";
            include("setting_query_result.php");
 ?>
 
@@ -725,7 +725,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_left8_index' ";
+           $keyy="Advertise_left8_index";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">

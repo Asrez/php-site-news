@@ -20,7 +20,7 @@ session_start();
         <div class="col-12 col-md-6">
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right1_about_us' ";
+            $keyy="Advertise_right1_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -29,7 +29,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right2_about_us' ";
+            $keyy="Advertise_right2_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -38,7 +38,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+            $keyy="Advertise_right3_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -115,7 +115,7 @@ session_start();
             </article>
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+            $keyy="Advertise_right3_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -381,7 +381,7 @@ session_start();
             </section>
             <section class="box ads">
             <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+            $keyy="Advertise_right1_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -390,7 +390,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+            $keyy="Advertise_right2_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">
@@ -399,7 +399,7 @@ session_start();
                     </a>
                 </div>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='Advertise_right3_about_us' ";
+            $keyy="Advertise_right3_about_us";
            include("setting_query_result.php");
 ?>
                 <div class="col-12 text-center p-0">

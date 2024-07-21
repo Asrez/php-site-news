@@ -1,11 +1,3 @@
-<?php
-$link=mysqli_connect("localhost","root","","news");
-$setting_Query_Advertise_header="SELECT * FROM   setting where key_setting='Advertise_header' ";
-$setting_result_Advertise_header=mysqli_query($link,$setting_Query_Advertise_header);
-$setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_header);
-
-?>
-
 <header id="header">
     <div id="top_header">
         <div class="container">
@@ -63,7 +55,7 @@ $setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_heade
             <div class="col-12 col-lg-6">
                 <h1>
                 <?php
-            $setting_Query="SELECT * FROM   setting where key_setting='logo_header' ";
+            $keyy="logo_header";
             include("setting_query_result.php");
             $logo_image=$setting_row['value_setting'];
             ?>
@@ -73,9 +65,12 @@ $setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_heade
             <div class="col-12 col-lg-6 text-center">
                 <div class="ads">
                     <figure>
-                        <a href="<?php echo $setting_row_Advertise_header['link'];?>">
+                        <?php 
+                        $keyy="Advertise_header";
+                         include("setting_query_result.php"); ?>
+                        <a href="<?php echo $setting_row['link'];?>">
                             
-                            <img src="image/<?php echo $setting_row_Advertise_header['value_setting'];?>" class="img-fluid" alt="ads" title="ads">
+                            <img src="image/<?php echo $setting_row['value_setting'];?>" class="img-fluid" alt="ads" title="ads">
                         </a>
                     </figure>
                 </div>
@@ -91,21 +86,26 @@ $setting_row_Advertise_header=mysqli_fetch_array($setting_result_Advertise_heade
                     </a> 
 </li>
             <?php
-               $categoryn_parent="SELECT * FROM `categorys` WHERE parent_id=0 ";
-               $result_category_parent=mysqli_query($link,$categoryn_parent);
-               while($row_category_parent=mysqli_fetch_array($result_category_parent)) {?>
+               $categoryn_parent=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=? ;");
+               $cId=0;
+               $categoryn_parent->bind_param("i",$cId);
+               $categoryn_parent->execute();
+               $result_category_parent=$categoryn_parent->get_result();
+               while($row_category_parent=$result_category_parent->fetch_assoc()) {?>
                <li>
                    <a href="#">
                         <?php  echo $row_category_parent["title"]; ?>
                     </a> 
                    <?php
                    $id_category_parent=$row_category_parent['id'];
-                   $category_down_query="SELECT * FROM categorys WHERE parent_id=$id_category_parent"; 
-                   $result_category_down=mysqli_query($link,$category_down_query);?>
+                   $category_down_query=$link->prepare("SELECT * FROM `categorys` WHERE `parent_id`=?;"); 
+                   $category_down_query->bind_param("i",$id_category_parent);
+                   $category_down_query->execute();
+                   $result_category_down=$category_down_query->get_result();?>
                    
                    <ul class="submenu">
 
-                               <?php  while($row_category_down=mysqli_fetch_array($result_category_down)) { ?>
+                               <?php  while($row_category_down=$result_category_down->fetch_assoc()) { ?>
                        <li>
                            <a href="category.php?category_slug=<?php echo $row_category_down['slug'];?>">
                            <?php echo $row_category_down ['title']; ?>
