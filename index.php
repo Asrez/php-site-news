@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php require "config.php";?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

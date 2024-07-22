@@ -1,38 +1,26 @@
 <?php 
 require "config.php";
-$link=mysqli_connect("localhost","root","","news");
-$category_slug=$_GET['category_slug'];
-$cat_sql="SELECT * FROM categorys WHERE slug=?";
-$cat_queryy=$link->prepare($cat_sql);
-$cat_queryy->bind_param("s",$category_slug);
-$cat_queryy->execute(); 
-$cat_resultt=$cat_queryy->get_result();
-$cat_roww=$cat_resultt->fetch_assoc();
-$cat_id=$cat_roww['id'];
+if(isset($_GET['category_slug'])){
+    $slug=$_GET['category_slug'];
+}
+else{
+    ?>
+    <script>
+        location.replace("404.php");
+    </script>
+    <?php
+}
+$subcategory_row=getCategoryWithSlug($slug);
 
-$cat_mini_sql="SELECT * FROM categorys WHERE id=?";
-$cat_query=$link->prepare($cat_mini_sql);
-$cat_query->bind_param("i",$cat_id);
-$cat_query->execute(); 
-$cat_result=$cat_query->get_result();
-$cat_row=$cat_result->fetch_assoc();
-
-$category_parent_id=$cat_row['parent_id'];
-$category_parent_sql="SELECT * FROM `categorys` WHERE `parent_id`=0 and `id`=?";
-
-$cat_parent_query=$link->prepare($category_parent_sql);
-$cat_parent_query->bind_param("i",$category_parent_id);
-$cat_parent_query->execute(); 
-$cat_parent_result=$cat_parent_query->get_result();
-$cat_parent_row=$cat_parent_result->fetch_assoc();
-
-$article_sql="SELECT * FROM `articles` WHERE `category_id`=? ;";
-$article_query=$link->prepare($article_sql);
-$article_query->bind_param("i",$cat_id);
-$article_query->execute(); 
-$article_result=$article_query->get_result();
-
-
+if($subcategory_row == false){
+    ?>
+    <script>
+        location.replace("404.php");
+    </script>
+    <?php
+}
+$parent_id=$subcategory_row['parent_id'];
+$category_row=findParentRow($parent_id);
 ?>
 <html lang="en">
 <head>
@@ -56,17 +44,24 @@ $article_result=$article_query->get_result();
                 <div class="col-12">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">صفحه اصلی</a> </li>
-                        <li class="breadcrumb-item"><a href="#"><?=  $cat_parent_row['title'] ;?> </a> </li>
-                        <li class="breadcrumb-item active"><?=  $cat_row['title'] ;?> </li>
+                        <li class="breadcrumb-item"><a href="#"><?= $category_row['title'] ;  ?>
+                     <?php  
+                        
+                        ?> </a> </li>
+                        <li class="breadcrumb-item active"><?= $subcategory_row['title'] ; ?> </li>
                     </ul>
                 </div>
                 <div class="col-12 main_content">
-                    <?php while($article_row=$article_result->fetch_assoc()){
+                    
+                    <?php
+                    $cat_id=$subcategory_row['id'];
+                     $article_result=getArticlesInCategory($cat_id);
+                    while($article_row=$article_result->fetch_assoc()){
                         ?>
                     <div class="row mb-2">
                         <div class="col-4 pl-0">
-                            <a href="show_news.php?article_slug=<?=  $article_row['slug']; ?>" target="_blank">
-                                <img src="image/<?php echo $article_row['image']; ?>" class="img-fluid" alt="" title="">
+                            <a href="show_news.php?article_slug=<?php echo $article_row['slug']; ?>" target="_blank">
+                                <img src="image/<?php echo  $article_row['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-8">
@@ -108,9 +103,9 @@ $article_result=$article_query->get_result();
                         <div class="most_viewed_news">
                             <ul>
                             <?php 
-                            $result_end_news_query=getArticles("publicationdate",20);
-                              while($row_end_news_query=result_end_news_query->fetch_assoc()){ ?>
-                                <li><a href="show_news.php?article_slug=<?php echo $row_end_news_query['slug'] ; ?>"><?php echo $row_end_news_query['title'] ;?></a> </li>
+                            $result_news_query=getArticles("publicationdate",20);
+                              while($row_news_query=$result_news_query->fetch_assoc()){ ?>
+                                <li><a href="show_news.php?article_slug=<?php echo $row_news_query['slug'] ; ?>"><?php echo $row_news_query['title'] ;?></a> </li>
                                 <?php } ?>
                             </ul>
                         </div>

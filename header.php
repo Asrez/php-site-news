@@ -1,3 +1,4 @@
+
 <header id="header">
     <div id="top_header">
         <div class="container">
@@ -55,8 +56,7 @@
             <div class="col-12 col-lg-6">
                 <h1>
                 <?php
-            $keyy="logo_header";
-            include("setting_query_result.php");
+            $setting_row=getSetting("logo_header");
             $logo_image=$setting_row['value_setting'];
             ?>
                     <a href="index.php" class="logo" style="background-image: url('image/<?php echo $logo_image ;?>');"></a>
@@ -66,8 +66,8 @@
                 <div class="ads">
                     <figure>
                         <?php 
-                        $keyy="Advertise_header";
-                         include("setting_query_result.php"); ?>
+                        $setting_row=getSetting("Advertise_header");
+                        ?>
                         <a href="<?php echo $setting_row['link'];?>">
                             
                             <img src="image/<?php echo $setting_row['value_setting'];?>" class="img-fluid" alt="ads" title="ads">
