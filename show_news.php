@@ -28,6 +28,11 @@ $sum = $num1 + $num2;
 $setting_row_right4 = getSetting("Advertise_right4");
 
 $ip = GetRealIp();
+
+$article_result = getArticles("viewcount ASC",6);
+$article_tag_result = searchInArticleTag($id_main);
+$article_result4 = getArticles("publicationdate",10);
+$comment_result = getComments(0,$id_main);
 // $query_update_viewcount="UPDATE `articles` SET `viewcount`=viewcount+1 WHERE id = $article_id ;";
 // if(mysqli_query($link,$query_update_viewcount))
 // echo "";
@@ -152,8 +157,6 @@ $ip = GetRealIp();
                     
                         <div class="row">
                         <?php
-                                
-                                $article_result = getArticles("viewcount ASC",6);
                                 while($article_row = mysqli_fetch_array($article_result)){
 
                                 ?>
@@ -185,7 +188,6 @@ $ip = GetRealIp();
                         <div class="col-12 p-0">
                             <ul>
                                 <?php
-                                $article_tag_result = searchInArticleTag($id_main);
                                 while($article_tag_row = $article_tag_result->fetch_assoc()){
                                 $tag_result = getTags($article_tag_row['tag_id']);
                                 while($tag_row = mysqli_fetch_array($tag_result)){
@@ -214,8 +216,7 @@ $ip = GetRealIp();
                             <div class="most_viewed_news suggested">
                                 <ul>
                                 <?php
-                                  $article_result = getArticles("publicationdate",10);
-                                  while($article_row = $article_result->fetch_assoc()){
+                                  while($article_row = $article_result4->fetch_assoc()){
                                     ?>
                                     <li><a href="show_news.php?article_slug=<?= $article_row['slug']; ?>"> <?= $article_row['title']; ?> </a> </li>
                                     <?php } ?>
@@ -230,7 +231,6 @@ $ip = GetRealIp();
                     <div class="tab-pane active">
                         <div class="col-12 show_comment">
                             <?php
-                            $comment_result = getComments(0,$id_main);
                              while($row_comment = $comment_result->fetch_assoc()){
                                  ?>
                             <div class="row mt-2">

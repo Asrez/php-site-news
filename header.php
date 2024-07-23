@@ -8,6 +8,7 @@ $row_instagram = getSetting("instagram_icon");
 $row_telegram = getSetting("telegram_icon");
 $row_twitter = getSetting("twitter_icon");
 $row_facebook = getSetting("facebook_icon");
+$result_category_parent = getCategories();
 ?>
 <header id="header">
     <div id="top_header">
@@ -86,7 +87,7 @@ $row_facebook = getSetting("facebook_icon");
                       صفحه نخست
                     </a> 
 </li>
-                     <?php $result_category_parent = getCategories();
+                     <?php 
                      while($row_category_parent = $result_category_parent->fetch_assoc()) {?>
                <li>
                    <a href="#">

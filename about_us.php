@@ -2,6 +2,8 @@
 require("config.php");
 $row_about = getaboutus();
 $setting_row_left4 = getSetting("Advertise_left4");
+$article_result1 = getArticles("`viewcount` ASC",6);
+$article_result2 = getArticles("publicationdate",15);
 ?>
 <html lang="en">
 <head>
@@ -74,8 +76,8 @@ $setting_row_left4 = getSetting("Advertise_left4");
                     <div class="row container_box">
                         <div class="row">
                         <?php
-                               $article_result = getArticles("`viewcount` ASC",6);
-                                while($article_row = $article_result->fetch_assoc()){
+                               
+                                while($article_row = $article_result1->fetch_assoc()){
 
                                 ?>
                             <div class="col-6 col-lg-4">
@@ -128,8 +130,8 @@ $setting_row_left4 = getSetting("Advertise_left4");
                                     
                                 <?php
                                 
-                                $article_result = getArticles("publicationdate",15);
-                                while($article_row = $article_result->fetch_assoc()){
+                                
+                                while($article_row = $article_result2->fetch_assoc()){
 
                                     ?>
                                     <li><a href="show_news.php?article_slug=<?= $article_row['slug']; ?>"> <?=  $article_row['title']; ?> </a> </li>

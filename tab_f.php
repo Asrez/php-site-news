@@ -4,6 +4,15 @@ $setting_row_middel2 = getSetting("Advertise_middel2");
 $setting_row_left1 = getSetting("Advertise_left1");
 $setting_row_left2 = getSetting("Advertise_left2");
 $setting_row_left3 = getSetting("Advertise_left3");
+$article_result1 = getArticles(" RAND() ",5);
+$row_last_ostan = getCategories(10);
+$result_news_query1 = getArticles("publicationdate",20);
+$result_news_query2 = getArticles("`viewcount` > 0",4);
+$row_siyasi = getCategories(3);
+$row_farhangi = getCategories(2);
+$row_iran = getCategories(10);
+$row_eghtesad = getCategories(4);
+$row_sport_news = getCategories(5);
 ?>
         <div class="col-12 col-md-3">
         <section class="box box_news box_caricature">
@@ -18,8 +27,7 @@ $setting_row_left3 = getSetting("Advertise_left3");
                             <div class="row">
                                 <div class="owl-carousel3 owl-carousel owl-theme">
                                 <?php 
-                              $article_result = getArticles(" RAND() ",5);
-                              while($row_end_news_query2 = $article_result->fetch_assoc()){
+                              while($row_end_news_query2 = $article_result1->fetch_assoc()){
 ?>
                                     <div class="item">
                                         <a href="show_news.php?article_slug=<?= $row_end_news_query2['slug'] ; ?>" target="_blank">
@@ -62,8 +70,7 @@ $setting_row_left3 = getSetting("Advertise_left3");
                         <div class="most_viewed_news">
                             <ul>
                                 <?php 
-                                   $row = getCategories(10);
-                                   while($row_getCategories = $row->fetch_assoc()){
+                                   while($row_getCategories = $row_last_ostan->fetch_assoc()){
                                        $rowcat = getArticlesInCategory($row_getCategories['id']);
                                    while($row_getArticlesInCategory = $rowcat->fetch_assoc()){ ?>
                                 <li><a href="show_news.php?article_slug=<?= $row_getArticlesInCategory['slug']; ?>"><?= $row_getArticlesInCategory['title'];?></a> </li>
@@ -87,8 +94,7 @@ $setting_row_left3 = getSetting("Advertise_left3");
                         <div class="most_viewed_news">
                             <ul>
                             <?php
-                            $result_news_query = getArticles("publicationdate",20);
-                              while($row_news_query = $result_news_query->fetch_assoc()){ ?>
+                              while($row_news_query = $result_news_query1->fetch_assoc()){ ?>
                                <li><a href="show_news.php?article_slug=<?= $row_news_query['slug'] ; ?>"><?= $row_news_query['title'] ;?></a> </li>
                                <?php } ?>
                             </ul>
@@ -107,8 +113,7 @@ $setting_row_left3 = getSetting("Advertise_left3");
                     </div>
                     <div class="row container_box">
                         <?php 
-                        $result_news_query = getArticles("`viewcount` > 0",4);
-                        while($coment_row = $result_news_query->fetch_assoc()){ 
+                        while($coment_row = $result_news_query2->fetch_assoc()){ 
                         ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
@@ -137,8 +142,8 @@ $setting_row_left3 = getSetting("Advertise_left3");
                     <div class="row container_box">
                     <?php
                      
-                     $row = getCategories(3);
-                     while($row_getCategories = $row->fetch_assoc()){
+                     
+                     while($row_getCategories = $row_siyasi->fetch_assoc()){
                          $rowcat = getArticlesInCategory($row_getCategories['id']);
                      while($row_getArticlesInCategory = $rowcat->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
@@ -170,10 +175,7 @@ $setting_row_left3 = getSetting("Advertise_left3");
                     </div>
                     <div class="row container_box">
                     <?php
-                    
-                   
-                                $row = getCategories(2);
-                                 while($row_getCategories = $row->fetch_assoc()){
+                                 while($row_getCategories = $row_farhangi->fetch_assoc()){
                                      $rowcat=getArticlesInCategory($row_getCategories['id']);
                                  while($row_getArticlesInCategory=$rowcat->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
@@ -220,8 +222,7 @@ $setting_row_left3 = getSetting("Advertise_left3");
                         
                     <div class="row container_box">
                     <?php 
-                          $row = getCategories(10);
-                          while($row_getCategories = $row->fetch_assoc()){
+                          while($row_getCategories = $row_iran->fetch_assoc()){
                               $rowcat = getArticlesInCategory($row_getCategories['id']);
                           while($row_getArticlesInCategory = $rowcat->fetch_assoc()){ ?>
                         <div class="col-5 p-0">
@@ -251,9 +252,7 @@ $setting_row_left3 = getSetting("Advertise_left3");
                     </div>
                     <div class="row container_box">
                     <?php
-                    
-                                 $row = getCategories(4);
-                                 while($row_getCategories = $row->fetch_assoc()){
+                                 while($row_getCategories = $row_eghtesad->fetch_assoc()){
                                      $rowcat = getArticlesInCategory($row_getCategories['id']);
                                  while($row_getArticlesInCategory = $rowcat->fetch_assoc()){?>
                         <div class="col-6 p-0 boxing">
@@ -281,8 +280,7 @@ $setting_row_left3 = getSetting("Advertise_left3");
                         <div class="web_box_content">
                             <ul>
                                 <?php
-                                $row = getCategories(5);
-                                 while($row_getCategories = $row->fetch_assoc()){
+                                 while($row_getCategories = $row_sport_news->fetch_assoc()){
                                      $rowcat = getArticlesInCategory($row_getCategories['id']);
                                  while($row_getArticlesInCategory = $rowcat->fetch_assoc()){
                                 

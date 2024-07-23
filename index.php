@@ -1,5 +1,11 @@
 <?php require "config.php";
 $counter1 = 0;
+$article_result_rand = getArticles("RAND()",3);
+$article_result_rand2 = getArticles("RAND()",3);
+$article_result_v = getArticles("viewcount ASC " ,10);
+$comment_result = getComments2(4);
+$article11__result4 = getArticles("viewcount DESC",4);
+$result_category_parentt = getCategories(0);
 ?>
 <html lang="en">
 <head>
@@ -28,8 +34,8 @@ $counter1 = 0;
                     </ul>
                     <div class="carousel-inner">
                     <?php
-                            $article_result = getArticles("RAND()",3);
-                            while($row_article_view3 = $article_result->fetch_assoc()){
+                            
+                            while($row_article_view3 = $article_result_rand->fetch_assoc()){
                                
                     ?>
                         <div class="carousel-item <?php if ($counter1 == 0) 
@@ -65,8 +71,7 @@ $counter1 = 0;
                     <div class="col-12">
                         <div class="row">
                         <?php
-                            $article_result = getArticles("RAND()",3);
-                            while($row_article_view1 = $article_result->fetch_assoc()){
+                            while($row_article_view1 = $article_result_rand2->fetch_assoc()){
                                
                     ?>
                             <div class="col-6 mt-4">
@@ -104,8 +109,8 @@ $counter1 = 0;
                     <div id="box2" class="tab-pane active ">
                         <div class="row">
                         <?php 
-                             $article_result = getArticles("viewcount ASC " ,10);
-                            while($row_article_view = $article_result->fetch_assoc()){?>
+                          
+                            while($row_article_view = $article_result_v->fetch_assoc()){?>
                             <div class="col12 col-lg-6">
                                 <div class="desc_news">
                                     <h3>
@@ -119,7 +124,7 @@ $counter1 = 0;
                     <div id="box4" class="tab-pane fade">
                         <div class="col-12 show_comment">
                             <?php
-                            $comment_result = getComments2(4);
+                            
                             while($row_comment = $comment_result->fetch_assoc()){ ?>
                             <div class="row mt-2">
                                 <div class="col-12 comment_header">
@@ -137,10 +142,10 @@ $counter1 = 0;
                                 <div class="col-12 comment_body">
                                     <div class="news_title">
 
-                                        <?php $article = getArticlesWithId($row_comment['article_id']); ?>
+                                        <?php $article_comment = getArticlesWithId($row_comment['article_id']); ?>
 
                                         <h3>
-                                            <a href="show_news.php?article_slug=<?= $article['slug'] ; ?>" target="_blank"> <?php  echo $article['title']; ?></a>
+                                            <a href="show_news.php?article_slug=<?= $article_comment['slug'] ; ?>" target="_blank"> <?= $article_comment['title']; ?></a>
                                         </h3>
                                     </div>
                                     <div class="comment">
@@ -168,8 +173,8 @@ $counter1 = 0;
                                 <div class="owl-carousel1 owl-carousel owl-theme">
                                     
                                     <?php
-                              $article11__result = getArticles("viewcount DESC",4);
-                                while($article11__row = $article11__result->fetch_assoc()){
+                              
+                                while($article11__row = $article11__result4->fetch_assoc()){
                                     ?>
                                     <div class="item">
                                         <a href="show_news.php?article_slug=<?= $article11__row['slug']; ?>" target="_blank" class="text-dark">
@@ -190,7 +195,7 @@ $counter1 = 0;
                 </div>
             </section>
             <?php 
-             $result_category_parentt = getCategories(0);
+             
                while ($row_parent_category = $result_category_parentt->fetch_assoc()){
                ?>
             <section class="box box_2">

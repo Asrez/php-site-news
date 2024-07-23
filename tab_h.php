@@ -2,6 +2,7 @@
 $setting_row_right1=getSetting("Advertise_right1");
 $setting_row_right2=getSetting("Advertise_right2");
 $setting_row_right3=getSetting("Advertise_right3");
+$article_result=getArticles("`viewcount` ASC",3);
 ?>
 <div class="container">
     <div class="row">
@@ -25,7 +26,7 @@ $setting_row_right3=getSetting("Advertise_right3");
                 </div>
                 <div class="row">
                 <?php
-                                $article_result=getArticles("`viewcount` ASC",3);
+                               
                                 while($article_row=$article_result->fetch_assoc()){
 
                                 ?>

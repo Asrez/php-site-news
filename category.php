@@ -19,6 +19,8 @@ if($subcategory_row == false){
     <?php
 }
 $category_row = findParentRow($subcategory_row['parent_id']);
+$article_result_cat = getArticlesInCategory($subcategory_row['id']);
+$result_news_query = getArticles("publicationdate",20);
 ?>
 <html lang="en">
 <head>
@@ -52,8 +54,8 @@ $category_row = findParentRow($subcategory_row['parent_id']);
                 <div class="col-12 main_content">
                     
                     <?php
-                     $article_result = getArticlesInCategory($subcategory_row['id']);
-                    while($article_row = $article_result->fetch_assoc()){
+                  
+                    while($article_row = $article_result_cat->fetch_assoc()){
                         ?>
                     <div class="row mb-2">
                         <div class="col-4 pl-0">
@@ -100,7 +102,7 @@ $category_row = findParentRow($subcategory_row['parent_id']);
                         <div class="most_viewed_news">
                             <ul>
                             <?php 
-                            $result_news_query = getArticles("publicationdate",20);
+                            
                               while($row_news_query = $result_news_query->fetch_assoc()){ ?>
                                 <li><a href="show_news.php?article_slug=<?= $row_news_query['slug'] ; ?>"><?= $row_news_query['title'] ;?></a> </li>
                                 <?php } ?>
