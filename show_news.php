@@ -25,7 +25,7 @@ $num1 = rand(1,10);
 $num2 = rand(1,10);
 $sum = $num1 + $num2;
 
-$setting_row_right4 = getSetting("Advertise_right4");
+$setting_row_left4 = getSetting("Advertise_left4");
 
 $ip = GetRealIp();
 
@@ -139,8 +139,8 @@ $comment_result = getComments(0,$id_main);
             </article>
             <section class="box ads">
                 <div class="col-12 text-center p-0">
-                    <a href="<?= $setting_row['link']; ?>" target="_blank">
-                        <img src="image/<?= $setting_row['value_setting']; ?>" class="img-fluid"  alt="" title="">
+                    <a href="<?= $setting_row_left4['link']; ?>" target="_blank">
+                        <img src="image/<?= $setting_row_left4['value_setting']; ?>" class="img-fluid"  alt="" title="">
                     </a>
                 </div>
             </section>
