@@ -1,6 +1,7 @@
 <?php
 require("config.php");
-$row_about=getaboutus();
+$row_about = getaboutus();
+$setting_row_left4 = getSetting("Advertise_left4");
 ?>
 <html lang="en">
 <head>
@@ -49,17 +50,15 @@ $row_about=getaboutus();
                     </div>
                     <div class="col-6 short-link">
                         <i class="fas fa-link"></i>
-                        <span><?php echo $row_about['link'] ;?></span>
+                        <span><?= $row_about['link'] ;?></span>
                     </div>
                 </div>
             </article>
             <section class="box ads">
-            <?php
-            $setting_row=getSetting("Advertise_right3_about_us");
-?>
+            
                 <div class="col-12 text-center p-0">
-                    <a href="<?= $setting_row['link']; ?>" target="_blank">
-                        <img src="image/<?= $setting_row['value_setting']; ?>" class="img-fluid"  alt="" title="">
+                    <a href="<?= $setting_row_left4['link']; ?>" target="_blank">
+                        <img src="image/<?= $setting_row_left4['value_setting']; ?>" class="img-fluid"  alt="" title="">
                     </a>
                 </div>
             </section>
@@ -75,15 +74,15 @@ $row_about=getaboutus();
                     <div class="row container_box">
                         <div class="row">
                         <?php
-                               $article_result=getArticles("`viewcount` ASC",6);
-                                while($article___row=$article_result->fetch_assoc()){
+                               $article_result = getArticles("`viewcount` ASC",6);
+                                while($article_row = $article_result->fetch_assoc()){
 
                                 ?>
                             <div class="col-6 col-lg-4">
-                                <a href="show_news.php?article_slug=<?php echo $article___row['slug']; ?>">
-                                    <img src="image/<?php echo $article___row['image']; ?>" class="img-fluid" alt="" title="">
+                                <a href="show_news.php?article_slug=<?= $article_row['slug']; ?>">
+                                    <img src="image/<?= $article_row['image']; ?>" class="img-fluid" alt="" title="">
                                     <div class="ads_text">
-                                        <p><?php echo $article___row['title']; ?></p>
+                                        <p><?= $article_row['title']; ?></p>
                                     </div>
                                 </a>
                             </div>
@@ -106,7 +105,7 @@ $row_about=getaboutus();
                         <div class="col-12 p-0">
                             <ul>
 
-                                <li><a href="archive.php"><?php echo $row_about['tag']; ?></a> </li>
+                                <li><a href="archive.php"><?= $row_about['tag']; ?></a> </li>
                                
                             </ul>
                         </div>
@@ -129,11 +128,11 @@ $row_about=getaboutus();
                                     
                                 <?php
                                 
-                                $article_result=getArticles("publicationdate",15);
-                                while($article__row=$article_result->fetch_assoc()){
+                                $article_result = getArticles("publicationdate",15);
+                                while($article_row = $article_result->fetch_assoc()){
 
                                     ?>
-                                    <li><a href="show_news.php?article_slug=<?= $article__row['slug']; ?>"> <?=  $article__row['title']; ?> </a> </li>
+                                    <li><a href="show_news.php?article_slug=<?= $article_row['slug']; ?>"> <?=  $article_row['title']; ?> </a> </li>
                                     <?php } ?>
                                 </ul>
                             </div>

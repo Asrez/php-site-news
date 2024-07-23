@@ -1,7 +1,7 @@
 <?php 
 require "config.php";
 if(isset($_GET['category_slug'])){
-    $slug=$_GET['category_slug'];
+    $slug = $_GET['category_slug'];
 }
 else{
     ?>
@@ -10,8 +10,7 @@ else{
     </script>
     <?php
 }
-$subcategory_row=getCategoryWithSlug($slug);
-
+$subcategory_row = getCategoryWithSlug($slug);
 if($subcategory_row == false){
     ?>
     <script>
@@ -19,8 +18,7 @@ if($subcategory_row == false){
     </script>
     <?php
 }
-$parent_id=$subcategory_row['parent_id'];
-$category_row=findParentRow($parent_id);
+$category_row = findParentRow($subcategory_row['parent_id']);
 ?>
 <html lang="en">
 <head>
@@ -54,14 +52,13 @@ $category_row=findParentRow($parent_id);
                 <div class="col-12 main_content">
                     
                     <?php
-                    $cat_id=$subcategory_row['id'];
-                     $article_result=getArticlesInCategory($cat_id);
-                    while($article_row=$article_result->fetch_assoc()){
+                     $article_result = getArticlesInCategory($subcategory_row['id']);
+                    while($article_row = $article_result->fetch_assoc()){
                         ?>
                     <div class="row mb-2">
                         <div class="col-4 pl-0">
-                            <a href="show_news.php?article_slug=<?php echo $article_row['slug']; ?>" target="_blank">
-                                <img src="image/<?php echo  $article_row['image']; ?>" class="img-fluid" alt="" title="">
+                            <a href="show_news.php?article_slug=<?= $article_row['slug']; ?>" target="_blank">
+                                <img src="image/<?=  $article_row['image']; ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-8">
@@ -103,9 +100,9 @@ $category_row=findParentRow($parent_id);
                         <div class="most_viewed_news">
                             <ul>
                             <?php 
-                            $result_news_query=getArticles("publicationdate",20);
-                              while($row_news_query=$result_news_query->fetch_assoc()){ ?>
-                                <li><a href="show_news.php?article_slug=<?php echo $row_news_query['slug'] ; ?>"><?php echo $row_news_query['title'] ;?></a> </li>
+                            $result_news_query = getArticles("publicationdate",20);
+                              while($row_news_query = $result_news_query->fetch_assoc()){ ?>
+                                <li><a href="show_news.php?article_slug=<?= $row_news_query['slug'] ; ?>"><?= $row_news_query['title'] ;?></a> </li>
                                 <?php } ?>
                             </ul>
                         </div>

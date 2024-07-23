@@ -1,3 +1,12 @@
+<?php 
+require "config.php";
+if(isset($_POST['btnsearch'])){
+    $search = $_POST['search'];
+    $result_article = search($search);
+  }
+  else{$result_article = getArticlesInCategory();}
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,13 +41,7 @@
                 <div class="col-12 main_content box">
 
                 <?php 
-               
-              if(isset($_POST['btnsearch'])){
-                $search=$_POST['search'];
-                 $articles="SELECT * FROM articles WHERE title LIKE '%$search%'  ";}
-              else{$articles="SELECT * FROM articles ";}
-                 $result_article=mysqli_query($link,$articles);
-                while($row_articles=mysqli_fetch_array($result_article)) {
+                while($row_articles = $result_article->fetch_assoc()) {
                   ?>
                     <div class="row mb-3">
                         <div class="after-content col-4 pl-0">
@@ -57,42 +60,28 @@
                             <div class="desc_news d-none d-md-block">
                                 <p>
                                     <span class="category">
-                                    <?php $article_id=$row_articles['id'];
-                                            $article_tag="SELECT * FROM article_tag WHERE article_id = $article_id"; 
-                                             $g=mysqli_query($link,$article_tag);
-                                             while($row_article_tag=mysqli_fetch_array($g)) {
-                                             $tag_id=$row_article_tag['tag_id']; 
-                                             $tags="SELECT * FROM tags WHERE id = $tag_id"; 
-                                             $d=mysqli_query($link,$tags);
-                                             while($row_tags=mysqli_fetch_array($d)){ ?>
-                                             <a href="#" target="_blank"> <?php  echo $row_tags["title"];?> </a>
+                                    <?php    $result_article_tag = searchInArticleTag($row_articles['id']);
+                                             while($row_article_tag = $result_article_tag->fetch_assoc()) {
+                                             $result_tag = getTags($row_article_tag['tag_id']);
+                                             while($row_tags = $result_tag->fetch_assoc()){ ?>
+                                             <a href="archive.php" target="_blank"> <?= $row_tags["title"];?> </a>
                                                 <?php }
                                             } ?></label> 
                                     </span>
-                                    <?php echo $row_articles['summery'];?>
+                                    <?= $row_articles['summery'];?>
                                 </p>
                             </div>
                             <time>
                                 <i class="far fa-clock"></i>
-                                <?php $public=$row_articles['publicationdate'];
-                                       echo date($public);?>
+                                <?php 
+                                       echo date($row_articles['publicationdate']);?>
                             </time>
                         </div>
                     </div><?php 
                     
                 
                 } ?>
-                    <div class="row">
-                        <div class="col-12">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item"><a class="page-link" href="#">قبلی</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">بعدی</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

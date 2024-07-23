@@ -1,7 +1,7 @@
 <?php 
 require("config.php");
 if(isset($_GET['article_slug'])){
-$article_slug=$_GET['article_slug'];}
+$article_slug = $_GET['article_slug'];}
 else{
     ?>
     <script>
@@ -9,14 +9,25 @@ else{
     </script>
     <?php
 }
-$article_row=getArticlesWithSlug($article_slug);
-$category_id=$article_row['category_id'];
-$subcat_row=findParentRow($category_id);
-$title_subcategory=$subcat_row['title'];
-$cat_row=findParentRow($subcat_row['parent_id']);
-$cat_title=$cat_row['title'];
 
+$article_row_main= getArticlesWithSlug($article_slug);
+if(!isset($article_row_main)){
+    exit();
+}
+$id_main = $article_row_main['id'];
+$category_id = $article_row_main['category_id'];
+$subcat_row = findParentRow($category_id);
+$title_subcategory = $subcat_row['title'];
+$cat_row = findParentRow($subcat_row['parent_id']);
+$cat_title = $cat_row['title'];
 
+$num1 = rand(1,10);
+$num2 = rand(1,10);
+$sum = $num1 + $num2;
+
+$setting_row_right4 = getSetting("Advertise_right4");
+
+$ip = GetRealIp();
 // $query_update_viewcount="UPDATE `articles` SET `viewcount`=viewcount+1 WHERE id = $article_id ;";
 // if(mysqli_query($link,$query_update_viewcount))
 // echo "";
@@ -47,7 +58,7 @@ $cat_title=$cat_row['title'];
                             ?>
                             <li class="breadcrumb-item"><a href="index.php">صفحه اصلی</a> </li>
                             <li class="breadcrumb-item"><a href="archive.php">  <?= $cat_title;?></a> </li>
-                            <li class="breadcrumb-item active"><?php echo $title_subcategory;?> </li>
+                            <li class="breadcrumb-item active"><?= $title_subcategory;?> </li>
                         </ul>
                         <div class="show-news-header col">
                             <?php ?>
@@ -55,7 +66,7 @@ $cat_title=$cat_row['title'];
                                 <div class="col-4">
                                     <div class="rating">
                                         <div class="rate-count">
-                                          <?php echo $article_row['viewcount'] ;?> نفر
+                                          <?= $article_row_main['viewcount'] ;?> نفر
                                         </div>
                                         <div class="starrating risingstar justify-content-center flex-row-reverse">
                                             <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"><i class="fas fa-star"></i></label>
@@ -68,7 +79,7 @@ $cat_title=$cat_row['title'];
                                 </div>
                                 <div class="col-4">
                                     <div class="news-time text-center">
-                                        <span>  <?php echo $article_row['publicationdate'] ;?></span>
+                                        <span>  <?= $article_row_main['publicationdate'] ;?></span>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -80,28 +91,28 @@ $cat_title=$cat_row['title'];
                         </div>
                         <div class="show-news-title my-4">
                             <h2>
-                                <a href="show_news.php?article_slug=<?php echo $article_row['slug'] ;?>">
-                                <?php echo $article_row['title'] ;?>
+                                <a href="show_news.php?article_slug=<?= $article_row_main['slug'] ;?>">
+                                <?= $article_row_main['title'] ;?>
                                  </a>
                             </h2>
                         </div>
                         <div class="show-news-summary">
                             <div class="row">
                                 <div class="col-6">
-                                    <p>   <?php echo $article_row['summery'] ;?> </p>
+                                    <p>   <?= $article_row_main['summery'] ;?> </p>
                                 </div>
                                 <div class="col-6">
-                                    <img src="image/<?php echo $article_row['image'] ;?>" alt="" title="" class="img-fluid img-thumbnail w-100">
+                                    <img src="image/<?= $article_row_main['image'] ;?>" alt="" title="" class="img-fluid img-thumbnail w-100">
                                 </div>
                             </div>
                         </div>
                         <div class="show-news-body">
                             <div>
-                            <?php echo $article_row['content'] ;?>
+                            <?= $article_row_main['content'] ;?>
                             </div>
                         </div>
                         <div class="news-code">
-                            <p>کد خبر <span>  <?php echo $article_row['id'] ;?></span></p>
+                            <p>کد خبر <span>  <?= $article_row_main['id'] ;?></span></p>
                         </div>
                     </div>
                 </div>
@@ -117,17 +128,14 @@ $cat_title=$cat_row['title'];
                     </div>
                     <div class="col-6 short-link">
                         <i class="fas fa-link"></i>
-                        <span>  <?php echo $article_row['source'] ;?></span>
+                        <span>  <?= $article_row_main['source'] ;?></span>
                     </div>
                 </div>
             </article>
             <section class="box ads">
-            <?php
-            $setting_row=getSetting("Advertise_right3_about_us");
-            ?>
                 <div class="col-12 text-center p-0">
-                    <a href="<?php echo $setting_row['link']; ?>" target="_blank">
-                        <img src="image/<?php echo $setting_row['value_setting']; ?>" class="img-fluid"  alt="" title="">
+                    <a href="<?= $setting_row['link']; ?>" target="_blank">
+                        <img src="image/<?= $setting_row['value_setting']; ?>" class="img-fluid"  alt="" title="">
                     </a>
                 </div>
             </section>
@@ -144,16 +152,16 @@ $cat_title=$cat_row['title'];
                     
                         <div class="row">
                         <?php
-                                $article1___query="SELECT * FROM articles LIMIT 6";
-                                $article1___result=mysqli_query($link,$article1___query);
-                                while($article1___row=mysqli_fetch_array($article1___result)){
+                                
+                                $article_result = getArticles("viewcount ASC",6);
+                                while($article_row = mysqli_fetch_array($article_result)){
 
                                 ?>
                             <div class="col-6 col-lg-4">
-                                <a href="show_news.php?article_slug=<?php echo $article1___row['slug']; ?>">
-                                    <img src="image/<?php echo $article1___row['image']; ?>" class="img-fluid" alt="" title="">
+                                <a href="show_news.php?article_slug=<?= $article_row['slug']; ?>">
+                                    <img src="image/<?= $article_row['image']; ?>" class="img-fluid" alt="" title="">
                                     <div class="ads_text">
-                                        <p><?php echo $article1___row['title']; ?></p>
+                                        <p><?= $article_row['title']; ?></p>
                                     </div>
                                 </a>
                             </div>
@@ -177,17 +185,14 @@ $cat_title=$cat_row['title'];
                         <div class="col-12 p-0">
                             <ul>
                                 <?php
-                                $article_tag_query="SELECT * FROM article_tag WHERE article_id=$article_id";
-                                $article_tag_result=mysqli_query($link,$article_tag_query);
-                                while($article_tag_row=mysqli_fetch_array($article_tag_result)){
-                                    $tag_id=$article_tag_row['tag_id'];
-                                    $tag_query="SELECT * FROM tags WHERE id=$tag_id";
-                                $tag_result=mysqli_query($link,$tag_query);
-                                while($tag_row=mysqli_fetch_array($tag_result)){
+                                $article_tag_result = searchInArticleTag($id_main);
+                                while($article_tag_row = $article_tag_result->fetch_assoc()){
+                                $tag_result = getTags($article_tag_row['tag_id']);
+                                while($tag_row = mysqli_fetch_array($tag_result)){
 
                                 ?>
 
-                                <li><a href="archive.php"><?php echo $tag_row['title']; ?></a> </li>
+                                <li><a href="archive.php"><?= $tag_row['title']; ?></a> </li>
                                 <?php } 
                                 } ?>
                             </ul>
@@ -209,11 +214,10 @@ $cat_title=$cat_row['title'];
                             <div class="most_viewed_news suggested">
                                 <ul>
                                 <?php
-                                $article__query="SELECT * FROM articles  LIMIT 5";
-                                $article__result=mysqli_query($link,$article__query);
-                                while($article__row=mysqli_fetch_array($article__result)){
+                                  $article_result = getArticles("publicationdate",10);
+                                  while($article_row = $article_result->fetch_assoc()){
                                     ?>
-                                    <li><a href="show_news.php?article_slug=<?php echo $article__row['slug']; ?>"> <?php echo $article__row['title']; ?> </a> </li>
+                                    <li><a href="show_news.php?article_slug=<?= $article_row['slug']; ?>"> <?= $article_row['title']; ?> </a> </li>
                                     <?php } ?>
                                 </ul>
                             </div>
@@ -223,32 +227,28 @@ $cat_title=$cat_row['title'];
             </section>
             <section class="box_news">
                 <div class="tab-content">
-                    
-                    <?php
-                    $id_for_comments=$article_roww['id'];
-                    $comment_query="SELECT * FROM comments WHERE venify=1 AND article_id='$id_for_comments'  ORDER BY comments.date  ";
-                    $comment_result=mysqli_query($link,$comment_query);
-
-                     ?>
                     <div class="tab-pane active">
                         <div class="col-12 show_comment">
-                            <?php while($row_comment=mysqli_fetch_array($comment_result)){ ?>
+                            <?php
+                            $comment_result = getComments(0,$id_main);
+                             while($row_comment = $comment_result->fetch_assoc()){
+                                 ?>
                             <div class="row mt-2">
                                 <div class="col-12 comment_header">
                                     <div class="row">
                                         <div class="col-6 username">
                                             <i class="fas fa-user"></i>
-                                            <?php echo $row_comment['name']; ?>
+                                            <?= $row_comment['name']; ?>
                                         </div>
                                         <div class="col-6 time">
                                             <i class="far fa-calendar-alt"></i>
-                                            <?php echo $row_comment['date'];?>
+                                            <?= $row_comment['date'];?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 comment_body">
                                     <div class="comment">
-                                        <p>  <?php echo $row_comment['comment'];?> </p>
+                                        <p>  <?= $row_comment['comment'];?> </p>
                                     </div>
                                 </div>
                             </div>
@@ -269,7 +269,7 @@ $cat_title=$cat_row['title'];
                     <div class="row">
                         <div class="col-12 p-0">
                         
-                            <form action="action_insert_comment.php?article_slug=<?php echo $article_slug; ?>" method="post" name="comment_form">
+                            <form action="action_insert_comment.php?article_slug=<?= $article_slug; ?>" method="post" name="comment_form">
                                 <fieldset class="row">
                                     <div class="col-12 col-md-6 form-group name-group">
                                         <label for="userName">نام</label>
@@ -290,13 +290,9 @@ $cat_title=$cat_row['title'];
                                     </div></div>
                                     <div class="col-12 col-md-6">
                                         <div style="direction: ltr">
-                                        <?php
-                                        $num1=rand(1,10);
-                                        $num2=rand(1,10);
-                                        $sum= $num1 + $num2;
-                                        ?>
-                                        <input type="number" name="real_sum" value="<?php echo $sum; ?>" style="opacity: 0;position: absolute;">
-                                            <div class="captcha-image d-inline-block"><?php echo $num1; ?> +<?php echo $num2; ?>=
+                                        
+                                        <input type="number" name="real_sum" value="<?=  $sum; ?>" style="opacity: 0;position: absolute;">
+                                            <div class="captcha-image d-inline-block"><?= $num1; ?> +<?= $num2; ?>=
                                             </div>
                                             <div class="captcha-input d-inline-block">
                                                 <input type="number" name="sum" id="number" required="required" data-required-msg="حاصل عبارت را وارد کنید.">
