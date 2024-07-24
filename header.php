@@ -9,25 +9,31 @@ $row_telegram = getSetting("telegram_icon");
 $row_twitter = getSetting("twitter_icon");
 $row_facebook = getSetting("facebook_icon");
 $result_category_parent = getCategories();
+$array_parent_category=[];
+$array_sub_category=[];
+while($row_category_parent = $result_category_parent->fetch_assoc()){
+      $array_parent_category[]=$row_category_parent;
+      $id_parent_category=$row_category_parent['id'];
+      $result_category_down = getCategories($id_parent_category); 
+      while($row_category_down = $result_category_down->fetch_assoc()) {
+        $array_sub_category[]=$row_category_down;
+      }
+}
 ?>
 <header id="header">
     <div id="top_header">
         <div class="container">
             <div class="row">
                 <div class="col-5 col-md-2">
-                    <ul class="lang_menu">
-                        <li><a href="#">فارسی</a> </li>
-                        <li><a href="#">العربية</a> </li>
-                        <li class="d-none d-lg-inline-block"><a href="#">English</a> </li>
-                    </ul>
-                </div>
-                <div class="col-7 col-md-3">
-                    <ul class="top_menu">
+                <ul class="top_menu">
                         <li><a href="contact_us.php">تماس با ما</a> </li>
                         <li><a href="about_us.php">درباره با ما</a> </li>
                         <li><a href="archive.php">آرشیو</a> </li>
                         
                     </ul>
+                </div>
+                <div class="col-7 col-md-3">
+                   
                 </div>
                 <div class="d-none col-md-3 d-md-block">
                     <div class="search">
@@ -88,15 +94,16 @@ $result_category_parent = getCategories();
                     </a> 
 </li>
                      <?php 
-                     while($row_category_parent = $result_category_parent->fetch_assoc()) {?>
+                     foreach($array_parent_category as $row_category_parent) {?>
                <li>
                    <a href="#">
                         <?= $row_category_parent["title"]; ?>
                     </a> 
                    <ul class="submenu">
 
-                     <?php $result_category_down = getCategories($row_category_parent['id']); 
-                     while($row_category_down = $result_category_down->fetch_assoc()) { ?>
+                     <?php 
+                     foreach($array_sub_category as $row_category_down) {
+                        if ($row_category_down['parent_id'] == $row_category_parent['id']){?>
 
                        <li>
                            <a href="category.php?category_slug=<?= $row_category_down['slug'];?>">
@@ -105,7 +112,8 @@ $result_category_parent = getCategories();
                        </li>
                    
                    
-                    <?php } ?>
+                    <?php } 
+                }?>
                    </ul>
                </li>
                    <?php }  ?>

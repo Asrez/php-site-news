@@ -170,3 +170,54 @@ function GetRealIp()
         $ip = $_SERVER['REMOTE_ADDR'];
     return $ip;
 }
+
+function getTagsInner($id)
+{  
+   global $link;
+
+   $inner_sql="SELECT `tags`.`title` , `tags`.`id` , `article_tag`.`article_id` FROM `tags` INNER JOIN `article_tag` ON `tags`.`id` = `article_tag`.`tag_id` WHERE `article_tag`.`article_id` = ?; ";
+   $inner_query = $link->prepare($inner_sql);
+   $inner_query->bind_param("i",$id);
+   $inner_query->execute();
+   $inner_result = $inner_query->get_result();   
+   return $inner_result;
+}
+
+
+
+function ISSETIP($ip,$article_id)
+{  
+   global $link;
+
+   $isset_sql="SELECT * FROM `view` WHERE `user_ip` = ? AND `article_id` = ? ;";
+   $isset_query = $link->prepare($isset_sql);
+   $isset_query->bind_param("si",$ip,$article_id);
+   $isset_query->execute();
+   $isset_result = $isset_query->get_result();   
+   $isset_row=$isset_result->fetch_assoc();
+if(!(empty($isset_row))){
+  return true;
+}
+else{
+    return false;
+}
+}
+
+function getARTICLEinLIST($id_subcategory)
+{  
+   global $link;
+   $ostan_list=[];
+   $sub_ostan_list=[];
+   $row_last_ostan = getCategories($id_subcategory);
+   while($row_getCategories = $row_last_ostan->fetch_assoc()){
+       $ostan_list[]= $row_getCategories;
+       $rowcat = getArticlesInCategory($row_getCategories['id']);
+       while($row_getArticlesInCategory = $rowcat->fetch_assoc()){
+           $sub_ostan_list[]= $row_getArticlesInCategory;
+       }
+   
+   }
+   
+   return $ostan_list;
+   return $ostan_list;
+}

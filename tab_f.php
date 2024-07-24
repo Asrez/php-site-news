@@ -6,6 +6,7 @@ $setting_row_left2 = getSetting("Advertise_left2");
 $setting_row_left3 = getSetting("Advertise_left3");
 $article_result1 = getArticles(" RAND() ",5);
 $row_last_ostan = getCategories(10);
+
 $result_news_query1 = getArticles("publicationdate",20);
 $result_news_query2 = getArticles("`viewcount` > 0",4);
 $row_siyasi = getCategories(3);
@@ -70,11 +71,13 @@ $row_sport_news = getCategories(5);
                         <div class="most_viewed_news">
                             <ul>
                                 <?php 
-                                   while($row_getCategories = $row_last_ostan->fetch_assoc()){
-                                       $rowcat = getArticlesInCategory($row_getCategories['id']);
-                                   while($row_getArticlesInCategory = $rowcat->fetch_assoc()){ ?>
+                                   foreach ($ostan_list as $row_getCategories){
+                                   foreach ($sub_ostan_list as $row_getArticlesInCategory){ 
+                                    if( $row_getArticlesInCategory['category_id'] == $row_getCategories['id']){
+                                    ?>
                                 <li><a href="show_news.php?article_slug=<?= $row_getArticlesInCategory['slug']; ?>"><?= $row_getArticlesInCategory['title'];?></a> </li>
                                 <?php } 
+                                   }
                                 }?>
                             </ul>
                         </div>

@@ -6,6 +6,16 @@ if(isset($_POST['btnsearch'])){
   }
   else{$result_article = getArticlesInCategory();}
 
+$tag_array=[];
+$article_array=[];
+while($row_article = $result_article->fetch_assoc()){
+    $article_array[]=$row_article;
+    $artic_id=$row_article['id'];
+    $tag_result=getTagsInner($artic_id);
+    while($tag_row=$tag_result->fetch_assoc()){
+       $tag_array[]=$tag_row;
+    }
+}
 ?>
 <html lang="en">
 <head>
@@ -41,7 +51,7 @@ if(isset($_POST['btnsearch'])){
                 <div class="col-12 main_content box">
 
                 <?php 
-                while($row_articles = $result_article->fetch_assoc()) {
+                foreach($article_array as $row_articles){
                   ?>
                     <div class="row mb-3">
                         <div class="after-content col-4 pl-0">
@@ -60,13 +70,14 @@ if(isset($_POST['btnsearch'])){
                             <div class="desc_news d-none d-md-block">
                                 <p>
                                     <span class="category">
-                                    <?php    $result_article_tag = searchInArticleTag($row_articles['id']);
-                                             while($row_article_tag = $result_article_tag->fetch_assoc()) {
-                                             $result_tag = getTags($row_article_tag['tag_id']);
-                                             while($row_tags = $result_tag->fetch_assoc()){ ?>
+                                    <?php  foreach($tag_array as $row_tags){
+                                        if($row_tags['article_id'] == $row_articles['id']){
+                                            ?>
                                              <a href="archive.php" target="_blank"> <?= $row_tags["title"];?> </a>
-                                                <?php }
-                                            } ?></label> 
+                                                <?php
+                                                  } 
+                                                                                 }
+                                    ?></label> 
                                     </span>
                                     <?= $row_articles['summery'];?>
                                 </p>

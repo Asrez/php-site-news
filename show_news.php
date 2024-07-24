@@ -21,22 +21,33 @@ $title_subcategory = $subcat_row['title'];
 $cat_row = findParentRow($subcat_row['parent_id']);
 $cat_title = $cat_row['title'];
 
+// venify for comment 
 $num1 = rand(1,10);
 $num2 = rand(1,10);
 $sum = $num1 + $num2;
 
 $setting_row_left4 = getSetting("Advertise_left4");
-
+// get user ip 
 $ip = GetRealIp();
 
-$article_result = getArticles("viewcount ASC",6);
-$article_tag_result = searchInArticleTag($id_main);
-$article_result4 = getArticles("publicationdate",10);
+$article_result2 = getArticles("`publicationdate` DESC",6);
+$article_result4 = getArticles("`publicationdate` DESC",10);
 $comment_result = getComments(0,$id_main);
-// $query_update_viewcount="UPDATE `articles` SET `viewcount`=viewcount+1 WHERE id = $article_id ;";
-// if(mysqli_query($link,$query_update_viewcount))
-// echo "";
+// insert to view count
+$viewcountresult=ISSETIP($ip,$id_main);
+if($viewcountresult == ""){
+    $insert_sql="INSERT INTO `view`(`id`, `user_ip`, `article_id`) VALUES ('', ? , ?) ;";
+    $insert_query = $link->prepare($insert_sql);
+    $insert_query->bind_param("si",$ip,$id_main);
+    $insert_query->execute();
+    $sql_update_viewcount="UPDATE `articles` SET `viewcount`=`viewcount`+1 WHERE `id` = ? ;";
+    $query_update_viewcount=$link->prepare($sql_update_viewcount);
+    $query_update_viewcount->bind_param("i" , $id_main);
+    $query_update_viewcount->execute();
+}
+
 ?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -157,7 +168,7 @@ $comment_result = getComments(0,$id_main);
                     
                         <div class="row">
                         <?php
-                                while($article_row = mysqli_fetch_array($article_result)){
+                                while($article_row = $article_result2->fetch_assoc()){
 
                                 ?>
                             <div class="col-6 col-lg-4">
@@ -188,15 +199,15 @@ $comment_result = getComments(0,$id_main);
                         <div class="col-12 p-0">
                             <ul>
                                 <?php
-                                while($article_tag_row = $article_tag_result->fetch_assoc()){
-                                $tag_result = getTags($article_tag_row['tag_id']);
+                               
+                                $tag_result = getTagsInner($id_main);
                                 while($tag_row = mysqli_fetch_array($tag_result)){
 
                                 ?>
 
                                 <li><a href="archive.php"><?= $tag_row['title']; ?></a> </li>
                                 <?php } 
-                                } ?>
+                                 ?>
                             </ul>
                         </div>
                     </div>
@@ -216,9 +227,9 @@ $comment_result = getComments(0,$id_main);
                             <div class="most_viewed_news suggested">
                                 <ul>
                                 <?php
-                                  while($article_row = $article_result4->fetch_assoc()){
+                                  while($article_row4 = $article_result4->fetch_assoc()){
                                     ?>
-                                    <li><a href="show_news.php?article_slug=<?= $article_row['slug']; ?>"> <?= $article_row['title']; ?> </a> </li>
+                                    <li><a href="show_news.php?article_slug=<?= $article_row4['slug']; ?>"> <?= $article_row4['title']; ?> </a> </li>
                                     <?php } ?>
                                 </ul>
                             </div>
