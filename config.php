@@ -4,8 +4,9 @@ $link = mysqli_connect("localhost","root","","news");
 
 function getCategories(?int $parent_id = 0) {
     global $link;
-    $sql1 = "SELECT * FROM `categorys` WHERE `parent_id` = $parent_id ;";
+    $sql1 = "SELECT * FROM `categorys` WHERE `parent_id` = ? ;";
     $category_query = $link->prepare($sql1);
+    $category_query->bind_param("i", $parent_id);
     $category_query->execute();
     $result_category_query = $category_query->get_result();
     return $result_category_query;
@@ -206,18 +207,41 @@ else{
 function getARTICLEinLIST($id_subcategory)
 {  
    global $link;
-   $ostan_list=[];
-   $sub_ostan_list=[];
+   $ostan_list = [];
+   $sub_ostan_list = [];
    $row_last_ostan = getCategories($id_subcategory);
    while($row_getCategories = $row_last_ostan->fetch_assoc()){
-       $ostan_list[]= $row_getCategories;
+       $ostan_list[] = $row_getCategories;
        $rowcat = getArticlesInCategory($row_getCategories['id']);
        while($row_getArticlesInCategory = $rowcat->fetch_assoc()){
-           $sub_ostan_list[]= $row_getArticlesInCategory;
+           $sub_ostan_list[] = $row_getArticlesInCategory;
        }
    
    }
+   $array = ["maincategory" => $ostan_list,"subCategory" => $sub_ostan_list];
+
+   return $array;
+}
+function getARTICLEinLISTinINDEX()
+{  
+   global $link;
+   $ostan_list = [];
+   $sub_ostan_list = [];
+   $category_list = [];
+   $result_category_main = getCategories(0);
+   while($row_category_main = $result_category_main->fetch_assoc()){
+       $category_list[] = $row_category_main;
+       $result_last_ostan = getCategories($row_category_main['id']);
+        while($row_getCategories = $result_last_ostan->fetch_assoc()){
+       $ostan_list[] = $row_getCategories;
+       $rowcat = getArticlesInCategory($row_getCategories['id']);
+       while($row_getArticlesInCategory = $rowcat->fetch_assoc()){
+           $sub_ostan_list[] = $row_getArticlesInCategory;
+       }
    
-   return $ostan_list;
-   return $ostan_list;
+     }
+   }
+   $array = ["category" => $category_list , "maincategory" => $ostan_list ,"subCategory" => $sub_ostan_list];
+
+   return $array;
 }

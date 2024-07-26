@@ -1,11 +1,19 @@
 <?php require "config.php";
 $counter1 = 0;
+$count = 0;
 $article_result_rand = getArticles("RAND()",3);
 $article_result_rand2 = getArticles("RAND()",3);
 $article_result_v = getArticles("viewcount ASC " ,10);
-$comment_result = getComments2(4);
+$comment_result = getComments2(6);
 $article11__result4 = getArticles("viewcount DESC",4);
-$result_category_parentt = getCategories(0);
+$row_category = getARTICLEinLISTinINDEX(0);
+$most_comment = [];
+$article = [];
+while($row_comment = $comment_result->fetch_assoc()){ 
+    $most_comment[]= $row_comment;
+    $article_comment = getArticlesWithId($row_comment['article_id']); 
+    $article[] = $article_comment;
+}
 ?>
 <html lang="en">
 <head>
@@ -99,7 +107,7 @@ $result_category_parentt = getCategories(0);
                 <ul class="nav nav-tabs my-2" role="tablist">
                     
                     <li class="nav-item pr-lg-1">
-                        <a href="#box2" class="nav-link active" data-toggle="tab">پربحث ترین ها</a>
+                        <a href="#box2" class="nav-link active" data-toggle="tab">پربازدید ترین ها</a>
                     </li>
                     <li class="nav-item">
                         <a href="#box4" class="nav-link" data-toggle="tab">آخرین نظرات</a>
@@ -125,7 +133,9 @@ $result_category_parentt = getCategories(0);
                         <div class="col-12 show_comment">
                             <?php
                             
-                            while($row_comment = $comment_result->fetch_assoc()){ ?>
+                            foreach ($most_comment as $row_comment ){ 
+                                foreach ($article as $row_article ){ 
+                                    if($row_comment['article_id'] === $row_article['id']){?>
                             <div class="row mt-2">
                                 <div class="col-12 comment_header">
                                     <div class="row">
@@ -142,10 +152,8 @@ $result_category_parentt = getCategories(0);
                                 <div class="col-12 comment_body">
                                     <div class="news_title">
 
-                                        <?php $article_comment = getArticlesWithId($row_comment['article_id']); ?>
-
                                         <h3>
-                                            <a href="show_news.php?article_slug=<?= $article_comment['slug'] ; ?>" target="_blank"> <?= $article_comment['title']; ?></a>
+                                            <a href="show_news.php?article_slug=<?= $row_article['slug'] ; ?>" target="_blank"> <?= $row_article['title']; ?></a>
                                         </h3>
                                     </div>
                                     <div class="comment">
@@ -153,7 +161,10 @@ $result_category_parentt = getCategories(0);
                                     </div>
                                 </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                        }
+                    }
+                         } ?>
                         </div>
                     </div>
                 </div>
@@ -196,26 +207,29 @@ $result_category_parentt = getCategories(0);
             </section>
             <?php 
              
-               while ($row_parent_category = $result_category_parentt->fetch_assoc()){
+             foreach ($row_category["category"] as $row_main_category){
                ?>
             <section class="box box_2">
                 
-                <?php 
-                $category_small_result = getCategories($row_parent_category['id']);
-                while($category_small_row = $category_small_result->fetch_assoc()){
-                   $result_article_category = getArticlesInCategory($category_small_row['id']);
-               $row_article_category = $result_article_category->fetch_assoc();
-            }
-                ?>
+              
                 <div class="col-12">
                     <div class="row">
                         <div class="box_header">
                             <h2>
-                                <a href="archive.php"><?= $row_parent_category['title']; ?></a>
+                                <a href="archive.php"><?= $row_main_category['title'];?></a>
                             </h2>
                         </div>
                     </div>
                     <div class="row">
+                        <?php 
+                              foreach ($row_category["maincategory"] as $row_getCategories){
+                                if( $row_main_category['id'] === $row_getCategories['parent_id']){
+                                  foreach ($row_category["subCategory"] as $row_article_category){ 
+                                   if( $row_article_category['category_id'] === $row_getCategories['id']){
+                                    if($count == 0 ){ 
+                                    $count++; 
+                          
+                              ?>
                         <div class="col-12 col-lg-6">
                             <div>
                                 <a href="show_news.php?article_slug=<?= $row_article_category['slug'] ; ?>" target="_blank">
@@ -226,19 +240,30 @@ $result_category_parentt = getCategories(0);
                                 </div>
                             </div>
                         </div>
+                        <?php } 
+                        }
+                    }
+                }
+                }?>
                         <div class="col-12 col-lg-6">
                             <div class="most_viewed_news">
                                 <ul>
-                                    <?php  
-                                      $category_small_result1 = getCategories($row_parent_category['id']);
-                                      while($category_small_row1 = $category_small_result1->fetch_assoc()){
-                                        $result_article_category1 = getArticlesInCategory($category_small_row1['id']);
-                                       while($row_article_category1 = $result_article_category1->fetch_assoc()){
- ?>
-                                    <li><a href="show_news.php?article_slug=<?= $row_article_category1['slug'] ; ?>" > </a> <?= $row_article_category1['title']; ?> </li>
+                                <?php 
+                foreach ($row_category["maincategory"] as $row_getCategories){
+                                if( $row_main_category['id'] === $row_getCategories['parent_id']){
+                                  foreach ($row_category["subCategory"] as $row_article_category){ 
+                                   if( $row_article_category['category_id'] === $row_getCategories['id']){
+                        
+            
+                ?>
+                                    <li><a href="show_news.php?article_slug=<?= $row_article_category['slug'] ; ?>" > </a> <?= $row_article_category['title']; ?> </li>
                                     <?php 
                                     } 
-                                    } ?>
+                               
+                            }
+                        }
+                                    } $count = 0 ;
+                                    ?>
                                     
                                 </ul>
                             </div>
@@ -247,9 +272,8 @@ $result_category_parentt = getCategories(0);
                 </div>
                 
             </section>
-            <?php  }
-        ?>
-            
+          
+            <?php  }  ?>
         </div>
         
 <?php include("tab_f.php") ;?>

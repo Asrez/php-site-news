@@ -45,7 +45,7 @@ if($viewcountresult == ""){
     $query_update_viewcount->bind_param("i" , $id_main);
     $query_update_viewcount->execute();
 }
-
+$tag_result = getTagsInner($id_main);
 ?>
 
 <html lang="en">
@@ -200,7 +200,7 @@ if($viewcountresult == ""){
                             <ul>
                                 <?php
                                
-                                $tag_result = getTagsInner($id_main);
+                                
                                 while($tag_row = mysqli_fetch_array($tag_result)){
 
                                 ?>

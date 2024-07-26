@@ -5,15 +5,16 @@ $setting_row_left1 = getSetting("Advertise_left1");
 $setting_row_left2 = getSetting("Advertise_left2");
 $setting_row_left3 = getSetting("Advertise_left3");
 $article_result1 = getArticles(" RAND() ",5);
-$row_last_ostan = getCategories(10);
 
 $result_news_query1 = getArticles("publicationdate",20);
 $result_news_query2 = getArticles("`viewcount` > 0",4);
-$row_siyasi = getCategories(3);
-$row_farhangi = getCategories(2);
-$row_iran = getCategories(10);
-$row_eghtesad = getCategories(4);
-$row_sport_news = getCategories(5);
+
+$row_ostan = getARTICLEinLIST(10);
+$row_siyasi = getARTICLEinLIST(3);
+$row_farhangi = getARTICLEinLIST(2);
+$row_iran = getARTICLEinLIST(10);
+$row_eghtesad = getARTICLEinLIST(4);
+$row_sport_news = getARTICLEinLIST(5);
 ?>
         <div class="col-12 col-md-3">
         <section class="box box_news box_caricature">
@@ -71,8 +72,8 @@ $row_sport_news = getCategories(5);
                         <div class="most_viewed_news">
                             <ul>
                                 <?php 
-                                   foreach ($ostan_list as $row_getCategories){
-                                   foreach ($sub_ostan_list as $row_getArticlesInCategory){ 
+                                   foreach ($row_ostan["maincategory"] as $row_getCategories){
+                                   foreach ($row_ostan["subCategory"] as $row_getArticlesInCategory){ 
                                     if( $row_getArticlesInCategory['category_id'] == $row_getCategories['id']){
                                     ?>
                                 <li><a href="show_news.php?article_slug=<?= $row_getArticlesInCategory['slug']; ?>"><?= $row_getArticlesInCategory['title'];?></a> </li>
@@ -145,10 +146,9 @@ $row_sport_news = getCategories(5);
                     <div class="row container_box">
                     <?php
                      
-                     
-                     while($row_getCategories = $row_siyasi->fetch_assoc()){
-                         $rowcat = getArticlesInCategory($row_getCategories['id']);
-                     while($row_getArticlesInCategory = $rowcat->fetch_assoc()){ ?>
+                     foreach ($row_siyasi["maincategory"] as $row_getCategories){
+                        foreach ($row_siyasi["subCategory"] as $row_getArticlesInCategory){ 
+                         if( $row_getArticlesInCategory['category_id'] == $row_getCategories['id']){?>
                         <div class="col-5 p-0">
                             <a href="show_news.php?article_slug=<?= $row_getArticlesInCategory['slug']; ?>" target="_blank">
                                 <img src="image/<?= $row_getArticlesInCategory['image']; ?>" class="img-fluid" alt="" title="">
@@ -160,6 +160,7 @@ $row_sport_news = getCategories(5);
                             </a>
                         </div>
                         <?php }
+                        }
                           } ?>
                         
                     </div>
@@ -178,9 +179,9 @@ $row_sport_news = getCategories(5);
                     </div>
                     <div class="row container_box">
                     <?php
-                                 while($row_getCategories = $row_farhangi->fetch_assoc()){
-                                     $rowcat=getArticlesInCategory($row_getCategories['id']);
-                                 while($row_getArticlesInCategory=$rowcat->fetch_assoc()){ ?>
+                    foreach ($row_farhangi["maincategory"] as $row_getCategories){
+                        foreach ($row_farhangi["subCategory"] as $row_getArticlesInCategory){ 
+                         if( $row_getArticlesInCategory['category_id'] == $row_getCategories['id']){ ?>
                         <div class="col-5 p-0">
                             <a href="#show_news.php?article_slug=<?= $row_getArticlesInCategory['slug']; ?>" target="_blank">
                                 <img src="image/<?= $row_getArticlesInCategory['image']; ?>" class="img-fluid" alt="" title="">
@@ -192,6 +193,7 @@ $row_sport_news = getCategories(5);
                             </a>
                         </div>
                         <?php }
+                        }
                     } ?>
                     </div>
                 </div>
@@ -225,9 +227,9 @@ $row_sport_news = getCategories(5);
                         
                     <div class="row container_box">
                     <?php 
-                          while($row_getCategories = $row_iran->fetch_assoc()){
-                              $rowcat = getArticlesInCategory($row_getCategories['id']);
-                          while($row_getArticlesInCategory = $rowcat->fetch_assoc()){ ?>
+                           foreach ($row_iran["maincategory"] as $row_getCategories){
+                            foreach ($row_iran["subCategory"] as $row_getArticlesInCategory){ 
+                             if( $row_getArticlesInCategory['category_id'] == $row_getCategories['id']){ ?>
                         <div class="col-5 p-0">
                             <a href="show_news.php?article_slug=<?= $row_getArticlesInCategory['slug']; ?>" target="_blank">
                                 <img src="image/<?= $row_getArticlesInCategory['image']; ?>" class="img-fluid" alt="" title="">
@@ -240,6 +242,7 @@ $row_sport_news = getCategories(5);
                         </div>
                         <?php } 
                                 }
+                            }
                         ?>
                     </div>
                 </div>
@@ -255,9 +258,9 @@ $row_sport_news = getCategories(5);
                     </div>
                     <div class="row container_box">
                     <?php
-                                 while($row_getCategories = $row_eghtesad->fetch_assoc()){
-                                     $rowcat = getArticlesInCategory($row_getCategories['id']);
-                                 while($row_getArticlesInCategory = $rowcat->fetch_assoc()){?>
+                              foreach ($row_eghtesad["maincategory"] as $row_getCategories){
+                                foreach ($row_eghtesad["subCategory"] as $row_getArticlesInCategory){ 
+                                 if( $row_getArticlesInCategory['category_id'] == $row_getCategories['id']){?>
                         <div class="col-6 p-0 boxing">
                             <a href="show_news.php?article_slug=<?= $row_getArticlesInCategory['slug']; ?>" target="_blank">
                                 <img src="image/<?= $row_getArticlesInCategory['image']; ?>" class="img-fluid" alt="" title="">
@@ -268,6 +271,7 @@ $row_sport_news = getCategories(5);
                         </div>
                         <?php } 
                         }
+                    }
                         ?>
                     </div>
                 </div>
@@ -283,13 +287,14 @@ $row_sport_news = getCategories(5);
                         <div class="web_box_content">
                             <ul>
                                 <?php
-                                 while($row_getCategories = $row_sport_news->fetch_assoc()){
-                                     $rowcat = getArticlesInCategory($row_getCategories['id']);
-                                 while($row_getArticlesInCategory = $rowcat->fetch_assoc()){
+                                foreach ($row_sport_news["maincategory"] as $row_getCategories){
+                                    foreach ($row_sport_news["subCategory"] as $row_getArticlesInCategory){ 
+                                     if( $row_getArticlesInCategory['category_id'] == $row_getCategories['id']){
                                 
                                 ?>
                                 <li><a href="show_news.php?article_slug=<?= $row_getArticlesInCategory['slug']; ?>" target="_blank"><?= $row_getArticlesInCategory['title'] ?> </a> </li>
                                 <?php }
+                                    }
                                  } ?>
                             </ul>
                         </div>
