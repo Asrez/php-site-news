@@ -1,6 +1,6 @@
 <?php
-session_start();
-$link=mysqli_connect("localhost" , "root" ,"" ,"news") ;
+$count_venify_row=get_count_tables(" `comments` "," WHERE `venify`= 0");
+$venify_result=commentswithVenify(0);
  ?>
 <header class="main-header">
     <!-- Logo -->
@@ -16,29 +16,21 @@ $link=mysqli_connect("localhost" , "root" ,"" ,"news") ;
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-<?php
-$count_venify_query="SELECT COUNT(id) AS count FROM comments WHERE venify=0";
-$count_venify_result=mysqli_query($link,$count_venify_query);
-$count_venify_row=mysqli_fetch_array($count_venify_result);
-$venify_query="SELECT * FROM comments WHERE venify=0";
-$venify_result=mysqli_query($link,$venify_query);
-
-?>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success"><?php echo $count_venify_row['count']; ?></span>
+              <span class="label label-success"><?= $count_venify_row['count']; ?></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header"><?php echo $count_venify_row['count']; ?> پیام تایید نشده</li>
+              <li class="header"><?= $count_venify_row['count']; ?> پیام تایید نشده</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu"> 
                   <!-- start message -->
-                  <?php while($venify_row=mysqli_fetch_array($venify_result)){ ?>
+                  <?php while($venify_row=$venify_result->fetch_assoc()){ ?>
                   <li>
                    
                     <a href="#">
@@ -46,17 +38,17 @@ $venify_result=mysqli_query($link,$venify_query);
                       <i class="fas fa-user"></i>
                       </div>
                       <h4>
-                        <?php echo $venify_row['name']; ?>
-                        <small><i class="fa fa-clock-o"></i> <?php echo $venify_row['date']; ?></small>
+                        <?= $venify_row['name']; ?>
+                        <small><i class="fa fa-clock-o"></i> <?= $venify_row['date']; ?></small>
                       </h4>
-                      <p><?php echo $venify_row['comment']; ?></p>
+                      <p><?= $venify_row['comment']; ?></p>
                     </a>
                   </li>
                   <?php } ?>
                   <!-- end message -->
                 </ul>
               </li>
-              <li class="footer"><a href="pages/tables/simple.php">نمایش تمام پیام ها</a></li>
+              <li class="footer"><a href="simple.php">نمایش تمام پیام ها</a></li>
             </ul>
           </li>
           <!-- User Account: style can be found in dropdown.less -->
@@ -89,10 +81,10 @@ $venify_result=mysqli_query($link,$venify_query);
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="pages/examples/lockscreen.php">صفحه من</a>
+                    <a href="lockscreen.php">صفحه من</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="pages/tables/simple.php">ادمین ها</a>
+                    <a href="simple.php">ادمین ها</a>
                   </div>
                 </div>
                 <!-- /.row -->
@@ -100,7 +92,7 @@ $venify_result=mysqli_query($link,$venify_query);
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="pages/examples/lockscreen.php" class="btn btn-default btn-flat">پروفایل</a>
+                  <a href="ockscreen.php" class="btn btn-default btn-flat">پروفایل</a>
                 </div>
                 <div class="pull-left">
                   <a href="logout.php" class="btn btn-default btn-flat">خروج</a>
@@ -147,48 +139,45 @@ $venify_result=mysqli_query($link,$venify_query);
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">منو</li>
         <li class="active treeview">
-          <a href="#">
+          <a href="index.php">
             <i class="fa fa-dashboard"></i> <span>داشبرد</span>
             <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index2.php"><i class="fa fa-circle-o"></i> داشبرد اصلی</a></li>
+            <li><a href="index.php"><i class="fa fa-circle-o"></i> داشبرد اصلی</a></li>
           </ul>
         </li>
        
         <li>
-          <a href="pages/widgets.php">
+          <a href="widgets.php">
             <i class="fa fa-th"></i> <span>ویجت ها</span>
           </a>
         </li>
-        
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>مدیریت اطلاعات</span>
+       
+        <li class="treeview" id="information">
+          <a href="data.php">
+            <i class="fa fa-table" ></i> <span>مدیریت اطلاعات</span>
             <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/tables/data.php"><i class="fa fa-circle-o"></i> مدیریت مقالات و تنظیمات</a></li>
-            <li><a href="pages/tables/simple.php"><i class="fa fa-circle-o"></i>  مدیریت تگ ها وادمین ها .پو ...</a></li>
+            <li><a href="data.php"><i class="fa fa-circle-o"></i> مدیریت مقالات و تنظیمات</a></li>
+            <li><a href="simple.php"><i class="fa fa-circle-o"></i>  مدیریت تگ ها وادمین ها .پو ...</a></li>
           </ul>
         </li>
-        
-        
-       
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>مستندات</span></a></li>
         <li>
           <a href="../index.php">
             <i class="fa fa-eye"></i> <span>سایت اصلی</span>
           </a>
         </li>
+        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>مستندات</span></a></li>
         <li class="header">برچسب ها</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>مهم</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>هشدار</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>اطلاعات</span></a></li>
+        <li><a href="#information"><i class="fa fa-circle-o text-aqua"></i> <span>اطلاعات</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

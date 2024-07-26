@@ -1,4 +1,5 @@
-<?php $action=$_GET['action'];
+<?php 
+$action=$_GET['action'];
 if($action!="insert"){$slug=$_GET['slug'];}
 ?>
 <html>

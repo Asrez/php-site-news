@@ -1,4 +1,9 @@
-<?php $page2=true; ?>
+<?php require "config.php"; 
+$action=$_GET['action'];
+if($action!='insert'){ $id=$_GET['id'];
+       $row_select=get_tables_with_id(" `admins` ", $id);
+}
+?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -50,20 +55,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <?php 
-                $action=$_GET['action'];
-                if($action!='insert'){ $id=$_GET['id'];
-                 
-                   
-$link=mysqli_connect("localhost","root","","news");
-                      $query_select="SELECT * FROM admins WHERE id=$id ";
-                      $result_select=mysqli_query($link,$query_select);
-                      $row_select=mysqli_fetch_array($result_select);
-                      $name_admin=$row_select['name'];
-                      $username_admin=$row_select['username'];
-                }
-                 ?>
-              <form role="form" method="post" action="admin_edit_action.php?action=<?php echo $action; if($action!="insert"){ echo "& id=".$id ."& username_admin=". $username_admin ."& name_admin=". $name_admin ;}?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="admin_edit_action.php?action=<?php echo $action; if($action!="insert"){ echo "& id=".$id ;}?>" enctype="multipart/form-data">
                 <!-- text input -->
                 <div class="form-group">
                   <label>نام کاربری </label>
