@@ -1,6 +1,5 @@
 <?php
-session_start();
-$link=mysqli_connect("localhost","root","","news");
+require "../config.php";
 $action=$_GET['action'];
 if($action!="insert"){
 $id=$_GET['id'];
@@ -13,7 +12,7 @@ else{
         ?>
          <script>
         window.alert("مقدار دهی نشده");
-        location.replace("tag_edit.php?action=<?php echo $action; if($action!='insert'){ ?>&id=<?php echo $id;} ?>");
+        location.replace("../tag_edit.php?action=<?php echo $action; if($action!='insert'){ ?>&id=<?php echo $id;} ?>");
     </script>
         <?php
         exit();
@@ -29,7 +28,7 @@ switch ($action)
                        ?>
                        <script>
                            window.alert("ویرایش  شد");
-                           location.replace("simple.php");
+                           location.replace("../simple.php");
                        </script>
                        <?php
                            }
@@ -37,7 +36,7 @@ switch ($action)
                                    ?>
                        <script>
                            window.alert("ویرایش نشد");
-                           location.replace("tag_edit.php?action=<?php echo $action; if($action!='insert'){ ?>&id=<?php echo $id;} ?>");
+                           location.replace("../tag_edit.php?action=<?php echo $action; if($action!='insert'){ ?>&id=<?php echo $id;} ?>");
                        </script>
                        <?php
                            }
@@ -52,7 +51,7 @@ switch ($action)
               ?>
               <script>
                   window.alert("حذف شد");
-                  location.replace("simple.php");
+                  location.replace("../simple.php");
               </script>
               <?php
              }
@@ -60,7 +59,7 @@ switch ($action)
                           ?>
               <script>
                   window.alert("حذف نشد");
-                  location.replace("simple.php");
+                  location.replace("../simple.php");
               </script>
               <?php
                   } 
@@ -81,7 +80,7 @@ switch ($action)
                     ?>
                     <script>
                         window.alert("ثبت شد");
-                        location.replace("simple.php");
+                        location.replace("../simple.php");
                     </script>
                     <?php
                         }
@@ -89,7 +88,7 @@ switch ($action)
                                 ?>
                     <script>
                         window.alert("ثبت نشد");
-                        location.replace("tag_edit.php?action=<?php echo $action; if($action!='insert'){ ?>&id=<?php echo $id;} ?>");
+                        location.replace("../tag_edit.php?action=<?php echo $action; if($action!='insert'){ ?>&id=<?php echo $id;} ?>");
                     </script>
                     <?php
                         }

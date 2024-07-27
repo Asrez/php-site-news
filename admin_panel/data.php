@@ -1,3 +1,10 @@
+<?php
+require "config.php";
+
+$news_result=selectall(" `articles` ");
+$setting_result=selectall(" `setting` ");
+?>
+
 <html>
 <head>
   <meta charset="utf-8">
@@ -6,20 +13,20 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../dist/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="dist/css/bootstrap-theme.css">
   <!-- Bootstrap rtl -->
-  <link rel="stylesheet" href="../../dist/css/rtl.css">
+  <link rel="stylesheet" href="dist/css/rtl.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.css">
+  <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +42,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-<?php include("../../header2.php"); ?>
+<?php include("header.php"); ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -77,20 +84,19 @@
                 <tbody>
                 
                 <?php 
-                    $news_query="SELECT * FROM `articles`";
-                    $news_result=mysqli_query($link,$news_query);
-                    while($news_row=mysqli_fetch_array($news_result)){
+                    while($news_row=$news_result->fetch_assoc()){
                      ?>
-                <tr>
-                <td>                     <a href="article_edit.php?slug=<?= urlencode($news_row['slug']) ?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
-                <a href="article_edit_action.php?slug=<?php echo $news_row['slug'];?>&action=delete" ><button type="button"  class="btn btn-block btn-danger btn-sm"  >حذف</button></a>
+                <tr >
+                <td>                     <a href="article_edit.php?slug=<?= $news_row['slug']; ?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
+                <a href="actions/article_edit_action.php?slug=<?= $news_row['slug'];?>&action=delete" ><button type="button"  class="btn btn-block btn-danger btn-sm"  >حذف</button></a>
+                <a href="read-article.php?slug=<?= $news_row['slug']; ?>"><i class="fa fa-eye"></i></a>
               </td>
-                  <td> <?php echo $news_row['id']; ?> </td>
-                  <td> <?php echo $news_row['title']; ?> </td>
-                  <td> <?php echo $news_row['summery']; ?> </td>
-                  <td> <?php echo $news_row['content']; ?> </td>
-                  <td> <?php echo $news_row['source']; ?> </td>
-                  <td> <?php echo $news_row['publicationdate']; ?> </td>
+                  <td> <?= $news_row['id']; ?> </td>
+                  <td> <?= $news_row['title']; ?> </td>
+                  <td> <?= $news_row['summery']; ?> </td>
+                  <td> <?= $news_row['content']; ?> </td>
+                  <td> <?= $news_row['source']; ?> </td>
+                  <td> <?= $news_row['publicationdate']; ?> </td>
                 </tr>
                   
                 <?php
@@ -123,101 +129,66 @@
                 <tbody>
              
                 <?php
-                $setting_query="SELECT * FROM setting ";
-                $setting_result=mysqli_query($link,$setting_query);
-                while($setting_row=mysqli_fetch_array($setting_result)){
+              
+                while($setting_row=$setting_result->fetch_assoc()){
                 ?>
                 <tr>
-                  <td><a class="fa fa-trash" href="setting_edit_action.php?id=<?php echo $setting_row['id'];?>&action=delete" title="حذف"></a>
+                  <td><a class="fa fa-trash" href="actions/setting_edit_action.php?id=<?php echo $setting_row['id'];?>&action=delete" title="حذف"></a>
                 <a class="fa fa-fw fa-cloud-download" href="setting_edit.php?id=<?php echo $setting_row['id'];?>&action=update" title="ویرایش"></a>
                 </td>
                   
-                  <td><?php echo $setting_row['id'];?></td>
+                  <td><?= $setting_row['id'];?></td>
                   <td><?php
-                  $idd=$setting_row['id'];
-                  switch ($idd) {
+                  switch ($setting_row['id']) {
                     case '1':
                       echo "عکس تبلیغ بخش هدر سایت ";
                       break;
                     case '2':
-                      echo " عکس تبلیغ میانی بالای صفحه اصلی";
+                      echo " عکس تبلیغ میانی بالا";
                       break;
                     case '3':
-                      echo " عکس تبلیغ میانی پایین صفحه اصلی";
+                      echo " عکس تبلیغ میانی پایین";
                       break;
                     case '4':
-                      echo " عکس تبلیغ اول سمت راست صفحه اصلی";
+                      echo " عکس تبلیغ اول سمت چپ ";
                       break;
                     case '5':
-                      echo " عکس تبلیغ دوم سمت راست صفحه اصلی";
+                      echo " عکس تبلیغ دوم سمت چپ ";
                       break;
                     case '6':
-                      echo " عکس تبلیغ سوم سمت راست صفحه اصلی";
+                      echo " عکس تبلیغ سوم سمت چپ ";
                       break;
                     case '7':
-                      echo " عکس تبلیغ چهارم سمت راست صفحه اصلی";
+                      echo "عکس لوگو سایت (قسمت هدر) ";
                       break;
                     case '8':
-                      echo " عکس تبلیغ پنجم سمت راست صفحه اصلی";
+                      echo " عکس تبلیغ اول سمت راست ";
                       break;
                       case '9':
-                        echo " عکس تبلیغ ششم سمت راست صفحه اصلی";
+                        echo " عکس تبلیغ دوم سمت راست";
                         break;
                       case '10':
-                        echo " عکس تبلیغ هفتم سمت راست صفحه اصلی";
+                        echo " عکس تبلیغ سوم سمت راست ";
                         break;
                       case '11':
-                        echo " عکس تبلیغ هشتم سمت راست صفحه اصلی";
+                        echo " عکس تبلیغ چهارم سمت راست ";
                         break;
                       case '12':
-                        echo " عکس تبلیغ اول سمت راست صفحه نمایش خبر";
+                        echo "اینستاگرام";
                         break;
                       case '13':
-                        echo " عکس تبلیغ دوم سمت راست صفحه نمایش خبر";
+                        echo "تلگرام";
                         break;
                       case '14':
-                        echo " عکس تبلیغ سوم سمت راست صفحه نمایش خبر";
+                        echo "توییتر";
                         break;
                       case '15':
-                        echo " عکس تبلیغ چهارم سمت راست صفحه نمایش خبر";
+                        echo "فیسبوک";
                         break;
-                      case '16':
-                        echo " عکس  تبلیغ اول سمت چپ صفحه نمایش خبر";
-                        break;
-                        case '17':
-                          echo " عکس  تبلیغ دوم سمت چپ صفحه نمایش خبر";
-                          break;
-                        case '18':
-                          echo "عکس تبلیغ سوم سمت چپ صفحه نمایش خبر";
-                          break;
-                        case '19':
-                          echo "عکس لوگو";
-                          break;
-                        case '20':
-                          echo "تبلیغ عکس اول سمت چپ صفحه درباره ما و ارتباط با ما";
-                          break;
-                        case '21':
-                          echo "تبلیغ عکس دوم سمت چپ صفحه درباره ما و ارتباط با ما";
-                          break;
-                        case '22':
-                          echo "تبلیغ عکس سوم سمت چپ صفحه درباره ما و ارتباط با ما";
-                          break;
-                        case '23':
-                          echo "تبلیغ عکس اول سمت راست صفحه درباره ما و ارتباط با ما";
-                          break;
-                        case '24':
-                          echo "تبلیغ عکس دوم سمت راست صفحه درباره ما و ارتباط با ما";
-                          break;
-                          case '25':
-                            echo "تبلیغ عکس سوم سمت راست صفحه درباره ما و ارتباط با ما";
-                            break;
-                          case '26':
-                            echo "تبلیغ عکس چهارم سمت راست صفحه درباره ما و ارتباط با ما";
-                            break;
                   }
                   ?></td>
-                  <td><?php echo $setting_row['value_setting'];?> </td>
-                  <td><?php echo $setting_row['link'];?> </td>
+                  <td><?= $setting_row['value_setting'];?> </td>
+                  <td><?= $setting_row['link'];?> </td>
                 </tr>
                 <?php } ?>
               
@@ -236,23 +207,23 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <?php include("../../footer.php"); ?>
+  <?php include("footer.php"); ?>
 
 <!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
-<script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="dist/js/demo.js"></script>
 <!-- page script -->
 <script>
   $(function () {

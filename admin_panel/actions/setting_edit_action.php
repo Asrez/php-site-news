@@ -1,11 +1,10 @@
 <?php
-session_start();
-$link=mysqli_connect("localhost","root","","news");
+require "../config.php";
 $action=$_GET['action'];
 $id=$_GET['id'];
 if(isset($_POST['qlink'] )&& !empty($_POST['qlink'])){
     $image=basename($_FILES["image"]["name"]);
-    $target_dir="../../../image/";
+    $target_dir="../image/";
     $target_file=$target_dir.basename($_FILES["image"]["name"]);
     $uploadok=1;
     $imagefiletype=pathinfo($target_file,PATHINFO_EXTENSION);
@@ -16,7 +15,7 @@ else{
     ?>
     <script>
         window.alert("فیلد ها مقدار دهی نشده اند");
-        location.replace("setting_edit.php?id=<?php echo $id; ?>");
+        location.replace("../setting_edit.php?id=<?php echo $id; ?>");
     </script>
     <?php
     exit();
@@ -31,7 +30,7 @@ if($action!="delete"){
     
     <script type="text/javascript">
     window.alert("شما فقط پسوند های png , jpg , jpeg ,gif مجاز هستید");
-        location.replace("article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?= urlencode($slug) ?>");
+        location.replace("../article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?= urlencode($slug) ?>");
     </script>');
         $uploadok=0;
     }
@@ -48,7 +47,7 @@ if($action=='update'){
               ?>
               <script>
                   window.alert("ویرایش  شد");
-                  location.replace("data.php");
+                  location.replace("../data.php");
               </script>
               <?php
                   }
@@ -56,7 +55,7 @@ if($action=='update'){
                           ?>
               <script>
                   window.alert("ویرایش نشد");
-                  location.replace("setting_edit.php?id=<?php echo $id; ?>");
+                  location.replace("../setting_edit.php?id=<?php echo $id; ?>");
               </script>
               <?php
                   }
@@ -72,7 +71,7 @@ if($action=="delete"){
               ?>
               <script>
                   window.alert("حذف شد");
-                  location.replace("data.php");
+                  location.replace("../data.php");
               </script>
               <?php
                   }
@@ -80,7 +79,7 @@ if($action=="delete"){
                           ?>
               <script>
                   window.alert("حذف نشد");
-                  location.replace("setting_edit.php?id=<?php echo $id; ?>");
+                  location.replace("../setting_edit.php?id=<?php echo $id; ?>");
               </script>
               <?php
                   }

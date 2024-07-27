@@ -150,12 +150,6 @@ $venify_result=commentswithVenify(0);
           </ul>
         </li>
        
-        <li>
-          <a href="widgets.php">
-            <i class="fa fa-th"></i> <span>ویجت ها</span>
-          </a>
-        </li>
-       
         <li class="treeview" id="information">
           <a href="data.php">
             <i class="fa fa-table" ></i> <span>مدیریت اطلاعات</span>

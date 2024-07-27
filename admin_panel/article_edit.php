@@ -1,6 +1,25 @@
 <?php 
-$action=$_GET['action'];
-if($action!="insert"){$slug=$_GET['slug'];}
+require "config.php";
+if(isset($_GET['action'])){
+$action = $_GET['action'];
+}else{
+  ?>
+  <script>
+    location.replace("404.php");
+  </script>
+  <?php
+  exit;
+}
+if($action == "update"){
+  $slug = $_GET['slug'];
+  $row_up = get_article_with_slug($slug);
+  $id = $row_up['id'];
+  $admin_row = get_tables_with_id(" `admins` ",$id);
+  $article_tag = getTagsInner($id);
+  
+}
+$tags_result = selectall(" `tags` ");
+  $category_parent_0 = get_tables_with_where(" `categorys` "," WHERE `parent_id` != 0");
 ?>
 <html>
 <head>
@@ -10,18 +29,18 @@ if($action!="insert"){$slug=$_GET['slug'];}
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../dist/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="dist/css/bootstrap-theme.css">
   <!-- Bootstrap rtl -->
-  <link rel="stylesheet" href="../../dist/css/rtl.css">
+  <link rel="stylesheet" href="dist/css/rtl.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.css">
+  <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,23 +53,7 @@ if($action!="insert"){$slug=$_GET['slug'];}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-  <?php include("../../header2.php"); 
-  if($action!="insert"){
-    
-  $row_up=$link->prepare("SELECT * FROM `articles` WHERE `slug`=?;");
-  $row_up->bind_param("s",$slug);
-  $row_up->execute();
-  $admin_id=$row_up['admin_id'];
-  $ccategory_id=$row_up['category_id'];
-  $id_art_for_tag=$row_up['id'];
-  $article_tag=$link->prepare("SELECT * FROM `article_tag` WHERE `article_id`=?; ");
-  $article_tag->bind_param("i",$id_art_for_tag);
-  $find_row=$link->prepare("SELECT * FROM admins WHERE id=?'");
-  $find_row->bind_param("i",$admin_id);
-  $find_row->execute();
-
-  }
-  ?>
+  <?php include("header.php"); ?>
 <div class="wrapper">
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -70,7 +73,7 @@ if($action!="insert"){$slug=$_GET['slug'];}
             <!-- /.box-header -->
             <div class="box-body">
                 
-              <form role="form" method="post" action="article_edit_action.php?action=<?php echo $action ; if($action!='insert'){echo "&slug=".$slug ;}?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="actions/article_edit_action.php?action=<?php echo $action ; if($action!='insert'){echo "&slug=".$slug ;}?>" enctype="multipart/form-data">
                 <!-- text input -->
                 <div class="form-group">
                   <label>عنوان</label>
@@ -78,31 +81,29 @@ if($action!="insert"){$slug=$_GET['slug'];}
                 </div>
                 <div class="form-group">
                   <label>نویسنده</label>
-                  <input type="text" class="form-control" name="admin"  id="admin" value="<?php 
-                  if($action=='insert'){
-                       if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true)
+                  <input type="text" class="form-control" name="admin"  id="admin" 
+                  value="<?php if($action == 'insert'){
+                       if(isset($_SESSION["state_login"]) && $_SESSION["state_login"] === true)
                       {
-                       echo $_SESSION["name"];
+                             echo $_SESSION["name"];
                       }
                     }
-                  if($action=='update')
+                  if($action == 'update')
                       {
-                    echo $find_row['name'];
+                    echo $admin_row['name'];
                    }?>" disabled>
                 </div>
 
                 <?php 
-                $tags_query="SELECT * FROM tags";
-                $tags_result=mysqli_query($link,$tags_query);
-                while($tags_row=mysqli_fetch_array($tags_result)){
+                while($tags_row=$tags_result->fetch_assoc()){
                 
                   
                 ?>
                 <div class="form-group">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="tags[]"  value="<?php echo $tags_row['id']; ?>" >
-                    <?php echo $tags_row['title']; ?>
+                      <input type="checkbox" name="tags[]"  value="<?= $tags_row['id']; ?>" >
+                    <?= $tags_row['title']; ?>
                     </label>
                   </div>
                 <?php } 
@@ -114,12 +115,10 @@ if($action!="insert"){$slug=$_GET['slug'];}
                   <label>دسته بندی</label>
                   <select class="form-control" name="category">
                     <?php
-                   $categorys_query1="SELECT * FROM `categorys` WHERE `parent_id`!=0";
-                    $categorys_result1=mysqli_query($link,$categorys_query1);
-                    while($categorys_row1=mysqli_fetch_array($categorys_result1)){
+                    while($categorys_row1=$category_parent_0->fetch_assoc()){
                    
                       ?>
-                    <option value="<?php echo $categorys_row1['id'] ?>" <?php if($action!="insert"){ if ($ccategory_id==$categorys_row1['id']){echo "selected";} }?>><?php echo $categorys_row1['title']; ?></option>
+                    <option value="<?= $categorys_row1['id'] ?>" <?php if($action!="insert"){ if ($row_up['category_id']==$categorys_row1['id']){echo "selected";} }?>><?php echo $categorys_row1['title']; ?></option>
                    <?php }  ?>
                   </select>
                       </div>
@@ -189,16 +188,16 @@ if($action!="insert"){$slug=$_GET['slug'];}
     </section>
     <!-- /.content -->
   </div>
-<?php include("../../footer.php"); ?>
+<?php include("footer.php"); ?>
 <!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="dist/js/demo.js"></script>
 </body>
 </html>

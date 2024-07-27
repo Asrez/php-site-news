@@ -1,4 +1,10 @@
-<?php $page2=true; ?>
+<?php 
+require "config.php" ;
+$admin_result=selectall(" `admins` ");
+$category_result=get_categorys();
+$tag_result=selectall(" `tags` ");
+$comment_result=selectall(" `comments` ");
+?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -7,18 +13,18 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../dist/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="dist/css/bootstrap-theme.css">
   <!-- Bootstrap rtl -->
-  <link rel="stylesheet" href="../../dist/css/rtl.css">
+  <link rel="stylesheet" href="dist/css/rtl.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.css">
+  <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,7 +38,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-    <?php include("../../header2.php") ;?>
+    <?php include("header.php") ;?>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -70,28 +76,27 @@
                   <th >تاریخ ورود</th>
                 </tr>
                 <?php 
-                $admin_query="SELECT * FROM admins ";
-                $admin_result=mysqli_query($link,$admin_query);
-                while($admin_row=mysqli_fetch_array($admin_result)){
+                
+                while($admin_row=$admin_result->fetch_assoc()){
                 ?>
                 <tr>
-                  <td>  <a href="admin_edit.php?id=<?php echo $admin_row['id'];?> & action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  
+                  <td>  <a href="admin_edit.php?id=<?= $admin_row['id'];?> & action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  
                   <?php 
                        if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true && $_SESSION["admin_id"]!=13 && $admin_row['id']==13){
                       echo "disabled";
 }  ?>
                   >ویرایش</button></a>
-                     <?php if ($admin_row['id']!=13) { ?>   <a href="admin_edit_action.php?id=<?php echo $admin_row['id'];?> & action=delete"><button type="button" class="btn btn-block btn-danger btn-sm"
+                     <?php if ($admin_row['id']!=13) { ?>   <a href="actions/admin_edit_action.php?id=<?php echo $admin_row['id'];?> & action=delete"><button type="button" class="btn btn-block btn-danger btn-sm"
                   <?php if($_SESSION["admin_id"]!=13 and $_SESSION["admin_id"]!=$admin_row['id']){
                     echo "disabled";
                   } 
                   ?>
                         >خذف</button></a> <?php } ?>
                 </td>
-                  <td><?php echo $admin_row['id'] ;?></td>
-                  <td><?php echo $admin_row['name'] ;?></td>
-                  <td><?php echo $admin_row['username'] ;?></td>
-                  <td><?php echo $admin_row['date'] ;?>
+                  <td><?= $admin_row['id'] ;?></td>
+                  <td><?= $admin_row['name'] ;?></td>
+                  <td><?= $admin_row['username'] ;?></td>
+                  <td><?= $admin_row['date'] ;?>
                </td>
                 </tr>
                 
@@ -120,31 +125,28 @@
                 </tr>
 
                   <?php
-                    $category_query="SELECT * FROM categorys WHERE parent_id=0;";
-                    $category_result=mysqli_query($link,$category_query);
-                    while($category_row=mysqli_fetch_array($category_result)){
-                    $id_category=$category_row['id'];
+                
+                    foreach($category_result['pcat'] as $category_row ){
                   ?>
                 <tr>
-                     <td ><?php echo $id_category; ?></td>
-                     <td><?php echo $category_row['title']; ?> <a href="action_category_edit.php?id=<?php echo $id_category; ?>&action=delete& parent_id=0"> <i class="fa fa-fw fa-trash"></i></a>
-                          <a href="category_edit.php?id=<?php echo $id_category; ?>&action=update& parent_id=0"> <i class="fa fa-fw  fa-pencil"></i></a></td>
+                     <td ><?= $category_row['id']; ?></td>
+                     <td><?= $category_row['title']; ?> <a href="actions/action_category_edit.php?id=<?= $category_row['id']; ?>&action=delete& parent_id=0"> <i class="fa fa-fw fa-trash"></i></a>
+                          <a href="category_edit.php?id=<?= $id_category; ?>&action=update& parent_id=0"> <i class="fa fa-fw  fa-pencil"></i></a></td>
                      <td>
                                    <?php
-                                        $category_query1="SELECT * FROM categorys WHERE parent_id='$id_category';";
-                                        $category_result1=mysqli_query($link,$category_query1);
-                                        while($category_row1=mysqli_fetch_array($category_result1)){
-                                        $id_categoryy=$category_row1['id'];
-                                        $parent_id=$id_category;
+                                         
+                                        foreach ($category_result['scat'] as $category_row1 ){
+                                          if($category_row1['parent_id'] == $category_row['id']){
                                      ?>
                        
-                                   <p><?php echo $category_row1['title']; ?> (<?php echo $category_row1['id']; ?> )
-                                   <a href="action_category_edit.php?id=<?php echo $id_categoryy; ?>&action=delete& parent_id=<?php echo $parent_id;  ?>"> <i class="fa fa-fw fa-trash"></i></a>
-                                   <a href="category_edit.php?id=<?php echo $id_categoryy; ?>&action=update& parent_id=<?php echo $parent_id;  ?>"> <i class="fa fa-fw  fa-pencil"></i></a>
+                                   <p><?= $category_row1['title']; ?> (<?= $category_row1['id']; ?> )
+                                   <a href="actions/action_category_edit.php?id=<?= $category_row1['id'] ;?>&action=delete& parent_id=<?= $category_row1['parent_id']; ?>"> <i class="fa fa-fw fa-trash"></i></a>
+                                   <a href="category_edit.php?id=<?= $category_row1['id']; ?>&action=update& parent_id=<?= $category_row1['parent_id'];  ?>"> <i class="fa fa-fw  fa-pencil"></i></a>
                                         </p>
                                    
-                                 <?php } ?>
-                                 <a href="category_edit.php?action=insert& parent_id=<?php echo $id_category;  ?>"><i class="fa fa-fw  fa-plus"></i></a>
+                                 <?php }
+                                 } ?>
+                                 <a href="category_edit.php?action=insert& parent_id=<?= $category_row1['id']; ?>"><i class="fa fa-fw  fa-plus"></i></a>
                        </td>
                    </tr>
                     <?php } ?>
@@ -178,15 +180,14 @@
                   <th>عنوان</th>
                 </tr>
                 <?php
-                $tag_query="SELECT * FROM tags ORDER BY id";
-                $tag_result=mysqli_query($link,$tag_query);
-                while($tag_row=mysqli_fetch_array($tag_result)){
+                
+                while($tag_row=$tag_result->fetch_assoc()){
                  ?>
                 <tr>
-                  <td><a href="tag_edit.php?action=update&id=<?php echo $tag_row['id'];?>"><button type="button" class="btn btn-block btn-warning btn-sm">ویرایش</button></a>
-                  <a href="tag_edit_action.php?action=delete&id=<?php echo $tag_row['id'];?>"><button type="button" class="btn btn-block btn-danger btn-sm">حذف</button></a></td>
-                  <td><?php echo $tag_row['id'] ;?></td>
-                  <td><?php echo $tag_row['title'] ;?></td>
+                  <td><a href="tag_edit.php?action=update&id=<?= $tag_row['id'];?>"><button type="button" class="btn btn-block btn-warning btn-sm">ویرایش</button></a>
+                  <a href="actions/tag_edit_action.php?action=delete&id=<?= $tag_row['id'];?>"><button type="button" class="btn btn-block btn-danger btn-sm">حذف</button></a></td>
+                  <td><?= $tag_row['id'] ;?></td>
+                  <td><?= $tag_row['title'] ;?></td>
                 </tr>
                 <?php } ?>
                 
@@ -226,27 +227,23 @@
                   <th>وضعیت</th>
                   <th>متن</th>
                 </tr>
-                <?php
-                $comment_query="SELECT * FROM comments ";
-                $comment_result=mysqli_query($link,$comment_query);
-                while($comment_row=mysqli_fetch_array($comment_result)){
-
+                <?php    
+                while($comment_row=$comment_result->fetch_assoc()){
                 ?>
                 <tr>
                   <td><?php
-                  $venify=$comment_row['venify'];
-                  if($venify==0){ ?>  <a href="comment_action.php?action=update&id=<?php echo $comment_row['id'];?>"><button type="button" class="btn btn-block btn-success btn-sm">تایید</button></a>
+                  if($comment_row['venify'] == 0){ ?>  <a href="actions/comment_action.php?action=update&id=<?= $comment_row['id'];?>"><button type="button" class="btn btn-block btn-success btn-sm">تایید</button></a>
                     <?php } ?>
-                  <a href="comment_action.php?action=delete&id=<?php echo $comment_row['id'];?>"><button type="button" class="btn btn-block btn-danger btn-sm">حذف</button></a></td>
-                  <td><?php echo $comment_row['id'];?></td>
-                  <td><?php echo $comment_row['name'];?></td>
-                  <td><?php echo $comment_row['date'];?></td>
+                  <a href="actions/comment_action.php?action=delete&id=<?= $comment_row['id'];?>"><button type="button" class="btn btn-block btn-danger btn-sm">حذف</button></a></td>
+                  <td><?= $comment_row['id'];?></td>
+                  <td><?= $comment_row['name'];?></td>
+                  <td><?= $comment_row['date'];?></td>
                   <td><span class="label <?php if(($comment_row['venify'])==1)
                   { echo 'label-success' ;}
                    else{ echo 'label-warning'; }?>">
-                   <?php if(($comment_row['venify'])==1){ echo 'تایید شده' ;}
+                   <?php if(($comment_row['venify']) == 1){ echo 'تایید شده' ;}
                     else{ echo 'در انتظار تایید'; }?> </span></td>
-                  <td><?php echo $comment_row['comment'];?> </td>
+                  <td><?= $comment_row['comment'];?> </td>
                 </tr>
                 <?php } ?>
                 
@@ -261,20 +258,20 @@
     <!-- /.content -->
   </div>
 
-  <?php include("../../footer.php"); ?>
+  <?php include("footer.php"); ?>
 
 
 <!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Slimscroll -->
-<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="dist/js/demo.js"></script>
 </body>
 </html>

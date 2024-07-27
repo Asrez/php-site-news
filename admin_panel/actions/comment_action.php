@@ -1,5 +1,5 @@
 <?php
-$link=mysqli_connect("localhost","root","","news");
+require "../config.php";
 $action=$_GET['action'];
 $id=$_GET['id'];
 switch ($action) {
@@ -12,7 +12,7 @@ switch ($action) {
               ?>
               <script>
                   window.alert("تایید  شد");
-                  location.replace("simple.php");
+                  location.replace("../simple.php");
               </script>
               <?php
                   }
@@ -20,7 +20,7 @@ switch ($action) {
                           ?>
               <script>
                   window.alert("تایید نشد");
-                  location.replace("simple.php");
+                  location.replace("../simple.php");
               </script>
               <?php
                   }
@@ -35,7 +35,7 @@ switch ($action) {
               ?>
               <script>
                   window.alert("حذف شد");
-                  location.replace("simple.php");
+                  location.replace("../simple.php");
               </script>
               <?php
                   }
@@ -43,7 +43,7 @@ switch ($action) {
                           ?>
               <script>
                   window.alert("حذف نشد");
-                  location.replace("simple.php");
+                  location.replace("../simple.php");
               </script>
               <?php
                   }

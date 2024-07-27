@@ -58,7 +58,7 @@ while($row_category_parent = $result_category_parent->fetch_assoc()){
                         <li><a href="<?= $row_twitter['link']; ?>"><i class="fab fa-twitter"></i></a> </li>
                         <li><a href="<?= $row_instagram['link']; ?>"><i class="fab fa-instagram"></i></a> </li>
                         <li><a href="<?= $row_telegram['link']; ?>"><i class="fab fa-telegram-plane"></i></a></li>
-                        <li><a href="admin_panel/pages/examples/login.php"><i class="fas fa-rss"></i></a> </li>
+                        <li><a href="admin_panel/login.php"><i class="fas fa-rss"></i></a> </li>
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 <?php
-session_start();
-$link=mysqli_connect("localhost","root","","news");
+require "../config.php";
 $action=$_GET['action'];
 if($action!="insert"){
     $id=$_GET['id'];}
@@ -20,7 +19,7 @@ isset($_POST["password"]) && !empty($_POST["password"]))
                 $password=$_POST['password'];
                 $image=basename($_FILES["image"]["name"]);
                 $image=basename($_FILES["image"]["name"]);
-                $target_dir="../../../image/";
+                $target_dir="../image/";
                 $target_file=$target_dir.basename($_FILES["image"]["name"]);
                 $uploadok=1;
                 $imagefiletype=pathinfo($target_file,PATHINFO_EXTENSION);
@@ -32,7 +31,7 @@ else{
   ?>
   <script type="text/javascript">
     window.alert("برخی فیلد ها مقدار دهی نشده است");
-location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+location.replace("../admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
 </script>
   <?php
  }
@@ -47,7 +46,7 @@ if($action!="delete"){
     
     <script type="text/javascript">
     window.alert("شما فقط پسوند های png , jpg , jpeg ,gif مجاز هستید");
-        location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+        location.replace("../admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
     </script>');
         $uploadok=0;
     }
@@ -56,7 +55,7 @@ if($action!="delete"){
     
     <script type="text/javascript">
     window.alert("فایل انتخابی در سرویس دهنده موجود است");
-        location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+        location.replace("../admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
     </script>');
     }
      if(move_uploaded_file($_FILES["image"]["tmp_name"],$target_file)){
@@ -81,7 +80,7 @@ switch ($action){
               ?>
               <script>
                   window.alert("حذف شد");
-                  location.replace("simple.php");
+                  location.replace("../simple.php");
               </script>
               <?php
              } }
@@ -89,7 +88,7 @@ switch ($action){
                           ?>
               <script>
                   window.alert("حذف نشد");
-                  location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+                  location.replace("../admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
               </script>
               <?php
                   }
@@ -109,7 +108,7 @@ switch ($action){
                        ?>
                        <script>
                            window.alert("ویرایش  شد");
-                           location.replace("simple.php");
+                           location.replace("../simple.php");
                        </script>
                        <?php
                            }
@@ -117,7 +116,7 @@ switch ($action){
                                    ?>
                        <script>
                            window.alert("ویرایش نشد");
-                           location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+                           location.replace("../admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
                        </script>
                        <?php
                            }
@@ -126,7 +125,7 @@ switch ($action){
                 ?>
                 <script>
                     window.alert("نام کاربری یا نام را تغییر دهید");
-                    location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+                    location.replace("../admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
                 </script>
                 <?php
             }
@@ -137,14 +136,11 @@ switch ($action){
         
 }
 if($action=="insert"){
-    $query__="SELECT COUNT(id) AS count FROM admins WHERE username='$username' OR name='$name'";
-$result__=mysqli_query($link,$query__);
-$row__=mysqli_fetch_array($result__);
-
+    $row__=get_count_tables("`admins` ","WHERE username='$username' OR name='$name'");
 if($row__['count']>0){
     ?>
  <script>   window.alert("نام کاربری یا نام را تغییر دهید");
-            location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+            location.replace("../admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
  </script>
     <?php
 }         
@@ -159,7 +155,7 @@ $date=date('Y-m-d');
                     ?>
                     <script>
                         window.alert("ثبت شد");
-                        location.replace("simple.php");
+                        location.replace("../simple.php");
                     </script>
                     <?php
                         }
@@ -167,7 +163,7 @@ $date=date('Y-m-d');
                                 ?>
                     <script>
                         window.alert("ثبت نشد");
-                        location.replace("admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
+                        location.replace("../admin_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & id=<?php  echo $id ;  }?>");
                     </script>
                     <?php
                         }

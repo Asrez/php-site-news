@@ -1,7 +1,14 @@
 <?php
 session_start();
 $link=mysqli_connect("localhost" , "root" ,"" ,"news") ;
-
+if(!(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true))
+{
+  ?>
+  <script>
+    location.replace("404.html");
+  </script>
+  <?php
+}
 function get_count_tables($table_name,$where) {
     global $link;
 
@@ -55,12 +62,12 @@ function get_tables_with_id($table_name,$id) {
 
 
 }
-function get_article_with_slug($id) {
+function get_article_with_slug($slug) {
     global $link;
 
-    $table_sql="SELECT * FROM `articles` WHERE `id` = ? ; ";
+    $table_sql="SELECT * FROM `articles` WHERE `slug` = ? ; ";
     $table_query = $link->prepare($table_sql);
-    $table_query->bind_param("i",$id);
+    $table_query->bind_param("s",$slug);
     $table_query->execute();
     $table_result = $table_query->get_result();
     $table_row = $table_result->fetch_assoc();
@@ -69,5 +76,59 @@ function get_article_with_slug($id) {
 
 
 }
+function getTagsInner($id)
+{  
+   global $link;
+
+   $inner_sql="SELECT `tags`.`title` , `tags`.`id` , `article_tag`.`article_id` FROM `tags` INNER JOIN `article_tag` ON `tags`.`id` = `article_tag`.`tag_id` WHERE `article_tag`.`article_id` = ?; ";
+   $inner_query = $link->prepare($inner_sql);
+   $inner_query->bind_param("i",$id);
+   $inner_query->execute();
+   $inner_result = $inner_query->get_result();   
+   return $inner_result;
+}
+
+function selectall($table_name){
+    global $link;
+
+    $table_sql="SELECT * FROM ".$table_name." ; ";
+    $table_query = $link->prepare($table_sql);
+    $table_query->execute();
+    $table_result = $table_query->get_result();
+    return $table_result;
+}
+function get_tables_with_where($table_name,$where) {
+    global $link;
+
+    $t_sql="SELECT * FROM ".$table_name." ".$where." ; ";
+    $t_query = $link->prepare($t_sql);
+    $t_query->execute();
+    $t_result = $t_query->get_result();
+
+    return $t_result;
+
+
+}
+
+function get_categorys() {
+    global $link;
+    
+    $parent_category=[];
+    $sub_category=[];
+    $category_result=get_tables_with_where(" `categorys` ","WHERE `parent_id`=0");
+    while($category_row=$category_result->fetch_assoc()){
+        $parent_category[]=$category_row;
+        $id_category = $category_row['id'];
+        $category_result1=get_tables_with_where(" `categorys` ","WHERE `parent_id`='$id_category';");
+        while($category_row1=$category_result1->fetch_assoc()){
+            $sub_category[]=$category_row1;
+        }
+    }
+     $category=["pcat"=>$parent_category,"scat"=>$sub_category];
+    return $category;
+
+
+}
+
 
 ?>

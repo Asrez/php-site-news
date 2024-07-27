@@ -7,17 +7,17 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../dist/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="dist/css/bootstrap-theme.css">
   <!-- Bootstrap rtl -->
-  <link rel="stylesheet" href="../../dist/css/rtl.css">
+  <link rel="stylesheet" href="dist/css/rtl.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.css">
+  <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
+  <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,13 +32,13 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="action_login.php"><b>ورود به سایت</b></a>
+    <a href="login.php"><b>ورود به سایت</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">فرم زیر را تکمیل کنید و ورود بزنید</p>
 
-    <form action="action_login.php" method="post" name="form1">
+    <form action="actions/action_login.php" method="post" name="form1">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="username" name="username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -71,7 +71,6 @@
     <!-- /.social-auth-links -->
 
     <a href="#">رمز عبورم را فراموش کرده ام.</a><br>
-    <a href="register.html" class="text-center">ثبت نام</a>
 
   </div>
   <!-- /.login-box-body -->
@@ -79,11 +78,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="../../plugins/iCheck/icheck.min.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
 <script>
   $(function () {
     $('input').iCheck({

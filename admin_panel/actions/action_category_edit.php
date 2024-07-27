@@ -1,5 +1,5 @@
 <?php
-$link=mysqli_connect("localhost","root","","news");
+require "../config.php";
 $action=$_GET['action'];
 if($action!="insert"){
 $id=$_GET['id'];}

@@ -1,8 +1,5 @@
 <?php 
-session_start();
-$link=mysqli_connect("localhost","root","","news");
-
-
+require "../config.php";
 if(
   isset($_POST["username"]) && !empty($_POST["username"])&&
   isset($_POST["password"]) && !empty($_POST["password"])
@@ -16,14 +13,13 @@ if(
   ?>
   <script> 
   window.alert("برخی فیلد ها مقدار دهی نشده اند ");
-  location.replace("login.php");
+  location.replace("../login.php");
   </script> 
   <?php
   }
 
-  $query="SELECT * FROM admins WHERE username='$username' AND password='$password'; ";
-  $result=mysqli_query($link,$query);
-  $row=mysqli_fetch_array($result);
+  $result=get_tables_with_where(" `admins` "," WHERE `username` = $username AND `password`= $password");
+  $row=$result->fetch_assoc();
   if($row){
     $_SESSION["state_login"]=true;
     $_SESSION["name"]=$row['name'];
@@ -31,13 +27,13 @@ if(
     $_SESSION["admin_image"]=$row['image'];
     $_SESSION["admin_id"]=$row['id'];
     echo ("<script > window.alert('{$row['name']}به پنل ادمین خوش آمدید');
-    location.replace('../../index2.php');
+    location.replace('../index.php');
 </script>");
   }
 
   else{
     echo ("<script> window.alert('ادمینی با این مشخصات وجود ندارد');
-    location.replace('login.php'); </script>");
+    location.replace('../login.php'); </script>");
   }
  
   ?>
