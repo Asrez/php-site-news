@@ -1,14 +1,14 @@
 <?php
 require "../config.php";
-$action=$_GET['action'];
-$id=$_GET['id'];
+$action = $_GET['action'];
+$id = $_GET['id'];
 if(isset($_POST['qlink'] )&& !empty($_POST['qlink'])){
-    $image=basename($_FILES["image"]["name"]);
-    $target_dir="../image/";
-    $target_file=$target_dir.basename($_FILES["image"]["name"]);
-    $uploadok=1;
-    $imagefiletype=pathinfo($target_file,PATHINFO_EXTENSION);
-    $linkQ=$_POST['qlink'] ;
+    $image = basename($_FILES["image"]["name"]);
+    $target_dir = "../../image/";
+    $target_file = $target_dir.basename($_FILES["image"]["name"]);
+    $uploadok = 1;
+    $imagefiletype = pathinfo($target_file,PATHINFO_EXTENSION);
+    $linkQ = $_POST['qlink'] ;
 }
 else{
     if($action=='update'){
@@ -22,7 +22,7 @@ else{
     }
 }           
  
-if($action!="delete"){
+if($action != "delete"){
 
     if($imagefiletype!="jpg" &&$imagefiletype!="png"&& $imagefiletype!="jpeg" && $imagefiletype!="gif")
     {
@@ -39,7 +39,7 @@ if($action!="delete"){
      move_uploaded_file($_FILES["image"]["tmp_name"],$target_file);}
 }
 
-if($action=='update'){
+if($action == 'update'){
     $update = $link->prepare("UPDATE `setting` SET `value_setting`=?,`link`=? WHERE `id`=?");
        if($update){
           $update->bind_param("ssi",$image,$linkQ , $id);
@@ -55,15 +55,15 @@ if($action=='update'){
                           ?>
               <script>
                   window.alert("ویرایش نشد");
-                  location.replace("../setting_edit.php?id=<?php echo $id; ?>");
+                  location.replace("../setting_edit.php?id=<?= $id; ?>");
               </script>
               <?php
                   }
                 } 
             }
-if($action=="delete"){
-    $nullimg="nullimg.png";
-    $liink="";
+if($action == "delete"){
+    $nullimg = "nullimg.png";
+    $liink = "";
     $delete = $link->prepare("UPDATE `setting` SET `value_setting`=? ,`link`=? WHERE `id`=?;");
        if($delete){
           $delete->bind_param("ssi",$nullimg,$liink,$id);
@@ -79,7 +79,7 @@ if($action=="delete"){
                           ?>
               <script>
                   window.alert("حذف نشد");
-                  location.replace("../setting_edit.php?id=<?php echo $id; ?>");
+                  location.replace("../setting_edit.php?id=<?= $id; ?>");
               </script>
               <?php
                   }

@@ -1,14 +1,14 @@
 <?php
 require "config.php";
 if(isset($_POST['btn'])){
-  $pass=$_POST['password'];
-  $user=$_SESSION['username'];
-  $passtrue_sql="SELECT * FROM `admins` WHERE `username` = ? AND `password` = ? ;";
-  $passtrue=$link->prepare($passtrue_sql);
+  $pass = $_POST['password'];
+  $user = $_SESSION['username'];
+  $passtrue_sql = "SELECT * FROM `admins` WHERE `username` = ? AND `password` = ? ;";
+  $passtrue = $link->prepare($passtrue_sql);
   $passtrue->bind_param("ss",$user, $pass);
   $passtrue->execute();
-  $result=$passtrue->get_result();
-  $row=$result->fetch_assoc();
+  $result = $passtrue->get_result();
+  $row = $result->fetch_assoc();
   if($row){
     ?>
     <script type='text/javascript'> window.alert('خوش آمدید ');

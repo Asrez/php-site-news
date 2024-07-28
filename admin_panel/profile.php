@@ -2,8 +2,8 @@
 require "config.php";
 if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true)
 {
-$adminn_id=$_SESSION["admin_id"];
-$row_count_article=get_count_tables(" `articles` ","WHERE `admin_id`='$adminn_id'");
+$adminn_id = $_SESSION["admin_id"];
+$row_count_article = get_count_tables(" `articles` ","WHERE `admin_id`='$adminn_id'");
 }
 else{
   ?>
@@ -13,11 +13,11 @@ else{
   <?php
   exit();
 }
-$result__article=get_tables_with_where(" `articles` ","WHERE `admin_id`='$adminn_id'");
+$result__article = get_tables_with_where(" `articles` ","WHERE `admin_id`='$adminn_id'");
 
 
- $result=get_tables_with_where(" `admins` ","WHERE `id`='$adminn_id'");
- $row=$result->fetch_assoc();
+ $result = get_tables_with_where(" `admins` ","WHERE `id`='$adminn_id'");
+ $row = $result->fetch_assoc();
  ?>
  
 
@@ -111,13 +111,13 @@ $result__article=get_tables_with_where(" `articles` ","WHERE `admin_id`='$adminn
             <div class="tab-content">
               
               <div class="active tab-pane" id="activity">
-              <?php  while($row__article=$result__article->fetch_assoc()){ ?>
+              <?php  while($row__article = $result__article->fetch_assoc()){ ?>
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="dist/img/<?php echo $_SESSION["admin_image"]; ?>" alt="user image">
+                    <img class="img-circle img-bordered-sm" src="dist/img/<?= $_SESSION["admin_image"]; ?>" alt="user image">
                         <span class="username">
-                          <a href="#"> <?php echo $_SESSION["username"]; ?></a>
+                          <a href="#"> <?= $_SESSION["username"]; ?></a>
                           <a href="#" class="pull-left btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description"></span>

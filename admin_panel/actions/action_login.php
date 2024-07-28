@@ -5,8 +5,8 @@ if(
   isset($_POST["password"]) && !empty($_POST["password"])
   )
   {
-    $username=$_POST['username'];
-    $password=$_POST['password'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
   }
   else{
 
@@ -18,14 +18,14 @@ if(
   <?php
   }
 
-  $result=get_tables_with_where(" `admins` "," WHERE `username` = $username AND `password`= $password");
-  $row=$result->fetch_assoc();
+  $result = get_tables_with_where(" `admins` "," WHERE `username` = '$username' AND `password`= '$password'");
+  $row = $result->fetch_assoc();
   if($row){
-    $_SESSION["state_login"]=true;
-    $_SESSION["name"]=$row['name'];
-    $_SESSION["username"]=$row['username'];
-    $_SESSION["admin_image"]=$row['image'];
-    $_SESSION["admin_id"]=$row['id'];
+    $_SESSION["state_login"] = true;
+    $_SESSION["name"] = $row['name'];
+    $_SESSION["username"] = $row['username'];
+    $_SESSION["admin_image"] = $row['image'];
+    $_SESSION["admin_id"] = $row['id'];
     echo ("<script > window.alert('{$row['name']}به پنل ادمین خوش آمدید');
     location.replace('../index.php');
 </script>");

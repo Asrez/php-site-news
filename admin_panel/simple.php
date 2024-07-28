@@ -1,9 +1,9 @@
 <?php 
 require "config.php" ;
-$admin_result=selectall(" `admins` ");
-$category_result=get_categorys();
-$tag_result=selectall(" `tags` ");
-$comment_result=selectall(" `comments` ");
+$admin_result = selectall(" `admins` ");
+$category_result = get_categorys();
+$tag_result = selectall(" `tags` ");
+$comment_result = selectall(" `comments` ");
 ?>
 <html>
 <head>
@@ -67,7 +67,7 @@ $comment_result=selectall(" `comments` ");
                 <tr>
                   <td><a href="admin_edit.php?action=insert"><button type="button" class="btn btn-block btn-success btn-sm" 
                      <?php 
-                       if($_SESSION["admin_id"]!=13 ){
+                       if($_SESSION["admin_id"] != 13 ){
                       echo "disabled";
 }  ?>>افزودن</button></a></td>
                   <th style="width: 10px">کد کاربر</th>
@@ -77,21 +77,21 @@ $comment_result=selectall(" `comments` ");
                 </tr>
                 <?php 
                 
-                while($admin_row=$admin_result->fetch_assoc()){
+                while($admin_row = $admin_result->fetch_assoc()){
                 ?>
                 <tr>
                   <td>  <a href="admin_edit.php?id=<?= $admin_row['id'];?> & action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  
                   <?php 
-                       if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true && $_SESSION["admin_id"]!=13 && $admin_row['id']==13){
+                       if(isset($_SESSION["state_login"]) && $_SESSION["state_login"] === true && $_SESSION["admin_id"]!=13 && $admin_row['id'] == 13){
                       echo "disabled";
 }  ?>
                   >ویرایش</button></a>
-                     <?php if ($admin_row['id']!=13) { ?>   <a href="actions/admin_edit_action.php?id=<?php echo $admin_row['id'];?> & action=delete"><button type="button" class="btn btn-block btn-danger btn-sm"
-                  <?php if($_SESSION["admin_id"]!=13 and $_SESSION["admin_id"]!=$admin_row['id']){
+                     <?php if ($admin_row['id'] != 13) { ?>   <a href="actions/admin_edit_action.php?id=<?= $admin_row['id'];?> & action=delete"><button type="button" class="btn btn-block btn-danger btn-sm"
+                  <?php if($_SESSION["admin_id"] != 13 and $_SESSION["admin_id"] != $admin_row['id']){
                     echo "disabled";
                   } 
                   ?>
-                        >خذف</button></a> <?php } ?>
+                        >حذف</button></a> <?php } ?>
                 </td>
                   <td><?= $admin_row['id'] ;?></td>
                   <td><?= $admin_row['name'] ;?></td>
@@ -130,29 +130,30 @@ $comment_result=selectall(" `comments` ");
                   ?>
                 <tr>
                      <td ><?= $category_row['id']; ?></td>
-                     <td><?= $category_row['title']; ?> <a href="actions/action_category_edit.php?id=<?= $category_row['id']; ?>&action=delete& parent_id=0"> <i class="fa fa-fw fa-trash"></i></a>
-                          <a href="category_edit.php?id=<?= $id_category; ?>&action=update& parent_id=0"> <i class="fa fa-fw  fa-pencil"></i></a></td>
+                     <td><?= $category_row['title']; ?> <a href = "actions/action_category_edit.php?id=<?= $category_row['id']; ?>&action=delete&parent_id=0"> <i class="fa fa-fw fa-trash"></i></a>
+                          <a href="category_edit.php?id=<?= $category_row['id']; ?>&action=update&parent_id=0"> <i class="fa fa-fw  fa-pencil"></i></a></td>
                      <td>
                                    <?php
                                          
-                                        foreach ($category_result['scat'] as $category_row1 ){
+                                        foreach ($category_result['scat'] as $category_row1 ){ 
                                           if($category_row1['parent_id'] == $category_row['id']){
+                                            
                                      ?>
                        
                                    <p><?= $category_row1['title']; ?> (<?= $category_row1['id']; ?> )
-                                   <a href="actions/action_category_edit.php?id=<?= $category_row1['id'] ;?>&action=delete& parent_id=<?= $category_row1['parent_id']; ?>"> <i class="fa fa-fw fa-trash"></i></a>
-                                   <a href="category_edit.php?id=<?= $category_row1['id']; ?>&action=update& parent_id=<?= $category_row1['parent_id'];  ?>"> <i class="fa fa-fw  fa-pencil"></i></a>
+                                   <a href="actions/action_category_edit.php?id=<?= $category_row1['id'] ;?>&action=delete&parent_id=<?= $category_row['id']; ?>"> <i class="fa fa-fw fa-trash"></i></a>
+                                   <a href="category_edit.php?id=<?= $category_row1['id']; ?>&action=update&parent_id=<?= $category_row['id'];  ?>"> <i class="fa fa-fw  fa-pencil"></i></a>
                                         </p>
                                    
                                  <?php }
                                  } ?>
-                                 <a href="category_edit.php?action=insert& parent_id=<?= $category_row1['id']; ?>"><i class="fa fa-fw  fa-plus"></i></a>
+                                 <a href="category_edit.php?action=insert&parent_id=<?= $category_row['id']; ?>"><i class="fa fa-fw  fa-plus"></i></a>
                        </td>
                    </tr>
                     <?php } ?>
               
                 <tr>
-                  <td><a href="category_edit.php?action=insert& parent_id=0"><i class="fa fa-fw  fa-plus"></i></a></td>
+                  <td><a href="category_edit.php?action=insert&parent_id=0"><i class="fa fa-fw  fa-plus"></i></a></td>
                 </tr>
               </table>
               
@@ -181,7 +182,7 @@ $comment_result=selectall(" `comments` ");
                 </tr>
                 <?php
                 
-                while($tag_row=$tag_result->fetch_assoc()){
+                while($tag_row = $tag_result->fetch_assoc()){
                  ?>
                 <tr>
                   <td><a href="tag_edit.php?action=update&id=<?= $tag_row['id'];?>"><button type="button" class="btn btn-block btn-warning btn-sm">ویرایش</button></a>
@@ -204,17 +205,8 @@ $comment_result=selectall(" `comments` ");
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">جدول کامنت ها</h3>
+              <h3 class="box-title">کامنت ها</h3>
 
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="جستجو">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
@@ -228,7 +220,7 @@ $comment_result=selectall(" `comments` ");
                   <th>متن</th>
                 </tr>
                 <?php    
-                while($comment_row=$comment_result->fetch_assoc()){
+                while($comment_row = $comment_result->fetch_assoc()){
                 ?>
                 <tr>
                   <td><?php
@@ -238,7 +230,7 @@ $comment_result=selectall(" `comments` ");
                   <td><?= $comment_row['id'];?></td>
                   <td><?= $comment_row['name'];?></td>
                   <td><?= $comment_row['date'];?></td>
-                  <td><span class="label <?php if(($comment_row['venify'])==1)
+                  <td><span class="label <?php if(($comment_row['venify']) == 1)
                   { echo 'label-success' ;}
                    else{ echo 'label-warning'; }?>">
                    <?php if(($comment_row['venify']) == 1){ echo 'تایید شده' ;}

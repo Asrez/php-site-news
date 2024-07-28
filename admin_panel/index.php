@@ -1,11 +1,23 @@
 <?php require "config.php" ; 
-$count_category=get_count_tables(" `categorys` ","WHERE `parent_id` = 0 ");
-$count_comment=get_count_tables(" `comments` "," WHERE `venify`= 0");
-$count_article=get_count_tables(" `articles` ","");
-$count_admin=get_count_tables(" `admins` ","");
-$last_admin=gettables(" `admins` ", " `date` ",8);
-$last_comment=gettables(" `comments` ", " `date` ",10);
-$last_article=gettables(" `articles` ", " `publicationdate` ",6);
+$count_category = get_count_tables(" `categorys` ","WHERE `parent_id` = 0 ");
+$count_comment = get_count_tables(" `comments` ","");
+$count_article = get_count_tables(" `articles` ","");
+$count_admin = get_count_tables(" `admins` ","");
+$last_admin = gettables(" `admins` ", " `date` ",8);
+$last_comment = gettables(" `comments` ", " `date` ",10);
+$last_article = gettables(" `articles` ", " `publicationdate` ",6);
+$chart_article = get_article_for_chart();
+$chart_article_label = [];
+$chart_article_viewcount = [];
+$chart_article_comment_count = [];
+while($chart_row = $chart_article->fetch_assoc()){
+  $chart_article_label[] = $chart_row['id'];
+  $chart_article_viewcount[] = $chart_row["viewcount"];
+  $id_artic = $chart_row['id'];
+  $count_comment = get_count_tables(" `comments` "," WHERE `article_id` = '$id_artic' ");
+  $chart_article_comment_count[] = $count_comment['count'];
+}
+
 ?>
 <html>
 <head>
@@ -162,7 +174,7 @@ $last_article=gettables(" `articles` ", " `publicationdate` ",6);
               <div class="row">
                 <div class="col-md-8">
                   <p class="text-center">
-                    <strong>فروش ۳ مرداد ۱۳۹۶</strong>
+                    
                   </p>
 
                   <div class="chart">
@@ -172,94 +184,15 @@ $last_article=gettables(" `articles` ", " `publicationdate` ",6);
                   <!-- /.chart-responsive -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-4">
-                  <p class="text-center">
-                    <strong>میزان پیشرفت اهداف</strong>
-                  </p>
+                
 
-                  <div class="progress-group">
-                    <span class="progress-text">سفارش در ماه</span>
-                    <span class="progress-number"><b>160</b>/200</span>
 
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">محصول</span>
-                    <span class="progress-number"><b>310</b>/400</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">مشتری جدید</span>
-                    <span class="progress-number"><b>480</b>/800</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">بازدید جدید</span>
-                    <span class="progress-number"><b>250</b>/500</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                </div>
                 <!-- /.col -->
               </div>
               <!-- /.row -->
             </div>
             <!-- ./box-body -->
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                    <h5 class="description-header"> 35,210.43 تومان</h5>
-                    <span class="description-text">کل گردش حساب</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                    <h5 class="description-header">10,390.90 تومان</h5>
-                    <span class="description-text">فروش کل</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                    <h5 class="description-header">24,813.53 تومان</h5>
-                    <span class="description-text">سود کل</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block">
-                    <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                    <h5 class="description-header">1200</h5>
-                    <span class="description-text">اهداف</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
+            
           </div>
           <!-- /.box -->
         </div>
@@ -274,50 +207,7 @@ $last_article=gettables(" `articles` ", " `publicationdate` ",6);
           <!-- MAP & BOX PANE -->
           
           <!-- /.box -->
-          <div class="row">
-            
-            <!-- /.col -->
-
-            <div class="col-md-6">
-              <!-- USERS LIST -->
-              <div class="box box-danger">
-                <div class="box-header with-border">
-                  <h3 class="box-title">آخرین ادمین ها</h3>
-
-                  <div class="box-tools pull-right">
-                    <span class="label label-danger">
-                      <?= $count_admin['count']; ?> کاربر جدید</span>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-                    </button>
-                  </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <ul class="users-list clearfix">
-                  <?php 
-                while($row_count_admins=$last_admin->fetch_assoc()){
-              ?>
-                    <li>
-                      <img src="dist/img/<?= $row_count_admins['image']; ?>" alt="User Image">
-                      <a class="users-list-name" href="#"><?= $row_count_admins['name']; ?></a>
-                      <span class="users-list-date"><?= $row_count_admins['date']; ?></span>
-                    </li>
-                    <?php } ?>
-                  </ul>
-                  <!-- /.users-list -->
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer text-center">
-                  <a href="simple.php" class="uppercase">نمایش همه ادمین ها</a>
-                </div>
-                <!-- /.box-footer -->
-              </div>
-              <!--/.box -->
-            </div>
-            <!-- /.col -->
-          </div>
+          
           <!-- /.row -->
 
           <!-- TABLE: LATEST ORDERS -->
@@ -345,7 +235,7 @@ $last_article=gettables(" `articles` ", " `publicationdate` ",6);
                   </thead>
                   <tbody>
                     <?php
-                    while($row_comment=$last_comment->fetch_assoc()){
+                    while($row_comment = $last_comment->fetch_assoc()){
                     ?>
                   <tr>
                     <td><a href="pages/examples/invoice.html"><?= $row_comment['id'] ?></a></td>
@@ -394,7 +284,7 @@ $last_article=gettables(" `articles` ", " `publicationdate` ",6);
             <div class="box-body">
               <ul class="products-list product-list-in-box">
                 <?php
-                while($article_row=$last_article->fetch_assoc()){
+                while($article_row = $last_article->fetch_assoc()){
                 ?>
                 <li class="item">
                   <div class="product-img">
@@ -447,6 +337,80 @@ $last_article=gettables(" `articles` ", " `publicationdate` ",6);
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard2.js"></script>
 <!-- AdminLTE for demo purposes -->
+ <script>
+      // Get context with jQuery - using jQuery's .get() method.
+      var salesChartCanvas = $('#salesChart').get(0).getContext('2d');
+    // This will get the first returned node in the jQuery collection.
+    var salesChart       = new Chart(salesChartCanvas);
+
+    var salesChartData = {
+      labels  : <?php echo json_encode($chart_article_label); ?>,
+      datasets: [
+        {
+          label               : 'Electronics',
+          fillColor           : 'rgb(210, 214, 222)',
+          strokeColor         : 'rgb(210, 214, 222)',
+          pointColor          : 'rgb(210, 214, 222)',
+          pointStrokeColor    : '#c1c7d1',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgb(220,220,220)',
+          data                : <?php echo json_encode($chart_article_viewcount); ?>
+        },
+        {
+          label               : 'Digital Goods',
+          fillColor           : 'rgba(60,141,188,0.9)',
+          strokeColor         : 'rgba(60,141,188,0.8)',
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : <?php echo json_encode($chart_article_comment_count); ?>
+        }
+      ]
+    };
+
+    var salesChartOptions = {
+      // Boolean - If we should show the scale at all
+      showScale               : true,
+      // Boolean - Whether grid lines are shown across the chart
+      scaleShowGridLines      : false,
+      // String - Colour of the grid lines
+      scaleGridLineColor      : 'rgba(0,0,0,.05)',
+      // Number - Width of the grid lines
+      scaleGridLineWidth      : 1,
+      // Boolean - Whether to show horizontal lines (except X axis)
+      scaleShowHorizontalLines: true,
+      // Boolean - Whether to show vertical lines (except Y axis)
+      scaleShowVerticalLines  : true,
+      // Boolean - Whether the line is curved between points
+      bezierCurve             : true,
+      // Number - Tension of the bezier curve between points
+      bezierCurveTension      : 0.3,
+      // Boolean - Whether to show a dot for each point
+      pointDot                : false,
+      // Number - Radius of each point dot in pixels
+      pointDotRadius          : 4,
+      // Number - Pixel width of point dot stroke
+      pointDotStrokeWidth     : 1,
+      // Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+      pointHitDetectionRadius : 20,
+      // Boolean - Whether to show a stroke for datasets
+      datasetStroke           : true,
+      // Number - Pixel width of dataset stroke
+      datasetStrokeWidth      : 2,
+      // Boolean - Whether to fill the dataset with a color
+      datasetFill             : true,
+      // String - A legend template
+      legendTemplate          : '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].lineColor%>\'></span><%=datasets[i].label%></li><%}%></ul>',
+      // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+      maintainAspectRatio     : true,
+      // Boolean - whether to make the chart responsive to window resizing
+      responsive              : true
+    };
+
+    // Create the line chart
+    salesChart.Line(salesChartData, salesChartOptions);
+ </script>
 <script src="dist/js/demo.js"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@ $action = $_GET['action'];
 if($action == "update"){
   $slug = $_GET['slug'];
   $row_up = get_article_with_slug($slug);
-  $id = $row_up['id'];
+  $id = $row_up['admin_id'];
   $admin_row = get_tables_with_id(" `admins` ",$id);
   $article_tag = getTagsInner($id);
   
@@ -82,20 +82,13 @@ $tags_result = selectall(" `tags` ");
                 <div class="form-group">
                   <label>نویسنده</label>
                   <input type="text" class="form-control" name="admin"  id="admin" 
-                  value="<?php if($action == 'insert'){
-                       if(isset($_SESSION["state_login"]) && $_SESSION["state_login"] === true)
-                      {
-                             echo $_SESSION["name"];
-                      }
-                    }
-                  if($action == 'update')
-                      {
-                    echo $admin_row['name'];
-                   }?>" disabled>
+                  value="<?php if($action == 'insert') { echo $_SESSION["name"]; }
+                  if($action == 'update') {echo $admin_row['name'];} ?>" 
+                  disabled>
                 </div>
 
                 <?php 
-                while($tags_row=$tags_result->fetch_assoc()){
+                while($tags_row = $tags_result->fetch_assoc()){
                 
                   
                 ?>
@@ -115,10 +108,10 @@ $tags_result = selectall(" `tags` ");
                   <label>دسته بندی</label>
                   <select class="form-control" name="category">
                     <?php
-                    while($categorys_row1=$category_parent_0->fetch_assoc()){
+                    while($categorys_row1 = $category_parent_0->fetch_assoc()){
                    
                       ?>
-                    <option value="<?= $categorys_row1['id'] ?>" <?php if($action!="insert"){ if ($row_up['category_id']==$categorys_row1['id']){echo "selected";} }?>><?php echo $categorys_row1['title']; ?></option>
+                    <option value="<?= $categorys_row1['id'] ?>" <?php if($action!="insert"){ if ($row_up['category_id'] == $categorys_row1['id']){echo "selected";} }?>><?= $categorys_row1['title']; ?></option>
                    <?php }  ?>
                   </select>
                       </div>
@@ -162,17 +155,17 @@ $tags_result = selectall(" `tags` ");
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <textarea id="editor1" rows="20" cols="45" name="content" ><?php if($action=='update'){echo $row_up['content'];} ?></textarea>
+              <textarea id="editor1" rows="20" cols="45" name="content" ><?php if($action == 'update'){echo $row_up['content'];} ?></textarea>
               
             </div>
             <div class="form-group">
                   <label>منبع</label>
-                  <input type="text" class="form-control" placeholder="منبع" name="source" value="<?php if($action=='update'){echo $row_up['source'];} ?>">
+                  <input type="text" class="form-control" placeholder="منبع" name="source" value="<?php if($action == 'update'){echo $row_up['source'];} ?>">
                 </div>
           </div>
           <div class="form-group">
                   <label>عکس</label>
-                  <input type="file" class="form-control" name="image" value="<?php if($action=='update'){echo $row_up['image'];} ?>">
+                  <input type="file" class="form-control" name="image" value="<?php if($action == 'update'){echo $row_up['image'];} ?>">
                 </div>
           </div>
           <button type="submit" name="btn" >ثبت</button>

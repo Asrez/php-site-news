@@ -7,7 +7,7 @@ if(isset($_GET['slug'])){
 else{
   exit;
 }
-$row=get_article_with_slug($slug);
+$row = get_article_with_slug($slug);
 ?>
 <html>
 <head>

@@ -1,8 +1,8 @@
 <?php
 require "config.php";
 
-$news_result=selectall(" `articles` ");
-$setting_result=selectall(" `setting` ");
+$news_result = selectall(" `articles` ");
+$setting_result = selectall(" `setting` ");
 ?>
 
 <html>
@@ -76,7 +76,6 @@ $setting_result=selectall(" `setting` ");
                   <th>کد خبر</th>
                   <th>نام خبر</th>
                   <th>خلاصه</th>
-                  <th>متن کل</th>
                   <th>منبع</th>
                   <th>زمان انتشار</th>
                 </tr>
@@ -84,17 +83,16 @@ $setting_result=selectall(" `setting` ");
                 <tbody>
                 
                 <?php 
-                    while($news_row=$news_result->fetch_assoc()){
+                    while($news_row = $news_result->fetch_assoc()){
                      ?>
                 <tr >
                 <td>                     <a href="article_edit.php?slug=<?= $news_row['slug']; ?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
                 <a href="actions/article_edit_action.php?slug=<?= $news_row['slug'];?>&action=delete" ><button type="button"  class="btn btn-block btn-danger btn-sm"  >حذف</button></a>
-                <a href="read-article.php?slug=<?= $news_row['slug']; ?>"><i class="fa fa-eye"></i></a>
+                <a href="read-article.php?slug=<?= $news_row['slug']; ?>"><i class="fa fa-eye" title="نمایش مقاله"></i></a>
               </td>
                   <td> <?= $news_row['id']; ?> </td>
                   <td> <?= $news_row['title']; ?> </td>
                   <td> <?= $news_row['summery']; ?> </td>
-                  <td> <?= $news_row['content']; ?> </td>
                   <td> <?= $news_row['source']; ?> </td>
                   <td> <?= $news_row['publicationdate']; ?> </td>
                 </tr>
@@ -130,11 +128,11 @@ $setting_result=selectall(" `setting` ");
              
                 <?php
               
-                while($setting_row=$setting_result->fetch_assoc()){
+                while($setting_row = $setting_result->fetch_assoc()){
                 ?>
                 <tr>
-                  <td><a class="fa fa-trash" href="actions/setting_edit_action.php?id=<?php echo $setting_row['id'];?>&action=delete" title="حذف"></a>
-                <a class="fa fa-fw fa-cloud-download" href="setting_edit.php?id=<?php echo $setting_row['id'];?>&action=update" title="ویرایش"></a>
+                  <td><a class="fa fa-trash" href="actions/setting_edit_action.php?id=<?= $setting_row['id'];?>&action=delete" title="حذف"></a>
+                <a class="fa fa-fw fa-cloud-download" href="setting_edit.php?id=<?= $setting_row['id'];?>&action=update" title="ویرایش"></a>
                 </td>
                   
                   <td><?= $setting_row['id'];?></td>

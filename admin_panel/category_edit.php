@@ -2,7 +2,7 @@
 require "config.php" ;
 
 if(isset($_GET['action'])){
-$action=$_GET['action'];
+$action = $_GET['action'];
 }else{
   ?>
   <script>
@@ -11,11 +11,11 @@ $action=$_GET['action'];
   <?php
   exit;
 }
-$parent_id=$_GET['parent_id'];
-if($action!='insert'){
-   $id=$_GET['id'];
-   $query_select="SELECT * FROM `categorys` WHERE id=$id ";
-   $row_select=get_tables_with_id(" `categorys` ",$id);
+$parent_id = $_GET['parent_id'];
+if($action != 'insert'){
+   $id = $_GET['id'];
+   $query_select = "SELECT * FROM `categorys` WHERE id=$id ";
+   $row_select = get_tables_with_id(" `categorys` ",$id);
      
 }
 ?>

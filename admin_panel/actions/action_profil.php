@@ -5,10 +5,10 @@ if(isset( $_POST['name']) && !empty( $_POST['name']) &&
 isset( $_POST['password']) && !empty( $_POST['password']) && 
 isset( $_POST['username']) && !empty( $_POST['username']))
  {
-$name=$_POST['name'];
- $password=$_POST['password'];
-$username=$_POST['username'];
-$image=$_POST['image'];
+$name = $_POST['name'];
+ $password = $_POST['password'];
+$username = $_POST['username'];
+$image = $_POST['image'];
  }
  else{
 ?>
@@ -19,10 +19,10 @@ window.alert("برخی فیلد ها مقدار پهی نشده اند");
 <?php
 }
  try {
- if($image ==""){
-$image="user.png";
+ if($image == ""){
+$image = "user.png";
 }
-$update = $link->prepare("UPDATE `admins` SET username =?, name=?, password =?, image =? WHERE id=?;");
+$update = $link->prepare("UPDATE `admins` SET `username` =?, `name`=?, `password` =?, `image` =? WHERE `id`=?;");
  if($update){
                      $update->bind_param("ssssi",$username, $name ,$password , $image , $adminn_id);
                      if($update->execute()){

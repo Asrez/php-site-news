@@ -1,12 +1,12 @@
 <?php
 require "../config.php";
-$action=$_GET['action'];
-$id=$_GET['id'];
+$action = $_GET['action'];
+$id = $_GET['id'];
 switch ($action) {
     case 'update':
        $update = $link->prepare("UPDATE `comments` SET `venify`=? WHERE `id`=?");
        if($update){
-        $num=1;
+        $num = 1;
           $update->bind_param("ii",$num, $id);
           if($update->execute()){
               ?>
