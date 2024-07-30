@@ -9,7 +9,7 @@ $article_result2 = getArticles("publicationdate",15);
 <html dir="rtl" lang="fa_IR">
 <head>
     <meta charset="UTF-8">
-    <title>خبر اینلاین</title>
+    <title>درباره ما - <?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">

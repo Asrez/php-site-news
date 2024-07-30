@@ -34,7 +34,7 @@ $row_sport_news = getARTICLEinLIST(5);
                               while($row_end_news_query2 = $article_result1->fetch_assoc()) {
 ?>
                                     <div class="item">
-                                        <a href="show_news.php?article_slug=<?= $row_end_news_query2['slug'] ; ?>" target="_blank">
+                                        <a href="show_news.php?article_slug=<?= $row_end_news_query2['slug'] ?>" target="_blank">
                                             <img src="image/<?= $row_end_news_query2['image']; ?>" class="img-fluid" alt="" title="">
                                             <p><?= $row_end_news_query2['title']; ?> </p>
                                         </a>
@@ -101,7 +101,7 @@ $row_sport_news = getARTICLEinLIST(5);
                             <ul>
                             <?php
                               while($row_news_query = $result_news_query1->fetch_assoc()) { ?>
-                               <li><a href="show_news.php?article_slug=<?= $row_news_query['slug'] ; ?>"><?= $row_news_query['title'] ;?></a> </li>
+                               <li><a href="show_news.php?article_slug=<?= $row_news_query['slug'] ?>"><?= $row_news_query['title'] ;?></a> </li>
                                <?php } ?>
                             </ul>
                         </div>
@@ -123,11 +123,11 @@ $row_sport_news = getARTICLEinLIST(5);
                         ?>
                         <div class="col-5 p-0">
                             <a href="#" target="_blank">
-                                <img src="image/<?=$coment_row['image'] ; ?>" class="img-fluid" alt="" title="">
+                                <img src="image/<?=$coment_row['image'] ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-7 p-0">
-                            <a href="show_news.php?article_slug=<?= $coment_row['slug'] ; ?>" target="_blank" class="">
+                            <a href="show_news.php?article_slug=<?= $coment_row['slug'] ?>" target="_blank" class="">
                                 <?= $coment_row['title']; ?>
                             </a>
                         </div>

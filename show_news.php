@@ -1,19 +1,14 @@
 <?php 
+define("LOAD", "");
+
 require "config.php";
-if(isset($_GET['article_slug'])) {
-$article_slug = $_GET['article_slug'];}
-else{
-    ?>
-    <script>
-        location.replace("404.php");
-    </script>
-    <?php
-}
+
+if (isset($_GET['article_slug'])) $article_slug = $_GET['article_slug'];
+else header("Location: 404.php");
 
 $article_row_main= getArticlesWithSlug($article_slug);
-if(!isset($article_row_main)) {
-    exit();
-}
+if (!isset($article_row_main)) exit();
+
 $id_main = $article_row_main['id'];
 $category_id = $article_row_main['category_id'];
 $subcat_row = findParentRow($category_id);
@@ -21,30 +16,32 @@ $title_subcategory = $subcat_row['title'];
 $cat_row = findParentRow($subcat_row['parent_id']);
 $cat_title = $cat_row['title'];
 
-// venify for comment 
+// verify for comment 
 $num1 = rand(1,10);
 $num2 = rand(1,10);
 $sum = $num1 + $num2;
 
 $setting_row_left4 = getSetting("Advertise_left4");
-// get user ip 
+// get user ip
 $ip = GetRealIp();
 
-$article_result2 = getArticles("`publicationdate` DESC",6);
-$article_result4 = getArticles("`publicationdate` DESC",10);
-$comment_result = getComments(0,$id_main);
+$article_result2 = getArticles("`publicationdate` DESC", 6);
+$article_result4 = getArticles("`publicationdate` DESC", 10);
+$comment_result = getComments(0, $id_main);
+
 // insert to view count
-$viewcountresult=ISSETIP($ip,$id_main);
-if($viewcountresult == "") {
-    $insert_sql="INSERT INTO `view`(`id`, `user_ip`, `article_id`) VALUES ('', ? , ?);";
+$viewcountresult = ISSETIP($ip, $id_main);
+if ($viewcountresult === "") {
+    $insert_sql = "INSERT INTO `view`(`id`, `user_ip`, `article_id`) VALUES ('', ?, ?);";
     $insert_query = $link->prepare($insert_sql);
     $insert_query->bind_param("si",$ip,$id_main);
     $insert_query->execute();
-    $sql_update_viewcount="UPDATE `articles` SET `viewcount`=`viewcount`+1 WHERE `id` = ?;";
-    $query_update_viewcount=$link->prepare($sql_update_viewcount);
+    $sql_update_viewcount = "UPDATE `articles` SET `viewcount`=`viewcount` + 1 WHERE `id` = ?;";
+    $query_update_viewcount = $link->prepare($sql_update_viewcount);
     $query_update_viewcount->bind_param("i" , $id_main);
     $query_update_viewcount->execute();
 }
+
 $tag_result = getTagsInner($id_main);
 ?>
 <!doctype html>

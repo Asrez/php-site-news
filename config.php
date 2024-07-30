@@ -1,10 +1,14 @@
 <?php
 if (!defined("LOAD")) exit("");
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 session_start();
 $link = mysqli_connect("localhost","root","","news");
 
-include "jdf.php";
+include "lib/jdf.php";
 
 function getCategories(?int $parent_id = 0) {
 	global $link;
@@ -219,7 +223,7 @@ function getTagsInner($id)
 	return $inner_result;
 }
 
-function ISSETIP($ip,$article_id)
+function ISSETIP(string $ip, $article_id)
 {
 	global $link;
 
@@ -242,12 +246,12 @@ function getARTICLEinLIST($id_subcategory)
 	$sub_ostan_list = [];
 	$row_last_ostan = getCategories($id_subcategory);
 	
-	while($row_getCategories = $row_last_ostan->fetch_assoc()) {
+	while ($row_getCategories = $row_last_ostan->fetch_assoc()) {
 		$ostan_list[] = $row_getCategories;
 
 		$rowcat = getArticlesInCategory($row_getCategories['id']);
 
-		while($row_getArticlesInCategory = $rowcat->fetch_assoc()) {
+		while ($row_getArticlesInCategory = $rowcat->fetch_assoc()) {
 			$sub_ostan_list[] = $row_getArticlesInCategory;
 		}
 	}
@@ -256,7 +260,7 @@ function getARTICLEinLIST($id_subcategory)
 
 	return $array;
 }
-function getARTICLEinLISTinINDEX()
+function getArticleInListInIndex()
 {
 	global $link;
 
@@ -265,15 +269,15 @@ function getARTICLEinLISTinINDEX()
 	$category_list = [];
 	$result_category_main = getCategories(0);
 
-	while($row_category_main = $result_category_main->fetch_assoc()) {
+	while ($row_category_main = $result_category_main->fetch_assoc()) {
 		$category_list[] = $row_category_main;
 		$result_last_ostan = getCategories($row_category_main['id']);
 
-		while($row_getCategories = $result_last_ostan->fetch_assoc()) {
+		while ($row_getCategories = $result_last_ostan->fetch_assoc()) {
 			$ostan_list[] = $row_getCategories;
 			$rowcat = getArticlesInCategory($row_getCategories['id']);
 
-			while($row_getArticlesInCategory = $rowcat->fetch_assoc()) {
+			while ($row_getArticlesInCategory = $rowcat->fetch_assoc()) {
 				$sub_ostan_list[] = $row_getArticlesInCategory;
 			}
 		}
@@ -283,3 +287,6 @@ function getARTICLEinLISTinINDEX()
 
 	return $array;
 }
+
+
+$title = "خبر اینلاین";

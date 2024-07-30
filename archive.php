@@ -1,10 +1,13 @@
 <?php 
+define("LOAD", "");
+
 require "config.php";
-if(isset($_POST['btnsearch'])) {
+
+if (isset($_POST['btnsearch'])) {
     $search = $_POST['search'];
     $result_article = search($search);
   }
-  else{$result_article = getArticlesInCategory();}
+  else {$result_article = getArticlesInCategory();}
 
 $tag_array=[];
 $article_array=[];
@@ -21,7 +24,7 @@ while($row_article = $result_article->fetch_assoc()) {
 <html dir="rtl" lang="fa_IR">
 <head>
     <meta charset="UTF-8">
-    <title>خبر اینلاین</title>
+    <title>آرشیو - <?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
@@ -72,7 +75,7 @@ while($row_article = $result_article->fetch_assoc()) {
                                 <p>
                                     <span class="category">
                                     <?php  foreach($tag_array as $row_tags) {
-                                        if($row_tags['article_id'] == $row_articles['id']) {
+                                        if ($row_tags['article_id'] == $row_articles['id']) {
                                             ?>
                                              <a href="archive.php" target="_blank"> <?= $row_tags["title"];?> </a>
                                                 <?php

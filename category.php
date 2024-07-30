@@ -1,32 +1,29 @@
 <?php 
+define("LOAD", "");
+
 require "config.php";
-if(isset($_GET['category_slug'])) {
+
+if (isset($_GET['category_slug'])) {
     $slug = $_GET['category_slug'];
 }
-else{
-    ?>
-    <script>
-        location.replace("404.php");
-    </script>
-    <?php
+else {
+    header("Location: 404.php");
 }
+
 $subcategory_row = getCategoryWithSlug($slug);
-if($subcategory_row == false) {
-    ?>
-    <script>
-        location.replace("404.php");
-    </script>
-    <?php
+if ($subcategory_row == false) {
+    header("Location: 404.php");
 }
+
 $category_row = findParentRow($subcategory_row['parent_id']);
 $article_result_cat = getArticlesInCategory($subcategory_row['id']);
-$result_news_query = getArticles("publicationdate",20);
+$result_news_query = getArticles("publicationdate", 20);
 ?>
 <!doctype html>
 <html dir="rtl" lang="fa_IR">
 <head>
     <meta charset="UTF-8">
-    <title>خبر اینلاین</title>
+    <title><?= $category_row['title'] ?> - <?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
@@ -45,11 +42,8 @@ $result_news_query = getArticles("publicationdate",20);
                 <div class="col-12">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">صفحه اصلی</a> </li>
-                        <li class="breadcrumb-item"><a href="#"><?= $category_row['title'] ;  ?>
-                     <?php  
-                        
-                        ?> </a> </li>
-                        <li class="breadcrumb-item active"><?= $subcategory_row['title'] ; ?> </li>
+                        <li class="breadcrumb-item"><a href="#"><?= $category_row['title'] ?></a> </li>
+                        <li class="breadcrumb-item active"><?= $subcategory_row['title'] ?> </li>
                     </ul>
                 </div>
                 <div class="col-12 main_content">
@@ -95,7 +89,7 @@ $result_news_query = getArticles("publicationdate",20);
                     <div class="row">
                         <div class="box_header">
                             <h2>
-                                <a href="archive.php">آخرین اخبار  </a>
+                                <a href="archive.php">آخرین اخبار</a>
                             </h2>
                         </div>
                     </div>
@@ -105,7 +99,7 @@ $result_news_query = getArticles("publicationdate",20);
                             <?php 
                             
                               while($row_news_query = $result_news_query->fetch_assoc()) { ?>
-                                <li><a href="show_news.php?article_slug=<?= $row_news_query['slug'] ; ?>"><?= $row_news_query['title'] ;?></a> </li>
+                                <li><a href="show_news.php?article_slug=<?= $row_news_query['slug'] ?>"><?= $row_news_query['title'] ;?></a> </li>
                                 <?php } ?>
                             </ul>
                         </div>

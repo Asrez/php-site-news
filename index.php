@@ -1,4 +1,8 @@
-<?php require "config.php";
+<?php
+define("LOAD", "");
+
+require "config.php";
+
 $counter1 = 0;
 $count = 0;
 $article_result_rand = getArticles("RAND()",3);
@@ -9,6 +13,7 @@ $article11__result4 = getArticles("viewcount DESC",4);
 $row_category = getARTICLEinLISTinINDEX(0);
 $most_comment = [];
 $article = [];
+
 while($row_comment = $comment_result->fetch_assoc()) { 
     $most_comment[]= $row_comment;
     $article_comment = getArticlesWithId($row_comment['article_id']); 
@@ -50,7 +55,7 @@ while($row_comment = $comment_result->fetch_assoc()) {
                         <div class="carousel-item <?php if ($counter1 == 0) 
                         echo' active';?>">
                            
-                            <a href="show_news.php?article_slug=<?= $row_article_view3['slug'] ; ?>" target="_blank">
+                            <a href="show_news.php?article_slug=<?= $row_article_view3['slug'] ?>" target="_blank">
                                 <img src="image/<?= $row_article_view3['image'];  ?>" alt="" class="img-fluid">
                                 <div class="carousel-caption">
                                     <p>
@@ -86,14 +91,14 @@ while($row_comment = $comment_result->fetch_assoc()) {
                             <div class="col-6 mt-4">
                                 <div class="row">
                                     <div class="col-12 text-center text-md-right col-lg-5 p-md-1 p-lg-0">
-                                        <a href="show_news.php?article_slug=<?= $row_article_view1['slug'] ; ?>" target="_blank">
+                                        <a href="show_news.php?article_slug=<?= $row_article_view1['slug'] ?>" target="_blank">
                                             <img src="image/<?= $row_article_view1['image']; ?>" class="img-fluid" alt="" title="">
                                         </a>
                                     </div>
                                     <div class="col-12 text-center text-md-right col-lg-7 p-md-1 p-lg-0">
                                         <div class="desc_news ">
                                             <h3>
-                                                <a href="show_news.php?article_slug=<?= $row_article_view1['slug'] ; ?>" target="_blank">ببینید | <?php echo $row_article_view1['title']; ?></a>
+                                                <a href="show_news.php?article_slug=<?= $row_article_view1['slug'] ?>" target="_blank">ببینید | <?php echo $row_article_view1['title']; ?></a>
                                             </h3>
                                         </div>
                                     </div>
@@ -123,7 +128,7 @@ while($row_comment = $comment_result->fetch_assoc()) {
                             <div class="col12 col-lg-6">
                                 <div class="desc_news">
                                     <h3>
-                                        <a href="show_news.php?article_slug=<?= $row_article_view['slug'] ; ?>" target="_blank"> <?= $row_article_view['title']; ?> </a>
+                                        <a href="show_news.php?article_slug=<?= $row_article_view['slug'] ?>" target="_blank"> <?= $row_article_view['title']; ?> </a>
                                     </h3>
                                 </div>
                             </div>
@@ -136,7 +141,7 @@ while($row_comment = $comment_result->fetch_assoc()) {
                             
                             foreach ($most_comment as $row_comment ) { 
                                 foreach ($article as $row_article ) { 
-                                    if($row_comment['article_id'] === $row_article['id']) {?>
+                                    if ($row_comment['article_id'] === $row_article['id']) {?>
                             <div class="row mt-2">
                                 <div class="col-12 comment_header">
                                     <div class="row">
@@ -154,7 +159,7 @@ while($row_comment = $comment_result->fetch_assoc()) {
                                     <div class="news_title">
 
                                         <h3>
-                                            <a href="show_news.php?article_slug=<?= $row_article['slug'] ; ?>" target="_blank"> <?= $row_article['title']; ?></a>
+                                            <a href="show_news.php?article_slug=<?= $row_article['slug'] ?>" target="_blank"> <?= $row_article['title']; ?></a>
                                         </h3>
                                     </div>
                                     <div class="comment">
@@ -224,20 +229,20 @@ while($row_comment = $comment_result->fetch_assoc()) {
                     <div class="row">
                         <?php 
                               foreach ($row_category["maincategory"] as $row_getCategories) {
-                                if( $row_main_category['id'] === $row_getCategories['parent_id']) {
+                                if ( $row_main_category['id'] === $row_getCategories['parent_id']) {
                                   foreach ($row_category["subCategory"] as $row_article_category) { 
-                                   if( $row_article_category['category_id'] === $row_getCategories['id']) {
-                                    if($count == 0 ) { 
+                                   if ( $row_article_category['category_id'] === $row_getCategories['id']) {
+                                    if ($count == 0 ) { 
                                     $count++; 
                           
                               ?>
                         <div class="col-12 col-lg-6">
                             <div>
-                                <a href="show_news.php?article_slug=<?= $row_article_category['slug'] ; ?>" target="_blank">
+                                <a href="show_news.php?article_slug=<?= $row_article_category['slug'] ?>" target="_blank">
                                     <img src="image/<?= $row_article_category['image']; ?>" alt="" title="" class="img-fluid">
                                 </a>
                                 <div class="desc">
-                                    <h2><a href="show_news.php?article_slug=<?= $row_article_category['slug'] ; ?>"> <?= $row_article_category['title']; ?></a> </h2>
+                                    <h2><a href="show_news.php?article_slug=<?= $row_article_category['slug'] ?>"> <?= $row_article_category['title']; ?></a> </h2>
                                 </div>
                             </div>
                         </div>
@@ -251,13 +256,13 @@ while($row_comment = $comment_result->fetch_assoc()) {
                                 <ul>
                                 <?php 
                 foreach ($row_category["maincategory"] as $row_getCategories) {
-                                if( $row_main_category['id'] === $row_getCategories['parent_id']) {
+                                if ( $row_main_category['id'] === $row_getCategories['parent_id']) {
                                   foreach ($row_category["subCategory"] as $row_article_category) { 
-                                   if( $row_article_category['category_id'] === $row_getCategories['id']) {
+                                   if ( $row_article_category['category_id'] === $row_getCategories['id']) {
                         
             
                 ?>
-                                    <li><a href="show_news.php?article_slug=<?= $row_article_category['slug'] ; ?>" > </a> <?= $row_article_category['title']; ?> </li>
+                                    <li><a href="show_news.php?article_slug=<?= $row_article_category['slug'] ?>" > </a> <?= $row_article_category['title']; ?> </li>
                                     <?php 
                                     } 
                                
