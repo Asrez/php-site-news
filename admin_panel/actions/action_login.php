@@ -1,6 +1,4 @@
 <?php 
-define("LOAD", "");
-
 require "../config.php";
 if(
   isset($_POST["username"]) && !empty($_POST["username"])&&
