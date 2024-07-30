@@ -1,105 +1,68 @@
 <?php
+define("LOAD", "");
+
 require "config.php" ;
 
 if(isset($_GET['action'])) {
 $action = $_GET['action'];
 }else{
-  ?>
-  <script>
-    location.replace("404.php");
-  </script>
-  <?php
-  exit;
+header("Location: 404.php");
+exit;
 }
 $parent_id = $_GET['parent_id'];
 if($action != 'insert') {
    $id = $_GET['id'];
-   $query_select = "SELECT * FROM `categorys` WHERE id=$id ";
+   $query_select = "SELECT * FROM `categorys` WHERE id='$id' ";
    $row_select = get_tables_with_id(" `categorys` ",$id);
      
 }
 ?>
-<html>
+<!doctype html>
+<html dir="rtl" lang="fa_IR">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>فرم عمومی | کنترل پنل</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="dist/css/bootstrap-theme.css">
-  <!-- Bootstrap rtl -->
   <link rel="stylesheet" href="dist/css/rtl.css">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-  <?php include("header.php"); ?>
-<div class="wrapper">
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-     <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- left column -->
-        
-        <!--/.col (left) -->
-        <!-- right column -->
-        <div class="col-md-6">
-          <div class="box box-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title">دسته بندی ها</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <form role="form" method="post" action="actions/action_category_edit.php?action=<?= $action; ?>&parent_id=<?php echo $parent_id; if($action=='update') {echo '&id='.$id ;}?>" >
-                <!-- text input -->
-                <div class="form-group">
-                  <label> عنوان </label>
-                  <input type="text" class="form-control" placeholder="عنوان  " name="title" id="title" value="<?php if($action!='insert') {echo $row_select['title'];} ?>" >
+    <?php include("header.php"); ?>
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <section class="content">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="box box-warning">
+                <div class="box-header with-border">
+                  <h3 class="box-title">دسته بندی ها</h3>
                 </div>
-                
-                <button type="submit" name="btn">تایید</button>
-              </form>
-              
+                <div class="box-body">
+                  <form role="form" method="post" action="actions/action_category_edit.php?action=<?= $action; ?>&parent_id=<?php echo $parent_id; if($action=='update') {echo '&id='.$id ;}?>" >
+                    <div class="form-group">
+                      <label> عنوان </label>
+                      <input type="text" class="form-control" placeholder="عنوان" name="title" id="title" value="<?php if($action!='insert') {echo $row_select['title'];} ?>" >
+                    </div>
+                    
+                    <button type="submit" name="btn">تایید</button>
+                  </form>
+                </div>
+              </div>
             </div>
-            <!-- /.box-body -->
           </div>
-        </div>
-        <!--/.col (right) -->
+        </section>
       </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-<?php include("footer.php"); ?>
-<!-- jQuery 3 -->
+  <?php include("footer.php"); ?>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>
 </html>

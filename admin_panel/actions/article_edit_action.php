@@ -7,21 +7,24 @@ isset($_POST["summery"]) && !empty($_POST["summery"])&&
 isset($_POST["content"]) && !empty($_POST["content"]))
 
 {
-   
-      
-                $title = $_POST['title'];
-                $summery = $_POST['summery'];
-                $content = $_POST['content'];
-                $source = $_POST['source'];
-                $category = $_POST['category'];
-                $admin = $_SESSION["admin_id"];
-                $image = basename($_FILES["image"]["name"]);
-                $target_dir = "../../image/";
-                $target_file = $target_dir.basename($_FILES["image"]["name"]);
-                $uploadok = 1;
-                $imagefiletype = pathinfo($target_file,PATHINFO_EXTENSION);
-   
-              
+    $title = $_POST['title'];
+    $summery = $_POST['summery'];
+    $content = $_POST['content'];
+    $source = $_POST['source'];
+    $category = $_POST['category'];
+    $admin = $_SESSION["admin_id"];
+    $image = basename($_FILES["image"]["name"]);
+    $target_dir = "../../image/";
+    $target_file = $target_dir.basename($_FILES["image"]["name"]);
+    $uploadok = 1;
+    $imagefiletype = pathinfo($target_file,PATHINFO_EXTENSION);
+    if($admin === 13){
+        $verrify = 1;
+    }
+    else{
+        $verrify = 0;
+    }
+        
 }
 else{ 
     if($action!="delete") {
@@ -37,6 +40,7 @@ location.replace("article_edit.php?action=<?php  echo $action ; if($action!="ins
 if(isset($_POST['tags'])) {
 $tags = $_POST['tags'];
 }
+
 if($action!="delete") {
 
     if($imagefiletype!="jpg" &&$imagefiletype!="png"&& $imagefiletype!="jpeg" && $imagefiletype!="gif")
@@ -54,14 +58,22 @@ if($action!="delete") {
      move_uploaded_file($_FILES["image"]["tmp_name"],$target_file);}
 }
 switch ($action) {
+    case "verify":
+        $verify = $link->prepare("UPDATE `articles` SET `verify`= 1  WHERE `slug`=? ;");
+            if($verify) {
+               $verify->bind_param("s",$slug);
+               if($verify->execute()) {
+                   ?>
+                   <script>
+                       window.alert("تایید شد");
+                       location.replace("../data.php");
+                   </script>
+                   <?php
+                       }
+                    }
+        break;
     case "delete":
-        $found_article = "SELECT * FROM `articles` WHERE `slug`= ?;";
-        $found_article = $link->prepare($found_article);
-        $found_article->bind_param("s",$slug);
-        $found_article->execute();
-        $found_article_result = $found_article->get_result();
-        $found_article_row = $found_article_result->fetch_assoc();
-
+        $found_article_row = get_article_with_slug($slug);
         $id = $found_article_row['id'];
         $delete_comment = $link->prepare("DELETE FROM `comments` WHERE `article_id`=?");
         $delete_article_tag = $link->prepare("DELETE FROM `article_tag` WHERE `article_id`=?");
@@ -133,7 +145,7 @@ $date = date('Y-m-d h:i:s');
             }
             $code = "NULL";
             $view_count = 0;
-            $insert->bind_param("issssssiiis",$code, $date, $title, $summery , $content , $image , $source , $ $view_count , $category ,$admin , $text);
+            $insert->bind_param("issssssiiis",$code, $date, $title, $summery , $content , $image , $source , $ $view_count , $category ,$admin , $text,$verrify);
             if($insert->execute()) {
                 $find_id_art_result = get_tables_with_where(" `articles` ","WHERE `slug`='$text'");
                 $find_id_art_row = $find_id_art_result->fetch_assoc();

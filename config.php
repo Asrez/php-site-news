@@ -27,11 +27,11 @@ function getArticlesInCategory(?int $category_id = null) {
 	global $link;
 
 	if ($category_id === null) {
-		$sql = "SELECT * FROM `articles`  ORDER BY `publicationdate`,`viewcount`;";
+		$sql = "SELECT * FROM `articles` WHERE `verify` = 1  ORDER BY `publicationdate`,`viewcount`  ;";
 		$category_query1 = $link->prepare($sql);
 	}
 	else{
-		$sql = "SELECT * FROM `articles` WHERE `category_id` = ?  ORDER BY `publicationdate`,`viewcount` LIMIT 8;";
+		$sql = "SELECT * FROM `articles` WHERE `category_id` = ? AND `verify` = 1  ORDER BY `publicationdate`,`viewcount`  LIMIT 8 ;";
 		$category_query1 = $link->prepare($sql);
 		$category_query1->bind_param("i", $category_id);
 	}
@@ -44,7 +44,7 @@ function getArticlesInCategory(?int $category_id = null) {
 
 function getArticles(string $order, int $limit) {
 	global $link;
-	   $news_sql = "SELECT * FROM `articles` ORDER BY  " . $order . " LIMIT ?;";
+	   $news_sql = "SELECT * FROM `articles` WHERE `verify` = 1  ORDER BY  " . $order . " LIMIT  ?;";
 
 	$news_query = $link->prepare($news_sql);
 	$news_query->bind_param("i",$limit);
@@ -112,7 +112,7 @@ function findParentRow(int $id) {
 function getArticlesWithSlug(string $slug) {
 	global $link;
 
-	$news_sqll = "SELECT * FROM `articles` WHERE `slug` = ?;";
+	$news_sqll = "SELECT * FROM `articles` WHERE `slug` = ? AND `verify` = 1 ;";
 
 	$news1_query = $link->prepare($news_sqll);
 	$news1_query->bind_param("s", $slug);
@@ -126,7 +126,7 @@ function getArticlesWithSlug(string $slug) {
 function searchInArticleTag(int $id) {
 	global $link;
 
-	$article_tag_sql = "SELECT * FROM `article_tag` WHERE `article_id` = ?;";
+	$article_tag_sql = "SELECT * FROM `article_tag` WHERE `article_id` = ? AND `verify` = 1 ;";
 
 	$article_tag_query = $link->prepare($article_tag_sql);
 	$article_tag_query->bind_param("i", $id);
@@ -139,7 +139,7 @@ function searchInArticleTag(int $id) {
 function getArticlesWithId(int $id) {
 	global $link;
 	
-	$news_sqll = "SELECT * FROM `articles` WHERE `id` = ?;";
+	$news_sqll = "SELECT * FROM `articles` WHERE `id` = ? AND `verify` = 1 ;";
 
 	$news2_query = $link->prepare($news_sqll);
 	$news2_query->bind_param("i",$id);
@@ -153,7 +153,7 @@ function getArticlesWithId(int $id) {
 function getTags(int $id) {
 	global $link;
 
-	$tag_sql = "SELECT * FROM `tags` WHERE `id` = ?;";
+	$tag_sql = "SELECT * FROM `tags` WHERE `id` = ? ;";
 
 	$tag_query = $link->prepare($tag_sql);
 	$tag_query->bind_param("i", $id);
@@ -192,7 +192,7 @@ function getComments2(int $limit) {
 function search(string $text) {
 	global $link;
 
-	$search_sql = "SELECT * FROM `articles` WHERE `title` LIKE ?;";
+	$search_sql = "SELECT * FROM `articles` WHERE  `verify` = 1 AND `title` LIKE ? ;";
 	$search_query = $link->prepare($search_sql);
 	$text = '%'.$text.'%';
 	$search_query->bind_param("s", $text);

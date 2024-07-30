@@ -2,8 +2,9 @@
 session_start();
 session_unset();
 session_destroy();
-?><!doctype html>
-<html>
+?>
+<!doctype html>
+<html dir="rtl" lang="fa_IR">
 <head>
 <meta charset="utf-8">
 <title> </title>
