@@ -6,7 +6,10 @@ require "../config.php";
 if(isset ($_GET['action']))
     $action = $_GET['action'];
 else 
+{
     header("Location: ../404.php");
+    exit();
+}
 
 $id = $_GET['id'];
 switch ($action) {

@@ -7,7 +7,11 @@ if (isset($_GET['id'])) {
 $id = $_GET['id'];                 
 $row_select=setting($id);
 }         
-else header("Location: 404.php");
+else
+{
+  header("Location: 404.php");
+  exit();
+}
                  ?>
 <html>
 <head>

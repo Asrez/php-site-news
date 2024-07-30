@@ -56,5 +56,8 @@ $update = $link->prepare("UPDATE `admins` SET `username` =?, `name`=?, `password
   }
 }
 else 
+{
     header("Location: ../404.php");
+    exit();
+}
  ?>

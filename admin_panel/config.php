@@ -9,7 +9,10 @@ session_start();
 $link=mysqli_connect("localhost" , "root" ,"" ,"news") ;
 
 if(!(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true))
-header("Location: 404.php");
+{
+    header("Location: 404.php");
+    exit();
+}
 
 function get_count_tables(string $table_name, string $where) {
     global $link;

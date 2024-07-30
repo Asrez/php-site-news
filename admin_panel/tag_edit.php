@@ -10,7 +10,9 @@ $action = $_GET['action'];
    $row_select = get_tables_with_id(" `tags` ", $id);    
   }
 }
-else{
+else
+{
+  header("Location: 404.php");
   exit();
 }
 ?>              

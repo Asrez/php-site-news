@@ -6,7 +6,10 @@ require "../config.php";
 if(isset ($_GET['action']))
     $action = $_GET['action'];
 else 
+{
     header("Location: ../404.php");
+    exit();
+}
 
 if($action != "insert") {$slug = $_GET['slug'];}
 if(isset($_POST["title"]) && !empty($_POST["title"])&&

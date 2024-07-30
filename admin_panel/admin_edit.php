@@ -5,7 +5,12 @@ require "config.php";
 
 if(isset($_GET['action'])) {
 $action = $_GET['action'];}
-else header("Location: 404.php");
+else
+{
+  header("Location: 404.php");
+  exit();
+}
+
 if($action != 'insert') { $id = $_GET['id'];
   $row_select = get_tables_with_id(" `admins` ", $id);
 }

@@ -7,9 +7,12 @@ if(isset($_GET['slug'])) {
   $slug = $_GET['slug'];
 
 }
-else{
-  exit;
+else
+{
+  header("Location: 404.php");
+  exit();
 }
+
 $row = get_article_with_slug($slug);
 ?>
 <html>

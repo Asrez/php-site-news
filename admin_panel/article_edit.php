@@ -5,7 +5,11 @@ require "config.php";
 
 if(isset($_GET['action'])) {
 $action = $_GET['action'];
-}else header("Location: 404.php");
+}else
+{
+  header("Location: 404.php");
+  exit();
+}
 
 if($action === "update") {
   $slug = $_GET['slug'];
