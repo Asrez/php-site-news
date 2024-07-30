@@ -11,6 +11,8 @@ $row_twitter = getSetting("twitter_icon");
 $row_facebook = getSetting("facebook_icon");
 $result_category_parent = getCategories();
 
+
+
 $array_parent_category=[];
 $array_sub_category=[];
 while ($row_category_parent = $result_category_parent->fetch_assoc()) {
@@ -51,7 +53,7 @@ while ($row_category_parent = $result_category_parent->fetch_assoc()) {
                 </div>
                 <div class="d-none col-lg-2 d-lg-block">
                     <div class="date_time" >
-                        <?= $date; ?>
+                        <?= $date ?>
                     </div>
                 </div>
                 <div class="d-none col-md-4 col-lg-2 d-md-block">
@@ -72,7 +74,7 @@ while ($row_category_parent = $result_category_parent->fetch_assoc()) {
             <div class="col-12 col-lg-6">
                 <h1>
                 
-                    <a href="index.php" class="logo" style="background-image: url('image/<?= $logo_image ;?>');"></a>
+                    <a href="index.php" class="logo" style="background-image: url('image/<?= $logo_image ?>');"></a>
                 </h1>
             </div>
             <div class="col-12 col-lg-6 text-center">
@@ -105,7 +107,7 @@ while ($row_category_parent = $result_category_parent->fetch_assoc()) {
                    <ul class="submenu">
 
                      <?php foreach($array_sub_category as $row_category_down) {
-                        if ($row_category_down['parent_id'] == $row_category_parent['id']) { ?>
+                        if ($row_category_down['parent_id'] === $row_category_parent['id']) { ?>
                        <li>
                             <a href="category.php?category_slug=<?= $row_category_down['slug'] ?>">
                                 <?= $row_category_down ['title'] ?>

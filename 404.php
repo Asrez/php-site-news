@@ -2,6 +2,8 @@
 define("LOAD", "");
 
 require "config.php";
+
+
 ?>
 <!DOCTYPE html>
 <html dir="rtl" lang="fa_IR">

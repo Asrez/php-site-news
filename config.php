@@ -163,7 +163,7 @@ function getTags(int $id) {
 	return $tag_result;
 }
 
-function getComments($venify,$id) {
+function getComments(int $venify, int $id) {
 	global $link;
 
 	$comment_sql = "SELECT * FROM `comments` WHERE `venify` = ? AND `article_id` = ?  ORDER BY `date`;";
@@ -176,7 +176,7 @@ function getComments($venify,$id) {
 	return $comment_result;
 }
 
-function getComments2($limit) {
+function getComments2(int $limit) {
 	global $link;
 
 	$comment_sql = "SELECT * FROM `comments` WHERE `venify`='1'  ORDER BY `date` LIMIT ?;";
@@ -185,17 +185,20 @@ function getComments2($limit) {
 	$comment_query->bind_param("i", $limit);
 	$comment_query->execute();
 	$comment_result = $comment_query->get_result();
+
 	return $comment_result;
 }
 
-function search($text) {
+function search(string $text) {
 	global $link;
+
 	$search_sql = "SELECT * FROM `articles` WHERE `title` LIKE ?;";
 	$search_query = $link->prepare($search_sql);
 	$text = '%'.$text.'%';
-	$search_query->bind_param("s",$text);
+	$search_query->bind_param("s", $text);
 	$search_query->execute();
 	$search_result = $search_query->get_result();
+
 	return $search_result;
 }
 
@@ -210,35 +213,35 @@ function GetRealIp()
 	return $ip;
 }
 
-function getTagsInner($id)
+function getTagsInner(int $id)
 {  
 	global $link;
 
-	$inner_sql="SELECT `tags`.`title` , `tags`.`id` , `article_tag`.`article_id` FROM `tags` INNER JOIN `article_tag` ON `tags`.`id` = `article_tag`.`tag_id` WHERE `article_tag`.`article_id` = ?; ";
+	$inner_sql = "SELECT `tags`.`title` , `tags`.`id` , `article_tag`.`article_id` FROM `tags` INNER JOIN `article_tag` ON `tags`.`id` = `article_tag`.`tag_id` WHERE `article_tag`.`article_id` = ?;";
 	$inner_query = $link->prepare($inner_sql);
-	$inner_query->bind_param("i",$id);
+	$inner_query->bind_param("i", $id);
 	$inner_query->execute();
 	$inner_result = $inner_query->get_result();
 
 	return $inner_result;
 }
 
-function ISSETIP(string $ip, $article_id)
+function ISSETIP(string $ip, int $article_id)
 {
 	global $link;
 
-	$isset_sql="SELECT * FROM `view` WHERE `user_ip` = ? AND `article_id` = ?;";
+	$isset_sql = "SELECT * FROM `view` WHERE `user_ip` = ? AND `article_id` = ?;";
 	$isset_query = $link->prepare($isset_sql);
 	$isset_query->bind_param("si",$ip,$article_id);
 	$isset_query->execute();
 	$isset_result = $isset_query->get_result();   
-	$isset_row=$isset_result->fetch_assoc();
+	$isset_row = $isset_result->fetch_assoc();
 
 	if(!(empty($isset_row))) return true;
 	else return false;
 }
 
-function getARTICLEinLIST($id_subcategory)
+function getARTICLEinLIST(int $id_subcategory)
 {  
 	global $link;
 
@@ -288,5 +291,20 @@ function getArticleInListInIndex()
 	return $array;
 }
 
+function viewcount(int $id_main, int $ip) {
+	global $link;
 
-$title = "خبر اینلاین";
+	$insert_sql = "INSERT INTO `view`(`id`, `user_ip`, `article_id`) VALUES ('', ?, ?);";
+	$insert_query = $link->prepare($insert_sql);
+	$insert_query->bind_param("si", $ip,$id_main);
+	$insert_query->execute();
+
+	$sql_update_viewcount = "UPDATE `articles` SET `viewcount`=`viewcount` + 1 WHERE `id` = ?;";
+	$query_update_viewcount = $link->prepare($sql_update_viewcount);
+	$query_update_viewcount->bind_param("i" , $id_main);
+	$query_update_viewcount->execute();
+	
+}
+
+$title_row = getSetting("title");
+$title=$title_row['value_setting'];

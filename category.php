@@ -54,21 +54,21 @@ $result_news_query = getArticles("publicationdate", 20);
                         ?>
                     <div class="row mb-2">
                         <div class="col-4 pl-0">
-                            <a href="show_news.php?article_slug=<?= $article_row['slug']; ?>" target="_blank">
-                                <img src="image/<?= $article_row['image']; ?>" class="img-fluid" alt="" title="">
+                            <a href="show_news.php?article_slug=<?= $article_row['slug'] ?>" target="_blank">
+                                <img src="image/<?= $article_row['image'] ?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="col-8">
                             <div class="news_title">
                                 <h2 class="h6">
-                                    <a href="show_news.php?article_slug=<?= $article_row['slug']; ?>" target="_blank">
-                                    <?= $article_row['title']; ?>
+                                    <a href="show_news.php?article_slug=<?= $article_row['slug'] ?>" target="_blank">
+                                    <?= $article_row['title'] ?>
                                     </a>
                                 </h2>
                             </div>
                             <div class="desc_news d-none d-md-block">
                                <p>
-                               <?= $article_row['summery']; ?>
+                               <?= $article_row['summery'] ?>
                             </p>
                             </div>
                         </div>
@@ -99,7 +99,7 @@ $result_news_query = getArticles("publicationdate", 20);
                             <?php 
                             
                               while($row_news_query = $result_news_query->fetch_assoc()) { ?>
-                                <li><a href="show_news.php?article_slug=<?= $row_news_query['slug'] ?>"><?= $row_news_query['title'] ;?></a> </li>
+                                <li><a href="show_news.php?article_slug=<?= $row_news_query['slug'] ?>"><?= $row_news_query['title'] ?></a> </li>
                                 <?php } ?>
                             </ul>
                         </div>

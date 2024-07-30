@@ -22,6 +22,7 @@ $num2 = rand(1,10);
 $sum = $num1 + $num2;
 
 $setting_row_left4 = getSetting("Advertise_left4");
+
 // Get user ip
 $ip = GetRealIp();
 
@@ -32,15 +33,7 @@ $comment_result = getComments(0, $id_main);
 // Insert to view count
 $viewcountresult = ISSETIP($ip, $id_main);
 if ($viewcountresult === "") {
-    $insert_sql = "INSERT INTO `view`(`id`, `user_ip`, `article_id`) VALUES ('', ?, ?);";
-    $insert_query = $link->prepare($insert_sql);
-    $insert_query->bind_param("si", $ip,$id_main);
-    $insert_query->execute();
-
-    $sql_update_viewcount = "UPDATE `articles` SET `viewcount`=`viewcount` + 1 WHERE `id` = ?;";
-    $query_update_viewcount = $link->prepare($sql_update_viewcount);
-    $query_update_viewcount->bind_param("i" , $id_main);
-    $query_update_viewcount->execute();
+    viewcount($id_main,$ip);
 }
 
 $tag_result = getTagsInner($id_main);
@@ -71,8 +64,8 @@ $tag_result = getTagsInner($id_main);
                         
                         ?>
                         <li class="breadcrumb-item"><a href="index.php">صفحه اصلی</a> </li>
-                        <li class="breadcrumb-item"><a href="archive.php">  <?= $cat_title;?></a> </li>
-                        <li class="breadcrumb-item active"><?= $title_subcategory;?> </li>
+                        <li class="breadcrumb-item"><a href="archive.php">  <?= $cat_title ?></a> </li>
+                        <li class="breadcrumb-item active"><?= $title_subcategory ?> </li>
                     </ul>
                     <div class="show-news-header col">
                         <?php ?>
@@ -80,20 +73,13 @@ $tag_result = getTagsInner($id_main);
                             <div class="col-4">
                                 <div class="rating">
                                     <div class="rate-count">
-                                        <?= $article_row_main['viewcount'] ;?> نفر
-                                    </div>
-                                    <div class="starrating risingstar justify-content-center flex-row-reverse">
-                                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"><i class="fas fa-star"></i></label>
-                                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star"><i class="fas fa-star"></i></label>
-                                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star"><i class="fas fa-star"></i></label>
-                                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"><i class="fas fa-star"></i></label>
-                                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"><i class="fas fa-star"></i></label>
-                                    </div>
+                                        <?= $article_row_main['viewcount'] ?> نفر
+                                    </div>   
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="news-time text-center">
-                                    <span>  <?= $article_row_main['publicationdate'] ;?></span>
+                                    <span>  <?= $article_row_main['publicationdate'] ?></span>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -105,51 +91,43 @@ $tag_result = getTagsInner($id_main);
                     </div>
                     <div class="show-news-title my-4">
                         <h2>
-                            <a href="show_news.php?article_slug=<?= $article_row_main['slug'] ;?>">
+                            <a href="show_news.php?article_slug=<?= $article_row_main['slug'] ?>">
                                 <?= $article_row_main['title'] ?>
-                                </a>
+                            </a>
                         </h2>
                     </div>
                     <div class="show-news-summary">
                         <div class="row">
                             <div class="col-6">
-                                <p>   <?= $article_row_main['summery'] ;?> </p>
+                                <p> <?= $article_row_main['summery'] ?> </p>
                             </div>
                             <div class="col-6">
-                                <img src="image/<?= $article_row_main['image'] ;?>" alt="" title="" class="img-fluid img-thumbnail w-100">
+                                <img src="image/<?= $article_row_main['image'] ?>" alt="<?= $article_row_main['title'] ?>" title="<?= $article_row_main['title'] ?>" class="img-fluid img-thumbnail w-100">
                             </div>
                         </div>
                     </div>
                     <div class="show-news-body">
                         <div>
-                        <?= $article_row_main['content'] ;?>
+                        <?= $article_row_main['content'] ?>
                         </div>
                     </div>
                     <div class="news-code">
-                        <p>کد خبر <span>  <?= $article_row_main['id'] ;?></span></p>
+                        <p>کد خبر <span> <?= $article_row_main['id'] ?></span></p>
                     </div>
                 </div>
             </div>
             <hr style="width: 100%;height: 1px;background-color: #adb5bd">
             <div class="row">
-                <div class="col-6 social">
-                    <ul>
-                        <li class="fb"><a href="#"><i class="fab fa-facebook-f"></i></a> </li>
-                        <li class="tw"><a href="#"><i class="fab fa-twitter"></i></a> </li>
-                        <li class="wa"><a href="#"><i class="fab fa-whatsapp"></i></a> </li>
-                        <li class="tg"><a href="#"><i class="fab fa-telegram-plane"></i></a> </li>
-                    </ul>
-                </div>
                 <div class="col-6 short-link">
                     <i class="fas fa-link"></i>
-                    <span>  <?= $article_row_main['source'] ;?></span>
+                    <span>  <?= $article_row_main['source'] ?></span>
                 </div>
             </div>
         </article>
         <section class="box ads">
             <div class="col-12 text-center p-0">
-                <a href="<?= $setting_row_left4['link']; ?>" target="_blank">
-                    <img src="image/<?= $setting_row_left4['value_setting']; ?>" class="img-fluid"  alt="" title="">
+                <a href="<?= $setting_row_left4['link'] ?>" target="_blank">
+                    <img src="image/<?= $setting_row_left4['value_setting'] ?>" class="img-fluid"  alt="<?= $setting_row_left4['key_setting'] ?>" title="<?= $setting_row_left4['key_setting'] ?>">
                 </a>
             </div>
         </section>
@@ -170,10 +148,10 @@ $tag_result = getTagsInner($id_main);
 
                             ?>
                         <div class="col-6 col-lg-4">
-                            <a href="show_news.php?article_slug=<?= $article_row['slug']; ?>">
-                                <img src="image/<?= $article_row['image']; ?>" class="img-fluid" alt="" title="">
+                            <a href="show_news.php?article_slug=<?= $article_row['slug'] ?>">
+                                <img src="image/<?= $article_row['image'] ?>" class="img-fluid" alt="<?= $article_row['title'] ?>" title="<?= $article_row['title'] ?>">
                                 <div class="ads_text">
-                                    <p><?= $article_row['title']; ?></p>
+                                    <p><?= $article_row['title'] ?></p>
                                 </div>
                             </a>
                         </div>
@@ -203,7 +181,7 @@ $tag_result = getTagsInner($id_main);
 
                             ?>
 
-                            <li><a href="archive.php"><?= $tag_row['title']; ?></a> </li>
+                            <li><a href="archive.php"><?= $tag_row['title'] ?></a> </li>
                             <?php } 
                                 ?>
                         </ul>
@@ -227,7 +205,7 @@ $tag_result = getTagsInner($id_main);
                             <?php
                                 while($article_row4 = $article_result4->fetch_assoc()) {
                                 ?>
-                                <li><a href="show_news.php?article_slug=<?= $article_row4['slug']; ?>"> <?= $article_row4['title']; ?> </a> </li>
+                                <li><a href="show_news.php?article_slug=<?= $article_row4['slug'] ?>"> <?= $article_row4['title'] ?> </a> </li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -239,25 +217,23 @@ $tag_result = getTagsInner($id_main);
             <div class="tab-content">
                 <div class="tab-pane active">
                     <div class="col-12 show_comment">
-                        <?php
-                            while($row_comment = $comment_result->fetch_assoc()) {
-                                ?>
+                        <?php while($row_comment = $comment_result->fetch_assoc()) { ?>
                         <div class="row mt-2">
                             <div class="col-12 comment_header">
                                 <div class="row">
                                     <div class="col-6 username">
                                         <i class="fas fa-user"></i>
-                                        <?= $row_comment['name']; ?>
+                                        <?= $row_comment['name'] ?>
                                     </div>
                                     <div class="col-6 time">
                                         <i class="far fa-calendar-alt"></i>
-                                        <?= $row_comment['date'];?>
+                                        <?= $row_comment['date']?>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 comment_body">
                                 <div class="comment">
-                                    <p>  <?= $row_comment['comment'];?> </p>
+                                    <p>  <?= $row_comment['comment'] ?> </p>
                                 </div>
                             </div>
                         </div>
@@ -278,7 +254,7 @@ $tag_result = getTagsInner($id_main);
                 <div class="row">
                     <div class="col-12 p-0">
                     
-                        <form action="action_insert_comment.php?article_slug=<?= $article_slug; ?>" method="post" name="comment_form">
+                        <form action="action_insert_comment.php?article_slug=<?= $article_slug ?>" method="post" name="comment_form">
                             <fieldset class="row">
                                 <div class="col-12 col-md-6 form-group name-group">
                                     <label for="userName">نام</label>
@@ -300,8 +276,8 @@ $tag_result = getTagsInner($id_main);
                                 <div class="col-12 col-md-6">
                                     <div style="direction: ltr">
                                     
-                                    <input type="number" name="real_sum" value="<?= $sum; ?>" style="opacity: 0;position: absolute;">
-                                        <div class="captcha-image d-inline-block"><?= $num1; ?> +<?= $num2; ?>=
+                                    <input type="number" name="real_sum" value="<?= $sum ?>" style="opacity: 0;position: absolute;">
+                                        <div class="captcha-image d-inline-block"><?= $num1 ?> +<?= $num2 ?>=
                                         </div>
                                         <div class="captcha-input d-inline-block">
                                             <input type="number" name="sum" id="number" required="required" data-required-msg="حاصل عبارت را وارد کنید.">
@@ -320,7 +296,7 @@ $tag_result = getTagsInner($id_main);
             </div>
         </section>
     </div>
-    
+
     <?php include("tab_f.php") ;?>
     <?php include("footer.php") ;?>
 

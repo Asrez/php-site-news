@@ -38,7 +38,7 @@ $article_result_s2 = getArticles("publicationdate",15);
                     </div>
                     <div class="body">
                         <p>
-                            نشانی: <?= $about_row['address'] ?> کد پستی: <?= $about_row['post_code'] ;?>
+                            نشانی: <?= $about_row['address'] ?> کد پستی: <?= $about_row['post_code'] ?>
                         </p>
                         <p>
                             در صورت تمایل جهت ارسال هر گونه خبر، پیشنهاد و یا انتقاد به
@@ -72,7 +72,7 @@ $article_result_s2 = getArticles("publicationdate",15);
 
         <section class="box ads">
             <div class="col-12 text-center p-0">
-                <a href="<?= $setting_row_left4['link']; ?>" target="_blank">
+                <a href="<?= $setting_row_left4['link'] ?>" target="_blank">
                     <img src="image/<?= $setting_row_left4['value_setting'] ?>" class="img-fluid"  alt="" title="">
                 </a>
             </div>
@@ -100,7 +100,7 @@ $article_result_s2 = getArticles("publicationdate",15);
                                 </div>
                             </a>
                         </div>
-                        <?php } ?>
+                    <?php } ?>
                     </div>
                 </div>
             </div>

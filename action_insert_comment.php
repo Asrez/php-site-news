@@ -6,7 +6,7 @@ require "config.php";
 $article_slug = $_GET['article_slug'];
 $article_roww = getArticlesWithSlug($article_slug);
 $article_id = $article_roww['id'];
-$date = date('Y-m-d h:i:s');
+$date = jdate('Y-m-d h:i:s');
 $insert_comment_sql = "INSERT INTO `comments`(`id`, `name`, `email`, `comment`, `date`, `article_id`, `venify`) VALUES (?, ?, ?, ?, ?, ?, ?);";
 $insert_comment_query = $link->prepare($insert_comment_sql);
 $code = "NULL";
