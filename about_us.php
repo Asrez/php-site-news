@@ -5,7 +5,8 @@ $setting_row_left4 = getSetting("Advertise_left4");
 $article_result1 = getArticles("`viewcount` ASC",6);
 $article_result2 = getArticles("publicationdate",15);
 ?>
-<html lang="en">
+<!doctype html>
+<html dir="rtl" lang="fa_IR">
 <head>
     <meta charset="UTF-8">
     <title>خبر اینلاین</title>

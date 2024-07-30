@@ -15,7 +15,8 @@ while($row_comment = $comment_result->fetch_assoc()){
     $article[] = $article_comment;
 }
 ?>
-<html lang="en">
+<!doctype html>
+<html dir="rtl" lang="fa_IR">
 <head>
     <meta charset="UTF-8">
     <title>خبر اینلاین</title>

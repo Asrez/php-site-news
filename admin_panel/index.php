@@ -17,9 +17,9 @@ while($chart_row = $chart_article->fetch_assoc()){
   $count_comment = get_count_tables(" `comments` "," WHERE `article_id` = '$id_artic' ");
   $chart_article_comment_count[] = $count_comment['count'];
 }
-
 ?>
-<html>
+<!doctype html>
+<html dir="rtl" lang="fa_IR">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

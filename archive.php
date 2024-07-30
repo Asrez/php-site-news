@@ -17,7 +17,8 @@ while($row_article = $result_article->fetch_assoc()){
     }
 }
 ?>
-<html lang="en">
+<!doctype html>
+<html dir="rtl" lang="fa_IR">
 <head>
     <meta charset="UTF-8">
     <title>خبر اینلاین</title>

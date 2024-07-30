@@ -22,7 +22,8 @@ $category_row = findParentRow($subcategory_row['parent_id']);
 $article_result_cat = getArticlesInCategory($subcategory_row['id']);
 $result_news_query = getArticles("publicationdate",20);
 ?>
-<html lang="en">
+<!doctype html>
+<html dir="rtl" lang="fa_IR">
 <head>
     <meta charset="UTF-8">
     <title>خبر اینلاین</title>

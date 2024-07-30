@@ -47,8 +47,8 @@ if($viewcountresult == ""){
 }
 $tag_result = getTagsInner($id_main);
 ?>
-
-<html lang="en">
+<!doctype html>
+<html dir="rtl" lang="fa_IR">
 <head>
     <meta charset="UTF-8">
     <title>خبر اینلاین</title>
