@@ -65,21 +65,21 @@ $setting_result = selectall("setting");
                 <tbody>
                 <?php while($news_row = $news_result->fetch_assoc()) { ?>
                 <tr>
-                  <td><a href="article_edit.php?slug=<?= $news_row['slug']; ?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm">ویرایش</button></a>
-                      <a href="actions/article_edit_action.php?slug=<?= $news_row['slug'];?>&action=delete"><button type="button"  class="btn btn-block btn-danger btn-sm">حذف</button></a>
-                      <a href="read-article.php?slug=<?= $news_row['slug']; ?>"><i class="fa fa-eye" title="نمایش مقاله"></i></a>
+                  <td><a href="article_edit.php?slug=<?= $news_row['slug']  ?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm">ویرایش</button></a>
+                      <a href="actions/article_edit_action.php?slug=<?= $news_row['slug'] ?>&action=delete"><button type="button"  class="btn btn-block btn-danger btn-sm">حذف</button></a>
+                      <a href="read-article.php?slug=<?= $news_row['slug'] ?>"><i class="fa fa-eye" title="نمایش مقاله"></i></a>
                   </td>
-                  <td><?= $news_row['id']; ?></td>
-                  <td><?= $news_row['title']; ?></td>
-                  <td><?= $news_row['summery']; ?></td>
-                  <td><?= $news_row['source']; ?></td>
-                  <td><?= $news_row['publicationdate']; ?></td>
+                  <td><?= $news_row['id'] ?></td>
+                  <td><?= $news_row['title'] ?></td>
+                  <td><?= $news_row['summery'] ?></td>
+                  <td><?= $news_row['source'] ?></td>
+                  <td><?= $news_row['publicationdate'] ?></td>
                   <td><span class="label <?php if(($news_row['verify']) === 1)
                   { echo 'label-success' ;}
                    else{ echo 'label-warning'; }?>">
                    <?php if(($news_row['verify']) === 1) { echo 'تایید شده' ;}
                     else{ echo 'در انتظار تایید'; }?> </span></td>
-                    <td> <?php if(($news_row['verify']) === 0)  {?><a href="actions/article_edit_action.php?slug=<?=$news_row['slug']; ?>&action=verify"><button type="button" class="btn btn-block btn-success btn-sm">تایید</button></a> <?php } ?></td>
+                    <td> <?php if(($news_row['verify']) === 0 and $_SESSION["admin_id"] === 13  )  {?><a href="actions/article_edit_action.php?slug=<?=$news_row['slug'] ?>&action=verify"><button type="button" class="btn btn-block btn-success btn-sm">تایید</button></a> <?php } ?></td>
                 </tr>
                
                 <?php } ?>
@@ -106,10 +106,10 @@ $setting_result = selectall("setting");
                 <tbody>
                 <?php while($setting_row = $setting_result->fetch_assoc()) { ?>
                 <tr>
-                  <td><a class="fa fa-trash" href="actions/setting_edit_action.php?id=<?= $setting_row['id'];?>&action=delete" title="حذف"></a>
-                      <a class="fa fa-fw fa-cloud-download" href="setting_edit.php?id=<?= $setting_row['id'];?>&action=update" title="ویرایش"></a>
+                  <td><a class="fa fa-trash" href="actions/setting_edit_action.php?id=<?= $setting_row['id'] ?>&action=delete" title="حذف"></a>
+                      <a class="fa fa-fw fa-cloud-download" href="setting_edit.php?id=<?= $setting_row['id'] ?>&action=update" title="ویرایش"></a>
                   </td>
-                  <td><?= $setting_row['id'];?></td>
+                  <td><?= $setting_row['id'] ?></td>
                   <td><?php
                   switch ($setting_row['id']) {
                     case '1':
@@ -165,8 +165,8 @@ $setting_result = selectall("setting");
                         break;
                   }
                   ?></td>
-                  <td><?= $setting_row['value_setting'];?> </td>
-                  <td><?= $setting_row['link'];?> </td>
+                  <td><?= $setting_row['value_setting'] ?> </td>
+                  <td><?= $setting_row['link'] ?> </td>
                 </tr>
                 <?php } ?>
                 </tbody>

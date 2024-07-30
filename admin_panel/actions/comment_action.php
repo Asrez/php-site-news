@@ -1,6 +1,13 @@
 <?php
+define("LOAD", "");
+
 require "../config.php";
-$action = $_GET['action'];
+
+if(isset ($_GET['action']))
+    $action = $_GET['action'];
+else 
+    header("Location: ../404.php");
+
 $id = $_GET['id'];
 switch ($action) {
     case 'update':

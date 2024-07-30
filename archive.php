@@ -75,7 +75,7 @@ while($row_article = $result_article->fetch_assoc()) {
                                 <p>
                                     <span class="category">
                                     <?php  foreach($tag_array as $row_tags) {
-                                        if ($row_tags['article_id'] == $row_articles['id']) {
+                                        if ($row_tags['article_id'] === $row_articles['id']) {
                                             ?>
                                              <a href="archive.php" target="_blank"> <?= $row_tags["title"];?> </a>
                                                 <?php

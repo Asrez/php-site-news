@@ -18,12 +18,12 @@ function jdate($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran',
   $date = explode('_', date('H_i_j_n_O_P_s_w_Y', $ts));
   list($j_y, $j_m, $j_d) = gregorian_to_jalali($date[8], $date[3], $date[2]);
   $doy = ($j_m < 7) ? (($j_m - 1) * 31) + $j_d - 1 : (($j_m - 7) * 30) + $j_d + 185;
-  $kab = (((($j_y + 12) % 33) % 4) == 1) ? 1 : 0;
+  $kab = (((($j_y + 12) % 33) % 4) === 1) ? 1 : 0;
   $sl = strlen($format);
   $out = '';
   for ($i = 0; $i < $sl; $i++) {
     $sub = substr($format, $i, 1);
-    if ($sub == '\\') {
+    if ($sub === '\\') {
       $out .= substr($format, ++$i, 1);
       continue;
     }
@@ -133,7 +133,7 @@ function jdate($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran',
         break;
 
       case 'o':
-        $jdw = ($date[7] == 6) ? 0 : $date[7] + 1;
+        $jdw = ($date[7] === 6) ? 0 : $date[7] + 1;
         $dny = 364 + $kab - $doy;
         $out .= ($jdw > ($doy + 3) and $doy < 3) ? $j_y - 1 : (((3 - $dny) > $jdw and $dny < 3) ? $j_y + 1 : $j_y);
         break;
@@ -188,20 +188,20 @@ function jdate($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran',
         break;
 
       case 'w':
-        $out .= ($date[7] == 6) ? 0 : $date[7] + 1;
+        $out .= ($date[7] === 6) ? 0 : $date[7] + 1;
         break;
 
       case 'W':
-        $avs = (($date[7] == 6) ? 0 : $date[7] + 1) - ($doy % 7);
+        $avs = (($date[7] === 6) ? 0 : $date[7] + 1) - ($doy % 7);
         if ($avs < 0) $avs += 7;
         $num = (int) (($doy + $avs) / 7);
         if ($avs < 4) {
           $num++;
         } else if ($num < 1) {
-          $num = ($avs == 4 or $avs == ((((($j_y % 33) % 4) - 2) == ((int) (($j_y % 33) * 0.05))) ? 5 : 4)) ? 53 : 52;
+          $num = ($avs === 4 or $avs === ((((($j_y % 33) % 4) - 2) === ((int) (($j_y % 33) * 0.05))) ? 5 : 4)) ? 53 : 52;
         }
         $aks = $avs + $kab;
-        if ($aks == 7) $aks = 0;
+        if ($aks === 7) $aks = 0;
         $out .= (($kab + 363 - $doy) < $aks and $aks < 3) ? '01' : (($num < 10) ? '0' . $num : $num);
         break;
 
@@ -234,12 +234,12 @@ function jstrftime($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehr
   $date = explode('_', date('h_H_i_j_n_s_w_Y', $ts));
   list($j_y, $j_m, $j_d) = gregorian_to_jalali($date[7], $date[4], $date[3]);
   $doy = ($j_m < 7) ? (($j_m - 1) * 31) + $j_d - 1 : (($j_m - 7) * 30) + $j_d + 185;
-  $kab = (((($j_y + 12) % 33) % 4) == 1) ? 1 : 0;
+  $kab = (((($j_y + 12) % 33) % 4) === 1) ? 1 : 0;
   $sl = strlen($format);
   $out = '';
   for ($i = 0; $i < $sl; $i++) {
     $sub = substr($format, $i, 1);
-    if ($sub == '%') {
+    if ($sub === '%') {
       $sub = substr($format, ++$i, 1);
     } else {
       $out .= $sub;
@@ -273,7 +273,7 @@ function jstrftime($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehr
         break;
 
       case 'w':
-        $out .= ($date[6] == 6) ? 0 : $date[6] + 1;
+        $out .= ($date[6] === 6) ? 0 : $date[6] + 1;
         break;
 
         /* Week */
@@ -281,26 +281,26 @@ function jstrftime($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehr
         $avs = (($date[6] < 5) ? $date[6] + 2 : $date[6] - 5) - ($doy % 7);
         if ($avs < 0) $avs += 7;
         $num = (int) (($doy + $avs) / 7) + 1;
-        if ($avs > 3 or $avs == 1) $num--;
+        if ($avs > 3 or $avs === 1) $num--;
         $out .= ($num < 10) ? '0' . $num : $num;
         break;
 
       case 'V':
-        $avs = (($date[6] == 6) ? 0 : $date[6] + 1) - ($doy % 7);
+        $avs = (($date[6] === 6) ? 0 : $date[6] + 1) - ($doy % 7);
         if ($avs < 0) $avs += 7;
         $num = (int) (($doy + $avs) / 7);
         if ($avs < 4) {
           $num++;
         } else if ($num < 1) {
-          $num = ($avs == 4 or $avs == ((((($j_y % 33) % 4) - 2) == ((int) (($j_y % 33) * 0.05))) ? 5 : 4)) ? 53 : 52;
+          $num = ($avs === 4 or $avs === ((((($j_y % 33) % 4) - 2) === ((int) (($j_y % 33) * 0.05))) ? 5 : 4)) ? 53 : 52;
         }
         $aks = $avs + $kab;
-        if ($aks == 7) $aks = 0;
+        if ($aks === 7) $aks = 0;
         $out .= (($kab + 363 - $doy) < $aks and $aks < 3) ? '01' : (($num < 10) ? '0' . $num : $num);
         break;
 
       case 'W':
-        $avs = (($date[6] == 6) ? 0 : $date[6] + 1) - ($doy % 7);
+        $avs = (($date[6] === 6) ? 0 : $date[6] + 1) - ($doy % 7);
         if ($avs < 0) $avs += 7;
         $num = (int) (($doy + $avs) / 7) + 1;
         if ($avs > 3) $num--;
@@ -328,13 +328,13 @@ function jstrftime($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehr
         break;
 
       case 'g':
-        $jdw = ($date[6] == 6) ? 0 : $date[6] + 1;
+        $jdw = ($date[6] === 6) ? 0 : $date[6] + 1;
         $dny = 364 + $kab - $doy;
         $out .= substr(($jdw > ($doy + 3) and $doy < 3) ? $j_y - 1 : (((3 - $dny) > $jdw and $dny < 3) ? $j_y + 1 : $j_y), 2, 2);
         break;
 
       case 'G':
-        $jdw = ($date[6] == 6) ? 0 : $date[6] + 1;
+        $jdw = ($date[6] === 6) ? 0 : $date[6] + 1;
         $dny = 364 + $kab - $doy;
         $out .= ($jdw > ($doy + 3) and $doy < 3) ? $j_y - 1 : (((3 - $dny) > $jdw and $dny < 3) ? $j_y + 1 : $j_y);
         break;
@@ -499,7 +499,7 @@ function jgetdate($timestamp = '', $none = '', $timezone = 'Asia/Tehran', $tn = 
 /*	F	*/
 function jcheckdate($jm, $jd, $jy) {
   list($jm, $jd, $jy) = explode('_', tr_num($jm . '_' . $jd . '_' . $jy));
-  $l_d = ($jm == 12 and ((($jy + 12) % 33) % 4) != 1) ? 29 : (31 - (int) ($jm / 6.5));
+  $l_d = ($jm === 12 and ((($jy + 12) % 33) % 4) != 1) ? 29 : (31 - (int) ($jm / 6.5));
   return ($jm > 12 or $jd > $l_d or $jm < 1 or $jd < 1 or $jy < 1) ? false : true;
 }
 
@@ -507,7 +507,7 @@ function jcheckdate($jm, $jd, $jy) {
 function tr_num($str, $mod = 'en', $mf = '٫') {
   $num_a = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.');
   $key_a = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', $mf);
-  return ($mod == 'fa') ? str_replace($num_a, $key_a, $str) : str_replace($key_a, $num_a, $str);
+  return ($mod === 'fa') ? str_replace($num_a, $key_a, $str) : str_replace($key_a, $num_a, $str);
 }
 
 /*	F	*/
@@ -520,13 +520,13 @@ function jdate_words($array, $mod = '') {
         $sl = strlen($num);
         $xy3 = substr($num, 2 - $sl, 1);
         $h3 = $h34 = $h4 = '';
-        if ($xy3 == 1) {
+        if ($xy3 === 1) {
           $p34 = '';
           $k34 = array('ده', 'یازده', 'دوازده', 'سیزده', 'چهارده', 'پانزده', 'شانزده', 'هفده', 'هجده', 'نوزده');
           $h34 = $k34[substr($num, 2 - $sl, 2) - 10];
         } else {
           $xy4 = substr($num, 3 - $sl, 1);
-          $p34 = ($xy3 == 0 or $xy4 == 0) ? '' : ' و ';
+          $p34 = ($xy3 === 0 or $xy4 === 0) ? '' : ' و ';
           $k3 = array('', '', 'بیست', 'سی', 'چهل', 'پنجاه', 'شصت', 'هفتاد', 'هشتاد', 'نود');
           $h3 = $k3[$xy3];
           $k4 = array('', 'یک', 'دو', 'سه', 'چهار', 'پنج', 'شش', 'هفت', 'هشت', 'نه');
@@ -536,7 +536,7 @@ function jdate_words($array, $mod = '') {
           array('12', '13', '14', '19', '20'),
           array('هزار و دویست', 'هزار و سیصد', 'هزار و چهارصد', 'هزار و نهصد', 'دوهزار'),
           substr($num, 0, 2)
-        ) . ((substr($num, 2, 2) == '00') ? '' : ' و ') : '') . $h3 . $p34 . $h34 . $h4;
+        ) . ((substr($num, 2, 2) === '00') ? '' : ' و ') : '') . $h3 . $p34 . $h34 . $h4;
         break;
 
       case 'mm':
@@ -619,7 +619,7 @@ function gregorian_to_jalali($gy, $gm, $gd, $mod = '') {
     $jm = 7 + (int) (($days - 186) / 30);
     $jd = 1 + (($days - 186) % 30);
   }
-  return ($mod == '') ? array($jy, $jm, $jd) : $jy . $mod . $jm . $mod . $jd;
+  return ($mod === '') ? array($jy, $jm, $jd) : $jy . $mod . $jm . $mod . $jd;
 }
 
 /*	F	*/
@@ -641,7 +641,7 @@ function jalali_to_gregorian($jy, $jm, $jd, $mod = '') {
     $days = ($days - 1) % 365;
   }
   $gd = $days + 1;
-  $sal_a = array(0, 31, (($gy % 4 == 0 and $gy % 100 != 0) or ($gy % 400 == 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+  $sal_a = array(0, 31, (($gy % 4 === 0 and $gy % 100 != 0) or ($gy % 400 === 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
   for ($gm = 0; $gm < 13 and $gd > $sal_a[$gm]; $gm++) $gd -= $sal_a[$gm];
-  return ($mod == '') ? array($gy, $gm, $gd) : $gy . $mod . $gm . $mod . $gd;
+  return ($mod === '') ? array($gy, $gm, $gd) : $gy . $mod . $gm . $mod . $gd;
 }

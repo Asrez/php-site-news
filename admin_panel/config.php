@@ -1,15 +1,17 @@
 <?php
+if (!defined("LOAD")) exit();
+
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 session_start();
 $link=mysqli_connect("localhost" , "root" ,"" ,"news") ;
+
 if(!(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true))
-{
-  ?>
-  <script>
-    location.replace("404.html");
-  </script>
-  <?php
-}
-function get_count_tables($table_name,$where) {
+header("Location: 404.php");
+
+function get_count_tables(string $table_name, string $where) {
     global $link;
 
     $comment_sql = "SELECT COUNT(`id`) AS `count` FROM ".$table_name." ".$where." ; ";
@@ -24,7 +26,7 @@ function get_count_tables($table_name,$where) {
 }
 
 
-function commentswithVenify($venify) {
+function commentswithVenify(int $venify) {
     global $link;
     
     $comment_sql = "SELECT * FROM `comments` WHERE `venify` = ?;";
@@ -36,7 +38,7 @@ function commentswithVenify($venify) {
     return $comment_result;
 }
 
-function gettables($tables,$order,$limit) {
+function gettables(string $tables, string $order, int $limit) {
     global $link;
     
     $tables_sql = "SELECT * FROM ".$tables." ORDER BY ".$order." LIMIT ?;";
@@ -48,7 +50,7 @@ function gettables($tables,$order,$limit) {
     return $tables_result;
 }
 
-function get_tables_with_id($table_name,$id) {
+function get_tables_with_id(string $table_name, int $id) {
     global $link;
 
     $table_sql = "SELECT * FROM ".$table_name." WHERE `id` = ? ; ";
@@ -62,10 +64,10 @@ function get_tables_with_id($table_name,$id) {
 
 
 }
-function get_article_with_slug($slug) {
+function get_article_with_slug(string $slug) {
     global $link;
 
-    $table_sql = "SELECT * FROM `articles` WHERE `slug` = ? ; ";
+    $table_sql = "SELECT * FROM `articles` WHERE `slug` = ?  and `verify` = 1 ; ";
     $table_query = $link->prepare($table_sql);
     $table_query->bind_param("s",$slug);
     $table_query->execute();
@@ -76,7 +78,7 @@ function get_article_with_slug($slug) {
 
 
 }
-function getTagsInner($id)
+function getTagsInner(int $id)
 {  
    global $link;
 
@@ -88,7 +90,7 @@ function getTagsInner($id)
    return $inner_result;
 }
 
-function selectall($table_name) {
+function selectall(string $table_name) {
     global $link;
 
     $table_sql = "SELECT * FROM ".$table_name." ; ";
@@ -97,7 +99,7 @@ function selectall($table_name) {
     $table_result = $table_query->get_result();
     return $table_result;
 }
-function get_tables_with_where($table_name,$where) {
+function get_tables_with_where(string $table_name, string $where) {
     global $link;
 
     $t_sql = "SELECT * FROM ".$table_name." ".$where." ; ";
@@ -133,7 +135,7 @@ function get_categorys() {
 function get_article_for_chart() {
     global $link;
 
-    $chart_sql = "SELECT * FROM `articles` ORDER BY `viewcount` DESC LIMIT 6  ; ";
+    $chart_sql = "SELECT * FROM `articles` WHERE `verify` = 1  ORDER BY `viewcount` DESC LIMIT 6  ; ";
     $chart_query = $link->prepare($chart_sql);
     $chart_query->execute();
     $chart_result = $chart_query->get_result();
@@ -141,5 +143,18 @@ function get_article_for_chart() {
     return $chart_result;
 
 
+}
+function setting($id) {
+    global $link;
+
+    $sql_select = "SELECT * FROM `setting` WHERE `id` = ?;";
+
+    $query_select = $link->prepare($sql_select);
+    $query_select->bind_param("i",$id);
+    $query_select->execute();
+    $result_select = $query_select->get_result();
+    $row_select = $result_select->fetch_assoc();
+
+    return $row_select;
 }
 ?>

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 30, 2024 at 01:05 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jul 30, 2024 at 04:45 PM
+-- Server version: 8.2.0
+-- PHP Version: 8.2.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,17 +27,20 @@ SET time_zone = "+00:00";
 -- Table structure for table `about_us`
 --
 
-CREATE TABLE `about_us` (
-  `id` bigint(20) NOT NULL,
-  `title` varchar(1000) NOT NULL,
-  `address` text NOT NULL,
-  `email` varchar(10000) NOT NULL,
-  `tel` bigint(20) NOT NULL,
-  `post_code` bigint(20) NOT NULL,
-  `about_us_text` text NOT NULL,
-  `link` mediumtext DEFAULT NULL,
-  `tag` varchar(5000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+DROP TABLE IF EXISTS `about_us`;
+CREATE TABLE IF NOT EXISTS `about_us` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `title` varchar(1000) COLLATE utf8mb3_persian_ci NOT NULL,
+  `address` text COLLATE utf8mb3_persian_ci NOT NULL,
+  `email` varchar(10000) COLLATE utf8mb3_persian_ci NOT NULL,
+  `tel` bigint NOT NULL,
+  `post_code` bigint NOT NULL,
+  `about_us_text` text COLLATE utf8mb3_persian_ci NOT NULL,
+  `link` mediumtext COLLATE utf8mb3_persian_ci,
+  `tag` varchar(5000) COLLATE utf8mb3_persian_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
 
 --
 -- Dumping data for table `about_us`
@@ -52,14 +55,21 @@ INSERT INTO `about_us` (`id`, `title`, `address`, `email`, `tel`, `post_code`, `
 -- Table structure for table `admins`
 --
 
-CREATE TABLE `admins` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(500) NOT NULL,
-  `username` varchar(500) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `image` varchar(500) DEFAULT 'user.png',
-  `date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+DROP TABLE IF EXISTS `admins`;
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(500) COLLATE utf8mb3_persian_ci NOT NULL,
+  `username` varchar(500) COLLATE utf8mb3_persian_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb3_persian_ci NOT NULL,
+  `image` varchar(500) COLLATE utf8mb3_persian_ci DEFAULT 'user.png',
+  `date` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `id` (`id`,`username`),
+  UNIQUE KEY `name` (`name`),
+  KEY `id_2` (`id`),
+  KEY `id_3` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
 
 --
 -- Dumping data for table `admins`
@@ -77,20 +87,27 @@ INSERT INTO `admins` (`id`, `name`, `username`, `password`, `image`, `date`) VAL
 -- Table structure for table `articles`
 --
 
-CREATE TABLE `articles` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `articles`;
+CREATE TABLE IF NOT EXISTS `articles` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `publicationdate` datetime NOT NULL,
-  `title` varchar(500) NOT NULL,
-  `summery` text NOT NULL,
-  `content` longtext NOT NULL,
-  `image` varchar(1000) NOT NULL,
-  `source` varchar(1000) DEFAULT NULL,
-  `viewcount` bigint(20) DEFAULT NULL,
-  `category_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `admin_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `slug` varchar(1000) DEFAULT NULL,
-  `verify` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+  `title` varchar(500) COLLATE utf8mb3_persian_ci NOT NULL,
+  `summery` text COLLATE utf8mb3_persian_ci NOT NULL,
+  `content` longtext COLLATE utf8mb3_persian_ci NOT NULL,
+  `image` varchar(1000) COLLATE utf8mb3_persian_ci NOT NULL,
+  `source` varchar(1000) COLLATE utf8mb3_persian_ci DEFAULT NULL,
+  `viewcount` bigint DEFAULT '0',
+  `category_id` bigint UNSIGNED DEFAULT NULL,
+  `admin_id` bigint UNSIGNED DEFAULT NULL,
+  `slug` varchar(1000) COLLATE utf8mb3_persian_ci DEFAULT NULL,
+  `verify` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`),
+  KEY `category_id` (`admin_id`),
+  KEY `admin_id` (`admin_id`),
+  KEY `id` (`id`),
+  KEY `category_id_2` (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
 
 --
 -- Dumping data for table `articles`
@@ -112,9 +129,9 @@ INSERT INTO `articles` (`id`, `publicationdate`, `title`, `summery`, `content`, 
 (19, '2024-07-14 08:33:46', 'خبر۱ ', 'اتدلاتپدلادبل', 'ابلزتلا', 'img105.jpg', 'بل', 2, 12, 13, 'tQ0xGOz*fyX@1Pa', 1),
 (25, '2024-07-14 10:25:05', 'خبر۱', 'fg nbv', 'fnb ', 'img101.jpg', 'hgfb', 5, 11, 1, 'eGk_FWDBCmJb$E', 1),
 (39, '2024-07-20 09:02:40', 'kkkkkkuyyum', 'ifuoliuoyi', 'llgkulguluuiuii', 'img21.jpg', 'fvuil.iu', 8, 12, 13, '8o*Tu3h@OBsA4X', 1),
-(44, '2024-07-30 08:40:54', 'bgb', 'b', 'b', 'default_art_img.png', 'b', NULL, 12, 13, 'pDxhMjq2kOF5IgZi', 1),
-(45, '2024-07-30 12:42:58', 'nbn', 'nnn', 'nnn', 'default_art_img.png', 'nnn', NULL, 13, 13, '72urE0cmihjpHoTU', 1),
-(46, '2024-07-30 12:49:42', 'ytrfyt', 'fdxgfdgfx', 'gfdgfdfdfhdggggggggggggggg', '3.jpg', 'hgf', NULL, 6, 13, 'ulwcN8OeoBKIHMUY', 1);
+(44, '2024-07-30 08:40:54', 'bgb', 'b', 'b', 'default_art_img.png', 'b', 0, 12, 13, 'pDxhMjq2kOF5IgZi', 1),
+(45, '2024-07-30 12:42:58', 'nbn', 'nnn', 'nnn', 'default_art_img.png', 'nnn', 0, 13, 13, '72urE0cmihjpHoTU', 1),
+(46, '2024-07-30 12:49:42', 'ytrfyt', 'fdxgfdgfx', 'gfdgfdfdfhdggggggggggggggg', '3.jpg', 'hgf', 0, 6, 13, 'ulwcN8OeoBKIHMUY', 1);
 
 -- --------------------------------------------------------
 
@@ -122,11 +139,16 @@ INSERT INTO `articles` (`id`, `publicationdate`, `title`, `summery`, `content`, 
 -- Table structure for table `article_tag`
 --
 
-CREATE TABLE `article_tag` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `article_id` bigint(20) UNSIGNED NOT NULL,
-  `tag_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+DROP TABLE IF EXISTS `article_tag`;
+CREATE TABLE IF NOT EXISTS `article_tag` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `article_id` bigint UNSIGNED NOT NULL,
+  `tag_id` bigint UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `article_id` (`article_id`,`tag_id`),
+  KEY `tag_id` (`tag_id`),
+  KEY `tag_id_2` (`tag_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
 
 --
 -- Dumping data for table `article_tag`
@@ -148,12 +170,17 @@ INSERT INTO `article_tag` (`id`, `article_id`, `tag_id`) VALUES
 -- Table structure for table `categorys`
 --
 
-CREATE TABLE `categorys` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(500) NOT NULL,
-  `parent_id` bigint(20) UNSIGNED DEFAULT 0,
-  `slug` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+DROP TABLE IF EXISTS `categorys`;
+CREATE TABLE IF NOT EXISTS `categorys` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(500) COLLATE utf8mb3_persian_ci NOT NULL,
+  `parent_id` bigint UNSIGNED DEFAULT '0',
+  `slug` varchar(1000) COLLATE utf8mb3_persian_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`),
+  KEY `id` (`id`),
+  KEY `id_2` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
 
 --
 -- Dumping data for table `categorys`
@@ -183,15 +210,20 @@ INSERT INTO `categorys` (`id`, `title`, `parent_id`, `slug`) VALUES
 -- Table structure for table `comments`
 --
 
-CREATE TABLE `comments` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(500) NOT NULL,
-  `comment` text NOT NULL,
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb3_persian_ci NOT NULL,
+  `email` varchar(500) COLLATE utf8mb3_persian_ci NOT NULL,
+  `comment` text COLLATE utf8mb3_persian_ci NOT NULL,
   `date` date NOT NULL,
-  `article_id` bigint(20) UNSIGNED NOT NULL,
-  `venify` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+  `article_id` bigint UNSIGNED NOT NULL,
+  `venify` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `article_id` (`article_id`),
+  KEY `article_id_2` (`article_id`),
+  KEY `article_id_3` (`article_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
 
 --
 -- Dumping data for table `comments`
@@ -208,12 +240,15 @@ INSERT INTO `comments` (`id`, `name`, `email`, `comment`, `date`, `article_id`, 
 -- Table structure for table `setting`
 --
 
-CREATE TABLE `setting` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `key_setting` varchar(500) NOT NULL,
-  `value_setting` varchar(500) NOT NULL,
-  `link` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+DROP TABLE IF EXISTS `setting`;
+CREATE TABLE IF NOT EXISTS `setting` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `key_setting` varchar(500) COLLATE utf8mb3_persian_ci NOT NULL,
+  `value_setting` varchar(500) COLLATE utf8mb3_persian_ci NOT NULL,
+  `link` text COLLATE utf8mb3_persian_ci,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `key_setting` (`key_setting`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
 
 --
 -- Dumping data for table `setting`
@@ -236,7 +271,7 @@ INSERT INTO `setting` (`id`, `key_setting`, `value_setting`, `link`) VALUES
 (14, 'twitter_icon', '', 'https://www.twitter.com'),
 (15, 'facebook_icon', '', 'https://www.facebook.com'),
 (16, 'title', 'خبر اینلاین', NULL),
-(17, 'footer', 'اسرز', 'https://asrez.com/');
+(17, 'footer', 'asrez', 'https://asrez.com/');
 
 -- --------------------------------------------------------
 
@@ -244,11 +279,15 @@ INSERT INTO `setting` (`id`, `key_setting`, `value_setting`, `link`) VALUES
 -- Table structure for table `tags`
 --
 
-CREATE TABLE `tags` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(500) NOT NULL,
-  `slug` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+DROP TABLE IF EXISTS `tags`;
+CREATE TABLE IF NOT EXISTS `tags` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(500) COLLATE utf8mb3_persian_ci NOT NULL,
+  `slug` varchar(1000) COLLATE utf8mb3_persian_ci NOT NULL,
+  PRIMARY KEY (`slug`) USING BTREE,
+  UNIQUE KEY `slug` (`slug`),
+  KEY `id_2` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
 
 --
 -- Dumping data for table `tags`
@@ -266,11 +305,14 @@ INSERT INTO `tags` (`id`, `title`, `slug`) VALUES
 -- Table structure for table `view`
 --
 
-CREATE TABLE `view` (
-  `id` bigint(20) NOT NULL,
-  `user_ip` varchar(5000) NOT NULL,
-  `article_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+DROP TABLE IF EXISTS `view`;
+CREATE TABLE IF NOT EXISTS `view` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_ip` varchar(5000) COLLATE utf8mb3_persian_ci NOT NULL,
+  `article_id` bigint UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `article_id` (`article_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
 
 --
 -- Dumping data for table `view`
@@ -285,146 +327,6 @@ INSERT INTO `view` (`id`, `user_ip`, `article_id`) VALUES
 (6, '127.0.0.1', 2),
 (7, '127.0.0.1', 11),
 (8, '127.0.0.1', 1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `about_us`
---
-ALTER TABLE `about_us`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
-
---
--- Indexes for table `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `id` (`id`,`username`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `id_2` (`id`),
-  ADD KEY `id_3` (`id`);
-
---
--- Indexes for table `articles`
---
-ALTER TABLE `articles`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `slug` (`slug`),
-  ADD KEY `category_id` (`admin_id`),
-  ADD KEY `admin_id` (`admin_id`),
-  ADD KEY `id` (`id`),
-  ADD KEY `category_id_2` (`category_id`);
-
---
--- Indexes for table `article_tag`
---
-ALTER TABLE `article_tag`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `article_id` (`article_id`,`tag_id`),
-  ADD KEY `tag_id` (`tag_id`),
-  ADD KEY `tag_id_2` (`tag_id`);
-
---
--- Indexes for table `categorys`
---
-ALTER TABLE `categorys`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `slug` (`slug`),
-  ADD KEY `id` (`id`),
-  ADD KEY `id_2` (`id`);
-
---
--- Indexes for table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `article_id` (`article_id`),
-  ADD KEY `article_id_2` (`article_id`),
-  ADD KEY `article_id_3` (`article_id`);
-
---
--- Indexes for table `setting`
---
-ALTER TABLE `setting`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `key_setting` (`key_setting`);
-
---
--- Indexes for table `tags`
---
-ALTER TABLE `tags`
-  ADD PRIMARY KEY (`slug`) USING BTREE,
-  ADD UNIQUE KEY `slug` (`slug`),
-  ADD KEY `id_2` (`id`);
-
---
--- Indexes for table `view`
---
-ALTER TABLE `view`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `article_id` (`article_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `about_us`
---
-ALTER TABLE `about_us`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `admins`
---
-ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `articles`
---
-ALTER TABLE `articles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
---
--- AUTO_INCREMENT for table `article_tag`
---
-ALTER TABLE `article_tag`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `categorys`
---
-ALTER TABLE `categorys`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT for table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `setting`
---
-ALTER TABLE `setting`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- AUTO_INCREMENT for table `tags`
---
-ALTER TABLE `tags`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `view`
---
-ALTER TABLE `view`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

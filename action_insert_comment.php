@@ -13,7 +13,7 @@ $code = "NULL";
 $venify = 0;
 
 if (isset($_POST['btnsubmit'])) {
-    if ($_POST['sum'] == $_POST['sum']) {
+    if ($_POST['sum'] === $_POST['sum']) {
         if (isset($_POST['name']) && !empty($_POST['name']) &&
         isset($_POST['Email']) && !empty($_POST['Email']) &&
         isset($_POST['comment']) && !empty($_POST['comment'])

@@ -1,6 +1,13 @@
 <?php
+define("LOAD", "");
+
 require "../config.php";
-$action = $_GET['action'];
+
+if(isset ($_GET['action']))
+    $action = $_GET['action'];
+else 
+    header("Location: ../404.php");
+
 if($action != "insert") {$slug = $_GET['slug'];}
 if(isset($_POST["title"]) && !empty($_POST["title"])&&
 isset($_POST["summery"]) && !empty($_POST["summery"])&&
@@ -114,7 +121,7 @@ switch ($action) {
          }} }    
         break;
         case "update":
-            if($image == "") {
+            if($image === "") {
             $select_img = get_article_with_slug($slug);
             $image = $select_img['image'];}
             $update = $link->prepare("UPDATE `articles` SET `title` =?, `summery`=?, `content` =?, `image` =?, `source` =?, `category_id` =?  WHERE `slug`=? ;");
@@ -149,12 +156,12 @@ $date = date('Y-m-d h:i:s');
 
            $insert = $link->prepare("INSERT INTO `articles`(`id`, `publicationdate`, `title`, `summery`, `content`, `image`, `source`, `viewcount`, `category_id`, `admin_id`, `slug`,`verify`)VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
          if($insert) {
-            if($image == "") {
+            if($image === "") {
                 $image = "default_art_img.png";
             }
             $code = "NULL";
             $view_count = 0;
-            $insert->bind_param("issssssiiis",$code, $date, $title, $summery , $content , $image , $source , $ $view_count , $category ,$admin , $text,$verify);
+            $insert->bind_param("issssssiiisi",$code, $date, $title, $summery , $content , $image , $source , $ $view_count , $category ,$admin , $text,$verify);
             if($insert->execute()) {
                 $find_id_art_result = get_tables_with_where(" `articles` ","WHERE `slug`='$text'");
                 $find_id_art_row = $find_id_art_result->fetch_assoc();
