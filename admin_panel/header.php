@@ -30,7 +30,7 @@ $venify_result = commentswithVenify(0);
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu"> 
                   <!-- start message -->
-                  <?php while($venify_row = $venify_result->fetch_assoc()){ ?>
+                  <?php while($venify_row = $venify_result->fetch_assoc()) { ?>
                   <li>
                    
                     <a href="#">
@@ -56,16 +56,16 @@ $venify_result = commentswithVenify(0);
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
               <img src='dist/img/<?= $_SESSION["admin_image"];?>' class="user-image" alt="User Image">
-              <span class="hidden-xs"><?= $_SESSION["name"]; ?>
+              <span class="hidden-xs"><?= $_SESSION["name"] ?>
 </span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src='dist/img/<?= $_SESSION["admin_image"]; ?>' class="img-circle" alt="User Image">
+                <img src='dist/img/<?= $_SESSION["admin_image"] ?>' class="img-circle" alt="User Image">
 
                 <p>
-                  <?= $_SESSION["name"]; ?>
+                  <?= $_SESSION["name"] ?>
                   <small>مدیریت کل سایت</small>
                 </p>
               </li>
@@ -107,7 +107,7 @@ $venify_result = commentswithVenify(0);
           <img src='dist/img/<?= $_SESSION["admin_image"];?>' class="img-circle" alt="User Image">
         </div>
         <div class="pull-right info">
-          <p><?= $_SESSION["name"]; ?>
+          <p><?= $_SESSION["name"] ?>
 </p>
           <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
         </div>

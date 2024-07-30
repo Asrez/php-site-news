@@ -1,6 +1,6 @@
 <?php 
 require "config.php";
-if(isset($_GET['action'])){
+if(isset($_GET['action'])) {
 $action = $_GET['action'];
 }else{
   ?>
@@ -10,7 +10,7 @@ $action = $_GET['action'];
   <?php
   exit;
 }
-if($action == "update"){
+if($action == "update") {
   $slug = $_GET['slug'];
   $row_up = get_article_with_slug($slug);
   $id = $row_up['admin_id'];
@@ -73,11 +73,11 @@ $tags_result = selectall(" `tags` ");
             <!-- /.box-header -->
             <div class="box-body">
                 
-              <form role="form" method="post" action="actions/article_edit_action.php?action=<?php echo $action ; if($action!='insert'){echo "&slug=".$slug ;}?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="actions/article_edit_action.php?action=<?php echo $action ; if($action!='insert') {echo "&slug=".$slug ;}?>" enctype="multipart/form-data">
                 <!-- text input -->
                 <div class="form-group">
                   <label>عنوان</label>
-                  <input type="text" class="form-control" placeholder="متن" name="title" id="title" value="<?php if($action=='update'){echo $row_up['title'];} ?>">
+                  <input type="text" class="form-control" placeholder="متن" name="title" id="title" value="<?php if($action=='update') {echo $row_up['title'];} ?>">
                 </div>
                 <div class="form-group">
                   <label>نویسنده</label>
@@ -88,7 +88,7 @@ $tags_result = selectall(" `tags` ");
                 </div>
 
                 <?php 
-                while($tags_row = $tags_result->fetch_assoc()){
+                while($tags_row = $tags_result->fetch_assoc()) {
                 
                   
                 ?>
@@ -108,10 +108,10 @@ $tags_result = selectall(" `tags` ");
                   <label>دسته بندی</label>
                   <select class="form-control" name="category">
                     <?php
-                    while($categorys_row1 = $category_parent_0->fetch_assoc()){
+                    while($categorys_row1 = $category_parent_0->fetch_assoc()) {
                    
                       ?>
-                    <option value="<?= $categorys_row1['id'] ?>" <?php if($action!="insert"){ if ($row_up['category_id'] == $categorys_row1['id']){echo "selected";} }?>><?= $categorys_row1['title']; ?></option>
+                    <option value="<?= $categorys_row1['id'] ?>" <?php if($action!="insert") { if ($row_up['category_id'] == $categorys_row1['id']) {echo "selected";} }?>><?= $categorys_row1['title']; ?></option>
                    <?php }  ?>
                   </select>
                       </div>
@@ -136,7 +136,7 @@ $tags_result = selectall(" `tags` ");
             <!-- /.box-header -->
             <div class="box-body pad">
              
-                    <textarea id="editor1"  rows="5" cols="45" name="summery"><?php if($action=='update'){echo $row_up['summery'];} ?></textarea>
+                    <textarea id="editor1"  rows="5" cols="45" name="summery"><?php if($action=='update') {echo $row_up['summery'];} ?></textarea>
                </div>
           </div>
           <div class="box box-info">
@@ -155,17 +155,17 @@ $tags_result = selectall(" `tags` ");
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <textarea id="editor1" rows="20" cols="45" name="content" ><?php if($action == 'update'){echo $row_up['content'];} ?></textarea>
+              <textarea id="editor1" rows="20" cols="45" name="content" ><?php if($action == 'update') {echo $row_up['content'];} ?></textarea>
               
             </div>
             <div class="form-group">
                   <label>منبع</label>
-                  <input type="text" class="form-control" placeholder="منبع" name="source" value="<?php if($action == 'update'){echo $row_up['source'];} ?>">
+                  <input type="text" class="form-control" placeholder="منبع" name="source" value="<?php if($action == 'update') {echo $row_up['source'];} ?>">
                 </div>
           </div>
           <div class="form-group">
                   <label>عکس</label>
-                  <input type="file" class="form-control" name="image" value="<?php if($action == 'update'){echo $row_up['image'];} ?>">
+                  <input type="file" class="form-control" name="image" value="<?php if($action == 'update') {echo $row_up['image'];} ?>">
                 </div>
           </div>
           <button type="submit" name="btn" >ثبت</button>

@@ -1,6 +1,6 @@
 <?php 
-require("config.php");
-if(isset($_GET['article_slug'])){
+require "config.php";
+if(isset($_GET['article_slug'])) {
 $article_slug = $_GET['article_slug'];}
 else{
     ?>
@@ -11,7 +11,7 @@ else{
 }
 
 $article_row_main= getArticlesWithSlug($article_slug);
-if(!isset($article_row_main)){
+if(!isset($article_row_main)) {
     exit();
 }
 $id_main = $article_row_main['id'];
@@ -35,12 +35,12 @@ $article_result4 = getArticles("`publicationdate` DESC",10);
 $comment_result = getComments(0,$id_main);
 // insert to view count
 $viewcountresult=ISSETIP($ip,$id_main);
-if($viewcountresult == ""){
-    $insert_sql="INSERT INTO `view`(`id`, `user_ip`, `article_id`) VALUES ('', ? , ?) ;";
+if($viewcountresult == "") {
+    $insert_sql="INSERT INTO `view`(`id`, `user_ip`, `article_id`) VALUES ('', ? , ?);";
     $insert_query = $link->prepare($insert_sql);
     $insert_query->bind_param("si",$ip,$id_main);
     $insert_query->execute();
-    $sql_update_viewcount="UPDATE `articles` SET `viewcount`=`viewcount`+1 WHERE `id` = ? ;";
+    $sql_update_viewcount="UPDATE `articles` SET `viewcount`=`viewcount`+1 WHERE `id` = ?;";
     $query_update_viewcount=$link->prepare($sql_update_viewcount);
     $query_update_viewcount->bind_param("i" , $id_main);
     $query_update_viewcount->execute();
@@ -168,7 +168,7 @@ $tag_result = getTagsInner($id_main);
                     
                         <div class="row">
                         <?php
-                                while($article_row = $article_result2->fetch_assoc()){
+                                while($article_row = $article_result2->fetch_assoc()) {
 
                                 ?>
                             <div class="col-6 col-lg-4">
@@ -201,7 +201,7 @@ $tag_result = getTagsInner($id_main);
                                 <?php
                                
                                 
-                                while($tag_row = mysqli_fetch_array($tag_result)){
+                                while($tag_row = mysqli_fetch_array($tag_result)) {
 
                                 ?>
 
@@ -227,7 +227,7 @@ $tag_result = getTagsInner($id_main);
                             <div class="most_viewed_news suggested">
                                 <ul>
                                 <?php
-                                  while($article_row4 = $article_result4->fetch_assoc()){
+                                  while($article_row4 = $article_result4->fetch_assoc()) {
                                     ?>
                                     <li><a href="show_news.php?article_slug=<?= $article_row4['slug']; ?>"> <?= $article_row4['title']; ?> </a> </li>
                                     <?php } ?>
@@ -242,7 +242,7 @@ $tag_result = getTagsInner($id_main);
                     <div class="tab-pane active">
                         <div class="col-12 show_comment">
                             <?php
-                             while($row_comment = $comment_result->fetch_assoc()){
+                             while($row_comment = $comment_result->fetch_assoc()) {
                                  ?>
                             <div class="row mt-2">
                                 <div class="col-12 comment_header">
@@ -302,7 +302,7 @@ $tag_result = getTagsInner($id_main);
                                     <div class="col-12 col-md-6">
                                         <div style="direction: ltr">
                                         
-                                        <input type="number" name="real_sum" value="<?=  $sum; ?>" style="opacity: 0;position: absolute;">
+                                        <input type="number" name="real_sum" value="<?= $sum; ?>" style="opacity: 0;position: absolute;">
                                             <div class="captcha-image d-inline-block"><?= $num1; ?> +<?= $num2; ?>=
                                             </div>
                                             <div class="captcha-input d-inline-block">

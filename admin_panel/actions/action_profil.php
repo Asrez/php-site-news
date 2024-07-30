@@ -1,6 +1,6 @@
 <?php
 require "../config.php" ;
-if(isset($_POST['subbtn'])){
+if(isset($_POST['subbtn'])) {
 if(isset( $_POST['name']) && !empty( $_POST['name']) &&
 isset( $_POST['password']) && !empty( $_POST['password']) && 
 isset( $_POST['username']) && !empty( $_POST['username']))
@@ -19,13 +19,13 @@ window.alert("برخی فیلد ها مقدار پهی نشده اند");
 <?php
 }
  try {
- if($image == ""){
+ if($image == "") {
 $image = "user.png";
 }
 $update = $link->prepare("UPDATE `admins` SET `username` =?, `name`=?, `password` =?, `image` =? WHERE `id`=?;");
- if($update){
+ if($update) {
                      $update->bind_param("ssssi",$username, $name ,$password , $image , $adminn_id);
-                     if($update->execute()){
+                     if($update->execute()) {
                          ?>
                          <script>
                              window.alert("ویرایش  شد");

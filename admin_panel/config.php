@@ -27,7 +27,7 @@ function get_count_tables($table_name,$where) {
 function commentswithVenify($venify) {
     global $link;
     
-    $comment_sql = "SELECT * FROM `comments` WHERE `venify` = ? ;";
+    $comment_sql = "SELECT * FROM `comments` WHERE `venify` = ?;";
     $comment_query = $link->prepare($comment_sql);
     $comment_query->bind_param("i",$venify);
     $comment_query->execute();
@@ -39,7 +39,7 @@ function commentswithVenify($venify) {
 function gettables($tables,$order,$limit) {
     global $link;
     
-    $tables_sql = "SELECT * FROM ".$tables." ORDER BY ".$order." LIMIT ? ;";
+    $tables_sql = "SELECT * FROM ".$tables." ORDER BY ".$order." LIMIT ?;";
     $tables_query = $link->prepare($tables_sql);
     $tables_query->bind_param("i",$limit);
     $tables_query->execute();
@@ -88,7 +88,7 @@ function getTagsInner($id)
    return $inner_result;
 }
 
-function selectall($table_name){
+function selectall($table_name) {
     global $link;
 
     $table_sql = "SELECT * FROM ".$table_name." ; ";
@@ -116,11 +116,11 @@ function get_categorys() {
     $parent_category = [];
     $sub_category = [];
     $category_result = get_tables_with_where(" `categorys` ","WHERE `parent_id`=0");
-    while($category_row = $category_result->fetch_assoc()){
+    while($category_row = $category_result->fetch_assoc()) {
         $parent_category[] = $category_row;
         $id_category = $category_row['id'];
         $category_result1 = get_tables_with_where(" `categorys` ","WHERE `parent_id`='$id_category';");
-        while($category_row1 = $category_result1->fetch_assoc()){
+        while($category_row1 = $category_result1->fetch_assoc()) {
             $sub_category[] = $category_row1;
         }
     }

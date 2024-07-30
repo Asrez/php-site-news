@@ -78,9 +78,9 @@ $result__article = get_tables_with_where(" `articles` ","WHERE `admin_id`='$admi
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="dist/img/<?= $_SESSION["admin_image"]; ?>" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="dist/img/<?= $_SESSION["admin_image"] ?>" alt="User profile picture">
 
-              <h3 class="profile-username text-center"><?= $_SESSION["name"]; ?></h3>
+              <h3 class="profile-username text-center"><?= $_SESSION["name"] ?></h3>
 
               <p class="text-muted text-center"> <?= $_SESSION["username"];
  ?></p>
@@ -111,13 +111,13 @@ $result__article = get_tables_with_where(" `articles` ","WHERE `admin_id`='$admi
             <div class="tab-content">
               
               <div class="active tab-pane" id="activity">
-              <?php  while($row__article = $result__article->fetch_assoc()){ ?>
+              <?php  while($row__article = $result__article->fetch_assoc()) { ?>
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="dist/img/<?= $_SESSION["admin_image"]; ?>" alt="user image">
+                    <img class="img-circle img-bordered-sm" src="dist/img/<?= $_SESSION["admin_image"] ?>" alt="user image">
                         <span class="username">
-                          <a href="#"> <?= $_SESSION["username"]; ?></a>
+                          <a href="#"> <?= $_SESSION["username"] ?></a>
                           <a href="#" class="pull-left btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description"></span>

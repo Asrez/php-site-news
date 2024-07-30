@@ -10,7 +10,7 @@ $chart_article = get_article_for_chart();
 $chart_article_label = [];
 $chart_article_viewcount = [];
 $chart_article_comment_count = [];
-while($chart_row = $chart_article->fetch_assoc()){
+while($chart_row = $chart_article->fetch_assoc()) {
   $chart_article_label[] = $chart_row['id'];
   $chart_article_viewcount[] = $chart_row["viewcount"];
   $id_artic = $chart_row['id'];
@@ -235,13 +235,13 @@ while($chart_row = $chart_article->fetch_assoc()){
                   </thead>
                   <tbody>
                     <?php
-                    while($row_comment = $last_comment->fetch_assoc()){
+                    while($row_comment = $last_comment->fetch_assoc()) {
                     ?>
                   <tr>
                     <td><a href="pages/examples/invoice.html"><?= $row_comment['id'] ?></a></td>
                     <td><?=$row_comment['name'] ?></td>
                     
-                    <td><span class="label <?php if($row_comment['venify']==1){ echo 'label-success';}else {echo 'label-warning';}?>"><?php if($row_comment['venify']==1){echo  "تایید شده";} else{ echo "در انتظار تایید";}?></span></td> 
+                    <td><span class="label <?php if($row_comment['venify']==1) { echo 'label-success';}else {echo 'label-warning';}?>"><?php if($row_comment['venify']==1) {echo  "تایید شده";} else{ echo "در انتظار تایید";}?></span></td> 
                     <td>
                       <div ><?= $row_comment['comment']; ?></div>
                     </td>
@@ -284,7 +284,7 @@ while($chart_row = $chart_article->fetch_assoc()){
             <div class="box-body">
               <ul class="products-list product-list-in-box">
                 <?php
-                while($article_row = $last_article->fetch_assoc()){
+                while($article_row = $last_article->fetch_assoc()) {
                 ?>
                 <li class="item">
                   <div class="product-img">
@@ -401,7 +401,7 @@ while($chart_row = $chart_article->fetch_assoc()){
       // Boolean - Whether to fill the dataset with a color
       datasetFill             : true,
       // String - A legend template
-      legendTemplate          : '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].lineColor%>\'></span><%=datasets[i].label%></li><%}%></ul>',
+      legendTemplate          : '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++) {%><li><span style=\'background-color:<%=datasets[i].lineColor%>\'></span><%=datasets[i].label%></li><%}%></ul>',
       // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
       maintainAspectRatio     : true,
       // Boolean - whether to make the chart responsive to window resizing

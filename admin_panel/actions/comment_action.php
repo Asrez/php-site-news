@@ -5,10 +5,10 @@ $id = $_GET['id'];
 switch ($action) {
     case 'update':
        $update = $link->prepare("UPDATE `comments` SET `venify`=? WHERE `id`=?");
-       if($update){
+       if($update) {
         $num = 1;
           $update->bind_param("ii",$num, $id);
-          if($update->execute()){
+          if($update->execute()) {
               ?>
               <script>
                   window.alert("تایید  شد");
@@ -29,9 +29,9 @@ switch ($action) {
     
      case 'delete':
        $delete = $link->prepare("DELETE FROM `comments` WHERE `id`=?;");
-       if($delete){
+       if($delete) {
           $delete->bind_param("i",$id);
-          if($delete->execute()){
+          if($delete->execute()) {
               ?>
               <script>
                   window.alert("حذف شد");

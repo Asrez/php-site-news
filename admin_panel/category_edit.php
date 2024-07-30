@@ -1,7 +1,7 @@
 <?php
 require "config.php" ;
 
-if(isset($_GET['action'])){
+if(isset($_GET['action'])) {
 $action = $_GET['action'];
 }else{
   ?>
@@ -12,7 +12,7 @@ $action = $_GET['action'];
   exit;
 }
 $parent_id = $_GET['parent_id'];
-if($action != 'insert'){
+if($action != 'insert') {
    $id = $_GET['id'];
    $query_select = "SELECT * FROM `categorys` WHERE id=$id ";
    $row_select = get_tables_with_id(" `categorys` ",$id);
@@ -70,11 +70,11 @@ if($action != 'insert'){
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" method="post" action="actions/action_category_edit.php?action=<?= $action; ?>&parent_id=<?php echo $parent_id; if($action=='update'){echo '&id='.$id ;}?>" >
+              <form role="form" method="post" action="actions/action_category_edit.php?action=<?= $action; ?>&parent_id=<?php echo $parent_id; if($action=='update') {echo '&id='.$id ;}?>" >
                 <!-- text input -->
                 <div class="form-group">
                   <label> عنوان </label>
-                  <input type="text" class="form-control" placeholder="عنوان  " name="title" id="title" value="<?php if($action!='insert'){echo $row_select['title'];} ?>" >
+                  <input type="text" class="form-control" placeholder="عنوان  " name="title" id="title" value="<?php if($action!='insert') {echo $row_select['title'];} ?>" >
                 </div>
                 
                 <button type="submit" name="btn">تایید</button>

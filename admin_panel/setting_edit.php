@@ -1,8 +1,8 @@
 <?php
 require "config.php" ;
-if (isset($_GET['id'])){
+if (isset($_GET['id'])) {
 $id = $_GET['id'];                 
-$sql_select = "SELECT * FROM `setting` WHERE `id` = ? ;";
+$sql_select = "SELECT * FROM `setting` WHERE `id` = ?;";
 $query_select = $link->prepare($sql_select);
 $query_select->bind_param("i",$id);
 $query_select->execute();

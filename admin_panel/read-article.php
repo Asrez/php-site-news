@@ -1,6 +1,6 @@
 <?php
 require "config.php";
-if(isset($_GET['slug'])){
+if(isset($_GET['slug'])) {
   $slug = $_GET['slug'];
 
 }

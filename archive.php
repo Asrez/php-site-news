@@ -1,6 +1,6 @@
 <?php 
 require "config.php";
-if(isset($_POST['btnsearch'])){
+if(isset($_POST['btnsearch'])) {
     $search = $_POST['search'];
     $result_article = search($search);
   }
@@ -8,11 +8,11 @@ if(isset($_POST['btnsearch'])){
 
 $tag_array=[];
 $article_array=[];
-while($row_article = $result_article->fetch_assoc()){
+while($row_article = $result_article->fetch_assoc()) {
     $article_array[]=$row_article;
     $artic_id=$row_article['id'];
     $tag_result=getTagsInner($artic_id);
-    while($tag_row=$tag_result->fetch_assoc()){
+    while($tag_row=$tag_result->fetch_assoc()) {
        $tag_array[]=$tag_row;
     }
 }
@@ -52,27 +52,27 @@ while($row_article = $result_article->fetch_assoc()){
                 <div class="col-12 main_content box">
 
                 <?php 
-                foreach($article_array as $row_articles){
+                foreach($article_array as $row_articles) {
                   ?>
                     <div class="row mb-3">
                         <div class="after-content col-4 pl-0">
-                            <a href="show_news.php?article_slug=<?=  $row_articles['slug']; ?>" target="_blank">
+                            <a href="show_news.php?article_slug=<?= $row_articles['slug']; ?>" target="_blank">
                                 <img src="image/<?= $row_articles['image'];?>" class="img-fluid" alt="" title="">
                             </a>
                         </div>
                         <div class="after-content col-8">
                             <div class="news_title">
                                 <h2 class="h6">
-                                    <a href="show_news.php?article_slug=<?=  $row_articles['slug']; ?>" target="_blank">
-                                    <?=  $row_articles['title'];?>
+                                    <a href="show_news.php?article_slug=<?= $row_articles['slug']; ?>" target="_blank">
+                                    <?= $row_articles['title'];?>
                                     </a>
                                 </h2>
                             </div>
                             <div class="desc_news d-none d-md-block">
                                 <p>
                                     <span class="category">
-                                    <?php  foreach($tag_array as $row_tags){
-                                        if($row_tags['article_id'] == $row_articles['id']){
+                                    <?php  foreach($tag_array as $row_tags) {
+                                        if($row_tags['article_id'] == $row_articles['id']) {
                                             ?>
                                              <a href="archive.php" target="_blank"> <?= $row_tags["title"];?> </a>
                                                 <?php

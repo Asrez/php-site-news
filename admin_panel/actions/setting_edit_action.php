@@ -2,7 +2,7 @@
 require "../config.php";
 $action = $_GET['action'];
 $id = $_GET['id'];
-if(isset($_POST['qlink'] )&& !empty($_POST['qlink'])){
+if(isset($_POST['qlink'] )&& !empty($_POST['qlink'])) {
     $image = basename($_FILES["image"]["name"]);
     $target_dir = "../../image/";
     $target_file = $target_dir.basename($_FILES["image"]["name"]);
@@ -11,7 +11,7 @@ if(isset($_POST['qlink'] )&& !empty($_POST['qlink'])){
     $linkQ = $_POST['qlink'] ;
 }
 else{
-    if($action=='update'){
+    if($action=='update') {
     ?>
     <script>
         window.alert("فیلد ها مقدار دهی نشده اند");
@@ -22,7 +22,7 @@ else{
     }
 }           
  
-if($action != "delete"){
+if($action != "delete") {
 
     if($imagefiletype!="jpg" &&$imagefiletype!="png"&& $imagefiletype!="jpeg" && $imagefiletype!="gif")
     {
@@ -30,20 +30,20 @@ if($action != "delete"){
     
     <script type="text/javascript">
     window.alert("شما فقط پسوند های png , jpg , jpeg ,gif مجاز هستید");
-        location.replace("../article_edit.php?action=<?php  echo $action ; if($action!="insert"){?> & slug=<?= urlencode($slug) ?>");
+        location.replace("../article_edit.php?action=<?php  echo $action ; if($action!="insert") {?> & slug=<?= urlencode($slug) ?>");
     </script>');
         $uploadok=0;
     }
-                      if(!file_exists($target_file)){
+                      if(!file_exists($target_file)) {
                         
      move_uploaded_file($_FILES["image"]["tmp_name"],$target_file);}
 }
 
-if($action == 'update'){
+if($action == 'update') {
     $update = $link->prepare("UPDATE `setting` SET `value_setting`=?,`link`=? WHERE `id`=?");
-       if($update){
+       if($update) {
           $update->bind_param("ssi",$image,$linkQ , $id);
-          if($update->execute()){
+          if($update->execute()) {
               ?>
               <script>
                   window.alert("ویرایش  شد");
@@ -61,13 +61,13 @@ if($action == 'update'){
                   }
                 } 
             }
-if($action == "delete"){
+if($action == "delete") {
     $nullimg = "nullimg.png";
     $liink = "";
     $delete = $link->prepare("UPDATE `setting` SET `value_setting`=? ,`link`=? WHERE `id`=?;");
-       if($delete){
+       if($delete) {
           $delete->bind_param("ssi",$nullimg,$liink,$id);
-          if($delete->execute()){
+          if($delete->execute()) {
               ?>
               <script>
                   window.alert("حذف شد");

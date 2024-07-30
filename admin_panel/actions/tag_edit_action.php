@@ -1,18 +1,18 @@
 <?php
 require "../config.php";
 $action = $_GET['action'];
-if($action != "insert"){
+if($action != "insert") {
 $id = $_GET['id'];
 }
-if(isset($_POST['title']) && !empty($_POST['title'])){
+if(isset($_POST['title']) && !empty($_POST['title'])) {
     $title = $_POST['title'];
 }
 else{
-    if($action!="delete"){
+    if($action!="delete") {
         ?>
          <script>
         window.alert("مقدار دهی نشده");
-        location.replace("../tag_edit.php?action=<?php echo $action; if($action!='insert'){ ?>&id=<?= $id;} ?>");
+        location.replace("../tag_edit.php?action=<?php echo $action; if($action!='insert') { ?>&id=<?= $id;} ?>");
     </script>
         <?php
         exit();
@@ -22,9 +22,9 @@ switch ($action)
 {
     case 'update':
         $update = $link->prepare("UPDATE `tags` SET `title`=? WHERE `id`=?;");
-                if($update){
+                if($update) {
                    $update->bind_param("si",$title, $id);
-                   if($update->execute()){
+                   if($update->execute()) {
                        ?>
                        <script>
                            window.alert("ویرایش  شد");
@@ -36,7 +36,7 @@ switch ($action)
                                    ?>
                        <script>
                            window.alert("ویرایش نشد");
-                           location.replace("../tag_edit.php?action=<?php echo $action; if($action!='insert'){ ?>&id=<?= $id;} ?>");
+                           location.replace("../tag_edit.php?action=<?php echo $action; if($action!='insert') { ?>&id=<?= $id;} ?>");
                        </script>
                        <?php
                            }
@@ -47,10 +47,10 @@ switch ($action)
         $delete1 = $link->prepare("DELETE FROM `article_tag` WHERE `tag_id`=?;");
         $delete1->bind_param("i",$id);
         $delete = $link->prepare("DELETE FROM `tags` WHERE `id`=?;");
-        if($delete){
+        if($delete) {
           $delete->bind_param("i",$id);
-          if($delete1->execute()){
-            if($delete->execute()){
+          if($delete1->execute()) {
+            if($delete->execute()) {
               ?>
               <script>
                   window.alert("حذف شد");
@@ -77,10 +77,10 @@ switch ($action)
         $myChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $text = substr( str_shuffle($myChars), 5, 16 );
         $insert = $link->prepare("INSERT INTO `tags`(`id`, `title`, `slug`) VALUES (?,?,?);");
-             if($insert){
+             if($insert) {
                 $code = "NULL";
                 $insert->bind_param("iss",$code, $title, $text);
-                if($insert->execute()){
+                if($insert->execute()) {
                     ?>
                     <script>
                         window.alert("ثبت شد");

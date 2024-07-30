@@ -1,5 +1,5 @@
 <?php
-require("config.php");
+require "config.php";
 $row_about = getaboutus();
 $setting_row_left4 = getSetting("Advertise_left4");
 $article_result1 = getArticles("`viewcount` ASC",6);
@@ -32,11 +32,11 @@ $article_result2 = getArticles("publicationdate",15);
                         ?>
                         <div class="title">
                             
-                            <h2>درباره خبر <?=  $row_about['title'] ;?></h2>
+                            <h2>درباره خبر <?= $row_about['title'] ;?></h2>
                         </div>
                         <div class="body">
                             <p>
-                            <?=  $row_about['about_us_text'] ;?>
+                            <?= $row_about['about_us_text'] ;?>
                         </p>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ $article_result2 = getArticles("publicationdate",15);
                         <div class="row">
                         <?php
                                
-                                while($article_row = $article_result1->fetch_assoc()){
+                                while($article_row = $article_result1->fetch_assoc()) {
 
                                 ?>
                             <div class="col-6 col-lg-4">
@@ -132,10 +132,10 @@ $article_result2 = getArticles("publicationdate",15);
                                 <?php
                                 
                                 
-                                while($article_row = $article_result2->fetch_assoc()){
+                                while($article_row = $article_result2->fetch_assoc()) {
 
                                     ?>
-                                    <li><a href="show_news.php?article_slug=<?= $article_row['slug']; ?>"> <?=  $article_row['title']; ?> </a> </li>
+                                    <li><a href="show_news.php?article_slug=<?= $article_row['slug']; ?>"> <?= $article_row['title']; ?> </a> </li>
                                     <?php } ?>
                                 </ul>
                             </div>

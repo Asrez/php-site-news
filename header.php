@@ -1,5 +1,6 @@
 <?php
-include ("jdf.php");
+if (!defined("LOAD")) exit();
+
 $date = jdate("d F Y");
 $setting_row_logo = getSetting("logo_header");
 $logo_image = $setting_row_logo['value_setting']; 
@@ -9,15 +10,17 @@ $row_telegram = getSetting("telegram_icon");
 $row_twitter = getSetting("twitter_icon");
 $row_facebook = getSetting("facebook_icon");
 $result_category_parent = getCategories();
+
 $array_parent_category=[];
 $array_sub_category=[];
-while($row_category_parent = $result_category_parent->fetch_assoc()){
-      $array_parent_category[]=$row_category_parent;
-      $id_parent_category=$row_category_parent['id'];
-      $result_category_down = getCategories($id_parent_category); 
-      while($row_category_down = $result_category_down->fetch_assoc()) {
+while($row_category_parent = $result_category_parent->fetch_assoc()) {
+    $array_parent_category[]=$row_category_parent;
+    $id_parent_category=$row_category_parent['id'];
+    $result_category_down = getCategories($id_parent_category); 
+
+    while($row_category_down = $result_category_down->fetch_assoc()) {
         $array_sub_category[]=$row_category_down;
-      }
+    }
 }
 ?>
 <header id="header">
@@ -97,13 +100,13 @@ while($row_category_parent = $result_category_parent->fetch_assoc()){
                      foreach($array_parent_category as $row_category_parent) {?>
                <li>
                    <a href="#">
-                        <?= $row_category_parent["title"]; ?>
+                        <?= $row_category_parent["title"] ?>
                     </a> 
                    <ul class="submenu">
 
                      <?php 
                      foreach($array_sub_category as $row_category_down) {
-                        if ($row_category_down['parent_id'] == $row_category_parent['id']){?>
+                        if ($row_category_down['parent_id'] == $row_category_parent['id']) {?>
 
                        <li>
                            <a href="category.php?category_slug=<?= $row_category_down['slug'];?>">

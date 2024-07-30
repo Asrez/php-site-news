@@ -197,7 +197,7 @@ function jdate($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran',
         $num = (int) (($doy + $avs) / 7);
         if ($avs < 4) {
           $num++;
-        } elseif ($num < 1) {
+        } else if ($num < 1) {
           $num = ($avs == 4 or $avs == ((((($j_y % 33) % 4) - 2) == ((int) (($j_y % 33) * 0.05))) ? 5 : 4)) ? 53 : 52;
         }
         $aks = $avs + $kab;
@@ -291,7 +291,7 @@ function jstrftime($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehr
         $num = (int) (($doy + $avs) / 7);
         if ($avs < 4) {
           $num++;
-        } elseif ($num < 1) {
+        } else if ($num < 1) {
           $num = ($avs == 4 or $avs == ((((($j_y % 33) % 4) - 2) == ((int) (($j_y % 33) * 0.05))) ? 5 : 4)) ? 53 : 52;
         }
         $aks = $avs + $kab;

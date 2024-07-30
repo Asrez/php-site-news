@@ -1,8 +1,8 @@
 <?php 
 require "config.php";
-if(isset($_GET['action'])){
+if(isset($_GET['action'])) {
 $action = $_GET['action'];
-if($action != 'insert'){
+if($action != 'insert') {
 $id = $_GET['id'];
 $query_select = "SELECT * FROM tags WHERE id=$id ";
 $row_select = get_tables_with_id(" `tags` ", $id);    
@@ -67,11 +67,11 @@ else{
             </div>
             <!-- /.box-header -->
             <div class="box-body">         
-              <form role="form" method="post" action="actions/tag_edit_action.php?action=<?php echo $action; if($action == 'update'){echo '&id='.$id ;}?>" >
+              <form role="form" method="post" action="actions/tag_edit_action.php?action=<?php echo $action; if($action == 'update') {echo '&id='.$id ;}?>" >
                 <!-- text input -->
                 <div class="form-group">
                   <label> عنوان </label>
-                  <input type="text" class="form-control" placeholder="عنوان  " name="title" id="title" value="<?php if($action != 'insert'){echo $row_select['title'];} ?>" >
+                  <input type="text" class="form-control" placeholder="عنوان  " name="title" id="title" value="<?php if($action != 'insert') {echo $row_select['title'];} ?>" >
                 </div>
                 
                 <button type="submit" name="btn">تایید</button>

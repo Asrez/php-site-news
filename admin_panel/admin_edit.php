@@ -1,6 +1,6 @@
 <?php
  require "config.php"; 
- if(isset($_GET['action'])){
+ if(isset($_GET['action'])) {
 $action = $_GET['action'];}
 else{
   ?>
@@ -10,7 +10,7 @@ else{
   <?php
   exit;
 }
-if($action != 'insert'){ $id = $_GET['id'];
+if($action != 'insert') { $id = $_GET['id'];
   $row_select = get_tables_with_id(" `admins` ", $id);
 }
 ?>
@@ -65,20 +65,20 @@ if($action != 'insert'){ $id = $_GET['id'];
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" method="post" action="actions/admin_edit_action.php?action=<?php echo $action; if($action != "insert"){ echo "& id=".$id ;}?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="actions/admin_edit_action.php?action=<?php echo $action; if($action != "insert") { echo "& id=".$id ;}?>" enctype="multipart/form-data">
                 <!-- text input -->
                 <div class="form-group">
                   <label>نام کاربری </label>
-                  <input type="text" class="form-control" placeholder="نام کاربری" name="username" id="username" value="<?php if($action != 'insert'){echo $row_select['username'];} ?>" >
+                  <input type="text" class="form-control" placeholder="نام کاربری" name="username" id="username" value="<?php if($action != 'insert') {echo $row_select['username'];} ?>" >
                 </div>
                 <div class="form-group">
                   <label>نام</label>
-                   <input type="text" class="form-control" placeholder="نام" name="name" id="name" value="<?php if($action != 'insert'){ echo $row_select['name']; }?>">
+                   <input type="text" class="form-control" placeholder="نام" name="name" id="name" value="<?php if($action != 'insert') { echo $row_select['name']; }?>">
                  
                 </div>
                 <div class="form-group">
                   <label>پسورد</label>
-                   <input type="password" class="form-control" placeholder="پسورد" name="password" id="password" value="<?php if($action != 'insert'){ echo $row_select['password']; }?>">
+                   <input type="password" class="form-control" placeholder="پسورد" name="password" id="password" value="<?php if($action != 'insert') { echo $row_select['password']; }?>">
                  
                 </div>
                 <div class="form-group">

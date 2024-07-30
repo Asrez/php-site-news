@@ -1,5 +1,5 @@
 <footer class="main-footer text-left">
-    <strong>Copyleft &copy; 2014-2017 <a href="https://adminlte.io">Almsaeed Studio</a> & <a href="https://netparadis.com">NetParadis</a></strong>
+    <strong>Copyright &copy; 2024 <a href="https://asrez.com">asrez</a></strong>
   </footer>
 
 <!-- Control Sidebar -->

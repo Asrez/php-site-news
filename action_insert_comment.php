@@ -9,12 +9,12 @@
  $code = "NULL";
  $venify = 0;
 
-                            if(isset($_POST['btnsubmit'])){
-                                if($_POST['sum'] == $_POST['sum']){
+                            if(isset($_POST['btnsubmit'])) {
+                                if($_POST['sum'] == $_POST['sum']) {
                                 if(isset($_POST['name']) && !empty($_POST['name']) &&
                                 isset($_POST['Email']) && !empty($_POST['Email']) &&
                                 isset($_POST['comment']) && !empty($_POST['comment'])
-                                ){
+                                ) {
                                     $name = $_POST['name'];
                                     $email = $_POST['Email'];
                                     $comment = $_POST['comment'];
@@ -28,7 +28,7 @@
                                 }
                                 $insert_comment_query->bind_param("issssii",$code,$name,$email,$comment,$date,$article_id,$venify);
                                  
-                                if($insert_comment_query->execute()){
+                                if($insert_comment_query->execute()) {
                                     ?>
                                     <script>
                                         window.alert("سپاس از نظر شما.نظرات بعد از بررسی در سایت قرار خواهد گرفت");        

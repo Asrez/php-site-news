@@ -9,7 +9,7 @@ $article11__result4 = getArticles("viewcount DESC",4);
 $row_category = getARTICLEinLISTinINDEX(0);
 $most_comment = [];
 $article = [];
-while($row_comment = $comment_result->fetch_assoc()){ 
+while($row_comment = $comment_result->fetch_assoc()) { 
     $most_comment[]= $row_comment;
     $article_comment = getArticlesWithId($row_comment['article_id']); 
     $article[] = $article_comment;
@@ -44,7 +44,7 @@ while($row_comment = $comment_result->fetch_assoc()){
                     <div class="carousel-inner">
                     <?php
                             
-                            while($row_article_view3 = $article_result_rand->fetch_assoc()){
+                            while($row_article_view3 = $article_result_rand->fetch_assoc()) {
                                
                     ?>
                         <div class="carousel-item <?php if ($counter1 == 0) 
@@ -80,7 +80,7 @@ while($row_comment = $comment_result->fetch_assoc()){
                     <div class="col-12">
                         <div class="row">
                         <?php
-                            while($row_article_view1 = $article_result_rand2->fetch_assoc()){
+                            while($row_article_view1 = $article_result_rand2->fetch_assoc()) {
                                
                     ?>
                             <div class="col-6 mt-4">
@@ -119,7 +119,7 @@ while($row_comment = $comment_result->fetch_assoc()){
                         <div class="row">
                         <?php 
                           
-                            while($row_article_view = $article_result_v->fetch_assoc()){?>
+                            while($row_article_view = $article_result_v->fetch_assoc()) {?>
                             <div class="col12 col-lg-6">
                                 <div class="desc_news">
                                     <h3>
@@ -134,9 +134,9 @@ while($row_comment = $comment_result->fetch_assoc()){
                         <div class="col-12 show_comment">
                             <?php
                             
-                            foreach ($most_comment as $row_comment ){ 
-                                foreach ($article as $row_article ){ 
-                                    if($row_comment['article_id'] === $row_article['id']){?>
+                            foreach ($most_comment as $row_comment ) { 
+                                foreach ($article as $row_article ) { 
+                                    if($row_comment['article_id'] === $row_article['id']) {?>
                             <div class="row mt-2">
                                 <div class="col-12 comment_header">
                                     <div class="row">
@@ -186,7 +186,7 @@ while($row_comment = $comment_result->fetch_assoc()){
                                     
                                     <?php
                               
-                                while($article11__row = $article11__result4->fetch_assoc()){
+                                while($article11__row = $article11__result4->fetch_assoc()) {
                                     ?>
                                     <div class="item">
                                         <a href="show_news.php?article_slug=<?= $article11__row['slug']; ?>" target="_blank" class="text-dark">
@@ -208,7 +208,7 @@ while($row_comment = $comment_result->fetch_assoc()){
             </section>
             <?php 
              
-             foreach ($row_category["category"] as $row_main_category){
+             foreach ($row_category["category"] as $row_main_category) {
                ?>
             <section class="box box_2">
                 
@@ -223,11 +223,11 @@ while($row_comment = $comment_result->fetch_assoc()){
                     </div>
                     <div class="row">
                         <?php 
-                              foreach ($row_category["maincategory"] as $row_getCategories){
-                                if( $row_main_category['id'] === $row_getCategories['parent_id']){
-                                  foreach ($row_category["subCategory"] as $row_article_category){ 
-                                   if( $row_article_category['category_id'] === $row_getCategories['id']){
-                                    if($count == 0 ){ 
+                              foreach ($row_category["maincategory"] as $row_getCategories) {
+                                if( $row_main_category['id'] === $row_getCategories['parent_id']) {
+                                  foreach ($row_category["subCategory"] as $row_article_category) { 
+                                   if( $row_article_category['category_id'] === $row_getCategories['id']) {
+                                    if($count == 0 ) { 
                                     $count++; 
                           
                               ?>
@@ -250,10 +250,10 @@ while($row_comment = $comment_result->fetch_assoc()){
                             <div class="most_viewed_news">
                                 <ul>
                                 <?php 
-                foreach ($row_category["maincategory"] as $row_getCategories){
-                                if( $row_main_category['id'] === $row_getCategories['parent_id']){
-                                  foreach ($row_category["subCategory"] as $row_article_category){ 
-                                   if( $row_article_category['category_id'] === $row_getCategories['id']){
+                foreach ($row_category["maincategory"] as $row_getCategories) {
+                                if( $row_main_category['id'] === $row_getCategories['parent_id']) {
+                                  foreach ($row_category["subCategory"] as $row_article_category) { 
+                                   if( $row_article_category['category_id'] === $row_getCategories['id']) {
                         
             
                 ?>

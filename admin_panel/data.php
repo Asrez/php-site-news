@@ -83,7 +83,7 @@ $setting_result = selectall(" `setting` ");
                 <tbody>
                 
                 <?php 
-                    while($news_row = $news_result->fetch_assoc()){
+                    while($news_row = $news_result->fetch_assoc()) {
                      ?>
                 <tr >
                 <td>                     <a href="article_edit.php?slug=<?= $news_row['slug']; ?>&action=update"><button type="button" class="btn btn-block btn-warning btn-sm"  >ویرایش</button></a>
@@ -128,7 +128,7 @@ $setting_result = selectall(" `setting` ");
              
                 <?php
               
-                while($setting_row = $setting_result->fetch_assoc()){
+                while($setting_row = $setting_result->fetch_assoc()) {
                 ?>
                 <tr>
                   <td><a class="fa fa-trash" href="actions/setting_edit_action.php?id=<?= $setting_row['id'];?>&action=delete" title="حذف"></a>

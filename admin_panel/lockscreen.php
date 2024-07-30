@@ -1,15 +1,15 @@
 <?php
 require "config.php";
-if(isset($_POST['btn'])){
+if(isset($_POST['btn'])) {
   $pass = $_POST['password'];
   $user = $_SESSION['username'];
-  $passtrue_sql = "SELECT * FROM `admins` WHERE `username` = ? AND `password` = ? ;";
+  $passtrue_sql = "SELECT * FROM `admins` WHERE `username` = ? AND `password` = ?;";
   $passtrue = $link->prepare($passtrue_sql);
   $passtrue->bind_param("ss",$user, $pass);
   $passtrue->execute();
   $result = $passtrue->get_result();
   $row = $result->fetch_assoc();
-  if($row){
+  if($row) {
     ?>
     <script type='text/javascript'> window.alert('خوش آمدید ');
 location.replace('profile.php');
@@ -59,7 +59,7 @@ location.replace('profile.php');
     <a href="index.php"><b>کنترل پنل مدیریت</b></a>
   </div>
   <!-- User name -->
-  <div class="lockscreen-name"> <?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true){
+  <div class="lockscreen-name"> <?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true) {
   echo $_SESSION["name"];
 } ?>
 </div>
@@ -68,7 +68,7 @@ location.replace('profile.php');
   <div class="lockscreen-item">
     <!-- lockscreen image -->
     <div class="lockscreen-image">
-      <img src='dist/img/<?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true){
+      <img src='dist/img/<?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true) {
   echo $_SESSION["admin_image"];
 } ?>' alt="User Image">
     </div>
@@ -96,7 +96,7 @@ location.replace('profile.php');
     <a href="login.php">و یا با یک یوزرنیم دیگر وارد شوید</a>
   </div>
   <div class="lockscreen-footer text-center">
-    <b>Copyleft &copy; 2014-2017 <a href="https://netparadis.com">NetParadis</a></b>
+    <b>Copyright &copy; 2024 <a href="https://asrez.com">asrez</a></b>
   </div>
 </div>
 <!-- /.center -->
