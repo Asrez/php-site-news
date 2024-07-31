@@ -1,10 +1,9 @@
-<?php
+<?php 
 define("LOAD", "");
 
 require "config.php";
 ?>
-<!doctype html>
-<html dir="rtl" lang="fa_IR">
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +15,8 @@ require "config.php";
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
@@ -37,24 +38,10 @@ require "config.php";
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> مرا به خاطر بسپار
-            </label>
-          </div>
-        </div>
-        <div class="col-xs-12">
           <button type="submit" class="btn btn-primary btn-block btn-flat" name="submit" >ورود</button>
         </div>
       </div>
     </form>
-    <div class="social-auth-links text-center">
-      <p>- یا -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> ورود با فیسبوک</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> ورود با گوگل</a>
-    </div>
-    <a href="#">رمز عبورم را فراموش کرده ام.</a><br>
-  </div>
 </div>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -65,7 +52,7 @@ require "config.php";
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
       radioClass: 'iradio_square-blue',
-      increaseArea: '20%'
+      increaseArea: '20%' 
     });
   });
 </script>

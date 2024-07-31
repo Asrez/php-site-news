@@ -2,6 +2,7 @@
 define("LOAD", "");
 
 require "../config.php";
+  
 if(
   isset($_POST["username"]) && !empty($_POST["username"])&&
   isset($_POST["password"]) && !empty($_POST["password"])

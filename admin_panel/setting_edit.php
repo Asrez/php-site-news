@@ -1,24 +1,19 @@
 <?php
 define("LOAD", "");
 
-require "config.php" ;
+require "config.php";
 
 if (isset($_GET['id'])) {
 $id = $_GET['id'];                 
-$sql_select = "SELECT * FROM `setting` WHERE `id` = ?;";
-$query_select = $link->prepare($sql_select);
-$query_select->bind_param("i",$id);
-$query_select->execute();
-$result_select = $query_select->get_result();
-$row_select = $result_select->fetch_assoc();
+$row_select=setting($id);
 }         
-else{
+else
+{
   header("Location: 404.php");
-  exit;
-}  
-?>
-<!doctype html>
-<html dir="rtl" lang="fa_IR">
+  exit();
+}
+                 ?>
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,11 +25,13 @@ else{
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <?php include("header.php"); ?>
- <div class="wrapper">
+<div class="wrapper">
   <div class="content-wrapper">
     <section class="content">
       <div class="row">
@@ -44,6 +41,7 @@ else{
               <h3 class="box-title">  تنظیمات</h3>
             </div>
             <div class="box-body">
+               
               <form role="form" method="post" action="actions/setting_edit_action.php?id=<?= $id ?>&action=update" enctype="multipart/form-data">
                 <div class="form-group">
                   <label>کلید</label>
@@ -65,7 +63,8 @@ else{
       </div>
     </section>
   </div>
-  <?php include("footer.php"); ?>
+<?php include("footer.php"); ?>
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/fastclick/lib/fastclick.js"></script>

@@ -5,11 +5,13 @@ require "config.php";
 
 if(isset($_GET['action'])) {
 $action = $_GET['action'];
-}else{
+}else
+{
   header("Location: 404.php");
-  exit;
+  exit();
 }
-if($action == "update") {
+
+if($action === "update") {
   $slug = $_GET['slug'];
   $row_up = get_article_with_slug($slug);
   $id = $row_up['admin_id'];
@@ -18,10 +20,9 @@ if($action == "update") {
   
 }
 $tags_result = selectall(" `tags` ");
-$category_parent_0 = get_tables_with_where(" `categorys` "," WHERE `parent_id` != 0");
+  $category_parent_0 = get_tables_with_where(" `categorys` "," WHERE `parent_id` != 0");
 ?>
-<!doctype html>
-<html dir="rtl" lang="fa_IR">
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,6 +34,8 @@ $category_parent_0 = get_tables_with_where(" `categorys` "," WHERE `parent_id` !
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -56,11 +59,8 @@ $category_parent_0 = get_tables_with_where(" `categorys` "," WHERE `parent_id` !
                 <div class="form-group">
                   <label>نویسنده</label>
                   <input type="text" class="form-control" name="admin"  id="admin" 
-                  value="
-                  <?php if($action == 'insert') 
-                            { echo $_SESSION["name"]; }
-                        if($action == 'update') 
-                            {echo $admin_row['name'];} ?>" 
+                  value="<?php if($action === 'insert') { echo $_SESSION["name"]; }
+                  if($action === 'update') {echo $admin_row['name'];} ?>" 
                   disabled>
                 </div>
 
@@ -80,8 +80,8 @@ $category_parent_0 = get_tables_with_where(" `categorys` "," WHERE `parent_id` !
                 <div class="form-group">
                   <label>دسته بندی</label>
                   <select class="form-control" name="category">
-                    <?php while($categorys_row1 = $category_parent_0->fetch_assoc()) { ?>
-                    <option value="<?= $categorys_row1['id'] ?>" <?php if($action!="insert") { if ($row_up['category_id'] == $categorys_row1['id']) {echo "selected";} }?>><?= $categorys_row1['title'] ?></option>
+                    <?php while($categorys_row1 = $category_parent_0->fetch_assoc()) {?>
+                    <option value="<?= $categorys_row1['id'] ?>" <?php if($action!="insert") { if ($row_up['category_id'] === $categorys_row1['id']) {echo "selected";} }?>><?= $categorys_row1['title'] ?></option>
                    <?php }  ?>
                   </select>
                       </div>
@@ -98,13 +98,13 @@ $category_parent_0 = get_tables_with_where(" `categorys` "," WHERE `parent_id` !
               </div>
             </div>
             <div class="box-body pad">
-             
                     <textarea id="editor1"  rows="5" cols="45" name="summery"><?php if($action=='update') {echo $row_up['summery'];} ?></textarea>
                </div>
           </div>
           <div class="box box-info">
             <div class="box-header">
               <h3 class="box-title">متن خبر</h3>
+               tools box
               <div class="pull-right box-tools">
                 <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
@@ -115,17 +115,16 @@ $category_parent_0 = get_tables_with_where(" `categorys` "," WHERE `parent_id` !
               </div>
             </div>
             <div class="box-body pad">
-              <textarea id="editor1" rows="20" cols="45" name="content" ><?php if($action == 'update') {echo $row_up['content'];} ?></textarea>
-              
+              <textarea id="editor1" rows="20" cols="45" name="content" ><?php if($action === 'update') {echo $row_up['content'];} ?></textarea>
             </div>
             <div class="form-group">
                   <label>منبع</label>
-                  <input type="text" class="form-control" placeholder="منبع" name="source" value="<?php if($action == 'update') {echo $row_up['source'];} ?>">
+                  <input type="text" class="form-control" placeholder="منبع" name="source" value="<?php if($action === 'update') {echo $row_up['source'];} ?>">
                 </div>
           </div>
           <div class="form-group">
                   <label>عکس</label>
-                  <input type="file" class="form-control" name="image" value="<?php if($action == 'update') {echo $row_up['image'];} ?>">
+                  <input type="file" class="form-control" name="image" value="<?php if($action === 'update') {echo $row_up['image'];} ?>">
                 </div>
           </div>
           <button type="submit" name="btn" >ثبت</button>

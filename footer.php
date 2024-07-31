@@ -1,5 +1,6 @@
 <?php
 if (!defined("LOAD")) exit();
+
 $footer=getSetting("footer");
 ?>
 <footer class="mt-4">

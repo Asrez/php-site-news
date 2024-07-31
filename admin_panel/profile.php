@@ -8,17 +8,15 @@ if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true)
 $adminn_id = $_SESSION["admin_id"];
 $row_count_article = get_count_tables(" `articles` ","WHERE `admin_id`='$adminn_id'");
 }
-else{
-  header("Location: 404.php");
-  exit;
-}
-$result__article = get_tables_with_where(" `articles` ","WHERE `admin_id`='$adminn_id'");
+else header("Location: 404.php");
 
+$result__article = get_tables_with_where(" `articles` ","WHERE `admin_id`='$adminn_id'");
 $result = get_tables_with_where(" `admins` ","WHERE `id`='$adminn_id'");
 $row = $result->fetch_assoc();
  ?>
-<!doctype html>
-<html dir="rtl" lang="fa_IR">
+ 
+
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,6 +28,8 @@ $row = $result->fetch_assoc();
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -47,13 +47,17 @@ $row = $result->fetch_assoc();
       </ol>
     </section>
     <section class="content">
+
       <div class="row">
         <div class="col-md-3">
           <div class="box box-primary">
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="dist/img/<?= $_SESSION["admin_image"] ?>" alt="User profile picture">
+
               <h3 class="profile-username text-center"><?= $_SESSION["name"] ?></h3>
+
               <p class="text-muted text-center"> <?= $_SESSION["username"] ?></p>
+
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
                   <b> تعداد مقالات ثبت شده</b>
@@ -62,6 +66,7 @@ $row = $result->fetch_assoc();
               </ul>
               </div>
           </div>
+        </div>
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -90,24 +95,28 @@ $row = $result->fetch_assoc();
                 <form class="form-horizontal" action="actions/action_profil.php" method="post" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">نام</label>
+
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="inputName" name="name" placeholder="نام" value="<?= $row['name'] ?>">
                     </div>
                   </div>
                     <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">پسورد</label>
+
                     <div class="col-sm-10">
                       <input type="password" class="form-control" id="password" name="password" placeholder="پسورد" value="<?= $row['password'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">نام کاربری</label>
+
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="username" name="username" placeholder="نام کاربری" value="<?= $row['username'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="image" class="col-sm-2 control-label">تصویر </label>
+
                     <div class="col-sm-10">
                       <input type="file" class="form-control" id="image" name="image" placeholder="تصویر " value="<?= $row['image'] ?>">
                     </div>
@@ -126,6 +135,7 @@ $row = $result->fetch_assoc();
     </section>
   </div>
   <?php include("footer.php"); ?>
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/fastclick/lib/fastclick.js"></script>

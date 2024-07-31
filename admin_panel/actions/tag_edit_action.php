@@ -1,6 +1,16 @@
 <?php
+define("LOAD", "");
+
 require "../config.php";
-$action = $_GET['action'];
+
+if(isset ($_GET['action']))
+    $action = $_GET['action'];
+else 
+{
+    header("Location: ../404.php");
+    exit();
+}
+
 if($action != "insert") {
 $id = $_GET['id'];
 }

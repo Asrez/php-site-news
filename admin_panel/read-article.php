@@ -7,13 +7,15 @@ if(isset($_GET['slug'])) {
   $slug = $_GET['slug'];
 
 }
-else{
-  exit;
+else
+{
+  header("Location: 404.php");
+  exit();
 }
+
 $row = get_article_with_slug($slug);
 ?>
-<!doctype html>
-<html dir="rtl" lang="fa_IR">
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +42,7 @@ $row = get_article_with_slug($slug);
           <div class="box box-primary">
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
-                <h3><?= $row['title']; ?></h3>
+                <h3><?= $row['title'] ?></h3>
                   <span class="mailbox-read-time pull-left"><?= $row['publicationdate'] ?></span>
               </div>
               <div class="mailbox-read-message">
@@ -56,10 +58,10 @@ $row = get_article_with_slug($slug);
               </ul>
             </div>
           </div>
-          </div>
-        </div>
+          </div></div>
       </div>
     </section>
+
   <?php include("footer.php"); ?>
   </div>
   </div>

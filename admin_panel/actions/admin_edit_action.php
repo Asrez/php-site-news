@@ -1,9 +1,19 @@
 <?php
+define("LOAD", "");
+
 require "../config.php";
-$action = $_GET['action'];
+
+if(isset ($_GET['action']))
+    $action = $_GET['action'];
+else 
+{
+    header("Location: ../404.php");
+    exit();
+}
+
 if($action != "insert") {
     $id = $_GET['id'];}
-if($action == "update") {
+if($action === "update") {
     $username_admin = $_GET['username_admin'];
     $name_admin = $_GET['name_admin'];
 }
@@ -134,7 +144,7 @@ switch ($action) {
             break;
         
 }
-if($action == "insert") {
+if($action === "insert") {
     $row__ = get_count_tables("`admins` ","WHERE `username`='$username' OR `name`='$name'");
 if($row__['count']>0) {
     ?>
@@ -144,12 +154,10 @@ if($row__['count']>0) {
     <?php
 }         
 
-
 $date = date('Y-m-d');                                                                                                                                                                                                 
-             $insert = $link->prepare("INSERT INTO `admins`(`id`, `name`, `username`, `password`, `image`, `date`) VALUES (?,?,?,?,?,?);");
+             $insert = $link->prepare("INSERT INTO `admins`(`id` , `name`, `username`, `password`, `image`, `date`) VALUES (NULL,?,?,?,?,?);");
              if($insert) {
-                $code="NULL";
-                $insert->bind_param("issssi",$code, $name, $username, $password,$image ,$date);
+                $insert->bind_param("ssssi", $name, $username, $password,$image ,$date);
                 if($insert->execute()) {
                     ?>
                     <script>

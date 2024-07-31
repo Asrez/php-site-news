@@ -11,7 +11,7 @@ else {
 }
 
 $subcategory_row = getCategoryWithSlug($slug);
-if ($subcategory_row == false) {
+if ($subcategory_row === false) {
     header("Location: 404.php");
 }
 

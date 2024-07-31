@@ -3,7 +3,7 @@ if (!defined("LOAD")) exit();
 
 $count_venify_row = get_count_tables(" `comments` "," WHERE `venify`= 0");
 $venify_result = commentswithVenify(0);
-?>
+ ?>
 <header class="main-header">
     <a href="index2.html" class="logo">
       <span class="logo-mini">پنل</span>
@@ -42,15 +42,13 @@ $venify_result = commentswithVenify(0);
           </li>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-              <img src='dist/img/<?= $_SESSION["admin_image"];?>' class="user-image" alt="User Image">
+              <img src='dist/img/<?= $_SESSION["admin_image"] ?>' class="user-image" alt="User Image">
               <span class="hidden-xs"><?= $_SESSION["name"] ?>
 </span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
                 <img src='dist/img/<?= $_SESSION["admin_image"] ?>' class="img-circle" alt="User Image">
-
                 <p>
                   <?= $_SESSION["name"] ?>
                   <small>مدیریت کل سایت</small>

@@ -1,6 +1,16 @@
 <?php
+define("LOAD", "");
+
 require "../config.php";
-$action = $_GET['action'];
+
+if(isset ($_GET['action']))
+    $action = $_GET['action'];
+else 
+{
+    header("Location: ../404.php");
+    exit();
+}
+
 $id = $_GET['id'];
 if(isset($_POST['qlink'] )&& !empty($_POST['qlink'])) {
     $image = basename($_FILES["image"]["name"]);
@@ -39,7 +49,7 @@ if($action != "delete") {
      move_uploaded_file($_FILES["image"]["tmp_name"],$target_file);}
 }
 
-if($action == 'update') {
+if($action === 'update') {
     $update = $link->prepare("UPDATE `setting` SET `value_setting`=?,`link`=? WHERE `id`=?");
        if($update) {
           $update->bind_param("ssi",$image,$linkQ , $id);
@@ -61,7 +71,7 @@ if($action == 'update') {
                   }
                 } 
             }
-if($action == "delete") {
+if($action === "delete") {
     $nullimg = "nullimg.png";
     $liink = "";
     $delete = $link->prepare("UPDATE `setting` SET `value_setting`=? ,`link`=? WHERE `id`=?;");
