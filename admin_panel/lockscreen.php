@@ -3,10 +3,17 @@ define("LOAD", "");
 
 require "config.php";
 
+<<<<<<< HEAD
 $footer = get_tables_with_where(" `setting` ", "WHERE `key_setting` = 'footer' ");
 $footer_row = $footer->fetch_assoc();
 
 if (isset($_POST['btn'])) {
+=======
+$footer=get_tables_with_where(" `setting` ","WHERE `key_setting` = 'footer' ");
+$footer_row=$footer->fetch-assoc();
+
+if(isset($_POST['btn'])) {
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
   $pass = $_POST['password'];
   $user = $_SESSION['username'];
   $passtrue_sql = "SELECT * FROM `admins` WHERE `username` = ? AND `password` = ?;";
@@ -30,7 +37,10 @@ if (isset($_POST['btn'])) {
 }
 ?>
 <html>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,9 +53,32 @@ if (isset($_POST['btn'])) {
   <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<<<<<<< HEAD
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+=======
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition lockscreen">
+<div class="lockscreen-wrapper">
+  <div class="lockscreen-logo">
+    <a href="index.php"><b>کنترل پنل مدیریت</b></a>
+  </div>
+  <div class="lockscreen-name"> <?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true) {
+  echo $_SESSION["name"];
+} ?>
+</div>
+  <div class="lockscreen-item">
+    <div class="lockscreen-image">
+      <img src='dist/img/<?php if(isset($_SESSION["state_login"]) && $_SESSION["state_login"]===true) {
+  echo $_SESSION["admin_image"];
+} ?>' alt="User Image">
+    </div>
+    <form class="lockscreen-credentials" method="post" action="lockscreen.php">
+      <div class="input-group">
+        <input type="password" class="form-control" placeholder="رمز عبور" name="password">
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 
 <body class="hold-transition lockscreen">
   <div class="lockscreen-wrapper">
@@ -82,8 +115,23 @@ if (isset($_POST['btn'])) {
       <b>Copyright &copy; 2024 <a href="<?= $footer_row['link'] ?>"><?= $footer_row['value_setting'] ?></a></b>
     </div>
   </div>
+<<<<<<< HEAD
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+=======
+  <div class="help-block text-center">
+    برای ورود مجدد رمز عبور خود را وارد کنید
+  </div>
+  <div class="text-center">
+    <a href="login.php">و یا با یک یوزرنیم دیگر وارد شوید</a>
+  </div>
+  <div class="lockscreen-footer text-center">
+    <b>Copyright &copy; 2024 <a href="<?= $footer_row['link'] ?>"><?= $footer_row['value_setting'] ?></a></b>
+  </div>
+</div>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 </body>
 
 </html>

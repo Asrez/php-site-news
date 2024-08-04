@@ -14,7 +14,6 @@ $chart_article = get_article_for_chart();
 $chart_article_label = [];
 $chart_article_viewcount = [];
 $chart_article_comment_count = [];
-
 while($chart_row = $chart_article->fetch_assoc()) {
   $chart_article_label[] = $chart_row['id'];
   $chart_article_viewcount[] = $chart_row["viewcount"];

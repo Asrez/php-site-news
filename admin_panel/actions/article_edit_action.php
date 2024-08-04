@@ -165,7 +165,11 @@ $date = date('Y-m-d h:i:s');
             $code = "NULL";
             $view_count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
             $insert->bind_param("issssssiiis",$code, $date, $title, $summery , $content , $image , $source , $ $view_count , $category ,$admin , $text,$verify);
+=======
+            $insert->bind_param("issssssiiisi",$code, $date, $title, $summery , $content , $image , $source , $ $view_count , $category ,$admin , $text,$verify);
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 =======
             $insert->bind_param("issssssiiisi",$code, $date, $title, $summery , $content , $image , $source , $ $view_count , $category ,$admin , $text,$verify);
 >>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933

@@ -1,6 +1,5 @@
 <?php 
 define("LOAD", "");
-// var_dump(200);
 require "config.php";
 
 $article_slug = $_GET['article_slug'];
@@ -12,8 +11,8 @@ $insert_comment_query = $link->prepare($insert_comment_sql);
 $code = "NULL";
 $venify = 0;
 
-if (isset($_POST['btnsubmit']) and isset($_POST['sum'])) {
-    if ($_POST['sum'] === $_POST['sum']) {
+if (isset($_POST['btnsubmit'])) {
+    if ($_POST['sum'] == $_POST['realsum']) {
         if (isset($_POST['name']) && !empty($_POST['name']) &&
         isset($_POST['Email']) && !empty($_POST['Email']) &&
         isset($_POST['comment']) && !empty($_POST['comment'])

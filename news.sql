@@ -3,15 +3,21 @@
 -- https://www.phpmyadmin.net/
 --
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Host: 127.0.0.1
 -- Generation Time: Jul 30, 2024 at 01:05 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 =======
+=======
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 -- Host: 127.0.0.1:3306
 -- Generation Time: Jul 30, 2024 at 04:45 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
+<<<<<<< HEAD
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
+=======
 >>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -99,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `publicationdate` datetime NOT NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
   `title` varchar(500) NOT NULL,
   `summery` text NOT NULL,
   `content` longtext NOT NULL,
@@ -111,6 +118,8 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `verify` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 =======
+=======
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
   `title` varchar(500) COLLATE utf8mb3_persian_ci NOT NULL,
   `summery` text COLLATE utf8mb3_persian_ci NOT NULL,
   `content` longtext COLLATE utf8mb3_persian_ci NOT NULL,
@@ -128,6 +137,9 @@ CREATE TABLE IF NOT EXISTS `articles` (
   KEY `id` (`id`),
   KEY `category_id_2` (`category_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_persian_ci;
+<<<<<<< HEAD
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
+=======
 >>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 
 --
@@ -151,9 +163,15 @@ INSERT INTO `articles` (`id`, `publicationdate`, `title`, `summery`, `content`, 
 (25, '2024-07-14 10:25:05', 'خبر۱', 'fg nbv', 'fnb ', 'img101.jpg', 'hgfb', 5, 11, 1, 'eGk_FWDBCmJb$E', 1),
 (39, '2024-07-20 09:02:40', 'kkkkkkuyyum', 'ifuoliuoyi', 'llgkulguluuiuii', 'img21.jpg', 'fvuil.iu', 8, 12, 13, '8o*Tu3h@OBsA4X', 1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 (44, '2024-07-30 08:40:54', 'bgb', 'b', 'b', 'default_art_img.png', 'b', NULL, 12, 13, 'pDxhMjq2kOF5IgZi', 1),
 (45, '2024-07-30 12:42:58', 'nbn', 'nnn', 'nnn', 'default_art_img.png', 'nnn', NULL, 13, 13, '72urE0cmihjpHoTU', 1),
 (46, '2024-07-30 12:49:42', 'ytrfyt', 'fdxgfdgfx', 'gfdgfdfdfhdggggggggggggggg', '3.jpg', 'hgf', NULL, 6, 13, 'ulwcN8OeoBKIHMUY', 1);
+=======
+(44, '2024-07-30 08:40:54', 'bgb', 'b', 'b', 'default_art_img.png', 'b', 0, 12, 13, 'pDxhMjq2kOF5IgZi', 1),
+(45, '2024-07-30 12:42:58', 'nbn', 'nnn', 'nnn', 'default_art_img.png', 'nnn', 0, 13, 13, '72urE0cmihjpHoTU', 1),
+(46, '2024-07-30 12:49:42', 'ytrfyt', 'fdxgfdgfx', 'gfdgfdfdfhdggggggggggggggg', '3.jpg', 'hgf', 0, 6, 13, 'ulwcN8OeoBKIHMUY', 1);
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 =======
 (44, '2024-07-30 08:40:54', 'bgb', 'b', 'b', 'default_art_img.png', 'b', 0, 12, 13, 'pDxhMjq2kOF5IgZi', 1),
 (45, '2024-07-30 12:42:58', 'nbn', 'nnn', 'nnn', 'default_art_img.png', 'nnn', 0, 13, 13, '72urE0cmihjpHoTU', 1),
@@ -299,7 +317,11 @@ INSERT INTO `setting` (`id`, `key_setting`, `value_setting`, `link`) VALUES
 (15, 'facebook_icon', '', 'https://www.facebook.com'),
 (16, 'title', 'خبر اینلاین', NULL),
 <<<<<<< HEAD
+<<<<<<< HEAD
 (17, 'footer', 'اسرز', 'https://asrez.com/');
+=======
+(17, 'footer', 'asrez', 'https://asrez.com/');
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 =======
 (17, 'footer', 'asrez', 'https://asrez.com/');
 >>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
@@ -358,6 +380,7 @@ INSERT INTO `view` (`id`, `user_ip`, `article_id`) VALUES
 (6, '127.0.0.1', 2),
 (7, '127.0.0.1', 11),
 (8, '127.0.0.1', 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 --
@@ -499,6 +522,8 @@ ALTER TABLE `tags`
 --
 ALTER TABLE `view`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+=======
+>>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 =======
 >>>>>>> ccb84342f5e2d3160d997b6013b7247ad6100933
 
