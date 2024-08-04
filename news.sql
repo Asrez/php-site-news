@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2024 at 10:18 AM
+-- Generation Time: Aug 04, 2024 at 10:26 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -160,7 +160,7 @@ CREATE TABLE `categorys` (
 --
 
 INSERT INTO `categorys` (`id`, `title`, `parent_id`, `slug`) VALUES
-(1, 'مجلس', 0, 'jsdggggggggggggggggg\r\n'),
+(1, 'مجلس', 0, 'jsdggggggggggggggggg'),
 (2, 'فرهنگی', 0, 'tgldbhlkdfhglkhfgln'),
 (3, 'سیاسی', 0, ' sjvfjkhbikjhkgbjhgd'),
 (4, 'اقتصادی', 0, 'gjhhhhhhh'),
